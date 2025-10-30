@@ -13,11 +13,11 @@
                     if(isset($_SESSION['login'])) {
                     // if(isset($_SESSION['role_id'])) {
                         // if($_SESSION['role_id'] != 3) {
-                            echo '<li class="nav-item ms-lg-2"><a class="btn btn-primary" href="index.php?page=quanly"><i class="bi bi-person-circle me-2"></i>' . $_SESSION['username'] . '</a></li>';
+                            echo '<li class="nav-item ms-lg-2"><a class="btn btn-primary" href="index.php?page=quanly"><i class="bi bi-person-circle me-2"></i>' . $_SESSION['tenDangNhap'] . '</a></li>';
                         // }
-                        // echo '<li class="nav-item ms-lg-2">';
-                        //     echo '<a class="btn btn-outline-primary" href="index.php?page=dangxuat" onclick="return confirm(\'Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?\');"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a>';
-                        // echo '</li>';
+                        echo '<li class="nav-item ms-lg-2">';
+                            echo '<a class="btn btn-outline-primary" href="index.php?page=dangxuat" onclick="return confirm(\'Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?\');"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a>';
+                        echo '</li>';
                     } else {
                         echo '<li class="nav-item ms-lg-2">';
                             echo '<a class="btn btn-primary" href="index.php?page=dangnhap"><i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập</a>';

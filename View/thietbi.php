@@ -31,26 +31,8 @@
                                 echo '<span class="position-absolute top-0 start-0 m-3 badge badge-na rounded-pill">' . $r['tenBoMon'] . '</span>';
                             echo '</div>';
                             echo '<div class="p-3 p-lg-4 d-flex flex-column">';
-                                echo '<h5 class="fw-bold mb-1">' . $r['tenThietBi'] . '</h5>';
-                                // echo '<div class="d-flex align-items-center gap-2 mb-2 small text-muted">';
-                                //     // ⭐ Hiển thị số sao
-                                //     $fullStars = floor($r['rating']);
-                                //     $emptyStars = 5 - $fullStars;
-                                //     echo '<span class="rating">';
-                                //         echo str_repeat('★', $fullStars);
-                                //         echo str_repeat('☆', $emptyStars);
-                                //     echo '</span>';
-
-                                //     echo ' • ' . $r['size'] . 'm² • ' . $r['location'];
-                                // echo '</div>';
-                                echo '<ul class="list-unstyled small text-muted mb-3">';
-                                    // $features = explode(';', $r['features']);
-                                    // foreach ($features as $f) {
-                                    //     echo '<li><i class="bi bi-check2 text-primary"></i> ' . $f . '</li>';
-                                    // }
-                                echo '</ul>';
+                                echo '<h5 class="fw-bold mb-3">' . $r['tenThietBi'] . '</h5>';
                                 echo '<div class="d-flex align-items-center justify-content-between mt-auto">';
-                                    // echo '<div class="room-price h5 mb-0">' . number_format($r['price'], 0, ',', '.') . '₫/đêm</div>';
                                     echo '<a href="index.php?page=chitietthietbi&maThietBi=' . $r['maThietBi'] . '" class="btn btn-primary">Xem chi tiết</a>';
                                 echo '</div>';
                             echo '</div>';

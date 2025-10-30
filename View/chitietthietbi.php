@@ -35,50 +35,35 @@
         <div class="col-lg-7">
             <div class="card-na p-4 h-100 d-flex flex-column fs-5">
                 <h1 class="mb-3 fw-semibold text-primary"><?php echo $r['tenThietBi']; ?></h1>
-                
-                <ul class="list-group list-group-flush mb-4">
-                    <li class="list-group-item"><strong>Đơn vị:</strong> <?php echo $r['donVi']; ?></li>
-                    <li class="list-group-item"><strong>Số lượng:</strong> <?php echo $r['soLuong']; ?></li>
-                    <li class="list-group-item"><strong>Lớp sử dụng:</strong> <?php echo $r['lop']; ?></li>
-                    <li class="list-group-item"><strong>Bộ môn:</strong> <?php echo $r['tenBoMon']; ?></li>
-                    <li class="list-group-item"><strong>Nhà cung cấp:</strong> <?php echo $r['tenNhaCungCap']; ?></li>
-                    <li class="list-group-item"><strong>Tình trạng:</strong> 
-                        <span class="badge 
-                            <?php echo ($r['tinhTrang'] == 'Khả dụng') ? 'bg-success' : 'bg-danger'; ?>">
+
+                <div class="grid grid-cols-2 gap-3 text-sm bg-light rounded-4 mb-4">
+                    <div class="p-3">
+                        <strong>Đơn vị:</strong> <?php echo $r['donVi']; ?>
+                    </div>
+                    <div class="p-3">
+                        <strong>Số lượng:</strong> <?php echo $r['soLuong']; ?>
+                    </div>
+                    <div class="p-3">
+                        <strong>Lớp sử dụng:</strong> <?php echo $r['lop']; ?>
+                    </div>
+                    <div class="p-3">
+                        <strong>Bộ môn:</strong> <?php echo $r['tenBoMon']; ?>
+                    </div>
+                    <div class="p-3">
+                        <strong>Nhà cung cấp:</strong> <?php echo $r['tenNhaCungCap']; ?>
+                    </div>
+                    <div class="p-3">
+                        <strong>Tình trạng:</strong> 
+                        <span class="badge <?php echo ($r['tinhTrang'] == 'Khả dụng') ? 'bg-success' : 'bg-danger'; ?>">
                             <?php echo $r['tinhTrang']; ?>
                         </span>
-                    </li>
-                </ul>
+                    </div>
+                    <div class="p-3">
+                        <strong>Ghi chú:</strong> <?php echo nl2br($r['ghiChu']); ?>
+                    </div>
+                </div>
 
-
-                <div class="grid grid-cols-2 gap-3 text-sm">
-    <div class="p-3 bg-light rounded">
-        <strong>Đơn vị:</strong> <?php echo $r['donVi']; ?>
-    </div>
-    <div class="p-3 bg-light rounded">
-        <strong>Số lượng:</strong> <?php echo $r['soLuong']; ?>
-    </div>
-    <div class="p-3 bg-light rounded">
-        <strong>Lớp sử dụng:</strong> <?php echo $r['lop']; ?>
-    </div>
-    <div class="p-3 bg-light rounded">
-        <strong>Bộ môn:</strong> <?php echo $r['tenBoMon']; ?>
-    </div>
-    <div class="p-3 bg-light rounded">
-        <strong>Nhà cung cấp:</strong> <?php echo $r['tenNhaCungCap']; ?>
-    </div>
-    <div class="p-3 bg-light rounded">
-        <strong>Tình trạng:</strong> 
-        <span class="badge <?php echo ($r['tinhTrang'] == 'Khả dụng') ? 'bg-success' : 'bg-danger'; ?>">
-            <?php echo $r['tinhTrang']; ?>
-        </span>
-    </div>
-</div>
-
-
-                <p class="mb-4"><strong>Ghi chú:</strong><br><?php echo nl2br($r['ghiChu']); ?></p>
-
-                <a href="booking.php?maThietBi=<?php echo $r['maThietBi']; ?>" class="btn btn-primary btn-lg mt-auto align-self-start">
+                <a href="index.php?page=dangkymuon?maThietBi=<?php echo $r['maThietBi']; ?>" class="btn btn-primary btn-lg mt-auto align-self-start">
                     <i class="bi bi-cart-plus me-2"></i> Thêm vào phiếu mượn
                 </a>
             </div>

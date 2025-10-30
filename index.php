@@ -36,9 +36,6 @@
             case 'dangnhap':
                 include_once('View/dangnhap.php');
                 break;
-            case 'dangky':
-                include_once('View/dangky.php');
-                break;
             case 'dangxuat':
                 include_once('View/dangxuat.php');
                 break;

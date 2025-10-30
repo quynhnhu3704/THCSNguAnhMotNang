@@ -6,12 +6,12 @@
             <form action="#" method="post">
                 <div class="mb-3">
                     <label class="form-label fw-medium">Tên người dùng</label>
-                    <input type="text" name="username" value="quynhnhu" class="form-control" required>
+                    <input type="text" name="tenDangNhap" value="qltb1" class="form-control" required>
                 </div>
 
                 <div class="mb-5">
                     <label class="form-label fw-medium">Mật khẩu</label>
-                    <input type="password" name="password" value="123456" class="form-control" required>
+                    <input type="password" name="matKhau" value="123456" class="form-control" required>
                 </div>
 
                 <div class="row">
@@ -29,12 +29,12 @@
 
 <?php
     if(isset($_POST['btnlogin'])) {
-        include_once('Controller/cUser.php');
-        $p = new controlUser();
+        include_once('Controller/cNguoiDung.php');
+        $p = new controlNguoiDung();
 
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        $tenDangNhap = $_POST['tenDangNhap'];
+        $matKhau = $_POST['matKhau'];
 
-        $p->cLogin($username, $password);
+        $p->cLogin($tenDangNhap, $matKhau);
     }
 ?>
