@@ -138,6 +138,16 @@
         color: #fff !important;
     }
 
+    .list-group-item a {
+        display: block;
+        padding: 0.25em 0.5em;
+    }
+
+    .list-group-item a:hover {
+        transform: translateX(0.25em);
+        color: var(--na-primary) !important;
+    }
+
     .table thead th {
         background-color: var(--na-primary);
         color: white;

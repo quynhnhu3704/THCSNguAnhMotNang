@@ -23,8 +23,8 @@
 
     <div class="row g-4">
         <div class="col-lg-5">
-            <div class="card-na p-3 position-sticky" style="top: 1rem;">
-                <img src="image/<?php echo $r['hinhAnh']; ?>" alt="<?php echo $r['tenThietBi']; ?>" class="w-100 rounded-4 shadow-sm">
+            <div class="card-na p-3 position-sticky" style="top: 4em;">
+                <img src="image/<?php echo $r['hinhAnh']; ?>" alt="<?php echo $r['tenThietBi']; ?>" class="w-100 rounded-4">
 
                 <?php if($r['tenBoMon']): ?>
                     <span class="position-absolute top-0 start-0 badge badge-na rounded-pill m-4"><?php echo $r['tenBoMon']; ?></span>

@@ -18,5 +18,27 @@
             $kq = $p->select01ThietBi($maThietBi);
             return $kq;
         }
+
+        public function searchThietBi($keyword) {
+            $p = new modelThietBi();
+            $kq = $p->searchThietBi($keyword);
+
+            if(mysqli_num_rows($kq) > 0) {
+                return $kq;
+            } else {
+                return false;
+            }
+        }
+
+        public function getAllThietBiTheoBoMon($maBoMon) {
+            $p = new modelThietBi();
+            $kq = $p->selectAllThietBiTheoBoMon($maBoMon);
+
+            if(mysqli_num_rows($kq) > 0) {
+                return $kq;
+            } else {
+                return false;
+            }
+        }
     }
 ?>
