@@ -33,3 +33,50 @@
         </div>
     </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <?php if($r['badge']): ?>
+                    <span class="position-absolute top-0 start-0 badge badge-na rounded-pill m-4"><?php echo $r['badge']; ?></span>
+                <?php endif; ?>
+                
+                <?php if(!empty($r['gallery'])): 
+                    $images = explode(';', $r['gallery']);
+                ?>
+
+                <div class="row mt-3 g-2">
+                    <?php foreach($images as $img): ?>
+                        <div class="col-3">
+                            <img src="image/<?php echo $img; ?>" class="w-100 rounded-3 shadow-sm gallery-thumb" alt="" style="cursor:pointer;">
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
+
+
+
+
+
+
+
+
+<!-- JS: Chuyển ảnh chính theo ảnh thumbnail khi click -->
+<script>
+    const $mainImage = $('#main-room-image');
+    const $thumbs = $('.gallery-thumb');
+
+    $thumbs.on('click', function() {
+        $mainImage.attr('src', $(this).attr('src'));
+    });
+</script>

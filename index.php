@@ -44,11 +44,11 @@
                 break;
             case 'quanly':
             case 'quanlynguoidung':
-            case 'quanlyphong':
+            case 'quanlythietbi':
                 include_once('View/quanly.php');
                 break;
-            case 'chitietphong':
-                include_once('View/chitietphong.php');
+            case 'chitietthietbi':
+                include_once('View/chitietthietbi.php');
                 break;
             default:
                 include_once('View/thietbi.php');
