@@ -1,0 +1,35 @@
+<!-- Phần giới thiệu chức năng hệ thống -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row text-center g-4">
+            <div class="col-6 col-lg-3">
+                <div class="card-na p-4 h-100">
+                    <i class="bi bi-hdd-stack fs-3 text-primary"></i>
+                    <h6 class="mt-2 mb-0">Quản lý thiết bị</h6>
+                    <div class="small text-muted">Theo dõi số lượng, cập nhật tình trạng</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="card-na p-4 h-100">
+                    <i class="bi bi-person-badge fs-3 text-primary"></i>
+                    <h6 class="mt-2 mb-0">Phân quyền</h6>
+                    <div class="small text-muted">Kiểm soát truy cập và quyền thao tác</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="card-na p-4 h-100">
+                    <i class="bi bi-bar-chart-line fs-3 text-primary"></i>
+                    <h6 class="mt-2 mb-0">Thống kê</h6>
+                    <div class="small text-muted">Tổng hợp số liệu, báo cáo định kỳ</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="card-na p-4 h-100">
+                    <i class="bi bi-tools fs-3 text-primary"></i>
+                    <h6 class="mt-2 mb-0">Bảo trì</h6>
+                    <div class="small text-muted">Theo dõi, lập yêu cầu sửa chữa kịp thời</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
