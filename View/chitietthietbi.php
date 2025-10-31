@@ -24,7 +24,7 @@
     <div class="row g-4">
         <div class="col-lg-5">
             <div class="card-na p-3 position-sticky" style="top: 4em;">
-                <img src="image/<?php echo $r['hinhAnh']; ?>" alt="<?php echo $r['tenThietBi']; ?>" class="w-100 rounded-4">
+                <img src="image/<?php echo $r['hinhAnh']; ?>" alt="<?php echo $r['tenThietBi']; ?>" class="w-100 rounded-4 shadow-sm">
 
                 <?php if($r['tenBoMon']): ?>
                     <span class="position-absolute top-0 start-0 badge badge-na rounded-pill m-4"><?php echo $r['tenBoMon']; ?></span>
@@ -34,7 +34,7 @@
 
         <div class="col-lg-7">
             <div class="card-na p-4 h-100 d-flex flex-column fs-5">
-                <h1 class="mb-3 fw-semibold text-primary"><?php echo $r['tenThietBi']; ?></h1>
+                <h2 class="mb-3 fw-semibold text-primary"><?php echo $r['tenThietBi']; ?></h2>
 
                 <div class="grid grid-cols-2 gap-3 text-sm bg-light rounded-4 mb-4">
                     <div class="p-3">

@@ -3,7 +3,7 @@
         <div class="row">
             <!-- Sidebar bộ môn -->
             <div class="col-md-3 mb-4">
-                <div class="card sticky-top" style="top: 4em">
+                <div class="card position-sticky" style="top: 4em">
                     <div class="card-header bg-primary text-white fw-bold">Bộ môn</div>
                     <ul class="list-group list-group-flush">
                         <?php
@@ -29,7 +29,7 @@
 
             <!-- Danh sách thiết bị -->
             <div class="col-md-9">                
-                <!-- Hiển thị tiêu đề và mô tả dựa trên bộ môn đã chọn hoặc từ khóa tìm kiếm -->
+                <!-- Hiển thị tiêu đề dựa trên bộ môn đã chọn hoặc từ khóa tìm kiếm -->
                 <div class="d-flex flex-wrap align-items-end justify-content-between mb-4 gap-2">
                     <div>
                         <?php
@@ -75,7 +75,7 @@
                                         echo '<span class="position-absolute top-0 start-0 m-3 badge badge-na rounded-pill">' . $r['tenBoMon'] . '</span>';
                                     echo '</div>';
                                     echo '<div class="p-3 p-lg-4 d-flex flex-column">';
-                                        echo '<h5 class="fw-bold mb-3">' . $r['tenThietBi'] . '</h5>';
+                                        echo '<h6 class="fw-bold mb-3">' . $r['tenThietBi'] . '</h6>';
                                         echo '<div class="d-flex align-items-center justify-content-between mt-auto">';
                                             echo '<a href="index.php?page=chitietthietbi&maThietBi=' . $r['maThietBi'] . '" class="btn btn-primary">Xem chi tiết</a>';
                                         echo '</div>';
