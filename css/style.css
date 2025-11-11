@@ -83,36 +83,13 @@
         color:var(--na-primary)
     }
 
-    /* .nav-link:hover {
+    .nav-link:hover {
         color:var(--na-primary)!important
-    } */
-
-    .rating {
-        color:#f2b01e
-    }
-
-    .room-price {
-        font-weight:800
     }
 
     .sticky-book {
         position:sticky; 
         top:1rem
-    }
-
-    .gallery img {
-        object-fit:cover; 
-        height: 220px
-    }
-
-    #main-room-image {
-        width: 100%;
-        height: 25em;
-    }
-
-    .gallery-thumb {
-        width: 100%;
-        height: 5em;
     }
 
     .sidebar {
@@ -156,6 +133,24 @@
     .table {
         border-radius: 12px;
         overflow: hidden; /* bắt buộc để bo tròn có hiệu lực */
+    }
+
+    .offcanvas-body a {
+        padding-left: 1em;
+    }
+    
+    .offcanvas-body a:hover {
+        color: white !important;
+        background-color: var(--na-primary) !important;
+        border-radius: 1.25em;
+    }
+
+    .offcanvas-title {
+        font-weight: 600;
+    }
+
+    main {
+        min-height: 28.5em;
     }
 
     .footer-link {

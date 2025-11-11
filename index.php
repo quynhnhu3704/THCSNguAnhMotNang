@@ -30,28 +30,28 @@
         }
     ?>
 
-    <!-- switch case -->
-    <?php
-        switch($page) {
-            case 'dangnhap':
-                include_once('View/dangnhap.php');
-                break;
-            case 'dangxuat':
-                include_once('View/dangxuat.php');
-                break;
-            case 'quanly':
-            case 'quanlynguoidung':
-            case 'quanlythietbi':
-                include_once('View/quanly.php');
-                break;
-            case 'chitietthietbi':
-                include_once('View/chitietthietbi.php');
-                break;
-            default:
-                include_once('View/thietbi.php');
-                break;
-        }
-    ?>
+    <main>
+        <!-- switch case -->
+        <?php
+            switch($page) {
+                case 'dangnhap':
+                    include_once('View/dangnhap.php');
+                    break;
+                case 'dangxuat':
+                    include_once('View/dangxuat.php');
+                    break;
+                case 'quanlythietbi':
+                    include_once('View/quanlythietbi.php');
+                    break;
+                case 'chitietthietbi':
+                    include_once('View/chitietthietbi.php');
+                    break;
+                default:
+                    include_once('View/thietbi.php');
+                    break;
+            }
+        ?>
+    </main>
 
     <?php         
         include_once('View/footer.php');

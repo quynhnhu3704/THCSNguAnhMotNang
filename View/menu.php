@@ -55,12 +55,12 @@
 <!-- OFFCANVAS MENU -->
 <div class="offcanvas offcanvas-start" style="width:17.5em;" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">MENU</h5>
+        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">DANH MỤC</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body">
         <ul class="list-unstyled mb-0">
-            <li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý thiết bị</a></li>
+            <li><a href="index.php?page=quanlythietbi" class="text-decoration-none d-block text-dark py-2">Quản lý thiết bị</a></li>
             <li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý bộ môn</a></li>
             <li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>
             <li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>

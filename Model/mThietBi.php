@@ -4,7 +4,9 @@
     class modelThietBi{
         public function selectAllThietBi() {
             $p = new clsKetNoi();
-            $truyvan = "select * from thietbi tb join bomon bm on tb.maBoMon=bm.maBoMon";
+            $truyvan = "select * from thietbi tb
+                        join bomon bm on tb.maBoMon=bm.maBoMon
+                        join nhacungcap ncc on ncc.maNhaCungCap=tb.maNhaCungCap";
             $con = $p->moketnoi();
             $kq = mysqli_query($con, $truyvan);
             $p->dongketnoi($con);
