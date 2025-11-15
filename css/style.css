@@ -78,11 +78,6 @@
         border:1px solid rgba(255,255,255,.5);
     }
 
-    .amenity i {
-        font-size: 1.4rem; 
-        color:var(--na-primary)
-    }
-
     .nav-link:hover {
         color:var(--na-primary)!important
     }
@@ -133,24 +128,6 @@
     .table {
         border-radius: 12px;
         overflow: hidden; /* bắt buộc để bo tròn có hiệu lực */
-    }
-
-    .offcanvas-body a {
-        padding-left: 1em;
-    }
-    
-    .offcanvas-body a:hover {
-        color: white !important;
-        background-color: var(--na-primary) !important;
-        border-radius: 1.25em;
-    }
-
-    .offcanvas-title {
-        font-weight: 600;
-    }
-
-    main {
-        min-height: 28.5em;
     }
 
     .footer-link {

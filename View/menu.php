@@ -1,9 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
     <div class="container-fluid px-5">
-        <!-- Nút mở offcanvas -->
-        <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling">
-            <i class="bi bi-list fs-5"></i>
-        </button>
+        <!-- Nút mở sidebar -->
+        <button id="menuToggle" class="btn btn-outline-primary me-3">&#9776;</button>
 
         <a class="navbar-brand fw-bold ms-3" href="index.php">
             <i class="bi bi-mortarboard"></i> THCS Ngũ Anh Một Nàng
@@ -52,18 +50,132 @@
     </div>
 </nav>
 
-<!-- OFFCANVAS MENU -->
-<div class="offcanvas offcanvas-start" style="width:17.5em;" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">DANH MỤC</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-    </div>
-    <div class="offcanvas-body">
-        <ul class="list-unstyled mb-0">
-            <li><a href="index.php?page=quanlythietbi" class="text-decoration-none d-block text-dark py-2">Quản lý thiết bị</a></li>
-            <li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý bộ môn</a></li>
-            <li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>
-            <li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>
-        </ul>
-    </div>
+<!-- SIDEBAR -->
+<div id="sidebar" class="bg-white shadow-sm">
+    <h5 class="fw-semibold px-3 pt-3 pb-1">DANH MỤC</h5>
+    <ul class="list-unstyled px-3">
+        <?php
+            if(!isset($_SESSION['login'])) {
+                // echo "<li>vui lòng dang nhap</li>";
+                echo '<li class="fst-italic text-center text-muted">Vui lòng đăng nhập</li>';
+            } else {
+                echo '<li><a href="index.php?page=quanlythietbi" class="text-decoration-none d-block text-dark py-2">Quản lý thiết bị</a></li>';
+                echo '<li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý bộ môn</a></li>';
+                echo '<li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>';
+                echo '<li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>';
+            }
+        ?>
+    </ul>
 </div>
+
+<!-- MAIN CONTENT -->
+<div id="mainContent">
+    <!-- Header -->
+    <?php
+        include_once('View/menu.php');
+
+        $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : '';
+        
+        // Chỉ hiển thị header khi không có ?page nào, tức là index.php
+        if ($page == '') {
+            include_once('View/header.php');
+        }
+    ?>
+
+    <main>
+        <!-- switch case -->
+        <?php
+            switch($page) {
+                case 'dangnhap':
+                    include_once('View/dangnhap.php');
+                    break;
+                case 'dangxuat':
+                    include_once('View/dangxuat.php');
+                    break;
+                case 'quanlythietbi':
+                    include_once('View/quanlythietbi.php');
+                    break;
+                case 'chitietthietbi':
+                    include_once('View/chitietthietbi.php');
+                    break;
+                default:
+                    include_once('View/thietbi.php');
+                    break;
+            }
+        ?>
+    </main>
+
+    <?php         
+        include_once('View/footer.php');
+    ?>
+</div>
+
+
+<style>
+    #sidebar {
+        position: fixed;
+        top: 3.5em;
+        left: 0;
+        width: 17.5em;
+        height: 100vh;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1050;
+    }
+
+    #sidebar.active {
+        transform: translateX(0);
+    }
+
+    #mainContent {
+        transition: margin-left 0.3s ease;
+    }
+
+    #mainContent.shifted {
+        margin-left: 17.5em;
+    }
+
+    .no-transition *, .no-transition {
+        transition: none !important;
+    }
+
+    #sidebar a {
+        padding-left: 1em;
+    }
+    
+    #sidebar a:hover {
+        color: white !important;
+        background-color: var(--na-primary) !important;
+        border-radius: 1.25em;
+    }
+</style>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebar = document.getElementById('sidebar');
+        const main = document.getElementById('mainContent');
+        const toggleBtn = document.getElementById('menuToggle');
+
+        // Tạm tắt transition để tránh thụt ra thụt vô
+        document.body.classList.add('no-transition');
+
+        // Kiểm tra trạng thái lưu
+        if (localStorage.getItem('sidebarOpen') === 'true') {
+            sidebar.classList.add('active');
+            main.classList.add('shifted');
+        }
+
+        // Bật lại transition sau khi layout ổn định
+        setTimeout(() => {
+            document.body.classList.remove('no-transition');
+        }, 100);
+
+        // Toggle sidebar
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            main.classList.toggle('shifted');
+            localStorage.setItem('sidebarOpen', sidebar.classList.contains('active'));
+        });
+    });
+</script>

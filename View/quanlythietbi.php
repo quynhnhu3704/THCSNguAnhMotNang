@@ -15,6 +15,7 @@
         <table class="table table-striped table-hover table-borderless align-middle" style="font-size: 0.85em;">
             <thead class="text-center"> -->
 
+            
 <div class="table-responsive my-5 mx-2">
     <table class="table table-striped table-hover table-borderless align-middle" style="font-size: 0.85em;">
         <thead class="text-center">
