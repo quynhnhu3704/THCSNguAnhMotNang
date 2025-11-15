@@ -110,46 +110,9 @@
     ?>
 </div>
 
-
 <style>
-    #sidebar {
-        position: fixed;
-        top: 3.5em;
-        left: 0;
-        width: 17.5em;
-        height: 100vh;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        z-index: 1050;
-    }
 
-    #sidebar.active {
-        transform: translateX(0);
-    }
-
-    #mainContent {
-        transition: margin-left 0.3s ease;
-    }
-
-    #mainContent.shifted {
-        margin-left: 17.5em;
-    }
-
-    .no-transition *, .no-transition {
-        transition: none !important;
-    }
-
-    #sidebar a {
-        padding-left: 1em;
-    }
-    
-    #sidebar a:hover {
-        color: white !important;
-        background-color: var(--na-primary) !important;
-        border-radius: 1.25em;
-    }
 </style>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
