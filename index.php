@@ -32,7 +32,7 @@
         // }
     ?>
 
-    <main>
+    <!-- <main> -->
         <!-- switch case -->
         <?php
             // switch($page) {
@@ -53,7 +53,7 @@
             //         break;
             // }
         ?>
-    </main>
+    <!-- </main> -->
 
     <?php         
         include_once('View/footer.php');

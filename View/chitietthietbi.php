@@ -63,7 +63,7 @@
                     </div>
                 </div>
 
-                <a href="index.php?page=dangkymuon?maThietBi=<?php echo $r['maThietBi']; ?>" class="btn btn-primary btn-lg mt-auto align-self-start">
+                <a href="index.php?page=dangkymuon?maThietBi=<?php echo $r['maThietBi']; ?>" class="btn btn-primary btn-lg mt-auto align-self-start fw-semibold">
                     <i class="bi bi-cart-plus me-2"></i> Thêm vào phiếu mượn
                 </a>
             </div>

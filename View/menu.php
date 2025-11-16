@@ -52,17 +52,16 @@
 
 <!-- SIDEBAR -->
 <div id="sidebar" class="bg-white shadow-sm">
-    <h5 class="fw-semibold px-3 pt-3 pb-1">DANH MỤC</h5>
+    <h5 class="fw-semibold px-3 pt-3 pb-1"><i class="bi bi-speedometer2 me-2"></i>DANH MỤC</h5>
     <ul class="list-unstyled px-3">
         <?php
             if(!isset($_SESSION['login'])) {
-                // echo "<li>vui lòng dang nhap</li>";
                 echo '<li class="fst-italic text-center text-muted">Vui lòng đăng nhập</li>';
             } else {
                 echo '<li><a href="index.php?page=quanlythietbi" class="text-decoration-none d-block text-dark py-2">Quản lý thiết bị</a></li>';
-                echo '<li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý bộ môn</a></li>';
+                echo '<li><a href="index.php?page=quanlybomon" class="text-decoration-none d-block text-dark py-2">Quản lý bộ môn</a></li>';
                 echo '<li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>';
-                echo '<li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>';
+                echo '<li><a href="index.php?page=quanlynhacungcap" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>';
             }
         ?>
     </ul>
@@ -95,6 +94,12 @@
                 case 'quanlythietbi':
                     include_once('View/quanlythietbi.php');
                     break;
+                case 'quanlybomon':
+                    include_once('View/quanlybomon.php');
+                    break;
+                case 'quanlynhacungcap':
+                    include_once('View/quanlynhacungcap.php');
+                    break;
                 case 'chitietthietbi':
                     include_once('View/chitietthietbi.php');
                     break;
@@ -109,10 +114,6 @@
         include_once('View/footer.php');
     ?>
 </div>
-
-<style>
-
-</style>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {

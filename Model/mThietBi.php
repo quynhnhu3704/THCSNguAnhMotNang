@@ -29,6 +29,7 @@
             $p = new clsKetNoi();
             $truyvan = "select * from thietbi tb
                         join bomon bm on tb.maBoMon=bm.maBoMon
+                        join nhacungcap ncc on tb.maNhaCungCap=ncc.maNhaCungCap
                         where tenThietBi like N'%$keyword%'";
             $con = $p->moketnoi();
             $kq = mysqli_query($con, $truyvan);

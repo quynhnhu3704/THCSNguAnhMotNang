@@ -84,7 +84,7 @@
                             echo '</div>';
                         }
                     } else {
-                        echo '<h2>Chúng tôi tạm thời chưa có thiết bị nào, mời bạn quay lại sau.</h2>';
+                        echo '<h3 class="text-muted">Chúng tôi tạm thời chưa có thiết bị nào, mời bạn quay lại sau.</h3>';
                     }
                 ?>
                 </div>

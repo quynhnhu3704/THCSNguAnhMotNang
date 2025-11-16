@@ -1,28 +1,28 @@
 <?php
     include_once('mketnoi.php');
 
-    class modelBoMon{
-        public function selectAllBoMon() {
+    class modelNhaCungCap{
+        public function selectAllNhaCungCap() {
             $p = new clsKetNoi();
-            $truyvan = "select * from bomon";
+            $truyvan = "select * from nhacungcap";
             $con = $p->moketnoi();
             $kq = mysqli_query($con, $truyvan);
             $p->dongketnoi($con);
             return $kq;
         }
 
-        public function select01BoMon($maBoMon) {
+        public function select01NhaCungCap($maNhaCungCap) {
             $p = new clsKetNoi();
-            $truyvan = "select * from bomon where maBoMon=$maBoMon";
+            $truyvan = "select * from nhacungcap where maNhaCungCap=$maNhaCungCap";
             $con = $p->moketnoi();
             $kq = mysqli_query($con, $truyvan);
             $p->dongketnoi($con);
             return $kq;
         }
 
-        public function searchBoMon($keyword) {
+        public function searchNhaCungCap($keyword) {
             $p = new clsKetNoi();
-            $truyvan = "select * from bomon where tenBoMon like N'%$keyword%'";
+            $truyvan = "select * from nhacungcap where tenNhaCungCap like N'%$keyword%'";
             $con = $p->moketnoi();
             $kq = mysqli_query($con, $truyvan);
             $p->dongketnoi($con);

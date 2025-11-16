@@ -18,5 +18,16 @@
             $kq = $p->select01BoMon($maBoMon);
             return $kq;
         }
+
+        public function searchBoMon($keyword) {
+            $p = new modelBoMon();
+            $kq = $p->searchBoMon($keyword);
+
+            if(mysqli_num_rows($kq) > 0) {
+                return $kq;
+            } else {
+                return false;
+            }
+        }
     }
 ?>
