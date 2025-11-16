@@ -62,6 +62,7 @@
                 echo '<li><a href="index.php?page=quanlybomon" class="text-decoration-none d-block text-dark py-2">Quản lý bộ môn</a></li>';
                 echo '<li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>';
                 echo '<li><a href="index.php?page=quanlynhacungcap" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>';
+                echo '<li><a href="index.php?page=quanlynguoidung" class="text-decoration-none d-block text-dark py-2">Quản lý người dùng</a></li>';
             }
         ?>
     </ul>
@@ -99,6 +100,9 @@
                     break;
                 case 'quanlynhacungcap':
                     include_once('View/quanlynhacungcap.php');
+                    break;
+                case 'quanlynguoidung':
+                    include_once('View/quanlynguoidung.php');
                     break;
                 case 'chitietthietbi':
                     include_once('View/chitietthietbi.php');

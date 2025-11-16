@@ -10,75 +10,100 @@
     // }
 ?>
 
-<div class="table-responsive my-5 mx-2">
-    <table class="table table-striped table-hover table-borderless align-middle" style="font-size: 0.85em;">
-        <thead class="text-center">
-            <tr>
-                <th>STT</th>
-                <th>Tên đăng nhập</th>
-                <th>Họ tên</th>
-                <th>Email</th>
-                <th>Số điện thoại</th>
-                <th>Vai trò</th>
-                <th>Ngày sinh</th>
-                <th>Giới tính</th>
-                <th>Địa chỉ</th>
-                <th>Thao tác</th>
-            </tr>
-        </thead>
+<h2 class="text-center fw-semibold my-3">Danh sách người dùng</h2>
 
-        <tbody>
-        <?php
-            include_once('Controller/cUser.php');
-            $p = new controlUser();
-            $kq = $p->getAllUser();
+<div class="d-flex mx-auto justify-content-between align-items-center" style="width: 95%">
+    <!-- Nút thêm -->
+    <a href="index.php?page=themnguoidung" class="btn btn-primary fw-semibold"><i class="bi bi-database-add me-1"></i> Thêm người dùng</a>
 
-            if ($kq && $kq->num_rows > 0) {
-                $dem = 0;
-                while ($r = $kq->fetch_assoc()) {
-                    $dem++;
+    <!-- Thanh tìm kiếm -->
+    <form class="d-flex" action="index.php" method="get">
+        <input type="hidden" name="page" value="quanlynguoidung"> <!-- Submit sẽ tạo URL: index.php?page=quanlynguoidung&keyword=xxxxx -->
 
-                    echo '<tr>';
-                        echo '<td class="text-center"><strong>' . $dem . '</strong></td>';
-                        echo '<td>' . $r['username'] . '</td>';
-                        echo '<td>' . $r['fullname'] . '</td>';
-                        echo '<td>' . $r['email'] . '</td>';
-                        echo '<td>' . $r['phone'] . '</td>';
+        <input class="form-control me-2" type="text" name="keyword" placeholder="Tìm kiếm người dùng..." style="width: 220px;">
+        <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+    </form>
+</div>
 
-                        echo '<td class="text-center">';
-                            switch ($r['role_id']) {
-                                case 1: 
-                                    echo '<span class="badge bg-danger">Quản lý</span>'; 
-                                    break;
-                                case 2: 
-                                    echo '<span class="badge bg-info text-dark">Nhân viên</span>'; 
-                                    break;
-                                case 3: 
-                                    echo '<span class="badge bg-secondary">Khách hàng</span>'; 
-                                    break;
-                                default: 
-                                    echo '<span class="badge bg-light text-dark">Không xác định</span>';
-                            }
-                        echo '</td>';
 
-                        echo '<td>' . $r['dob'] . '</td>';
-                        echo '<td class="text-center">' . $r['gender'] . '</td>';
-                        echo '<td>' . $r['address'] . '</td>';
+<div class="d-flex justify-content-center">
+    <div class="table-responsive my-5" style="width: 95%;">
+        <table class="table table-striped table-hover table-borderless align-middle" style="font-size: 0.85em;">
+            <thead class="text-center">
+                <tr>
+                    <th>STT</th>
+                    <th>Tên đăng nhập</th>
+                    <th>Họ tên</th>
+                    <th>Vai trò</th>
+                    <th>Bộ môn</th>
+                    <th>Số điện thoại</th>
+                    <th>Email</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
 
-                        echo '<td class="text-center">';
-                            echo '<a href="index.php?page=suaNguoiDung&id=' . $r['user_id'] . '" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
-                            echo '<a href="index.php?page=xoaNguoiDung&id=' . $r['user_id'] . '" class="btn btn-sm btn-danger" onclick="return confirm(\'Bạn có chắc muốn xóa người dùng này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
-                        echo '</td>';
-                    echo '</tr>';
+            <tbody>
+            <?php
+                include_once('Controller/cNguoiDung.php');
+                $p = new controlNguoiDung();
+
+                if(isset($_GET['keyword'])) {
+                    $keyword = $_GET['keyword'];
+                    $kq = $p->searchNguoiDung($keyword);
+                } else {
+                    $kq = $p->getAllNguoiDung();
                 }
-            } else {
-                echo '<tr><td colspan="10"><h2>Chưa có dữ liệu người dùng.</h2></td></tr>';   
-            }
-        ?>
-        </tbody>
-    </table>
 
-    <div class="text-center mt-5">
-        <a href="index.php?page=themnguoidung" class="btn btn-primary btn-sm"><i class="bi bi-person-plus"></i> Thêm người dùng</a>
+                if ($kq && $kq->num_rows > 0) {
+                    $dem = 0;
+                    while ($r = $kq->fetch_assoc()) {
+                        $dem++;
+
+                        echo '<tr>';
+                            echo '<td class="text-center"><strong>' . $dem . '</strong></td>';
+                            echo '<td class="text-center">' . $r['tenDangNhap'] . '</td>';
+                            echo '<td class="text-center">' . $r['hoTen'] . '</td>';
+                        
+                            echo '<td class="text-center">';
+                                switch ($r['maVaiTro']) {
+                                    case 1: echo '<span class="badge bg-danger">Hiệu trưởng</span>'; break;
+                                    case 2: echo '<span class="badge bg-warning text-dark">Tổ trưởng chuyên môn</span>'; break;
+                                    case 3: echo '<span class="badge bg-secondary">Giáo viên bộ môn</span>'; break;
+                                    case 4: echo '<span class="badge bg-success">Nhân viên quản lý thiết bị</span>'; break;
+                                    case 5: echo '<span class="badge bg-primary">Nhân viên kỹ thuật</span>'; break;
+                                    case 6: echo '<span class="badge bg-info text-dark">Quản trị hệ thống</span>'; break;
+                                    default: echo '<span class="badge bg-light text-dark">Không xác định</span>';
+                                }
+                            echo '</td>';
+
+                            echo '<td class="text-center">';
+                                echo ($r['tenBoMon'] === NULL) ? '—' : $r['tenBoMon'];
+                            echo '</td>';
+                            
+                            echo '<td class="text-center">' . $r['soDienThoai'] . '</td>';
+                            echo '<td class="text-center">' . $r['email'] . '</td>';
+
+                            echo '<td class="text-center">';
+                                echo '<a href="index.php?page=suanguoidung&id=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
+                                echo '<a href="index.php?page=xoanguoidung&id=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa người dùng này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
+                            echo '</td>';
+                        echo '</tr>';
+                    }
+                } else {
+                    echo '<tr><td colspan="8"><h3 class="text-muted">Chúng tôi tạm thời chưa có người dùng nào, mời bạn quay lại sau.</h3></td></tr>';   
+                }
+            ?>
+            </tbody>
+        </table>
     </div>
 </div>
+
+<style>
+    th, td {
+        border: 1px solid #ddd;
+        max-width: 7.25em;      /* độ rộng tối đa của cột */
+        white-space: nowrap;   /* không xuống dòng */
+        overflow: hidden;      /* ẩn phần thừa */
+        text-overflow: ellipsis; /* hiện dấu ... */
+    }
+</style>

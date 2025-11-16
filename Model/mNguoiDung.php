@@ -22,7 +22,22 @@
 
         public function selectAllNguoiDung() {
             $p = new clsKetNoi();
-            $truyvan = "select * from nguoidung";
+            $truyvan = "select * from nguoidung nd
+                        left join bomon bm on bm.maBoMon=nd.maBoMon
+                        left join vaitro vt on vt.maVaiTro=nd.maVaiTro
+                        order by tenDangNhap";
+            $con = $p->moketnoi();
+            $kq = mysqli_query($con, $truyvan);
+            $p->dongketnoi($con);
+            return $kq;
+        }
+
+        public function searchNguoiDung($keyword) {
+            $p = new clsKetNoi();
+            $truyvan = "select * from nguoidung nd
+                        left join bomon bm on bm.maBoMon=nd.maBoMon
+                        left join vaitro vt on vt.maVaiTro=nd.maVaiTro
+                        where hoTen like N'%$keyword%'";
             $con = $p->moketnoi();
             $kq = mysqli_query($con, $truyvan);
             $p->dongketnoi($con);

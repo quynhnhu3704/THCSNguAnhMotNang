@@ -32,5 +32,16 @@
                 return false;
             }
         }
+
+        public function searchNguoiDung($keyword) {
+            $p = new modelNguoiDung();
+            $kq = $p->searchNguoiDung($keyword);
+
+            if(mysqli_num_rows($kq) > 0) {
+                return $kq;
+            } else {
+                return false;
+            }
+        }
     }
 ?>
