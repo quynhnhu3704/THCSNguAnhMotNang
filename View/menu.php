@@ -52,7 +52,7 @@
 
 <!-- SIDEBAR -->
 <div id="sidebar" class="bg-white shadow-sm">
-    <h5 class="fw-semibold px-3 pt-3 pb-1"><i class="bi bi-speedometer2 me-2"></i>DANH MỤC</h5>
+    <h5 class="fw-bold px-3 pt-3 pb-1"><i class="bi bi-speedometer2 me-2"></i>DANH MỤC</h5>
     <ul class="list-unstyled px-3">
         <?php
             if(!isset($_SESSION['login'])) {
@@ -106,6 +106,9 @@
                     break;
                 case 'chitietthietbi':
                     include_once('View/chitietthietbi.php');
+                    break;
+                case 'suathietbi':
+                    include_once('View/quanlythietbi/suathietbi.php');
                     break;
                 default:
                     include_once('View/thietbi.php');

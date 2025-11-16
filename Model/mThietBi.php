@@ -47,5 +47,14 @@
             $p->dongketnoi($con);
             return $kq;
         }
+
+        public function updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu) {
+            $p = new clsKetNoi();
+            $truyvan = "update thietbi set tenThietBi=N'$tenThietBi', hinhAnh=N'$hinh', donVi=N'$donVi', soLuong=$soLuong, lop=N'$lop', maBoMon=$maBoMon, maNhaCungCap=$maNhaCungCap, tinhTrang=N'$tinhTrang', ghiChu=N'$ghiChu' where maThietBi=$maThietBi";
+            $con = $p->moketnoi();
+            $kq = mysqli_query($con, $truyvan);
+            $p->dongketnoi($con);
+            return $kq;
+        }
     }
 ?>

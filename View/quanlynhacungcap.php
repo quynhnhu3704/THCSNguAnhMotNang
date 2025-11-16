@@ -65,8 +65,8 @@
                             echo '<td class="text-center">' . $r['email'] . '</td>';
 
                             echo '<td class="text-center">';
-                                echo '<a href="index.php?page=suanhacungcap&id=' . $r['maNhaCungCap'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
-                                echo '<a href="index.php?page=xoanhacungcap&id=' . $r['maNhaCungCap'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa nhà cung cấp này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
+                                echo '<a href="index.php?page=suanhacungcap&maNhaCungCap=' . $r['maNhaCungCap'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
+                                echo '<a href="index.php?page=xoanhacungcap&maNhaCungCap=' . $r['maNhaCungCap'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa nhà cung cấp này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
                             echo '</td>';
                         echo '</tr>';
                     }

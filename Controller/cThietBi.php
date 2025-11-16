@@ -40,5 +40,11 @@
                 return false;
             }
         }
+
+        public function updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu) {
+            $p = new modelThietBi();
+            $kq = $p->updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu);
+            return $kq;
+        }
     }
 ?>

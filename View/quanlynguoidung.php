@@ -84,8 +84,8 @@
                             echo '<td class="text-center">' . $r['email'] . '</td>';
 
                             echo '<td class="text-center">';
-                                echo '<a href="index.php?page=suanguoidung&id=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
-                                echo '<a href="index.php?page=xoanguoidung&id=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa người dùng này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
+                                echo '<a href="index.php?page=suanguoidung&maNguoiDung=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
+                                echo '<a href="index.php?page=xoanguoidung&maNguoiDung=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa người dùng này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
                             echo '</td>';
                         echo '</tr>';
                     }

@@ -19,7 +19,7 @@
 ?>
 
 <div class="container my-5">
-    <a href="index.php" class="btn btn-outline-primary mb-4"><i class="bi bi-arrow-left"></i> Quay lại</a>
+    <button type="button" class="btn btn-outline-primary mb-4" onclick="window.history.back()"><i class="bi bi-arrow-left"></i> Quay lại</button>
 
     <div class="row g-4">
         <div class="col-lg-5">
@@ -64,7 +64,7 @@
                 </div>
 
                 <a href="index.php?page=dangkymuon?maThietBi=<?php echo $r['maThietBi']; ?>" class="btn btn-primary btn-lg mt-auto align-self-start fw-semibold">
-                    <i class="bi bi-cart-plus me-2"></i> Thêm vào phiếu mượn
+                    <i class="bi bi-cart-plus me-2 fw-semibold"></i>Thêm vào phiếu mượn
                 </a>
             </div>
         </div>        

@@ -65,7 +65,7 @@
                         echo '<tr>';
                             echo '<td class="text-center"><strong>' . $dem . '</strong></td>';
                             echo '<td title="'.$r['tenThietBi'].'">' . $r['tenThietBi'] . '</td>';
-                            echo '<td><img src="image/' . $r['hinhAnh'] . '" width="40" class="rounded d-block mx-auto"></td>';
+                            echo '<td><img src="image/' . $r['hinhAnh'] . '" width="40" height="40" class="rounded d-block mx-auto"></td>';
                             echo '<td class="text-center">' . $r['donVi'] . '</td>';
                             echo '<td class="text-center">' . $r['soLuong'] . '</td>';
                             echo '<td class="text-center">' . $r['lop'] . '</td>';
@@ -75,8 +75,8 @@
                             echo '<td>' . $r['ghiChu'] . '</td>';
 
                             echo '<td class="text-center">';
-                                echo '<a href="index.php?page=suathietbi&id=' . $r['maThietBi'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
-                                echo '<a href="index.php?page=xoathietbi&id=' . $r['maThietBi'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa thiết bị này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
+                                echo '<a href="index.php?page=suathietbi&maThietBi=' . $r['maThietBi'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
+                                echo '<a href="index.php?page=xoathietbi&maThietBi=' . $r['maThietBi'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa thiết bị này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
                             echo '</td>';
                         echo '</tr>';
                     }

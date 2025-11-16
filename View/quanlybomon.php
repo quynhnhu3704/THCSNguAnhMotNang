@@ -61,8 +61,8 @@
                             echo '<td class="text-center">' . $r['moTa'] . '</td>';
 
                             echo '<td class="text-center">';
-                                echo '<a href="index.php?page=suabomon&id=' . $r['maBoMon'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
-                                echo '<a href="index.php?page=xoabomon&id=' . $r['maBoMon'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa bộ môn này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
+                                echo '<a href="index.php?page=suabomon&maBoMon=' . $r['maBoMon'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
+                                echo '<a href="index.php?page=xoabomon&maBoMon=' . $r['maBoMon'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa bộ môn này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
                             echo '</td>';
                         echo '</tr>';
                     }
