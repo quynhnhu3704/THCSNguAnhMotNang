@@ -29,5 +29,34 @@
                 return false;
             }
         }
+
+        public function checkName($tenBoMon) {
+            $p = new modelBoMon();
+            $kq = $p->checkName($tenBoMon);
+            
+            if(mysqli_num_rows($kq) > 0) {
+                return $kq;
+            } else {
+                return false;
+            }
+        }
+
+        public function insertBoMon($tenBoMon, $moTa) {
+            $p = new modelBoMon();
+            $kq = $p->insertBoMon($tenBoMon, $moTa);
+            return $kq;
+        }
+
+        public function updateBoMon($maBoMon, $tenBoMon, $moTa) {
+            $p = new modelBoMon();
+            $kq = $p->updateBoMon($maBoMon, $tenBoMon, $moTa);
+            return $kq;
+        }
+
+        public function deleteBoMon($maBoMon) {
+            $p = new modelBoMon();
+            $kq = $p->deleteBoMon($maBoMon);
+            return $kq;
+        }
     }
 ?>

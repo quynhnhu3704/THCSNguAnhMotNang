@@ -41,9 +41,32 @@
             }
         }
 
+        public function checkName($tenThietBi) {
+            $p = new modelThietBi();
+            $kq = $p->checkName($tenThietBi);
+            
+            if(mysqli_num_rows($kq) > 0) {
+                return $kq;
+            } else {
+                return false;
+            }
+        }
+
+        public function insertThietBi($tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu) {
+            $p = new modelThietBi();
+            $kq = $p->insertThietBi($tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu);
+            return $kq;
+        }
+
         public function updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu) {
             $p = new modelThietBi();
             $kq = $p->updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu);
+            return $kq;
+        }
+
+        public function deleteThietBi($maThietBi) {
+            $p = new modelThietBi();
+            $kq = $p->deleteThietBi($maThietBi);
             return $kq;
         }
     }

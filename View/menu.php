@@ -107,9 +107,32 @@
                 case 'chitietthietbi':
                     include_once('View/chitietthietbi.php');
                     break;
+
+                // Quản lý thiết bị (CRUD)
                 case 'suathietbi':
                     include_once('View/quanlythietbi/suathietbi.php');
                     break;
+                case 'themthietbi':
+                    include_once('View/quanlythietbi/themthietbi.php');
+                    break;
+                case 'xoathietbi':
+                    include_once('View/quanlythietbi/xoathietbi.php');
+                    break;
+
+                // Quản lý bộ môn (CRUD)
+                case 'suabomon':
+                    include_once('View/quanlybomon/suabomon.php');
+                    break;
+                case 'thembomon':
+                    include_once('View/quanlybomon/thembomon.php');
+                    break;
+                case 'xoabomon':
+                    include_once('View/quanlybomon/xoabomon.php');
+                    break;
+
+                // Quản lý nhà cung cấp (CRUD)
+                // Quản lý người dùng (CRUD)
+
                 default:
                     include_once('View/thietbi.php');
                     break;
