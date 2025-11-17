@@ -135,13 +135,13 @@
     if(isset($_POST['btnluu'])) {
         $tenThietBi = trim($_POST['tenThietBi']);
         $hinhAnh = $_FILES['hinhAnh'];
-        $donVi = $_POST['donVi'];
-        $soLuong = $_POST['soLuong'];
+        $donVi = trim($_POST['donVi']);
+        $soLuong = trim($_POST['soLuong']);
         $lop = isset($_POST['lop']) ? implode(',', $_POST['lop']) : null;
-        $maBoMon = $_POST['maBoMon'];
-        $maNhaCungCap = $_POST['maNhaCungCap'];
-        $tinhTrang = $_POST['tinhTrang'];
-        $ghiChu = $_POST['ghiChu'];
+        $maBoMon = trim($_POST['maBoMon']);
+        $maNhaCungCap = trim($_POST['maNhaCungCap']);
+        $tinhTrang = trim($_POST['tinhTrang']);
+        $ghiChu = trim($_POST['ghiChu']);
 
         if($p->checkName($tenThietBi)) {
             echo '<script>alert("Tên thiết bị đã tồn tại!"); window.location.href="index.php?page=themthietbi";</script>';

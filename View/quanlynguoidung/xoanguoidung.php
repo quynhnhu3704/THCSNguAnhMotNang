@@ -9,29 +9,29 @@
     //     exit();
     // }
 
-    include_once('Controller/cBoMon.php');
-    $p = new controlBoMon();
+    include_once('Controller/cNguoiDung.php');
+    $p = new controlNguoiDung();
 
-    $maBoMon = $_GET['maBoMon'];
+    $maNguoiDung = $_GET['maNguoiDung'];
 
-    if(!$maBoMon) {
-        echo "<script>alert('Không tìm thấy bộ môn!'); window.location.href='index.php?page=quanlybomon'</script>";
+    if(!$maNguoiDung) {
+        echo "<script>alert('Không tìm thấy người dùng!'); window.location.href='index.php?page=quanlynguoidung'</script>";
         exit();
     }
 
-    $kq = $p->get01BoMon($maBoMon);
+    $kq = $p->get01NguoiDung($maNguoiDung);
 
     if($kq && $kq->num_rows > 0) {
         $r = $kq->fetch_assoc();
     } else {
-        echo "<script>alert('Không tìm thấy bộ môn!'); window.location.href='index.php?page=quanlybomon'</script>";
+        echo "<script>alert('Không tìm thấy người dùng!'); window.location.href='index.php?page=quanlynguoidung'</script>";
         exit();
     }
 
 
     if (isset($_GET['action']) && $_GET['action'] == 'delete') {
-        if ($p->deleteBoMon($maBoMon)) {
-            echo "<script>alert('Xóa thành công!'); window.location.href='index.php?page=quanlybomon';</script>";
+        if ($p->deleteNguoiDung($maNguoiDung)) {
+            echo "<script>alert('Xóa thành công!'); window.location.href='index.php?page=quanlynguoidung';</script>";
         } else {
             echo "<script>alert('Xóa thất bại!'); window.history.back();</script>";
         }

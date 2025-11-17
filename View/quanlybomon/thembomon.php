@@ -46,12 +46,11 @@
 
 <?php
     include_once('Controller/cBoMon.php');
-
     $p = new controlBoMon();
     
     if(isset($_POST['btnluu'])) {
         $tenBoMon = trim($_POST['tenBoMon']);
-        $moTa = $_POST['moTa'];
+        $moTa = trim($_POST['moTa']);
 
         if($p->checkName($tenBoMon)) {
             echo '<script>alert("Tên bộ môn đã tồn tại!"); window.location.href="index.php?page=thembomon";</script>';

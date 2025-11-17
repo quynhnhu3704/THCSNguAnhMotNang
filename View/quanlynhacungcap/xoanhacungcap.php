@@ -9,29 +9,29 @@
     //     exit();
     // }
 
-    include_once('Controller/cBoMon.php');
-    $p = new controlBoMon();
+    include_once('Controller/cNhaCungCap.php');
+    $p = new controlNhaCungCap();
 
-    $maBoMon = $_GET['maBoMon'];
+    $maNhaCungCap = $_GET['maNhaCungCap'];
 
-    if(!$maBoMon) {
-        echo "<script>alert('Không tìm thấy bộ môn!'); window.location.href='index.php?page=quanlybomon'</script>";
+    if(!$maNhaCungCap) {
+        echo "<script>alert('Không tìm thấy nhà cung cấp!'); window.location.href='index.php?page=quanlynhacungcap'</script>";
         exit();
     }
 
-    $kq = $p->get01BoMon($maBoMon);
+    $kq = $p->get01NhaCungCap($maNhaCungCap);
 
     if($kq && $kq->num_rows > 0) {
         $r = $kq->fetch_assoc();
     } else {
-        echo "<script>alert('Không tìm thấy bộ môn!'); window.location.href='index.php?page=quanlybomon'</script>";
+        echo "<script>alert('Không tìm thấy nhà cung cấp!'); window.location.href='index.php?page=quanlynhacungcap'</script>";
         exit();
     }
 
 
     if (isset($_GET['action']) && $_GET['action'] == 'delete') {
-        if ($p->deleteBoMon($maBoMon)) {
-            echo "<script>alert('Xóa thành công!'); window.location.href='index.php?page=quanlybomon';</script>";
+        if ($p->deleteNhaCungCap($maNhaCungCap)) {
+            echo "<script>alert('Xóa thành công!'); window.location.href='index.php?page=quanlynhacungcap';</script>";
         } else {
             echo "<script>alert('Xóa thất bại!'); window.history.back();</script>";
         }

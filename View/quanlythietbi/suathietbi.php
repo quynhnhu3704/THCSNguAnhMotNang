@@ -34,7 +34,7 @@
 <div class="container d-flex justify-content-center align-items-center mb-5">
     <div class="card-na border-0" style="max-width: 36rem; width: 100%;">
         <div class="card-body p-4">
-            <h3 class="text-center mb-4 fw-bold text-primary">Sửa thiết bị</h3>
+            <h3 class="text-center mb-4 fw-bold text-primary">Cập nhật thiết bị</h3>
 
             <form action="#" method="post" enctype="multipart/form-data">
                 <!-- Tên thiết bị -->
@@ -159,13 +159,13 @@
     if(isset($_POST['btnluu'])) {
         $tenThietBi = trim($_POST['tenThietBi']);
         $hinhAnh = $_FILES['hinhAnh'];
-        $donVi = $_POST['donVi'];
-        $soLuong = $_POST['soLuong'];
+        $donVi = trim($_POST['donVi']);
+        $soLuong = trim($_POST['soLuong']);
         $lop = isset($_POST['lop']) ? implode(',', $_POST['lop']) : null;
-        $maBoMon = $_POST['maBoMon'];
-        $maNhaCungCap = $_POST['maNhaCungCap'];
-        $tinhTrang = $_POST['tinhTrang'];
-        $ghiChu = $_POST['ghiChu'];
+        $maBoMon = trim($_POST['maBoMon']);
+        $maNhaCungCap = trim($_POST['maNhaCungCap']);
+        $tinhTrang = trim($_POST['tinhTrang']);
+        $ghiChu = trim($_POST['ghiChu']);
         
         
         if (is_uploaded_file($hinhAnh['tmp_name'])) {

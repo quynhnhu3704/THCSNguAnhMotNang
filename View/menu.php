@@ -131,7 +131,26 @@
                     break;
 
                 // Quản lý nhà cung cấp (CRUD)
+                case 'suanhacungcap':
+                    include_once('View/quanlynhacungcap/suanhacungcap.php');
+                    break;
+                case 'themnhacungcap':
+                    include_once('View/quanlynhacungcap/themnhacungcap.php');
+                    break;
+                case 'xoanhacungcap':
+                    include_once('View/quanlynhacungcap/xoanhacungcap.php');
+                    break;
+
                 // Quản lý người dùng (CRUD)
+                case 'suanguoidung':
+                    include_once('View/quanlynguoidung/suanguoidung.php');
+                    break;
+                case 'themnguoidung':
+                    include_once('View/quanlynguoidung/themnguoidung.php');
+                    break;
+                case 'xoanguoidung':
+                    include_once('View/quanlynguoidung/xoanguoidung.php');
+                    break;
 
                 default:
                     include_once('View/thietbi.php');
