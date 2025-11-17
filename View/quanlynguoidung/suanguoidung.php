@@ -45,7 +45,8 @@
 
                 <!-- Mật khẩu mới -->
                 <div class="mb-3">
-                    <label class="form-label fw-medium">Mật khẩu mới <span class="text-danger">*</span></label>
+                    <label class="form-label fw-medium">Mật khẩu mới</label>
+                    <span class="text-warning fst-italic" style="font-size:smaller">(Không bắt buộc)</span>
                     <input type="password" name="matKhauMoi" value="" class="form-control">
                 </div>
 
@@ -126,7 +127,7 @@
 
         $maBoMon = $_POST['maBoMon'] ?? null;
         if ($maVaiTro != 2 && $maVaiTro != 3) {
-            $maBoMon = "NULL";
+            $maBoMon = null;
         }
 
         $soDienThoai = trim($_POST['soDienThoai']);

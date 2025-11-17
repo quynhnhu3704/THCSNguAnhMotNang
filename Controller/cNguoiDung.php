@@ -70,7 +70,15 @@
 
         public function updateNguoiDung($maNguoiDung, $tenDangNhap, $matKhauMoi, $hoTen, $maVaiTro, $maBoMon, $soDienThoai, $email) {
             $p = new modelNguoiDung();
-            $matKhauMoi = md5($matKhauMoi);
+
+            if (!empty($matKhauMoi)) {
+                // Mã hóa mật khẩu nếu người dùng nhập
+                $matKhauMoi = md5($matKhauMoi);
+            } else {
+                // Nếu để trống, truyền null để model biết không cập nhật
+                $matKhauMoi = null;
+            }
+
             $kq = $p->updateNguoiDung($maNguoiDung, $tenDangNhap, $matKhauMoi, $hoTen, $maVaiTro, $maBoMon, $soDienThoai, $email);
             return $kq;
         }

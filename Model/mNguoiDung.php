@@ -75,13 +75,16 @@
         public function updateNguoiDung($maNguoiDung, $tenDangNhap, $matKhauMoi, $hoTen, $maVaiTro, $maBoMon, $soDienThoai, $email) {
             $p = new clsKetNoi();
 
+            // Nếu maBoMon là NULL
+            $maBoMon = empty($maBoMon) ? "NULL" : $maBoMon;
+
             if($matKhauMoi == "") {
                 $truyvan = "update nguoidung set tenDangNhap=N'$tenDangNhap',
                             hoTen=N'$hoTen',
                             soDienThoai=N'$soDienThoai',
                             email=N'$email',
                             maVaiTro=$maVaiTro,
-                            maBoMon = " . ($maBoMon === "NULL" ? "NULL" : $maBoMon) . "
+                            maBoMon=$maBoMon
                             where maNguoiDung=$maNguoiDung";
             } else {
                 $truyvan = "update nguoidung set tenDangNhap=N'$tenDangNhap',
@@ -90,7 +93,7 @@
                             soDienThoai=N'$soDienThoai',
                             email=N'$email',
                             maVaiTro=$maVaiTro,
-                            maBoMon = " . ($maBoMon === "NULL" ? "NULL" : $maBoMon) . "
+                            maBoMon=$maBoMon
                             where maNguoiDung=$maNguoiDung";
             }
             $con = $p->moketnoi();
