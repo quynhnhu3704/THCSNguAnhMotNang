@@ -85,6 +85,7 @@ session_start();
                 echo '<li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>';
                 echo '<li><a href="index.php?page=dsnhacungcap" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>';
                 echo '<li><a href="index.php?page=dsnguoidung" class="text-decoration-none d-block text-dark py-2">Quản lý người dùng</a></li>';
+                echo '<li><a href="index.php?page=phanquyen" class="text-decoration-none d-block text-dark py-2">Phân quyền</a></li>';
             }
             ?>
         </ul>
@@ -107,18 +108,27 @@ session_start();
             <?php
             switch($page) {
                 // Chức năng dùng chung
+                // Đăng nhập
                 case 'dangnhap':
                     include_once('App/Views/common/dangnhap.php');
                     break;
+                // Đăng xuất
                 case 'dangxuat':
                     include_once('App/Views/common/dangxuat.php');
                     break;
+                // Xem thông tin cá nhân
                 case 'thongtincanhan':
                     include_once('App/Views/common/thongtincanhan.php');
                     break;
+                // Cập nhật thông tin cá nhân
+                case 'suathongtincanhan':
+                    include_once('App/Views/common/suathongtincanhan.php');
+                    break;
+                //  Thay đổi mật khẩu
                 case 'thaydoimatkhau':
                     include_once('App/Views/common/thaydoimatkhau.php');
                     break;
+                // Xem chi tiết thiết bị
                 case 'chitietthietbi':
                     include_once('App/Views/common/chitietthietbi.php');
                     break;
@@ -189,7 +199,12 @@ session_start();
                 case 'xoanguoidung':
                     include_once('App/Views/admin/qlnguoidung/xoanguoidung.php');
                     break;
-
+                // Phân quyền
+                case 'phanquyen':
+                    include_once('App/Views/admin/phanquyen.php');
+                    break;
+                
+                // Mặc định
                 default:
                     include_once('App/Views/common/thietbi.php');
                     break;

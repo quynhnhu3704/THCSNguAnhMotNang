@@ -126,6 +126,7 @@ if(isset($_POST['btnluu'])) {
     $maVaiTro = trim($_POST['maVaiTro']);
 
     $maBoMon = $_POST['maBoMon'] ?? null;
+    // Chỉ gán bộ môn nếu vai trò là Tổ trưởng chuyên môn hoặc Giáo viên bộ môn
     if ($maVaiTro != 2 && $maVaiTro != 3) {
         $maBoMon = null;
     }
@@ -134,6 +135,18 @@ if(isset($_POST['btnluu'])) {
     $email = trim($_POST['email']);
     
     if($p->updateNguoiDung($maNguoiDung, $tenDangNhap, $matKhauMoi, $hoTen, $maVaiTro, $maBoMon, $soDienThoai, $email)) {
+
+        if($maNguoiDung == $_SESSION['maNguoiDung'] && !empty($matKhauMoi)) {
+            // Admin thay đổi mật khẩu của chính mình
+            session_unset();
+            session_destroy();
+            echo '<script>alert("Bạn đã thay đổi mật khẩu của mình, vui lòng đăng nhập lại!"); window.location.href="index.php?page=dangnhap";</script>';
+            exit();
+        } else if($maNguoiDung == $_SESSION['maNguoiDung']) {
+            // Admin sửa thông tin khác của chính mình => chỉ cập nhật lại session
+            $_SESSION['tenDangNhap'] = $tenDangNhap;
+        }
+        
         echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=dsnguoidung";</script>';
     } else {
         echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';

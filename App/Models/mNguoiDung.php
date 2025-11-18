@@ -113,5 +113,28 @@ class modelNguoiDung {
         $p->dongketnoi($con);
         return $kq;
     }
+
+    public function updateThongTinCaNhan($maNguoiDung, $tenDangNhap, $hoTen, $soDienThoai, $email) {
+        $p = new clsKetNoi();
+        $truyvan = "update nguoidung set
+                    tenDangNhap = N'$tenDangNhap',
+                    hoTen = N'$hoTen',
+                    soDienThoai = N'$soDienThoai',
+                    email = N'$email'
+                    where maNguoiDung = $maNguoiDung";
+        $con = $p->moketnoi();
+        $kq = mysqli_query($con, $truyvan);
+        $p->dongketnoi($con);
+        return $kq;
+    }
+
+    public function updateMatKhau($maNguoiDung, $matKhauMoi) {
+        $p = new clsKetNoi();
+        $truyvan = "update nguoidung set matKhau = N'$matKhauMoi' where maNguoiDung = $maNguoiDung";
+        $con = $p->moketnoi();
+        $kq = mysqli_query($con, $truyvan);
+        $p->dongketnoi($con);
+        return $kq;
+    }
 }
 ?>

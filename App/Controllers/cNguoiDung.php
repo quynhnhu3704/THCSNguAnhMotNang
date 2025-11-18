@@ -88,5 +88,18 @@ class controlNguoiDung {
         $kq = $p->deleteNguoiDung($maNguoiDung);
         return $kq;
     }
+
+    public function updateThongTinCaNhan($maNguoiDung, $tenDangNhap, $hoTen, $soDienThoai, $email) {
+        $p = new modelNguoiDung();
+        $kq = $p->updateThongTinCaNhan($maNguoiDung, $tenDangNhap, $hoTen, $soDienThoai, $email);
+        return $kq;
+    }
+
+    public function updateMatKhau($maNguoiDung, $matKhauMoi) {
+        $p = new modelNguoiDung();
+        $matKhauMoi = md5($matKhauMoi);
+        $kq = $p->updateMatKhau($maNguoiDung, $matKhauMoi);
+        return $kq;
+    }
 }
 ?>
