@@ -28,13 +28,13 @@
 </div>
 
 <?php
-    if(isset($_POST['btnlogin'])) {
-        include_once('App/Controllers/cNguoiDung.php');
-        $p = new controlNguoiDung();
+if(isset($_POST['btnlogin'])) {
+    include_once('App/Controllers/cNguoiDung.php');
+    $p = new controlNguoiDung();
 
-        $tenDangNhap = $_POST['tenDangNhap'];
-        $matKhau = $_POST['matKhau'];
+    $tenDangNhap = $_POST['tenDangNhap'];
+    $matKhau = $_POST['matKhau'];
 
-        $p->cLogin($tenDangNhap, $matKhau);
-    }
+    $p->cLogin($tenDangNhap, $matKhau);
+}
 ?>

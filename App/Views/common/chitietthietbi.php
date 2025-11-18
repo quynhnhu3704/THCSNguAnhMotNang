@@ -1,21 +1,21 @@
 <?php
-    include_once('App/Controllers/cThietBi.php');
-    $p = new controlThietBi();
+include_once('App/Controllers/cThietBi.php');
+$p = new controlThietBi();
 
-    if (isset($_GET['maThietBi'])) {
-        $maThietBi = $_GET['maThietBi'];
-        $kq = $p->get01ThietBi($maThietBi);
-    } else {
-        echo "<h2>Không tìm thấy thiết bị, vui lòng quay lại.</h2>";
-        exit();
-    }
+if (isset($_GET['maThietBi'])) {
+    $maThietBi = $_GET['maThietBi'];
+    $kq = $p->get01ThietBi($maThietBi);
+} else {
+    echo "<h2>Không tìm thấy thiết bị, vui lòng quay lại.</h2>";
+    exit();
+}
 
-    if ($kq && $kq->num_rows > 0) {
-        $r = $kq->fetch_assoc();
-    } else {
-        echo "<h2>Dữ liệu thiết bị không tồn tại.</h2>";
-        exit();
-    }
+if ($kq && $kq->num_rows > 0) {
+    $r = $kq->fetch_assoc();
+} else {
+    echo "<h2>Dữ liệu thiết bị không tồn tại.</h2>";
+    exit();
+}
 ?>
 
 <div class="container my-5">

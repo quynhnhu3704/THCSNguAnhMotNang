@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="vi">
 <?php
-    ob_start();
-    session_start();
+ob_start();
+session_start();
 ?>
 <head>
     <meta charset="utf-8" />
@@ -43,29 +43,29 @@
                     <li class="nav-item"><a class="nav-link" href="index.php?page=phieumuon">Phiếu mượn</a></li>
 
                     <?php
-                        if(isset($_SESSION['login'])) {
-                        // if(isset($_SESSION['role_id'])) {
-                            // if($_SESSION['role_id'] != 3) {
-                                echo '
-                                <li class="nav-item dropdown ms-lg-2">
-                                    <a class="btn btn-primary dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-                                        <i class="bi bi-person-circle me-2"></i>' . $_SESSION['tenDangNhap'] . '
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-end shadow">
-                                        <li><a class="dropdown-item" href="index.php?page=thongtincanhan">Thông tin cá nhân</a></li>
-                                        <li><a class="dropdown-item" href="index.php?page=thaydoimatkhau">Thay đổi mật khẩu</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item text-danger" href="index.php?page=dangxuat" onclick="return confirm(\'Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?\');"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
-                                    </ul>
-                                </li>
-                                ';
+                    if(isset($_SESSION['login'])) {
+                    // if(isset($_SESSION['role_id'])) {
+                        // if($_SESSION['role_id'] != 3) {
+                            echo '
+                            <li class="nav-item dropdown ms-lg-2">
+                                <a class="btn btn-primary dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                                    <i class="bi bi-person-circle me-2"></i>' . $_SESSION['tenDangNhap'] . '
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end shadow">
+                                    <li><a class="dropdown-item" href="index.php?page=thongtincanhan">Thông tin cá nhân</a></li>
+                                    <li><a class="dropdown-item" href="index.php?page=thaydoimatkhau">Thay đổi mật khẩu</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-danger" href="index.php?page=dangxuat" onclick="return confirm(\'Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?\');"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
+                                </ul>
+                            </li>
+                            ';
 
-                            // }
-                        } else {
-                            echo '<li class="nav-item ms-lg-2">';
-                                echo '<a class="btn btn-primary" href="index.php?page=dangnhap"><i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập</a>';
-                            echo '</li>';
-                        }
+                        // }
+                    } else {
+                        echo '<li class="nav-item ms-lg-2">';
+                            echo '<a class="btn btn-primary" href="index.php?page=dangnhap"><i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập</a>';
+                        echo '</li>';
+                    }
                     ?>
                 </ul>
             </div>
@@ -77,15 +77,15 @@
         <h5 class="fw-bold px-3 pt-3 pb-1"><i class="bi bi-speedometer2 me-2"></i>DANH MỤC</h5>
         <ul class="list-unstyled px-3">
             <?php
-                if(!isset($_SESSION['login'])) {
-                    echo '<li class="fst-italic text-center text-muted">Vui lòng đăng nhập</li>';
-                } else {
-                    echo '<li><a href="index.php?page=dsthietbi" class="text-decoration-none d-block text-dark py-2">Quản lý thiết bị</a></li>';
-                    echo '<li><a href="index.php?page=dsbomon" class="text-decoration-none d-block text-dark py-2">Quản lý bộ môn</a></li>';
-                    echo '<li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>';
-                    echo '<li><a href="index.php?page=dsnhacungcap" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>';
-                    echo '<li><a href="index.php?page=dsnguoidung" class="text-decoration-none d-block text-dark py-2">Quản lý người dùng</a></li>';
-                }
+            if(!isset($_SESSION['login'])) {
+                echo '<li class="fst-italic text-center text-muted">Vui lòng đăng nhập</li>';
+            } else {
+                echo '<li><a href="index.php?page=dsthietbi" class="text-decoration-none d-block text-dark py-2">Quản lý thiết bị</a></li>';
+                echo '<li><a href="index.php?page=dsbomon" class="text-decoration-none d-block text-dark py-2">Quản lý bộ môn</a></li>';
+                echo '<li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>';
+                echo '<li><a href="index.php?page=dsnhacungcap" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>';
+                echo '<li><a href="index.php?page=dsnguoidung" class="text-decoration-none d-block text-dark py-2">Quản lý người dùng</a></li>';
+            }
             ?>
         </ul>
     </div>
@@ -94,105 +94,111 @@
     <div id="mainContent">
         <!-- Header -->
         <?php
-            $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : '';
-            
-            // Chỉ hiển thị header khi không có ?page nào, tức là index.php
-            if ($page == '') {
-                include_once('App/Views/layouts/header.php');
-            }
+        $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : '';
+        
+        // Chỉ hiển thị header khi không có ?page nào, tức là index.php
+        if ($page == '') {
+            include_once('App/Views/layouts/header.php');
+        }
         ?>
 
         <main>
             <!-- switch case -->
             <?php
-                switch($page) {
-                    // Chức năng dùng chung
-                    case 'dangnhap':
-                        include_once('App/Views/common/dangnhap.php');
-                        break;
-                    case 'dangxuat':
-                        include_once('App/Views/common/dangxuat.php');
-                        break;
-                    case 'chitietthietbi':
-                        include_once('App/Views/common/chitietthietbi.php');
-                        break;
-                    
-                    // Chức năng cho Hiệu trưởng
-                    // Chức năng cho Tổ trưởng chuyên môn
-                    // Chức năng cho Giáo viên bộ môn
+            switch($page) {
+                // Chức năng dùng chung
+                case 'dangnhap':
+                    include_once('App/Views/common/dangnhap.php');
+                    break;
+                case 'dangxuat':
+                    include_once('App/Views/common/dangxuat.php');
+                    break;
+                case 'thongtincanhan':
+                    include_once('App/Views/common/thongtincanhan.php');
+                    break;
+                case 'thaydoimatkhau':
+                    include_once('App/Views/common/thaydoimatkhau.php');
+                    break;
+                case 'chitietthietbi':
+                    include_once('App/Views/common/chitietthietbi.php');
+                    break;
+                
+                // Chức năng cho Hiệu trưởng
+                // Chức năng cho Tổ trưởng chuyên môn
+                // Chức năng cho Giáo viên bộ môn
 
 
-                    // Chức năng cho Nhân viên quản lý thiết bị
-                    // Quản lý thiết bị (CRUD)
-                    case 'dsthietbi':
-                        include_once('App/Views/thietbi/qlthietbi/dsthietbi.php');
-                        break;
-                    case 'suathietbi':
-                        include_once('App/Views/thietbi/qlthietbi/suathietbi.php');
-                        break;
-                    case 'themthietbi':
-                        include_once('App/Views/thietbi/qlthietbi/themthietbi.php');
-                        break;
-                    case 'xoathietbi':
-                        include_once('App/Views/thietbi/qlthietbi/xoathietbi.php');
-                        break;
+                // Chức năng cho Nhân viên quản lý thiết bị
+                // Quản lý thiết bị (CRUD)
+                case 'dsthietbi':
+                    include_once('App/Views/thietbi/qlthietbi/dsthietbi.php');
+                    break;
+                case 'suathietbi':
+                    include_once('App/Views/thietbi/qlthietbi/suathietbi.php');
+                    break;
+                case 'themthietbi':
+                    include_once('App/Views/thietbi/qlthietbi/themthietbi.php');
+                    break;
+                case 'xoathietbi':
+                    include_once('App/Views/thietbi/qlthietbi/xoathietbi.php');
+                    break;
 
-                    // Quản lý bộ môn (CRUD)
-                    case 'dsbomon':
-                        include_once('App/Views/thietbi/qlbomon/dsbomon.php');
-                        break;
-                    case 'suabomon':
-                        include_once('App/Views/thietbi/qlbomon/suabomon.php');
-                        break;
-                    case 'thembomon':
-                        include_once('App/Views/thietbi/qlbomon/thembomon.php');
-                        break;
-                    case 'xoabomon':
-                        include_once('App/Views/thietbi/qlbomon/xoabomon.php');
-                        break;
+                // Quản lý bộ môn (CRUD)
+                case 'dsbomon':
+                    include_once('App/Views/thietbi/qlbomon/dsbomon.php');
+                    break;
+                case 'suabomon':
+                    include_once('App/Views/thietbi/qlbomon/suabomon.php');
+                    break;
+                case 'thembomon':
+                    include_once('App/Views/thietbi/qlbomon/thembomon.php');
+                    break;
+                case 'xoabomon':
+                    include_once('App/Views/thietbi/qlbomon/xoabomon.php');
+                    break;
 
-                    // Quản lý nhà cung cấp (CRUD)
-                    case 'dsnhacungcap':
-                        include_once('App/Views/thietbi/qlnhacungcap/dsnhacungcap.php');
-                        break;
-                    case 'suanhacungcap':
-                        include_once('App/Views/thietbi/qlnhacungcap/suanhacungcap.php');
-                        break;
-                    case 'themnhacungcap':
-                        include_once('App/Views/thietbi/qlnhacungcap/themnhacungcap.php');
-                        break;
-                    case 'xoanhacungcap':
-                        include_once('App/Views/thietbi/qlnhacungcap/xoanhacungcap.php');
-                        break;
-
-
-                    // Chức năng cho Nhân viên kỹ thuật
+                // Quản lý nhà cung cấp (CRUD)
+                case 'dsnhacungcap':
+                    include_once('App/Views/thietbi/qlnhacungcap/dsnhacungcap.php');
+                    break;
+                case 'suanhacungcap':
+                    include_once('App/Views/thietbi/qlnhacungcap/suanhacungcap.php');
+                    break;
+                case 'themnhacungcap':
+                    include_once('App/Views/thietbi/qlnhacungcap/themnhacungcap.php');
+                    break;
+                case 'xoanhacungcap':
+                    include_once('App/Views/thietbi/qlnhacungcap/xoanhacungcap.php');
+                    break;
 
 
-                    // Chức năng cho Quản trị hệ thống
-                    // Quản lý người dùng (CRUD)
-                    case 'dsnguoidung':
-                        include_once('App/Views/admin/qlnguoidung/dsnguoidung.php');
-                        break;
-                    case 'suanguoidung':
-                        include_once('App/Views/admin/qlnguoidung/suanguoidung.php');
-                        break;
-                    case 'themnguoidung':
-                        include_once('App/Views/admin/qlnguoidung/themnguoidung.php');
-                        break;
-                    case 'xoanguoidung':
-                        include_once('App/Views/admin/qlnguoidung/xoanguoidung.php');
-                        break;
+                // Chức năng cho Nhân viên kỹ thuật
 
-                    default:
-                        include_once('App/Views/common/thietbi.php');
-                        break;
-                }
+
+                // Chức năng cho Quản trị hệ thống
+                // Quản lý người dùng (CRUD)
+                case 'dsnguoidung':
+                    include_once('App/Views/admin/qlnguoidung/dsnguoidung.php');
+                    break;
+                case 'suanguoidung':
+                    include_once('App/Views/admin/qlnguoidung/suanguoidung.php');
+                    break;
+                case 'themnguoidung':
+                    include_once('App/Views/admin/qlnguoidung/themnguoidung.php');
+                    break;
+                case 'xoanguoidung':
+                    include_once('App/Views/admin/qlnguoidung/xoanguoidung.php');
+                    break;
+
+                default:
+                    include_once('App/Views/common/thietbi.php');
+                    break;
+            }
             ?>
         </main>
 
         <?php         
-            include_once('App/Views/layouts/footer.php');
+        include_once('App/Views/layouts/footer.php');
         ?>
     </div>
 
@@ -226,6 +232,6 @@
     </script>
 </body>
 <?php
-    ob_end_flush();
+ob_end_flush();
 ?>
 </html>

@@ -1,32 +1,32 @@
 <?php
-    if(!isset($_SESSION['login'])) {
-        echo "<script>alert('Bạn chưa đăng nhập!'); window.location.href='index.php?page=dangnhap'</script>";
-        exit();
-    }
+if(!isset($_SESSION['login'])) {
+    echo "<script>alert('Bạn chưa đăng nhập!'); window.location.href='index.php?page=dangnhap'</script>";
+    exit();
+}
 
-    // if($_SESSION['login'] == 3) {
-    //     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
-    //     exit();
-    // }
+// if($_SESSION['login'] == 3) {
+//     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
+//     exit();
+// }
 
-    include_once('App/Controllers/cThietBi.php');
-    $p = new controlThietBi();
+include_once('App/Controllers/cThietBi.php');
+$p = new controlThietBi();
 
-    $maThietBi = $_GET['maThietBi'];
+$maThietBi = $_GET['maThietBi'];
 
-    if(!$maThietBi) {
-        echo "<script>alert('Không tìm thấy thiết bị!'); window.location.href='index.php?page=dsthietbi';</script>";
-        exit();
-    }
+if(!$maThietBi) {
+    echo "<script>alert('Không tìm thấy thiết bị!'); window.location.href='index.php?page=dsthietbi';</script>";
+    exit();
+}
 
-    $kq = $p->get01ThietBi($maThietBi);
+$kq = $p->get01ThietBi($maThietBi);
 
-    if($kq && $kq->num_rows > 0) {
-        $r = $kq->fetch_assoc();
-    } else {
-        echo "<script>alert('Không tìm thấy thiết bị!'); window.location.href='index.php?page=dsthietbi';</script>";
-        exit();
-    }
+if($kq && $kq->num_rows > 0) {
+    $r = $kq->fetch_assoc();
+} else {
+    echo "<script>alert('Không tìm thấy thiết bị!'); window.location.href='index.php?page=dsthietbi';</script>";
+    exit();
+}
 ?>
 
 <button type="button" class="btn btn-outline-primary ms-4 my-4" onclick="window.location.href='index.php?page=dsthietbi'"><i class="bi bi-arrow-left"></i> Quay lại</button>
@@ -153,35 +153,35 @@
 </div>
 
 <?php
-    include_once('App/Controllers/cUpload.php');
-    $p = new controlThietBi();
+include_once('App/Controllers/cUpload.php');
+$p = new controlThietBi();
 
-    if(isset($_POST['btnluu'])) {
-        $tenThietBi = trim($_POST['tenThietBi']);
-        $hinhAnh = $_FILES['hinhAnh'];
-        $donVi = trim($_POST['donVi']);
-        $soLuong = trim($_POST['soLuong']);
-        $lop = isset($_POST['lop']) ? implode(',', $_POST['lop']) : null;
-        $maBoMon = trim($_POST['maBoMon']);
-        $maNhaCungCap = trim($_POST['maNhaCungCap']);
-        $tinhTrang = trim($_POST['tinhTrang']);
-        $ghiChu = trim($_POST['ghiChu']);
-        
-        
-        if (is_uploaded_file($hinhAnh['tmp_name'])) {
-            $hinh = upload($hinhAnh);
-        } else {
-            $hinh = $r['hinhAnh'];
-        }
+if(isset($_POST['btnluu'])) {
+    $tenThietBi = trim($_POST['tenThietBi']);
+    $hinhAnh = $_FILES['hinhAnh'];
+    $donVi = trim($_POST['donVi']);
+    $soLuong = trim($_POST['soLuong']);
+    $lop = isset($_POST['lop']) ? implode(',', $_POST['lop']) : null;
+    $maBoMon = trim($_POST['maBoMon']);
+    $maNhaCungCap = trim($_POST['maNhaCungCap']);
+    $tinhTrang = trim($_POST['tinhTrang']);
+    $ghiChu = trim($_POST['ghiChu']);
+    
+    
+    if (is_uploaded_file($hinhAnh['tmp_name'])) {
+        $hinh = upload($hinhAnh);
+    } else {
+        $hinh = $r['hinhAnh'];
+    }
 
-        if($hinh) {
-            if($p->updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu)) {
-                echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=dsthietbi";</script>';
-            } else {
-                echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
-            }
+    if($hinh) {
+        if($p->updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu)) {
+            echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=dsthietbi";</script>';
         } else {
             echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
         }
+    } else {
+        echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
     }
+}
 ?>

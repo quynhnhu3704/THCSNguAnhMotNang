@@ -1,13 +1,13 @@
 <?php
-    if(!isset($_SESSION['login'])) {
-        echo "<script>alert('Bạn chưa đăng nhập!'); window.location.href='index.php?page=dangnhap'</script>";
-        exit();
-    }
+if(!isset($_SESSION['login'])) {
+    echo "<script>alert('Bạn chưa đăng nhập!'); window.location.href='index.php?page=dangnhap'</script>";
+    exit();
+}
 
-    // if($_SESSION['login'] == 3) {
-    //     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
-    //     exit();
-    // }
+// if($_SESSION['login'] == 3) {
+//     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
+//     exit();
+// }
 ?>
 
 <button type="button" class="btn btn-outline-primary ms-4 my-4" onclick="window.location.href='index.php?page=dsthietbi'"><i class="bi bi-arrow-left"></i> Quay lại</button>
@@ -54,13 +54,13 @@
                     <label class="form-label fw-medium d-block">Lớp <span class="text-danger">*</span></label>
 
                     <?php 
-                        $cacLop = ['6','7','8','9'];
-                        foreach ($cacLop as $lop) {
-                            echo '<div class="form-check form-check-inline">';
-                            echo '<input class="form-check-input" type="checkbox" name="lop[]" value="'.$lop.'">';
-                            echo '<label class="form-check-label me-3">'.$lop.'</label>';
-                            echo '</div>';
-                        }
+                    $cacLop = ['6','7','8','9'];
+                    foreach ($cacLop as $lop) {
+                        echo '<div class="form-check form-check-inline">';
+                        echo '<input class="form-check-input" type="checkbox" name="lop[]" value="'.$lop.'">';
+                        echo '<label class="form-check-label me-3">'.$lop.'</label>';
+                        echo '</div>';
+                    }
                     ?>
                 </div>
 
@@ -127,36 +127,36 @@
 </div>
 
 <?php
-    include_once('App/Controllers/cThietBi.php');
-    include_once('App/Controllers/cUpload.php');
+include_once('App/Controllers/cThietBi.php');
+include_once('App/Controllers/cUpload.php');
 
-    $p = new controlThietBi();
-    
-    if(isset($_POST['btnluu'])) {
-        $tenThietBi = trim($_POST['tenThietBi']);
-        $hinhAnh = $_FILES['hinhAnh'];
-        $donVi = trim($_POST['donVi']);
-        $soLuong = trim($_POST['soLuong']);
-        $lop = isset($_POST['lop']) ? implode(',', $_POST['lop']) : null;
-        $maBoMon = trim($_POST['maBoMon']);
-        $maNhaCungCap = trim($_POST['maNhaCungCap']);
-        $tinhTrang = trim($_POST['tinhTrang']);
-        $ghiChu = trim($_POST['ghiChu']);
+$p = new controlThietBi();
 
-        if($p->checkName($tenThietBi)) {
-            echo '<script>alert("Tên thiết bị đã tồn tại!"); window.location.href="index.php?page=themthietbi";</script>';
-        } else {
-            $hinh = upload($hinhAnh);
+if(isset($_POST['btnluu'])) {
+    $tenThietBi = trim($_POST['tenThietBi']);
+    $hinhAnh = $_FILES['hinhAnh'];
+    $donVi = trim($_POST['donVi']);
+    $soLuong = trim($_POST['soLuong']);
+    $lop = isset($_POST['lop']) ? implode(',', $_POST['lop']) : null;
+    $maBoMon = trim($_POST['maBoMon']);
+    $maNhaCungCap = trim($_POST['maNhaCungCap']);
+    $tinhTrang = trim($_POST['tinhTrang']);
+    $ghiChu = trim($_POST['ghiChu']);
 
-            if($hinh) {
-                if($p->insertThietBi($tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu)) {
-                    echo '<script>alert("Thêm thành công!"); window.location.href="index.php?page=dsthietbi";</script>';
-                } else {
-                    echo '<script>alert("Thêm thất bại!"); window.history.back();</script>';
-                }
+    if($p->checkName($tenThietBi)) {
+        echo '<script>alert("Tên thiết bị đã tồn tại!"); window.location.href="index.php?page=themthietbi";</script>';
+    } else {
+        $hinh = upload($hinhAnh);
+
+        if($hinh) {
+            if($p->insertThietBi($tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu)) {
+                echo '<script>alert("Thêm thành công!"); window.location.href="index.php?page=dsthietbi";</script>';
             } else {
                 echo '<script>alert("Thêm thất bại!"); window.history.back();</script>';
             }
+        } else {
+            echo '<script>alert("Thêm thất bại!"); window.history.back();</script>';
         }
     }
+}
 ?>

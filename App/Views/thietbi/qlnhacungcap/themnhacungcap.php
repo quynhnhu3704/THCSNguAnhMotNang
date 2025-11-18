@@ -1,13 +1,13 @@
 <?php
-    if(!isset($_SESSION['login'])) {
-        echo "<script>alert('Bạn chưa đăng nhập!'); window.location.href='index.php?page=dangnhap'</script>";
-        exit();
-    }
+if(!isset($_SESSION['login'])) {
+    echo "<script>alert('Bạn chưa đăng nhập!'); window.location.href='index.php?page=dangnhap'</script>";
+    exit();
+}
 
-    // if($_SESSION['login'] == 3) {
-    //     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
-    //     exit();
-    // }
+// if($_SESSION['login'] == 3) {
+//     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
+//     exit();
+// }
 ?>
 
 <button type="button" class="btn btn-outline-primary ms-4 my-4" onclick="window.location.href='index.php?page=dsnhacungcap'"><i class="bi bi-arrow-left"></i> Quay lại</button>
@@ -57,23 +57,23 @@
 </div>
 
 <?php
-    include_once('App/Controllers/cNhaCungCap.php');
-    $p = new controlNhaCungCap();
-    
-    if(isset($_POST['btnluu'])) {
-        $tenNhaCungCap = trim($_POST['tenNhaCungCap']);
-        $diaChi = trim($_POST['diaChi']);
-        $soDienThoai = trim($_POST['soDienThoai']);
-        $email = trim($_POST['email']);
+include_once('App/Controllers/cNhaCungCap.php');
+$p = new controlNhaCungCap();
 
-        if($p->checkName($tenNhaCungCap)) {
-            echo '<script>alert("Tên nhà cung cấp đã tồn tại!"); window.location.href="index.php?page=themnhacungcap";</script>';
+if(isset($_POST['btnluu'])) {
+    $tenNhaCungCap = trim($_POST['tenNhaCungCap']);
+    $diaChi = trim($_POST['diaChi']);
+    $soDienThoai = trim($_POST['soDienThoai']);
+    $email = trim($_POST['email']);
+
+    if($p->checkName($tenNhaCungCap)) {
+        echo '<script>alert("Tên nhà cung cấp đã tồn tại!"); window.location.href="index.php?page=themnhacungcap";</script>';
+    } else {
+        if($p->insertNhaCungCap($tenNhaCungCap, $diaChi, $soDienThoai, $email)) {
+            echo '<script>alert("Thêm thành công!"); window.location.href="index.php?page=dsnhacungcap";</script>';
         } else {
-            if($p->insertNhaCungCap($tenNhaCungCap, $diaChi, $soDienThoai, $email)) {
-                echo '<script>alert("Thêm thành công!"); window.location.href="index.php?page=dsnhacungcap";</script>';
-            } else {
-                echo '<script>alert("Thêm thất bại!"); window.history.back();</script>';
-            }
+            echo '<script>alert("Thêm thất bại!"); window.history.back();</script>';
         }
     }
+}
 ?>

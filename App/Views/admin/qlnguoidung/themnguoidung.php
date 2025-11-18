@@ -1,13 +1,13 @@
 <?php
-    if(!isset($_SESSION['login'])) {
-        echo "<script>alert('Bạn chưa đăng nhập!'); window.location.href='index.php?page=dangnhap'</script>";
-        exit();
-    }
+if(!isset($_SESSION['login'])) {
+    echo "<script>alert('Bạn chưa đăng nhập!'); window.location.href='index.php?page=dangnhap'</script>";
+    exit();
+}
 
-    // if($_SESSION['login'] == 3) {
-    //     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
-    //     exit();
-    // }
+// if($_SESSION['login'] == 3) {
+//     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
+//     exit();
+// }
 ?>
 
 <button type="button" class="btn btn-outline-primary ms-4 my-4" onclick="window.location.href='index.php?page=dsnguoidung'"><i class="bi bi-arrow-left"></i> Quay lại</button>
@@ -95,32 +95,32 @@
 </div>
 
 <?php
-    include_once('App/Controllers/cNguoiDung.php');
-    $p = new controlNguoiDung();
-    
-    if(isset($_POST['btnluu'])) {
-        $tenDangNhap = trim($_POST['tenDangNhap']);
-        $hoTen = trim($_POST['hoTen']);
-        $matKhauTamThoi = trim($_POST['matKhauTamThoi']);
-        $soDienThoai = trim($_POST['soDienThoai']);
-        $email = trim($_POST['email']);
-        $maVaiTro = trim($_POST['maVaiTro']);
+include_once('App/Controllers/cNguoiDung.php');
+$p = new controlNguoiDung();
 
-        $maBoMon = $_POST['maBoMon'] ?? null;
-        if ($maVaiTro != 2 && $maVaiTro != 3) {
-            $maBoMon = "NULL";
-        }
+if(isset($_POST['btnluu'])) {
+    $tenDangNhap = trim($_POST['tenDangNhap']);
+    $hoTen = trim($_POST['hoTen']);
+    $matKhauTamThoi = trim($_POST['matKhauTamThoi']);
+    $soDienThoai = trim($_POST['soDienThoai']);
+    $email = trim($_POST['email']);
+    $maVaiTro = trim($_POST['maVaiTro']);
 
-        if($p->checkName($tenDangNhap)) {
-            echo '<script>alert("Tên đăng nhập đã tồn tại!"); window.location.href="index.php?page=themnguoidung";</script>';
+    $maBoMon = $_POST['maBoMon'] ?? null;
+    if ($maVaiTro != 2 && $maVaiTro != 3) {
+        $maBoMon = "NULL";
+    }
+
+    if($p->checkName($tenDangNhap)) {
+        echo '<script>alert("Tên đăng nhập đã tồn tại!"); window.location.href="index.php?page=themnguoidung";</script>';
+    } else {
+        if($p->insertNguoiDung($tenDangNhap, $hoTen, $matKhauTamThoi, $soDienThoai, $email, $maVaiTro, $maBoMon)) {
+            echo '<script>alert("Thêm thành công!"); window.location.href="index.php?page=dsnguoidung";</script>';
         } else {
-            if($p->insertNguoiDung($tenDangNhap, $hoTen, $matKhauTamThoi, $soDienThoai, $email, $maVaiTro, $maBoMon)) {
-                echo '<script>alert("Thêm thành công!"); window.location.href="index.php?page=dsnguoidung";</script>';
-            } else {
-                echo '<script>alert("Thêm thất bại!"); window.history.back();</script>';
-            }
+            echo '<script>alert("Thêm thất bại!"); window.history.back();</script>';
         }
     }
+}
 ?>
 
 <script>

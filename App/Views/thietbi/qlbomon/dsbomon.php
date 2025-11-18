@@ -1,13 +1,13 @@
 <?php
-    if(!isset($_SESSION['login'])) {
-        echo "<script>alert('Vui lòng đăng nhập để tiếp tục.'); window.location.href='index.php?page=dangnhap'</script>";
-        exit();
-    }
+if(!isset($_SESSION['login'])) {
+    echo "<script>alert('Vui lòng đăng nhập để tiếp tục.'); window.location.href='index.php?page=dangnhap'</script>";
+    exit();
+}
 
-    // if($_SESSION['login'] != 1) {
-    //     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
-    //     exit();
-    // }
+// if($_SESSION['login'] != 1) {
+//     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
+//     exit();
+// }
 ?>
 
 <h2 class="text-center fw-semibold my-3">Danh sách bộ môn</h2>
@@ -40,35 +40,35 @@
 
             <tbody>
             <?php
-                include_once('App/Controllers/cBoMon.php');
-                $p = new controlBoMon();
+            include_once('App/Controllers/cBoMon.php');
+            $p = new controlBoMon();
 
-                if(isset($_GET['keyword'])) {
-                    $keyword = $_GET['keyword'];
-                    $kq = $p->searchBoMon($keyword);
-                } else {
-                    $kq = $p->getAllBoMon();
+            if(isset($_GET['keyword'])) {
+                $keyword = $_GET['keyword'];
+                $kq = $p->searchBoMon($keyword);
+            } else {
+                $kq = $p->getAllBoMon();
+            }
+
+            if ($kq && $kq->num_rows > 0) {
+                $dem = 0;
+                while ($r = $kq->fetch_assoc()) {
+                    $dem++;
+
+                    echo '<tr>';
+                        echo '<td class="text-center"><strong>' . $dem . '</strong></td>';
+                        echo '<td class="text-center">' . $r['tenBoMon'] . '</td>';
+                        echo '<td class="text-center">' . $r['moTa'] . '</td>';
+
+                        echo '<td class="text-center">';
+                            echo '<a href="index.php?page=suabomon&maBoMon=' . $r['maBoMon'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
+                            echo '<a href="index.php?page=xoabomon&action=delete&maBoMon=' . $r['maBoMon'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa bộ môn này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
+                        echo '</td>';
+                    echo '</tr>';
                 }
-
-                if ($kq && $kq->num_rows > 0) {
-                    $dem = 0;
-                    while ($r = $kq->fetch_assoc()) {
-                        $dem++;
-
-                        echo '<tr>';
-                            echo '<td class="text-center"><strong>' . $dem . '</strong></td>';
-                            echo '<td class="text-center">' . $r['tenBoMon'] . '</td>';
-                            echo '<td class="text-center">' . $r['moTa'] . '</td>';
-
-                            echo '<td class="text-center">';
-                                echo '<a href="index.php?page=suabomon&maBoMon=' . $r['maBoMon'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
-                                echo '<a href="index.php?page=xoabomon&action=delete&maBoMon=' . $r['maBoMon'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa bộ môn này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
-                            echo '</td>';
-                        echo '</tr>';
-                    }
-                } else {
-                    echo '<tr><td colspan="4"><h3 class="text-muted">Chúng tôi tạm thời chưa có bộ môn nào, mời bạn quay lại sau.</h3></td></tr>';   
-                }
+            } else {
+                echo '<tr><td colspan="4"><h3 class="text-muted">Chúng tôi tạm thời chưa có bộ môn nào, mời bạn quay lại sau.</h3></td></tr>';   
+            }
             ?>
             </tbody>
         </table>

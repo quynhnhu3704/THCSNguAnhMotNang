@@ -1,32 +1,32 @@
 <?php
-    if(!isset($_SESSION['login'])) {
-        echo "<script>alert('Bạn chưa đăng nhập!'); window.location.href='index.php?page=dangnhap'</script>";
-        exit();
-    }
+if(!isset($_SESSION['login'])) {
+    echo "<script>alert('Bạn chưa đăng nhập!'); window.location.href='index.php?page=dangnhap'</script>";
+    exit();
+}
 
-    // if($_SESSION['login'] == 3) {
-    //     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
-    //     exit();
-    // }
+// if($_SESSION['login'] == 3) {
+//     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
+//     exit();
+// }
 
-    include_once('App/Controllers/cNhaCungCap.php');
-    $p = new controlNhaCungCap();
+include_once('App/Controllers/cNhaCungCap.php');
+$p = new controlNhaCungCap();
 
-    $maNhaCungCap = $_GET['maNhaCungCap'];
+$maNhaCungCap = $_GET['maNhaCungCap'];
 
-    if(!$maNhaCungCap) {
-        echo "<script>alert('Không tìm thấy nhà cung cấp!'); window.location.href='index.php?page=dsnhacungcap';</script>";
-        exit();
-    }
+if(!$maNhaCungCap) {
+    echo "<script>alert('Không tìm thấy nhà cung cấp!'); window.location.href='index.php?page=dsnhacungcap';</script>";
+    exit();
+}
 
-    $kq = $p->get01NhaCungCap($maNhaCungCap);
+$kq = $p->get01NhaCungCap($maNhaCungCap);
 
-    if($kq && $kq->num_rows > 0) {
-        $r = $kq->fetch_assoc();
-    } else {
-        echo "<script>alert('Không tìm thấy nhà cung cấp!'); window.location.href='index.php?page=dsnhacungcap';</script>";
-        exit();
-    }
+if($kq && $kq->num_rows > 0) {
+    $r = $kq->fetch_assoc();
+} else {
+    echo "<script>alert('Không tìm thấy nhà cung cấp!'); window.location.href='index.php?page=dsnhacungcap';</script>";
+    exit();
+}
 ?>
 
 <button type="button" class="btn btn-outline-primary ms-4 my-4" onclick="window.location.href='index.php?page=dsnhacungcap'"><i class="bi bi-arrow-left"></i> Quay lại</button>
@@ -76,16 +76,16 @@
 </div>
 
 <?php
-    if(isset($_POST['btnluu'])) {
-        $tenNhaCungCap = trim($_POST['tenNhaCungCap']);
-        $diaChi = trim($_POST['diaChi']);
-        $soDienThoai = trim($_POST['soDienThoai']);
-        $email = trim($_POST['email']);
-        
-        if($p->updateNhaCungCap($maNhaCungCap, $tenNhaCungCap, $diaChi, $soDienThoai, $email)) {
-            echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=dsnhacungcap";</script>';
-        } else {
-            echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
-        }
+if(isset($_POST['btnluu'])) {
+    $tenNhaCungCap = trim($_POST['tenNhaCungCap']);
+    $diaChi = trim($_POST['diaChi']);
+    $soDienThoai = trim($_POST['soDienThoai']);
+    $email = trim($_POST['email']);
+    
+    if($p->updateNhaCungCap($maNhaCungCap, $tenNhaCungCap, $diaChi, $soDienThoai, $email)) {
+        echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=dsnhacungcap";</script>';
+    } else {
+        echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
     }
+}
 ?>

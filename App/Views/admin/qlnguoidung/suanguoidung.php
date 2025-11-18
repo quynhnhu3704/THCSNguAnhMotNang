@@ -1,32 +1,32 @@
 <?php
-    if(!isset($_SESSION['login'])) {
-        echo "<script>alert('Bạn chưa đăng nhập!'); window.location.href='index.php?page=dangnhap'</script>";
-        exit();
-    }
+if(!isset($_SESSION['login'])) {
+    echo "<script>alert('Bạn chưa đăng nhập!'); window.location.href='index.php?page=dangnhap'</script>";
+    exit();
+}
 
-    // if($_SESSION['login'] == 3) {
-    //     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
-    //     exit();
-    // }
+// if($_SESSION['login'] == 3) {
+//     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
+//     exit();
+// }
 
-    include_once('App/Controllers/cNguoiDung.php');
-    $p = new controlNguoiDung();
+include_once('App/Controllers/cNguoiDung.php');
+$p = new controlNguoiDung();
 
-    $maNguoiDung = $_GET['maNguoiDung'];
+$maNguoiDung = $_GET['maNguoiDung'];
 
-    if(!$maNguoiDung) {
-        echo "<script>alert('Không tìm thấy người dùng!'); window.location.href='index.php?page=dsnguoidung';</script>";
-        exit();
-    }
+if(!$maNguoiDung) {
+    echo "<script>alert('Không tìm thấy người dùng!'); window.location.href='index.php?page=dsnguoidung';</script>";
+    exit();
+}
 
-    $kq = $p->get01NguoiDung($maNguoiDung);
+$kq = $p->get01NguoiDung($maNguoiDung);
 
-    if($kq && $kq->num_rows > 0) {
-        $r = $kq->fetch_assoc();
-    } else {
-        echo "<script>alert('Không tìm thấy người dùng!'); window.location.href='index.php?page=dsnguoidung';</script>";
-        exit();
-    }
+if($kq && $kq->num_rows > 0) {
+    $r = $kq->fetch_assoc();
+} else {
+    echo "<script>alert('Không tìm thấy người dùng!'); window.location.href='index.php?page=dsnguoidung';</script>";
+    exit();
+}
 ?>
 
 <button type="button" class="btn btn-outline-primary ms-4 my-4" onclick="window.location.href='index.php?page=dsnguoidung'"><i class="bi bi-arrow-left"></i> Quay lại</button>
@@ -117,28 +117,28 @@
 </div>
 
 <?php
-    $p = new controlNguoiDung();
+$p = new controlNguoiDung();
 
-    if(isset($_POST['btnluu'])) {
-        $tenDangNhap = trim($_POST['tenDangNhap']);
-        $matKhauMoi = trim($_POST['matKhauMoi']);
-        $hoTen = trim($_POST['hoTen']);
-        $maVaiTro = trim($_POST['maVaiTro']);
+if(isset($_POST['btnluu'])) {
+    $tenDangNhap = trim($_POST['tenDangNhap']);
+    $matKhauMoi = trim($_POST['matKhauMoi']);
+    $hoTen = trim($_POST['hoTen']);
+    $maVaiTro = trim($_POST['maVaiTro']);
 
-        $maBoMon = $_POST['maBoMon'] ?? null;
-        if ($maVaiTro != 2 && $maVaiTro != 3) {
-            $maBoMon = null;
-        }
-
-        $soDienThoai = trim($_POST['soDienThoai']);
-        $email = trim($_POST['email']);
-        
-        if($p->updateNguoiDung($maNguoiDung, $tenDangNhap, $matKhauMoi, $hoTen, $maVaiTro, $maBoMon, $soDienThoai, $email)) {
-            echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=dsnguoidung";</script>';
-        } else {
-            echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
-        }
+    $maBoMon = $_POST['maBoMon'] ?? null;
+    if ($maVaiTro != 2 && $maVaiTro != 3) {
+        $maBoMon = null;
     }
+
+    $soDienThoai = trim($_POST['soDienThoai']);
+    $email = trim($_POST['email']);
+    
+    if($p->updateNguoiDung($maNguoiDung, $tenDangNhap, $matKhauMoi, $hoTen, $maVaiTro, $maBoMon, $soDienThoai, $email)) {
+        echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=dsnguoidung";</script>';
+    } else {
+        echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
+    }
+}
 ?>
 
 <script>

@@ -1,13 +1,13 @@
 <?php
-    if(!isset($_SESSION['login'])) {
-        echo "<script>alert('Vui lòng đăng nhập để tiếp tục.'); window.location.href='index.php?page=dangnhap'</script>";
-        exit();
-    }
+if(!isset($_SESSION['login'])) {
+    echo "<script>alert('Vui lòng đăng nhập để tiếp tục.'); window.location.href='index.php?page=dangnhap'</script>";
+    exit();
+}
 
-    // if($_SESSION['login'] != 1) {
-    //     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
-    //     exit();
-    // }
+// if($_SESSION['login'] != 1) {
+//     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
+//     exit();
+// }
 ?>
 
 <h2 class="text-center fw-semibold my-3">Danh sách người dùng</h2>
@@ -44,54 +44,54 @@
 
             <tbody>
             <?php
-                include_once('App/Controllers/cNguoiDung.php');
-                $p = new controlNguoiDung();
+            include_once('App/Controllers/cNguoiDung.php');
+            $p = new controlNguoiDung();
 
-                if(isset($_GET['keyword'])) {
-                    $keyword = $_GET['keyword'];
-                    $kq = $p->searchNguoiDung($keyword);
-                } else {
-                    $kq = $p->getAllNguoiDung();
-                }
+            if(isset($_GET['keyword'])) {
+                $keyword = $_GET['keyword'];
+                $kq = $p->searchNguoiDung($keyword);
+            } else {
+                $kq = $p->getAllNguoiDung();
+            }
 
-                if ($kq && $kq->num_rows > 0) {
-                    $dem = 0;
-                    while ($r = $kq->fetch_assoc()) {
-                        $dem++;
+            if ($kq && $kq->num_rows > 0) {
+                $dem = 0;
+                while ($r = $kq->fetch_assoc()) {
+                    $dem++;
 
-                        echo '<tr>';
-                            echo '<td class="text-center"><strong>' . $dem . '</strong></td>';
-                            echo '<td class="text-center">' . $r['tenDangNhap'] . '</td>';
-                            echo '<td class="text-center">' . $r['hoTen'] . '</td>';
+                    echo '<tr>';
+                        echo '<td class="text-center"><strong>' . $dem . '</strong></td>';
+                        echo '<td class="text-center">' . $r['tenDangNhap'] . '</td>';
+                        echo '<td class="text-center">' . $r['hoTen'] . '</td>';
+                    
+                        echo '<td class="text-center">';
+                            switch ($r['maVaiTro']) {
+                                case 1: echo '<span class="badge bg-danger">Hiệu trưởng</span>'; break;
+                                case 2: echo '<span class="badge bg-warning text-dark">Tổ trưởng chuyên môn</span>'; break;
+                                case 3: echo '<span class="badge bg-secondary">Giáo viên bộ môn</span>'; break;
+                                case 4: echo '<span class="badge bg-success">Nhân viên quản lý thiết bị</span>'; break;
+                                case 5: echo '<span class="badge bg-primary">Nhân viên kỹ thuật</span>'; break;
+                                case 6: echo '<span class="badge bg-info text-dark">Quản trị hệ thống</span>'; break;
+                                default: echo '<span class="badge bg-light text-dark">Không xác định</span>';
+                            }
+                        echo '</td>';
+
+                        echo '<td class="text-center">';
+                            echo ($r['tenBoMon'] === NULL) ? '—' : $r['tenBoMon'];
+                        echo '</td>';
                         
-                            echo '<td class="text-center">';
-                                switch ($r['maVaiTro']) {
-                                    case 1: echo '<span class="badge bg-danger">Hiệu trưởng</span>'; break;
-                                    case 2: echo '<span class="badge bg-warning text-dark">Tổ trưởng chuyên môn</span>'; break;
-                                    case 3: echo '<span class="badge bg-secondary">Giáo viên bộ môn</span>'; break;
-                                    case 4: echo '<span class="badge bg-success">Nhân viên quản lý thiết bị</span>'; break;
-                                    case 5: echo '<span class="badge bg-primary">Nhân viên kỹ thuật</span>'; break;
-                                    case 6: echo '<span class="badge bg-info text-dark">Quản trị hệ thống</span>'; break;
-                                    default: echo '<span class="badge bg-light text-dark">Không xác định</span>';
-                                }
-                            echo '</td>';
+                        echo '<td class="text-center">' . $r['soDienThoai'] . '</td>';
+                        echo '<td class="text-center">' . $r['email'] . '</td>';
 
-                            echo '<td class="text-center">';
-                                echo ($r['tenBoMon'] === NULL) ? '—' : $r['tenBoMon'];
-                            echo '</td>';
-                            
-                            echo '<td class="text-center">' . $r['soDienThoai'] . '</td>';
-                            echo '<td class="text-center">' . $r['email'] . '</td>';
-
-                            echo '<td class="text-center">';
-                                echo '<a href="index.php?page=suanguoidung&maNguoiDung=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
-                                echo '<a href="index.php?page=xoanguoidung&action=delete&maNguoiDung=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa người dùng này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
-                            echo '</td>';
-                        echo '</tr>';
-                    }
-                } else {
-                    echo '<tr><td colspan="8"><h3 class="text-muted">Chúng tôi tạm thời chưa có người dùng nào, mời bạn quay lại sau.</h3></td></tr>';   
+                        echo '<td class="text-center">';
+                            echo '<a href="index.php?page=suanguoidung&maNguoiDung=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
+                            echo '<a href="index.php?page=xoanguoidung&action=delete&maNguoiDung=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa người dùng này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
+                        echo '</td>';
+                    echo '</tr>';
                 }
+            } else {
+                echo '<tr><td colspan="8"><h3 class="text-muted">Chúng tôi tạm thời chưa có người dùng nào, mời bạn quay lại sau.</h3></td></tr>';   
+            }
             ?>
             </tbody>
         </table>
