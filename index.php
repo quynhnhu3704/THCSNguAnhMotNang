@@ -11,12 +11,12 @@
     <meta name="description" content="Website đặt phòng khách sạn NguAnhMotNang – sang trọng, thân thiện, đặt phòng nhanh trong 60 giây."/>
 
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="icon" href="image/icon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/jquery-3.7.1.min.js"></script>
+    <link rel="icon" href="public/uploads/icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="public/css/style.css">
+    <script src="public/js/bootstrap.bundle.min.js"></script>
+    <script src="public/js/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
@@ -80,11 +80,11 @@
                 if(!isset($_SESSION['login'])) {
                     echo '<li class="fst-italic text-center text-muted">Vui lòng đăng nhập</li>';
                 } else {
-                    echo '<li><a href="index.php?page=quanlythietbi" class="text-decoration-none d-block text-dark py-2">Quản lý thiết bị</a></li>';
-                    echo '<li><a href="index.php?page=quanlybomon" class="text-decoration-none d-block text-dark py-2">Quản lý bộ môn</a></li>';
+                    echo '<li><a href="index.php?page=dsthietbi" class="text-decoration-none d-block text-dark py-2">Quản lý thiết bị</a></li>';
+                    echo '<li><a href="index.php?page=dsbomon" class="text-decoration-none d-block text-dark py-2">Quản lý bộ môn</a></li>';
                     echo '<li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>';
-                    echo '<li><a href="index.php?page=quanlynhacungcap" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>';
-                    echo '<li><a href="index.php?page=quanlynguoidung" class="text-decoration-none d-block text-dark py-2">Quản lý người dùng</a></li>';
+                    echo '<li><a href="index.php?page=dsnhacungcap" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>';
+                    echo '<li><a href="index.php?page=dsnguoidung" class="text-decoration-none d-block text-dark py-2">Quản lý người dùng</a></li>';
                 }
             ?>
         </ul>
@@ -98,7 +98,7 @@
             
             // Chỉ hiển thị header khi không có ?page nào, tức là index.php
             if ($page == '') {
-                include_once('View/includes/header.php');
+                include_once('App/Views/layouts/header.php');
             }
         ?>
 
@@ -108,13 +108,13 @@
                 switch($page) {
                     // Chức năng dùng chung
                     case 'dangnhap':
-                        include_once('View/common/dangnhap.php');
+                        include_once('App/Views/common/dangnhap.php');
                         break;
                     case 'dangxuat':
-                        include_once('View/common/dangxuat.php');
+                        include_once('App/Views/common/dangxuat.php');
                         break;
                     case 'chitietthietbi':
-                        include_once('View/common/chitietthietbi.php');
+                        include_once('App/Views/common/chitietthietbi.php');
                         break;
                     
                     // Chức năng cho Hiệu trưởng
@@ -124,45 +124,45 @@
 
                     // Chức năng cho Nhân viên quản lý thiết bị
                     // Quản lý thiết bị (CRUD)
-                    case 'quanlythietbi':
-                        include_once('View/nvthietbi/quanlythietbi/quanlythietbi.php');
+                    case 'dsthietbi':
+                        include_once('App/Views/thietbi/qlthietbi/dsthietbi.php');
                         break;
                     case 'suathietbi':
-                        include_once('View/nvthietbi/quanlythietbi/suathietbi.php');
+                        include_once('App/Views/thietbi/qlthietbi/suathietbi.php');
                         break;
                     case 'themthietbi':
-                        include_once('View/nvthietbi/quanlythietbi/themthietbi.php');
+                        include_once('App/Views/thietbi/qlthietbi/themthietbi.php');
                         break;
                     case 'xoathietbi':
-                        include_once('View/nvthietbi/quanlythietbi/xoathietbi.php');
+                        include_once('App/Views/thietbi/qlthietbi/xoathietbi.php');
                         break;
 
                     // Quản lý bộ môn (CRUD)
-                    case 'quanlybomon':
-                        include_once('View/nvthietbi/quanlybomon/quanlybomon.php');
+                    case 'dsbomon':
+                        include_once('App/Views/thietbi/qlbomon/dsbomon.php');
                         break;
                     case 'suabomon':
-                        include_once('View/nvthietbi/quanlybomon/suabomon.php');
+                        include_once('App/Views/thietbi/qlbomon/suabomon.php');
                         break;
                     case 'thembomon':
-                        include_once('View/nvthietbi/quanlybomon/thembomon.php');
+                        include_once('App/Views/thietbi/qlbomon/thembomon.php');
                         break;
                     case 'xoabomon':
-                        include_once('View/nvthietbi/quanlybomon/xoabomon.php');
+                        include_once('App/Views/thietbi/qlbomon/xoabomon.php');
                         break;
 
                     // Quản lý nhà cung cấp (CRUD)
-                    case 'quanlynhacungcap':
-                        include_once('View/nvthietbi/quanlynhacungcap/quanlynhacungcap.php');
+                    case 'dsnhacungcap':
+                        include_once('App/Views/thietbi/qlnhacungcap/dsnhacungcap.php');
                         break;
                     case 'suanhacungcap':
-                        include_once('View/nvthietbi/quanlynhacungcap/suanhacungcap.php');
+                        include_once('App/Views/thietbi/qlnhacungcap/suanhacungcap.php');
                         break;
                     case 'themnhacungcap':
-                        include_once('View/nvthietbi/quanlynhacungcap/themnhacungcap.php');
+                        include_once('App/Views/thietbi/qlnhacungcap/themnhacungcap.php');
                         break;
                     case 'xoanhacungcap':
-                        include_once('View/nvthietbi/quanlynhacungcap/xoanhacungcap.php');
+                        include_once('App/Views/thietbi/qlnhacungcap/xoanhacungcap.php');
                         break;
 
 
@@ -171,28 +171,28 @@
 
                     // Chức năng cho Quản trị hệ thống
                     // Quản lý người dùng (CRUD)
-                    case 'quanlynguoidung':
-                        include_once('View/quantri/quanlynguoidung/quanlynguoidung.php');
+                    case 'dsnguoidung':
+                        include_once('App/Views/admin/qlnguoidung/dsnguoidung.php');
                         break;
                     case 'suanguoidung':
-                        include_once('View/quantri/quanlynguoidung/suanguoidung.php');
+                        include_once('App/Views/admin/qlnguoidung/suanguoidung.php');
                         break;
                     case 'themnguoidung':
-                        include_once('View/quantri/quanlynguoidung/themnguoidung.php');
+                        include_once('App/Views/admin/qlnguoidung/themnguoidung.php');
                         break;
                     case 'xoanguoidung':
-                        include_once('View/quantri/quanlynguoidung/xoanguoidung.php');
+                        include_once('App/Views/admin/qlnguoidung/xoanguoidung.php');
                         break;
 
                     default:
-                        include_once('View/common/thietbi.php');
+                        include_once('App/Views/common/thietbi.php');
                         break;
                 }
             ?>
         </main>
 
         <?php         
-            include_once('View/includes/footer.php');
+            include_once('App/Views/layouts/footer.php');
         ?>
     </div>
 
