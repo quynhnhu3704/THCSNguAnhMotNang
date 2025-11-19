@@ -54,8 +54,17 @@ if ($kq && $kq->num_rows > 0) {
                     </div>
                     <div class="p-3">
                         <strong>Tình trạng:</strong> 
-                        <span class="badge <?php echo ($r['tinhTrang'] == 'Khả dụng') ? 'bg-success' : 'bg-danger'; ?>">
-                            <?php echo $r['tinhTrang']; ?>
+                        <span class="badge 
+                        <?php 
+                        switch($r['tinhTrang']) {
+                            case 'Khả dụng': echo 'bg-success'; break;
+                            case 'Đang mượn': echo 'bg-warning text-dark'; break;
+                            case 'Báo hỏng': echo 'bg-danger'; break;
+                            case 'Thanh lý': echo 'bg-secondary'; break;
+                            default: echo 'bg-light text-dark';
+                        }
+                        ?>">
+                        <?php echo $r['tinhTrang']; ?>
                         </span>
                     </div>
                     <div class="p-3">

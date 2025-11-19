@@ -129,6 +129,8 @@ if($kq && $kq->num_rows > 0) {
                         <option value="" disabled>-- Chọn tình trạng --</option>
                         <option value="Khả dụng" <?= ($r["tinhTrang"] == 'Khả dụng') ? 'selected' : '' ?>>Khả dụng</option>
                         <option value="Thanh lý" <?= ($r["tinhTrang"] == 'Thanh lý') ? 'selected' : '' ?>>Thanh lý</option>
+                        <option value="Đang mượn" <?= ($r["tinhTrang"] == 'Đang mượn') ? 'selected' : '' ?>>Đang mượn</option>
+                        <option value="Báo hỏng" <?= ($r["tinhTrang"] == 'Báo hỏng') ? 'selected' : '' ?>>Báo hỏng</option>
                     </select>
                 </div>
 

@@ -103,6 +103,8 @@ if(!isset($_SESSION['login'])) {
                         <option value="" disabled selected>-- Chọn tình trạng --</option>
                         <option value="Khả dụng">Khả dụng</option>
                         <option value="Thanh lý">Thanh lý</option>
+                        <option value="Đang mượn">Đang mượn</option>
+                        <option value="Báo hỏng">Báo hỏng</option>
                     </select>
                 </div>
 

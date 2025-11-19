@@ -2,7 +2,7 @@
     <div class="container pb-4">
         <div class="row g-4">
             <div class="col-lg-4">
-                <h5 class="fw-bold"><i class="bi bi-mortarboard"></i> THCS Ngũ Anh Một Nàng</h5>
+                <h5 class="fw-bold"><i class="bi bi-mortarboard me-2"></i>THCS Ngũ Anh Một Nàng</h5>
                 <p class="opacity-75">Hệ thống hỗ trợ nhà trường theo dõi, bảo trì và thống kê thiết bị dạy học nhanh chóng, chính xác.</p>
             </div>
             <!-- <div class="col-6 col-lg-2">

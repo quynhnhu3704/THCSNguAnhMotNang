@@ -13,12 +13,9 @@ if(!isset($_SESSION['login'])) {
 <h2 class="text-center fw-semibold my-3">Danh sách thiết bị</h2>
 
 <div class="d-flex mx-auto justify-content-between align-items-center" style="width: 95%">
-    <!-- Nút thêm -->
-    <a href="index.php?page=themthietbi" class="btn btn-primary fw-semibold"><i class="bi bi-database-add me-1"></i> Thêm thiết bị</a>
-
     <!-- Thanh tìm kiếm -->
-    <form class="d-flex" action="index.php" method="get">
-        <input type="hidden" name="page" value="dsthietbi"> <!-- Submit sẽ tạo URL: index.php?page=dsthietbi&keyword=xxxxx -->
+    <form class="d-flex ms-auto" action="index.php" method="get">
+        <input type="hidden" name="page" value="dsbaohong"> <!-- Submit sẽ tạo URL: index.php?page=dsbaohong&keyword=xxxxx -->
 
         <input class="form-control me-2" type="text" name="keyword" placeholder="Tìm kiếm thiết bị..." style="width: 220px;">
         <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
@@ -71,7 +68,7 @@ if(!isset($_SESSION['login'])) {
                         echo '<td class="text-center">' . $r['lop'] . '</td>';
                         echo '<td class="text-center">' . $r['tenBoMon'] . '</td>';
                         echo '<td class="text-center">' . $r['tenNhaCungCap'] . '</td>';
-
+                        
                         echo '<td class="text-center">';
                             switch ($r['tinhTrang']) {
                                 case "Khả dụng": echo '<span class="badge bg-success">' . $r['tinhTrang'] . '</span>'; break;
@@ -85,8 +82,7 @@ if(!isset($_SESSION['login'])) {
                         echo '<td>' . $r['ghiChu'] . '</td>';
 
                         echo '<td class="text-center">';
-                            echo '<a href="index.php?page=suathietbi&maThietBi=' . $r['maThietBi'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
-                            echo '<a href="index.php?page=xoathietbi&action=delete&maThietBi=' . $r['maThietBi'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa thiết bị này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
+                            echo '<a href="index.php?page=baohongthietbi&maThietBi=' . $r['maThietBi'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-exclamation-triangle-fill"></i> Báo hỏng</a>&nbsp;';
                         echo '</td>';
                     echo '</tr>';
                 }

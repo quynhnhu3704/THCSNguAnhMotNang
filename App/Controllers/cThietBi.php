@@ -69,5 +69,11 @@ class controlThietBi {
         $kq = $p->deleteThietBi($maThietBi);
         return $kq;
     }
+
+    public function baoHong($maThietBi, $soLuong, $tinhTrang, $ghiChu) {
+        $p = new modelThietBi();
+        $kq = $p->baoHong($maThietBi,  $soLuong, $tinhTrang, $ghiChu);
+        return $kq;
+    }
 }
 ?>

@@ -136,5 +136,21 @@ class modelNguoiDung {
         $p->dongketnoi($con);
         return $kq;
     }
+
+    public function updateQuyen($maNguoiDung, $maVaiTro, $maBoMon) {
+        $p = new clsKetNoi();
+
+        // Nếu maBoMon là NULL
+        $maBoMon = empty($maBoMon) ? "NULL" : $maBoMon;
+        
+        $truyvan = "update nguoidung set
+                    maVaiTro = $maVaiTro,
+                    maBoMon = $maBoMon
+                    where maNguoiDung = $maNguoiDung";
+        $con = $p->moketnoi();
+        $kq = mysqli_query($con, $truyvan);
+        $p->dongketnoi($con);
+        return $kq;
+    }
 }
 ?>

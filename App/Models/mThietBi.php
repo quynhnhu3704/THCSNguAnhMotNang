@@ -93,5 +93,17 @@ class modelThietBi{
         $p->dongketnoi($con);
         return $kq;
     }
+
+    public function baoHong($maThietBi, $soLuong, $tinhTrang, $ghiChu) {
+        $p = new clsKetNoi();
+        $truyvan = "update thietbi set soLuong=$soLuong, 
+                    tinhTrang=N'$tinhTrang', 
+                    ghiChu=N'$ghiChu' 
+                    where maThietBi=$maThietBi";
+        $con = $p->moketnoi();
+        $kq = mysqli_query($con, $truyvan);
+        $p->dongketnoi($con);
+        return $kq;
+    }
 }
 ?>

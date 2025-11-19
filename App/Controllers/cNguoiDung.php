@@ -101,5 +101,11 @@ class controlNguoiDung {
         $kq = $p->updateMatKhau($maNguoiDung, $matKhauMoi);
         return $kq;
     }
+
+    public function updateQuyen($maNguoiDung, $maVaiTro, $maBoMon) {
+        $p = new modelNguoiDung();
+        $kq = $p->updateQuyen($maNguoiDung, $maVaiTro, $maBoMon);
+        return $kq;
+    }
 }
 ?>

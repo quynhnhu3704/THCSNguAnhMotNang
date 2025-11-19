@@ -26,7 +26,7 @@ session_start();
             <button id="menuToggle" class="btn btn-outline-primary me-3">&#9776;</button>
 
             <a class="navbar-brand fw-bold ms-3" href="index.php">
-                <i class="bi bi-mortarboard"></i> THCS Ngũ Anh Một Nàng
+                <i class="bi bi-mortarboard me-2"></i>THCS Ngũ Anh Một Nàng
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
             <div id="nav" class="collapse navbar-collapse">
@@ -85,7 +85,8 @@ session_start();
                 echo '<li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>';
                 echo '<li><a href="index.php?page=dsnhacungcap" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>';
                 echo '<li><a href="index.php?page=dsnguoidung" class="text-decoration-none d-block text-dark py-2">Quản lý người dùng</a></li>';
-                echo '<li><a href="index.php?page=phanquyen" class="text-decoration-none d-block text-dark py-2">Phân quyền</a></li>';
+                echo '<li><a href="index.php?page=dsquyen" class="text-decoration-none d-block text-dark py-2">Phân quyền</a></li>';
+                echo '<li><a href="index.php?page=dsbaohong" class="text-decoration-none d-block text-dark py-2">Báo hỏng thiết bị</a></li>';
             }
             ?>
         </ul>
@@ -152,7 +153,6 @@ session_start();
                 case 'xoathietbi':
                     include_once('App/Views/thietbi/qlthietbi/xoathietbi.php');
                     break;
-
                 // Quản lý bộ môn (CRUD)
                 case 'dsbomon':
                     include_once('App/Views/thietbi/qlbomon/dsbomon.php');
@@ -166,7 +166,6 @@ session_start();
                 case 'xoabomon':
                     include_once('App/Views/thietbi/qlbomon/xoabomon.php');
                     break;
-
                 // Quản lý nhà cung cấp (CRUD)
                 case 'dsnhacungcap':
                     include_once('App/Views/thietbi/qlnhacungcap/dsnhacungcap.php');
@@ -179,6 +178,13 @@ session_start();
                     break;
                 case 'xoanhacungcap':
                     include_once('App/Views/thietbi/qlnhacungcap/xoanhacungcap.php');
+                    break;
+                // Báo hỏng thiết bị
+                case 'dsbaohong':
+                    include_once('App/Views/thietbi/baohong/dsbaohong.php');
+                    break;
+                case 'baohongthietbi':
+                    include_once('App/Views/thietbi/baohong/baohongthietbi.php');
                     break;
 
 
@@ -200,8 +206,11 @@ session_start();
                     include_once('App/Views/admin/qlnguoidung/xoanguoidung.php');
                     break;
                 // Phân quyền
-                case 'phanquyen':
-                    include_once('App/Views/admin/phanquyen.php');
+                case 'dsquyen':
+                    include_once('App/Views/admin/phanquyen/dsquyen.php');
+                    break;
+                case 'suaquyen':
+                    include_once('App/Views/admin/phanquyen/suaquyen.php');
                     break;
                 
                 // Mặc định
