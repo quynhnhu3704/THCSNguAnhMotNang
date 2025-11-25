@@ -52,15 +52,20 @@ class controlThietBi {
         }
     }
 
-    public function insertThietBi($tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu) {
+    public function getConnection() {
         $p = new modelThietBi();
-        $kq = $p->insertThietBi($tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu);
+        return $p->getConnection();
+    }
+
+    public function insertThietBi($tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $moTa) {
+        $p = new modelThietBi();
+        $kq = $p->insertThietBi($tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $moTa);
         return $kq;
     }
 
-    public function updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu) {
+    public function updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $moTa) {
         $p = new modelThietBi();
-        $kq = $p->updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu);
+        $kq = $p->updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $moTa);
         return $kq;
     }
 
@@ -70,9 +75,37 @@ class controlThietBi {
         return $kq;
     }
 
-    public function baoHong($maThietBi, $soLuong, $tinhTrang, $ghiChu) {
+    public function getAllChiTietTB() {
         $p = new modelThietBi();
-        $kq = $p->baoHong($maThietBi,  $soLuong, $tinhTrang, $ghiChu);
+        $kq = $p->selectAllChiTietTB();
+
+        if(mysqli_num_rows($kq) > 0) {
+            return $kq;
+        } else {
+            return false;
+        }
+    }
+
+    public function get01ChiTietTB($maThietBi) {
+        $p = new modelThietBi();
+        $kq = $p->select01ChiTietTB($maThietBi);
+        return $kq;
+    }
+
+    public function searchChiTietTB($keyword) {
+        $p = new modelThietBi();
+        $kq = $p->searchChiTietTB($keyword);
+
+        if(mysqli_num_rows($kq) > 0) {
+            return $kq;
+        } else {
+            return false;
+        }
+    }
+
+    public function updateHong($maChiTietTB, $tinhTrang, $ghiChu) {
+        $p = new modelThietBi();
+        $kq = $p->updateHong($maChiTietTB, $tinhTrang, $ghiChu);
         return $kq;
     }
 }

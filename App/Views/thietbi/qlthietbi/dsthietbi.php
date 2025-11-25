@@ -25,7 +25,6 @@ if(!isset($_SESSION['login'])) {
     </form>
 </div>
 
-
 <div class="d-flex justify-content-center">
     <div class="table-responsive my-5" style="width: 95%;">
         <table class="table table-striped table-hover table-borderless align-middle" style="font-size: 0.85em;">
@@ -39,8 +38,8 @@ if(!isset($_SESSION['login'])) {
                     <th>Lớp</th>
                     <th>Bộ môn</th>
                     <th>Nhà cung cấp</th>
-                    <th>Tình trạng</th>
-                    <th>Ghi chú</th>
+                    <!-- <th>Tình trạng</th> -->
+                    <th>Mô tả</th>
                     <th>Thao tác</th>
                 </tr>
             </thead>
@@ -72,17 +71,17 @@ if(!isset($_SESSION['login'])) {
                         echo '<td class="text-center">' . $r['tenBoMon'] . '</td>';
                         echo '<td class="text-center">' . $r['tenNhaCungCap'] . '</td>';
 
-                        echo '<td class="text-center">';
-                            switch ($r['tinhTrang']) {
-                                case "Khả dụng": echo '<span class="badge bg-success">' . $r['tinhTrang'] . '</span>'; break;
-                                case "Đang mượn": echo '<span class="badge bg-warning text-dark">' . $r['tinhTrang'] . '</span>'; break;
-                                case "Thanh lý": echo '<span class="badge bg-secondary">' . $r['tinhTrang'] . '</span>'; break;
-                                case "Báo hỏng": echo '<span class="badge bg-danger">' . $r['tinhTrang'] . '</span>'; break;
-                                default: echo '<span class="badge bg-light text-dark">Không xác định</span>';
-                            }
-                        echo '</td>';
+                        // echo '<td class="text-center">';
+                        //     switch ($r['tinhTrang']) {
+                        //         case "Khả dụng": echo '<span class="badge bg-success">' . $r['tinhTrang'] . '</span>'; break;
+                        //         case "Đang mượn": echo '<span class="badge bg-warning text-dark">' . $r['tinhTrang'] . '</span>'; break;
+                        //         case "Thanh lý": echo '<span class="badge bg-secondary">' . $r['tinhTrang'] . '</span>'; break;
+                        //         case "Báo hỏng": echo '<span class="badge bg-danger">' . $r['tinhTrang'] . '</span>'; break;
+                        //         default: echo '<span class="badge bg-light text-dark">Không xác định</span>';
+                        //     }
+                        // echo '</td>';
 
-                        echo '<td>' . $r['ghiChu'] . '</td>';
+                        echo '<td>' . $r['moTa'] . '</td>';
 
                         echo '<td class="text-center">';
                             echo '<a href="index.php?page=suathietbi&maThietBi=' . $r['maThietBi'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';

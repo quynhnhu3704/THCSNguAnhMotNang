@@ -25,7 +25,6 @@ if(!isset($_SESSION['login'])) {
     </form>
 </div>
 
-
 <div class="d-flex justify-content-center">
     <div class="table-responsive my-5" style="width: 95%;">
         <table class="table table-striped table-hover table-borderless align-middle" style="font-size: 0.85em;">
@@ -63,18 +62,19 @@ if(!isset($_SESSION['login'])) {
                         echo '<td class="text-center"><strong>' . $dem . '</strong></td>';
                         echo '<td class="text-center">' . $r['tenDangNhap'] . '</td>';
                         echo '<td class="text-center">' . $r['hoTen'] . '</td>';
+                        echo '<td class="text-center">' . $r['tenVaiTro'] . '</td>';
                     
-                        echo '<td class="text-center">';
-                            switch ($r['maVaiTro']) {
-                                case 1: echo '<span class="badge bg-danger">Hiệu trưởng</span>'; break;
-                                case 2: echo '<span class="badge bg-warning text-dark">Tổ trưởng chuyên môn</span>'; break;
-                                case 3: echo '<span class="badge bg-secondary">Giáo viên bộ môn</span>'; break;
-                                case 4: echo '<span class="badge bg-success">Nhân viên quản lý thiết bị</span>'; break;
-                                case 5: echo '<span class="badge bg-primary">Nhân viên kỹ thuật</span>'; break;
-                                case 6: echo '<span class="badge bg-info text-dark">Quản trị hệ thống</span>'; break;
-                                default: echo '<span class="badge bg-light text-dark">Không xác định</span>';
-                            }
-                        echo '</td>';
+                        // echo '<td class="text-center">';
+                        //     switch ($r['maVaiTro']) {
+                        //         case 1: echo '<span class="badge bg-danger">Hiệu trưởng</span>'; break;
+                        //         case 2: echo '<span class="badge bg-warning text-dark">Tổ trưởng chuyên môn</span>'; break;
+                        //         case 3: echo '<span class="badge bg-secondary">Giáo viên bộ môn</span>'; break;
+                        //         case 4: echo '<span class="badge bg-success">Nhân viên quản lý thiết bị</span>'; break;
+                        //         case 5: echo '<span class="badge bg-primary">Nhân viên kỹ thuật</span>'; break;
+                        //         case 6: echo '<span class="badge bg-info text-dark">Quản trị hệ thống</span>'; break;
+                        //         default: echo '<span class="badge bg-light text-dark">Không xác định</span>';
+                        //     }
+                        // echo '</td>';
 
                         echo '<td class="text-center">';
                             echo ($r['tenBoMon'] === NULL) ? '—' : $r['tenBoMon'];

@@ -12,14 +12,14 @@ if(!isset($_SESSION['login'])) {
 include_once('App/Controllers/cThietBi.php');
 $p = new controlThietBi();
 
-$maThietBi = $_GET['maThietBi'];
+$maChiTietTB = $_GET['maChiTietTB'];
 
-if(!$maThietBi) {
+if(!$maChiTietTB) {
     echo "<script>alert('Không tìm thấy thiết bị!'); window.location.href='index.php?page=dsbaohong';</script>";
     exit();
 }
 
-$kq = $p->get01ThietBi($maThietBi);
+$kq = $p->get01ChiTietTB($maChiTietTB);
 
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
@@ -73,12 +73,6 @@ if($kq && $kq->num_rows > 0) {
                     <input type="text" value="<?= $r['tenNhaCungCap'] ?>" class="form-control" disabled>
                 </div>
                 
-                <!-- Số lượng -->
-                <div class="mb-3">
-                    <label class="form-label fw-medium">Số lượng <span class="text-danger">*</span></label>
-                    <input type="number" name="soLuong" value="<?= $r['soLuong'] ?>" class="form-control" min="1" max="<?= $r['soLuong'] ?>" required>
-                </div>
-                
                 <!-- Tình trạng -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Tình trạng <span class="text-danger">*</span></label>
@@ -110,11 +104,10 @@ include_once('App/Controllers/cUpload.php');
 $p = new controlThietBi();
 
 if(isset($_POST['btnluu'])) {
-    $soLuong = trim($_POST['soLuong']);
     $tinhTrang = trim($_POST['tinhTrang']);
     $ghiChu = trim($_POST['ghiChu']);
     
-    if($p->baoHong($maThietBi,$soLuong, $tinhTrang, $ghiChu)) {
+    if($p->updateHong($maChiTietTB, $tinhTrang, $ghiChu)) {
         echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=dsbaohong";</script>';
     } else {
         echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';

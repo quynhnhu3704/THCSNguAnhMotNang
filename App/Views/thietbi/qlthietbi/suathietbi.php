@@ -66,7 +66,7 @@ if($kq && $kq->num_rows > 0) {
                 <!-- Số lượng -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Số lượng <span class="text-danger">*</span></label>
-                    <input type="number" name="soLuong" value="<?= $r['soLuong'] ?>" class="form-control" min="1" required>
+                    <input type="number" name="soLuong" value="<?= $r['soLuong'] ?>" class="form-control" min="1" max="3" required>
                 </div>
 
                 <!-- Lớp -->
@@ -123,7 +123,7 @@ if($kq && $kq->num_rows > 0) {
                 </div>
 
                 <!-- Tình trạng -->
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <label class="form-label fw-medium">Tình trạng <span class="text-danger">*</span></label>
                     <select name="tinhTrang" class="form-select" required>
                         <option value="" disabled>-- Chọn tình trạng --</option>
@@ -132,12 +132,12 @@ if($kq && $kq->num_rows > 0) {
                         <option value="Đang mượn" <?= ($r["tinhTrang"] == 'Đang mượn') ? 'selected' : '' ?>>Đang mượn</option>
                         <option value="Báo hỏng" <?= ($r["tinhTrang"] == 'Báo hỏng') ? 'selected' : '' ?>>Báo hỏng</option>
                     </select>
-                </div>
+                </div> -->
 
-                <!-- Ghi chú -->
+                <!-- Mô tả -->
                 <div class="mb-4">
-                    <label class="form-label fw-medium">Ghi chú</label>
-                    <textarea name="ghiChu" class="form-control" rows="3" style="resize:none;"><?= $r['ghiChu'] ?></textarea>
+                    <label class="form-label fw-medium">Mô tả</label>
+                    <textarea name="moTa" class="form-control" rows="3" style="resize:none;"><?= $r['moTa'] ?></textarea>
                 </div>
 
                 <!-- Nút submit/reset -->
@@ -162,28 +162,30 @@ if(isset($_POST['btnluu'])) {
     $tenThietBi = trim($_POST['tenThietBi']);
     $hinhAnh = $_FILES['hinhAnh'];
     $donVi = trim($_POST['donVi']);
-    $soLuong = trim($_POST['soLuong']);
+    $soLuong = (int) $_POST['soLuong'];
     $lop = isset($_POST['lop']) ? implode(',', $_POST['lop']) : null;
     $maBoMon = trim($_POST['maBoMon']);
     $maNhaCungCap = trim($_POST['maNhaCungCap']);
-    $tinhTrang = trim($_POST['tinhTrang']);
-    $ghiChu = trim($_POST['ghiChu']);
+    $moTa = trim($_POST['moTa']);
     
-    
+    // Xử lý hình ảnh
     if (is_uploaded_file($hinhAnh['tmp_name'])) {
         $hinh = upload($hinhAnh);
     } else {
-        $hinh = $r['hinhAnh'];
+        $hinh = $r['hinhAnh']; // Giữ nguyên hình cũ nếu không có hình mới
     }
 
     if($hinh) {
-        if($p->updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu)) {
+        $kq = $p->updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $moTa);
+        if($kq === false) {
+            echo '<script>alert("Không thể giảm số lượng! Hiện còn thiết bị đang mượn hoặc hỏng."); window.history.back();</script>';
+        } else if($kq) {
             echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=dsthietbi";</script>';
         } else {
             echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
         }
     } else {
-        echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
+        echo '<script>alert("Cập nhật thất bại! Hình ảnh không hợp lệ!"); window.history.back();</script>';
     }
 }
 ?>

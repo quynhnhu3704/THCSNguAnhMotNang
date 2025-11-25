@@ -10,7 +10,7 @@ if(!isset($_SESSION['login'])) {
 // }
 ?>
 
-<h2 class="text-center fw-semibold my-3">Danh sách thiết bị</h2>
+<h2 class="text-center fw-semibold my-3">Danh sách thiết bị chi tiết</h2>
 
 <div class="d-flex mx-auto justify-content-between align-items-center" style="width: 95%">
     <!-- Thanh tìm kiếm -->
@@ -32,7 +32,6 @@ if(!isset($_SESSION['login'])) {
                     <th>Tên thiết bị</th>
                     <th>Hình ảnh</th>
                     <th>Đơn vị</th>
-                    <th>Số lượng</th>
                     <th>Lớp</th>
                     <th>Bộ môn</th>
                     <th>Nhà cung cấp</th>
@@ -49,9 +48,9 @@ if(!isset($_SESSION['login'])) {
 
             if(isset($_GET['keyword'])) {
                 $keyword = $_GET['keyword'];
-                $kq = $p->searchThietBi($keyword);
+                $kq = $p->searchChiTietTB($keyword);
             } else {
-                $kq = $p->getAllThietBi();
+                $kq = $p->getAllChiTietTB();
             }
 
             if ($kq && $kq->num_rows > 0) {
@@ -64,7 +63,6 @@ if(!isset($_SESSION['login'])) {
                         echo '<td title="'.$r['tenThietBi'].'">' . $r['tenThietBi'] . '</td>';
                         echo '<td><img src="public/uploads/' . $r['hinhAnh'] . '" width="40" height="40" class="rounded d-block mx-auto"></td>';
                         echo '<td class="text-center">' . $r['donVi'] . '</td>';
-                        echo '<td class="text-center">' . $r['soLuong'] . '</td>';
                         echo '<td class="text-center">' . $r['lop'] . '</td>';
                         echo '<td class="text-center">' . $r['tenBoMon'] . '</td>';
                         echo '<td class="text-center">' . $r['tenNhaCungCap'] . '</td>';
@@ -82,7 +80,7 @@ if(!isset($_SESSION['login'])) {
                         echo '<td>' . $r['ghiChu'] . '</td>';
 
                         echo '<td class="text-center">';
-                            echo '<a href="index.php?page=baohongthietbi&maThietBi=' . $r['maThietBi'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-exclamation-triangle-fill"></i> Báo hỏng</a>&nbsp;';
+                            echo '<a href="index.php?page=baohongthietbi&maChiTietTB=' . $r['maChiTietTB'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-exclamation-triangle-fill"></i> Báo hỏng</a>&nbsp;';
                         echo '</td>';
                     echo '</tr>';
                 }

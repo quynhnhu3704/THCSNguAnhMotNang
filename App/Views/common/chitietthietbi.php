@@ -44,7 +44,7 @@ if ($kq && $kq->num_rows > 0) {
                         <strong>Số lượng:</strong> <?php echo $r['soLuong']; ?>
                     </div>
                     <div class="p-3">
-                        <strong>Lớp sử dụng:</strong> <?php echo $r['lop']; ?>
+                        <strong>Lớp:</strong> <?php echo $r['lop']; ?>
                     </div>
                     <div class="p-3">
                         <strong>Bộ môn:</strong> <?php echo $r['tenBoMon']; ?>
@@ -53,22 +53,7 @@ if ($kq && $kq->num_rows > 0) {
                         <strong>Nhà cung cấp:</strong> <?php echo $r['tenNhaCungCap']; ?>
                     </div>
                     <div class="p-3">
-                        <strong>Tình trạng:</strong> 
-                        <span class="badge 
-                        <?php 
-                        switch($r['tinhTrang']) {
-                            case 'Khả dụng': echo 'bg-success'; break;
-                            case 'Đang mượn': echo 'bg-warning text-dark'; break;
-                            case 'Báo hỏng': echo 'bg-danger'; break;
-                            case 'Thanh lý': echo 'bg-secondary'; break;
-                            default: echo 'bg-light text-dark';
-                        }
-                        ?>">
-                        <?php echo $r['tinhTrang']; ?>
-                        </span>
-                    </div>
-                    <div class="p-3">
-                        <strong>Ghi chú:</strong> <?php echo nl2br($r['ghiChu']); ?>
+                        <strong>Mô tả:</strong> <?php echo nl2br($r['moTa']); ?>
                     </div>
                 </div>
 

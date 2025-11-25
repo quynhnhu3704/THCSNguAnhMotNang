@@ -25,7 +25,6 @@ if(!isset($_SESSION['login'])) {
     </form>
 </div>
 
-
 <div class="d-flex justify-content-center">
     <div class="table-responsive my-5" style="width: 95%;">
         <table class="table table-striped table-hover table-borderless align-middle" style="font-size: 0.85em;">

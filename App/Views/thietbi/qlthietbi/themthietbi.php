@@ -46,7 +46,7 @@ if(!isset($_SESSION['login'])) {
                 <!-- Số lượng -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Số lượng <span class="text-danger">*</span></label>
-                    <input type="number" name="soLuong" value="" class="form-control" min="1" required>
+                    <input type="number" name="soLuong" value="" class="form-control" min="1" max="3" required>
                 </div>
 
                 <!-- Lớp -->
@@ -97,7 +97,7 @@ if(!isset($_SESSION['login'])) {
                 </div>
 
                 <!-- Tình trạng -->
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <label class="form-label fw-medium">Tình trạng <span class="text-danger">*</span></label>
                     <select name="tinhTrang" class="form-select" required>
                         <option value="" disabled selected>-- Chọn tình trạng --</option>
@@ -106,12 +106,12 @@ if(!isset($_SESSION['login'])) {
                         <option value="Đang mượn">Đang mượn</option>
                         <option value="Báo hỏng">Báo hỏng</option>
                     </select>
-                </div>
+                </div> -->
 
-                <!-- Ghi chú -->
+                <!-- Mô tả -->
                 <div class="mb-4">
-                    <label class="form-label fw-medium">Ghi chú</label>
-                    <textarea name="ghiChu" class="form-control" rows="3" style="resize:none;"></textarea>
+                    <label class="form-label fw-medium">Mô tả</label>
+                    <textarea name="moTa" class="form-control" rows="3" style="resize:none;"></textarea>
                 </div>
 
                 <!-- Nút submit/reset -->
@@ -138,12 +138,11 @@ if(isset($_POST['btnluu'])) {
     $tenThietBi = trim($_POST['tenThietBi']);
     $hinhAnh = $_FILES['hinhAnh'];
     $donVi = trim($_POST['donVi']);
-    $soLuong = trim($_POST['soLuong']);
+    $soLuong = (int) $_POST['soLuong'];
     $lop = isset($_POST['lop']) ? implode(',', $_POST['lop']) : null;
     $maBoMon = trim($_POST['maBoMon']);
     $maNhaCungCap = trim($_POST['maNhaCungCap']);
-    $tinhTrang = trim($_POST['tinhTrang']);
-    $ghiChu = trim($_POST['ghiChu']);
+    $moTa = trim($_POST['moTa']);
 
     if($p->checkName($tenThietBi)) {
         echo '<script>alert("Tên thiết bị đã tồn tại!"); window.location.href="index.php?page=themthietbi";</script>';
@@ -151,13 +150,27 @@ if(isset($_POST['btnluu'])) {
         $hinh = upload($hinhAnh);
 
         if($hinh) {
-            if($p->insertThietBi($tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $tinhTrang, $ghiChu)) {
-                echo '<script>alert("Thêm thành công!"); window.location.href="index.php?page=dsthietbi";</script>';
+            $maThietBi = $p->insertThietBi($tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $moTa);
+            if($maThietBi) {
+                $kq = true;
+                $conn = $p->getConnection();
+
+                for($i = 0; $i < $soLuong; $i++) {
+                    $truyvan = "INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu) 
+                                VALUES ($maThietBi, 'Khả dụng', NULL)";
+                    if(!mysqli_query($conn, $truyvan)) {
+                        $kq = false;
+                    }
+                }
+
+                if($kq) {
+                    echo '<script>alert("Thêm thành công! Đã tạo ' . $soLuong . ' chi tiết thiết bị."); window.location.href="index.php?page=dsthietbi";</script>';
+                } else {
+                    echo '<script>alert("Thêm thành công!"); window.location.href="index.php?page=dsthietbi";</script>';
+                }
             } else {
                 echo '<script>alert("Thêm thất bại!"); window.history.back();</script>';
             }
-        } else {
-            echo '<script>alert("Thêm thất bại!"); window.history.back();</script>';
         }
     }
 }
