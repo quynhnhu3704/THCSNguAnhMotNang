@@ -84,9 +84,9 @@ if(isset($_POST['btnluu'])) {
     $email = trim($_POST['email']);
     
     if($p->updateNhaCungCap($maNhaCungCap, $tenNhaCungCap, $diaChi, $soDienThoai, $email)) {
-        echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=dsnhacungcap";</script>';
+        echo '<script>alert("Cập nhật nhà cung cấp thành công!"); window.location.href="index.php?page=dsnhacungcap";</script>';
     } else {
-        echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
+        echo '<script>alert("Cập nhật nhà cung cấp thất bại!"); window.history.back();</script>';
     }
 }
 ?>

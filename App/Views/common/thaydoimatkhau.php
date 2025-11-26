@@ -72,21 +72,21 @@ if(isset($_POST['btnluu'])) {
     $xacNhanMatKhauMoi = trim($_POST['xacNhanMatKhauMoi']);
     
     if(md5($matKhauHienTai) != $r['matKhau']) {
-        echo '<script>alert("Mật khẩu hiện tại không đúng!"); window.location.href="index.php?page=thaydoimatkhau";</script>';
+        echo '<script>alert("Mật khẩu hiện tại không đúng!"); window.history.back();</script>';
         exit();
     } else if($matKhauMoi != $xacNhanMatKhauMoi) {
-        echo '<script>alert("Mật khẩu mới và xác nhận mật khẩu mới không khớp!"); window.location.href="index.php?page=thaydoimatkhau";</script>';
+        echo '<script>alert("Mật khẩu mới và xác nhận mật khẩu mới không khớp!"); window.history.back();</script>';
         exit();
     } else if(md5($matKhauMoi) == $r['matKhau']) {
-        echo '<script>alert("Mật khẩu mới không được trùng với mật khẩu hiện tại!"); window.location.href="index.php?page=thaydoimatkhau";</script>';
+        echo '<script>alert("Mật khẩu mới không được trùng với mật khẩu hiện tại!"); window.history.back();</script>';
         exit();
     } else {
         if($p->updateMatKhau($maNguoiDung, $matKhauMoi)) {
             session_unset(); // Xóa tất cả biến phiên hiện tại
             session_destroy(); // Hủy phiên hiện tại
-            echo '<script>alert("Cập nhật thành công! Vui lòng đăng nhập lại."); window.location.href="index.php?page=dangnhap";</script>';
+            echo '<script>alert("Thay đổi mật khẩu thành công! Vui lòng đăng nhập lại."); window.location.href="index.php?page=dangnhap";</script>';
         } else {
-            echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
+            echo '<script>alert("Thay đổi mật khẩu thất bại!"); window.history.back();</script>';
         }
     }
 }

@@ -31,14 +31,26 @@ class controlPhieuMuon {
         }
     }
 
-    public function insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, $trangThai, $ghiChu) {
+    public function get01ChiTietPM($maPhieuMuon) {
         $p = new modelPhieuMuon();
-        return $p->insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, $trangThai, $ghiChu);
+        $kq = $p->select01ChiTietPM($maPhieuMuon);
+        if(mysqli_num_rows($kq) > 0) return $kq;
+        return false;
+    }
+
+    public function insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, $ghiChu) {
+        $p = new modelPhieuMuon();
+        return $p->insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, $ghiChu);
     }
 
     public function insertChiTietPM($maPhieuMuon, $chiTiet) {
         $p = new modelPhieuMuon();
-        $p->insertChiTietPM($maPhieuMuon, $chiTiet);
+        return $p->insertChiTietPM($maPhieuMuon, $chiTiet); // truyền mảng maThietBi => soLuong
+    }
+
+    public function deletePhieuMuon($maPhieuMuon) {
+        $p = new modelPhieuMuon();
+        return $p->deletePhieuMuon($maPhieuMuon);
     }
 }
 ?>

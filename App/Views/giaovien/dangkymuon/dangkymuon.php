@@ -13,17 +13,17 @@ $maNguoiDung = $_SESSION['maNguoiDung'];
 $r = $p->get01NguoiDung($maNguoiDung)->fetch_assoc();
 
 // Lấy danh sách thiết bị từ session
-$gioHang = isset($_SESSION['gioHangMuon']) ? $_SESSION['gioHangMuon'] : [];
+$gioHang = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 ?>
 
-<button type="button" class="btn btn-outline-primary ms-4 my-4" onclick="window.location.href='index.php?page=dsthietbi'"><i class="bi bi-arrow-left"></i> Quay lại</button>
+<button type="button" class="btn btn-outline-primary ms-4 my-4" onclick="window.history.back();"><i class="bi bi-arrow-left"></i> Quay lại</button>
 
 <div class="container d-flex justify-content-center align-items-center mb-5">
     <div class="card-na border-0" style="max-width: 50rem; width: 100%;">
         <div class="card-body p-4">
             <h3 class="text-center mb-4 fw-bold text-primary">Thông tin phiếu mượn</h3>
 
-            <form action="index.php?page=xulydangkymuon" method="post">
+            <form action="#" method="post">
                 <div class="row">
                     <div class="col-6">
                         <div class="mb-3">
@@ -86,7 +86,7 @@ $gioHang = isset($_SESSION['gioHangMuon']) ? $_SESSION['gioHangMuon'] : [];
                                         <input type="number" name="soLuong[<?= $maThietBi ?>]" value="<?= $soLuong ?>" min="1" max="<?= $r['soLuong'] ?>" class="form-control text-center">
                                     </td>
                                     <td>
-                                        <a href="index.php?page=xoathietbophieumuon&action=delete&maThietBi=<?= $maThietBi ?>" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm('Bạn có chắc muốn xóa thiết bị này không?')"><i class="bi bi-trash"></i> Xóa</a>
+                                        <a href="index.php?page=dangkymuon&xoa=<?= $maThietBi ?>" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm('Bạn có chắc muốn xóa thiết bị này không?')"><i class="bi bi-trash"></i> Xóa</a>
                                     </td>
                                 </tr>
                                 <?php 
@@ -120,12 +120,11 @@ if(isset($_POST['btnXacNhan'])) {
     include_once('App/Controllers/cPhieuMuon.php');
     $p = new controlPhieuMuon();
 
-    $maNguoiDung = $_SESSION['maNguoiDung']; // mã người đang đăng nhập
+    $maNguoiDung = $_SESSION['maNguoiDung'];
     $ngayMuon = $_POST['ngayMuon'];
     $ngayTra = $_POST['ngayTra'];
     $ghiChu = trim($_POST['ghiChu']);
 
-    // Kiểm tra tính hợp lệ
     $today = date('Y-m-d');
     if($ngayMuon < $today) {
         echo "<script>alert('Ngày mượn không được trước ngày hiện tại'); window.history.back();</script>";
@@ -136,19 +135,45 @@ if(isset($_POST['btnXacNhan'])) {
         exit();
     }
 
-    // Lưu phiếu mượn
-    $maPhieuMuon = $p->insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, $trangThai, $ghiChu);
+    // Cập nhật SESSION số lượng trong giỏ mượn nếu có tăng/giảm, nếu không thì nó mặc định là 1 như lúc thêm vào giỏ
+    if(isset($_POST['soLuong'])) {
+        foreach($_POST['soLuong'] as $maTB => $sl) {
+            $_SESSION['cart'][$maTB] = (int)$sl;
+        }
+    }
+
+    // Kiểm tra giỏ mượn không được rỗng
+    if(empty($_SESSION['cart'])) {
+        echo "<script>alert('Không có thiết bị nào trong phiếu mượn'); window.history.back();</script>";
+        exit();
+    }
+
+    $maPhieuMuon = $p->insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, $ghiChu);
 
     if($maPhieuMuon) {
-        // Lưu chi tiết phiếu mượn
-        foreach($_SESSION['gioHangMuon'] as $maThietBi => $soLuong) {
-            $p->insertChiTietPM($maPhieuMuon, $maThietBi, $soLuong);
+        // truyền toàn bộ giỏ mượn làm mảng
+        if($p->insertChiTietPM($maPhieuMuon, $_SESSION['cart'])) {
+            unset($_SESSION['cart']); // xóa giỏ mượn sau khi đăng ký thành công
+            echo "<script>alert('Đăng ký mượn thành công!'); window.location.href='index.php?page=dsphieumuon';</script>";
+        } else {
+            $p->deletePhieuMuon($maPhieuMuon); // rollback phiếu mượn
+            echo "<script>alert('Không đủ thiết bị khả dụng'); window.history.back();</script>";
         }
-        unset($_SESSION['gioHangMuon']); // clear session
-        echo "<script>alert('Đăng ký mượn thành công!'); window.location.href='index.php?page=phieumuon';</script>";
     } else {
-        echo "<script>alert('Đăng ký thất bại!'); window.history.back();</script>";
+        echo "<script>alert('Đăng ký mượn thất bại!'); window.history.back();</script>";
     }
+}
+?>
+
+<!-- Xóa thiết bị khỏi giỏ mượn -->
+<?php
+if(isset($_GET['xoa'])) {
+    $maThietBi = $_GET['xoa'];
+    if(isset($_SESSION['cart'][$maThietBi])) {
+        unset($_SESSION['cart'][$maThietBi]);
+    }
+    header("Location: index.php?page=dangkymuon"); // load lại trang
+    exit();
 }
 ?>
 

@@ -70,9 +70,9 @@ if(isset($_POST['btnluu'])) {
     $moTa = trim($_POST['moTa']);
     
     if($p->updateBoMon($maBoMon, $tenBoMon, $moTa)) {
-        echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=dsbomon";</script>';
+        echo '<script>alert("Cập nhật bộ môn thành công!"); window.location.href="index.php?page=dsbomon";</script>';
     } else {
-        echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
+        echo '<script>alert("Cập nhật bộ môn thất bại!"); window.history.back();</script>';
     }
 }
 ?>

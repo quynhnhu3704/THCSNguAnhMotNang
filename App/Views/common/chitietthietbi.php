@@ -74,20 +74,20 @@ if(isset($_POST['btnmuon'])) {
     $maThietBi = $r['maThietBi'];
     $soLuongMuon = 1; // mặc định thêm vào phiếu mượn 1 thiết bị
 
-    if(!isset($_SESSION['gioHangMuon'])) {
-        $_SESSION['gioHangMuon'] = [];
+    if(!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
     }
 
     // Nếu đã có thiết bị trong giỏ, cộng số lượng
-    if(isset($_SESSION['gioHangMuon'][$maThietBi])) {
-        $_SESSION['gioHangMuon'][$maThietBi] += $soLuongMuon;
+    if(isset($_SESSION['cart'][$maThietBi])) {
+        $_SESSION['cart'][$maThietBi] += $soLuongMuon;
     } else {
-        $_SESSION['gioHangMuon'][$maThietBi] = $soLuongMuon;
+        $_SESSION['cart'][$maThietBi] = $soLuongMuon;
     }
 
     // Giới hạn số lượng tối đa 3 loại thiết bị
-    if(count($_SESSION['gioHangMuon']) > 3) {
-        unset($_SESSION['gioHangMuon'][$maThietBi]); // remove item vừa thêm
+    if(count($_SESSION['cart']) > 3) {
+        unset($_SESSION['cart'][$maThietBi]); // remove item vừa thêm
         echo "<script>alert('Chỉ được mượn tối đa 3 thiết bị!'); window.history.back();</script>";
         exit();
     }

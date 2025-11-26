@@ -32,9 +32,9 @@ if($kq && $kq->num_rows > 0) {
 
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     if ($p->deleteNguoiDung($maNguoiDung)) {
-        echo "<script>alert('Xóa thành công!'); window.location.href='index.php?page=dsnguoidung';</script>";
+        echo "<script>alert('Xóa người dùng thành công!'); window.location.href='index.php?page=dsnguoidung';</script>";
     } else {
-        echo "<script>alert('Xóa thất bại!'); window.history.back();</script>";
+        echo "<script>alert('Xóa người dùng thất bại!'); window.history.back();</script>";
     }
 }
 ?>

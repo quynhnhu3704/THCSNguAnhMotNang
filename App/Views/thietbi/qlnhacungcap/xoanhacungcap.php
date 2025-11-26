@@ -32,9 +32,9 @@ if($kq && $kq->num_rows > 0) {
 
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     if ($p->deleteNhaCungCap($maNhaCungCap)) {
-        echo "<script>alert('Xóa thành công!'); window.location.href='index.php?page=dsnhacungcap';</script>";
+        echo "<script>alert('Xóa nhà cung cấp thành công!'); window.location.href='index.php?page=dsnhacungcap';</script>";
     } else {
-        echo "<script>alert('Xóa thất bại!'); window.history.back();</script>";
+        echo "<script>alert('Xóa nhà cung cấp thất bại!'); window.history.back();</script>";
     }
 }
 ?>

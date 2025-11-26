@@ -109,9 +109,9 @@ if(isset($_POST['btnluu'])) {
     $ghiChu = trim($_POST['ghiChu']);
     
     if($p->updateHong($maChiTietTB, $tinhTrang, $ghiChu)) {
-        echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=dsbaohong";</script>';
+        echo '<script>alert("Báo hỏng thiết bị thành công!"); window.location.href="index.php?page=dsbaohong";</script>';
     } else {
-        echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
+        echo '<script>alert("Báo hỏng thiết bị thất bại!"); window.history.back();</script>';
     }
 }
 ?>

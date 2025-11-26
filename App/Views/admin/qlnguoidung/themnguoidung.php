@@ -113,12 +113,12 @@ if(isset($_POST['btnluu'])) {
     }
 
     if($p->checkName($tenDangNhap)) {
-        echo '<script>alert("Tên đăng nhập đã tồn tại!"); window.location.href="index.php?page=themnguoidung";</script>';
+        echo '<script>alert("Tên đăng nhập đã tồn tại!"); window.history.back();</script>';
     } else {
         if($p->insertNguoiDung($tenDangNhap, $hoTen, $matKhauTamThoi, $soDienThoai, $email, $maVaiTro, $maBoMon)) {
-            echo '<script>alert("Thêm thành công!"); window.location.href="index.php?page=dsnguoidung";</script>';
+            echo '<script>alert("Thêm người dùng thành công!"); window.location.href="index.php?page=dsnguoidung";</script>';
         } else {
-            echo '<script>alert("Thêm thất bại!"); window.history.back();</script>';
+            echo '<script>alert("Thêm người dùng thất bại!"); window.history.back();</script>';
         }
     }
 }

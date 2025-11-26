@@ -146,33 +146,37 @@ if(isset($_POST['btnluu'])) {
     $moTa = trim($_POST['moTa']);
 
     if($p->checkName($tenThietBi)) {
-        echo '<script>alert("Tên thiết bị đã tồn tại!"); window.location.href="index.php?page=themthietbi";</script>';
-    } else {
-        $hinh = upload($hinhAnh);
+        echo '<script>alert("Tên thiết bị đã tồn tại!"); window.history.back();</script>';
+        exit();
+    }
 
-        if($hinh) {
-            $maThietBi = $p->insertThietBi($tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $moTa);
-            if($maThietBi) {
-                $kq = true;
-                $conn = $p->getConnection();
+    $hinh = upload($hinhAnh);
+    if(!$hinh) {
+        echo '<script>alert("Lỗi tải hình ảnh! Vui lòng thử lại."); window.history.back();</script>';
+        exit();
+    }
 
-                for($i = 0; $i < $soLuong; $i++) {
-                    $truyvan = "INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu) 
-                                VALUES ($maThietBi, 'Khả dụng', NULL)";
-                    if(!mysqli_query($conn, $truyvan)) {
-                        $kq = false;
-                    }
-                }
+    $maThietBi = $p->insertThietBi($tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $moTa);
+    
+    if($maThietBi) {
+        $kq = true;
+        $conn = $p->getConnection();
 
-                if($kq) {
-                    echo '<script>alert("Thêm thành công! Đã tạo ' . $soLuong . ' chi tiết thiết bị."); window.location.href="index.php?page=dsthietbi";</script>';
-                } else {
-                    echo '<script>alert("Thêm thành công!"); window.location.href="index.php?page=dsthietbi";</script>';
-                }
-            } else {
-                echo '<script>alert("Thêm thất bại!"); window.history.back();</script>';
+        for($i = 0; $i < $soLuong; $i++) {
+            $truyvan = "INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu) 
+                        VALUES ($maThietBi, 'Khả dụng', NULL)";
+            if(!mysqli_query($conn, $truyvan)) {
+                $kq = false;
             }
         }
+
+        if($kq) {
+            echo '<script>alert("Thêm thiết bị thành công! Đã tạo ' . $soLuong . ' chi tiết thiết bị."); window.location.href="index.php?page=dsthietbi";</script>';
+        } else {
+            echo '<script>alert("Thêm thiết bị thành công nhưng tạo chi tiết thất bại!"); window.location.href="index.php?page=dsthietbi";</script>';
+        }
+    } else {
+        echo '<script>alert("Thêm thiết bị thất bại!"); window.history.back();</script>';
     }
 }
 ?>

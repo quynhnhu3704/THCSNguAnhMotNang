@@ -148,9 +148,9 @@ if(isset($_POST['btnluu'])) {
             $_SESSION['tenDangNhap'] = $tenDangNhap;
         }
         
-        echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=dsnguoidung";</script>';
+        echo '<script>alert("Cập nhật người dùng thành công!"); window.location.href="index.php?page=dsnguoidung";</script>';
     } else {
-        echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
+        echo '<script>alert("Cập nhật người dùng thất bại!"); window.history.back();</script>';
     }
 }
 ?>

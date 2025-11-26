@@ -1,0 +1,161 @@
+$maThietBi = $p->insertThietBi(...); // trả về ID
+
+for ($i = 0; $i < $soLuong; $i++) {
+    $sql = "INSERT INTO chitietthietbi (maThietBi, tinhTrang)
+            VALUES ($maThietBi, 'Khả dụng')";
+    mysqli_query($conn, $sql);
+}
+
+
+
+
+
+-- reset lại tinhTrang bảng chitietthietbi --
+UPDATE chitietthietbi
+SET tinhTrang = CASE ( (maChiTietTB - 1) % 3 )
+    WHEN 0 THEN 'Khả dụng'
+    WHEN 1 THEN 'Đang mượn'
+    WHEN 2 THEN 'Báo hỏng'
+END;
+
+
+
+
+
+------- Reset lại thứ tự của AUTO_INCREMENT --------
+SET @count = 0;
+UPDATE `ThietBi` SET `maThietBi` = (@count := @count + 1) ORDER BY `maThietBi`;
+ALTER TABLE `ThietBi` AUTO_INCREMENT = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- insert bảng chitietthietbi
+-- Thiết bị 1
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (1,'Khả dụng','Dùng tốt, không lỗi.'),
+       (1,'Đang mượn','Đang được mượn phục vụ giảng dạy.'),
+       (1,'Hỏng','Hỏng do sử dụng lâu ngày.');
+
+-- Thiết bị 2
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (2,'Khả dụng','Dùng tốt, không lỗi.'),
+       (2,'Đang mượn','Đang được mượn phục vụ bài kiểm tra.'),
+       (2,'Hỏng','Hỏng do rơi vỡ.');
+
+-- Thiết bị 3
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (3,'Khả dụng','Trang sách còn mới.'),
+       (3,'Đang mượn','Giáo viên Ngữ văn mượn sử dụng.'),
+       (3,'Hỏng','Rách gáy, cần sửa.');
+
+-- Thiết bị 4
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (4,'Khả dụng','Không trầy xước.'),
+       (4,'Đang mượn','Mượn trong tiết Ngữ văn.'),
+       (4,'Hỏng','Bị cong góc.');
+
+-- Thiết bị 5
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (5,'Khả dụng','Sách còn rất mới.'),
+       (5,'Đang mượn','HS lớp 7 mượn nghiên cứu.'),
+       (5,'Hỏng','Sách bị ướt, nhòe chữ.');
+
+-- Thiết bị 6
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (6,'Khả dụng','Âm thanh hoạt động bình thường.'),
+       (6,'Đang mượn','Dùng trong giờ sinh hoạt.'),
+       (6,'Hỏng','Pin chai, không bật được.');
+
+-- Thiết bị 7
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (7,'Khả dụng','Đo chính xác.'),
+       (7,'Đang mượn','Tổ Lý mượn thực hành.'),
+       (7,'Hỏng','Nứt màn hình.');
+
+-- Thiết bị 8
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (8,'Khả dụng','Dùng tốt.'),
+       (8,'Đang mượn','Mượn cho tiết Vật lý.'),
+       (8,'Hỏng','Dây treo bị đứt.');
+
+-- Thiết bị 9
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (9,'Khả dụng','Không rò rỉ.'),
+       (9,'Đang mượn','Dùng trong thí nghiệm cháy.'),
+       (9,'Hỏng','Bị nứt bình cồn.');
+
+-- Thiết bị 10
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (10,'Khả dụng','Đo chính xác.'),
+       (10,'Đang mượn','GV Hóa đang sử dụng.'),
+       (10,'Hỏng','Đầu đo gãy.');
+
+-- Thiết bị 11
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (11,'Khả dụng','Kính trong, rõ.'),
+       (11,'Đang mượn','Dùng trong giờ Sinh học.'),
+       (11,'Hỏng','Bị lệch trục quang.');
+
+-- Thiết bị 12
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (12,'Khả dụng','Đầy đủ chi tiết.'),
+       (12,'Đang mượn','Tổ Sinh đang sử dụng.'),
+       (12,'Hỏng','Thiếu 1 chi tiết nhỏ.');
+
+-- Thiết bị 13
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (13,'Khả dụng','Hình ảnh rõ.'),
+       (13,'Đang mượn','GV Lịch sử đang dùng.'),
+       (13,'Hỏng','Rách mép giấy bên phải.');
+
+-- Thiết bị 14
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (14,'Khả dụng','Băng chạy tốt.'),
+       (14,'Đang mượn','HS lớp 8 dùng cho bài thuyết trình.'),
+       (14,'Hỏng','Băng bị rối, không tua được.');
+
+-- Thiết bị 15
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (15,'Khả dụng','Quả cầu xoay mượt.'),
+       (15,'Đang mượn','GV Địa lý mượn.'),
+       (15,'Hỏng','Trục xoay cứng.');
+
+-- Thiết bị 16
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (16,'Khả dụng','Không cong mép.'),
+       (16,'Đang mượn','Dùng trong tiết Địa lý.'),
+       (16,'Hỏng','Bị ố màu chỗ viền.');
+
+-- Thiết bị 17
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (17,'Khả dụng','Màu còn đầy.'),
+       (17,'Đang mượn','HS lớp 6 đang dùng.'),
+       (17,'Hỏng','Hộp bị gãy nắp.');
+
+-- Thiết bị 18
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (18,'Khả dụng','Chưa sử dụng nhiều.'),
+       (18,'Đang mượn','GV Mỹ thuật đang dùng.'),
+       (18,'Hỏng','Một lọ màu bị khô.');
+
+-- Thiết bị 19
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (19,'Khả dụng','Âm thanh ổn định.'),
+       (19,'Đang mượn','Dùng cho buổi sinh hoạt lớp.'),
+       (19,'Hỏng','Rách mặt trống.');
+
+-- Thiết bị 20
+INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu)
+VALUES (20,'Khả dụng','Phím đàn nhạy tốt.'),
+       (20,'Đang mượn','GV Âm nhạc đang luyện đàn.'),
+       (20,'Hỏng','Một phím bị kẹt.');

@@ -39,9 +39,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
             unlink($image_url);
         }
 
-        echo "<script>alert('Xóa thành công!'); window.location.href='index.php?page=dsthietbi';</script>";
+        echo "<script>alert('Xóa thiết bị thành công!'); window.location.href='index.php?page=dsthietbi';</script>";
     } else {
-        echo "<script>alert('Xóa thất bại!'); window.history.back();</script>";
+        echo "<script>alert('Xóa thiết bị thất bại!'); window.history.back();</script>";
     }
 }
 ?>

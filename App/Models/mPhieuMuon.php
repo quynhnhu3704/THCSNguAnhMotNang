@@ -30,11 +30,36 @@ class modelPhieuMuon{
         return $kq;
     }
 
-    public function insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, $trangThai, $ghiChu) {
+    public function selectAllChiTietPM() {
+        $p = new clsKetNoi();
+        $truyvan = "SELECT * FROM chitietphieumuon ct
+                    JOIN thietbi tb ON ct.maThietBi=tb.maThietBi
+                    JOIN bomon bm ON tb.maBoMon=bm.maBoMon
+                    JOIN nhacungcap ncc ON ncc.maNhaCungCap=tb.maNhaCungCap";
+        $con = $p->moketnoi();
+        $kq = mysqli_query($con, $truyvan);
+        $p->dongketnoi($con);
+        return $kq;
+    }
+
+    public function select01ChiTietPM($maChiTietPM) {
+        $p = new clsKetNoi();
+        $truyvan = "SELECT * FROM chitietphieumuon ct
+                    JOIN thietbi tb ON ct.maThietBi=tb.maThietBi
+                    JOIN bomon bm ON tb.maBoMon=bm.maBoMon
+                    JOIN nhacungcap ncc ON tb.maNhaCungCap=ncc.maNhaCungCap
+                    WHERE maChiTietTB = $maChiTietPM";
+        $con = $p->moketnoi();
+        $kq = mysqli_query($con, $truyvan);
+        $p->dongketnoi($con);
+        return $kq;
+    }
+
+    public function insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, $ghiChu) {
         $p = new clsKetNoi();
         $con = $p->moketnoi();
-        $truyvan = "INSERT INTO phieumuon (maNguoiDung, ngayMuon, ngayTra, trangThai, ghiChu) 
-                    VALUES ($maNguoiDung, '$ngayMuon', '$ngayTra', N'$trangThai', N'$ghiChu')";
+        $truyvan = "INSERT INTO phieumuon (maNguoiDung, ngayMuon, ngayTra, ghiChu) 
+                    VALUES ($maNguoiDung, '$ngayMuon', '$ngayTra', N'$ghiChu')";
         if(mysqli_query($con, $truyvan)) {
             $id = mysqli_insert_id($con); // lấy mã phiếu mượn vừa thêm
             $p->dongketnoi($con);
@@ -49,21 +74,56 @@ class modelPhieuMuon{
         $p = new clsKetNoi();
         $con = $p->moketnoi();
 
-        foreach($chiTiet as $maThietBi => $soLuong) {
-            // kiểm tra tình trạng "Khả dụng" và số lượng
-            $truyvan = "SELECT tinhTrang, soLuong FROM thietbi tb 
-                        JOIN chitietthietbi ct ON tb.maThietBi = ct.maThietBi
-                        WHERE maThietBi=$maThietBi LIMIT 1";
+        // Bước 1: Kiểm tra đủ thiết bị khả dụng
+        foreach($chiTiet as $maThietBi => $soLuongMuon) {
+            // 1. Đếm số lượng khả dụng
+            $truyvan = "SELECT COUNT(*) AS soLuongKhaDung 
+                        FROM chitietthietbi 
+                        WHERE maThietBi=$maThietBi AND tinhTrang='Khả dụng'";
             $kq = mysqli_query($con, $truyvan);
             $r = mysqli_fetch_assoc($kq);
-            if($r && $r['tinhTrang'] === 'Khả dụng' && $soLuong <= $r['soLuong']) {
-                $truyvan = "INSERT INTO chitietphieumuon (maPhieuMuon, maThietBi, soLuong) 
-                            VALUES ($maPhieuMuon, $maThietBi, $soLuong)";
-                mysqli_query($con, $truyvan);
+            $soLuongKhaDung = (int)$r['soLuongKhaDung'];
+
+            if($soLuongMuon > $soLuongKhaDung) {
+                $p->dongketnoi($con);
+                return false; // Không đủ thiết bị khả dụng
             }
         }
 
+        // Bước 2: Thực hiện insert chi tiết phiếu mượn
+        foreach($chiTiet as $maThietBi => $soLuongMuon) {
+            // 2. Lấy các chi tiết khả dụng
+            $truyvan = "SELECT maChiTietTB 
+                        FROM chitietthietbi 
+                        WHERE maThietBi=$maThietBi AND tinhTrang='Khả dụng'
+                        LIMIT $soLuongMuon";
+            $kq = mysqli_query($con, $truyvan);
+
+            // 3. Insert vào chi tiết phiếu mượn và cập nhật tình trạng
+            while($r = mysqli_fetch_assoc($kq)) {
+                $maChiTietTB = $r['maChiTietTB'];
+                $insert = mysqli_query($con, "INSERT INTO chitietphieumuon (maPhieuMuon, maThietBi, maChiTietTB) 
+                                                            VALUES ($maPhieuMuon, $maThietBi, $maChiTietTB)");
+                if(!$insert) {
+                    $p->dongketnoi($con);
+                    return false; // Insert thất bại => rollback bên controller
+                }
+                
+                mysqli_query($con, "UPDATE chitietthietbi SET tinhTrang='Đang mượn' 
+                                    WHERE maChiTietTB=$maChiTietTB");
+            }
+        }
         $p->dongketnoi($con);
+        return true;
+    }
+
+    public function deletePhieuMuon($maPhieuMuon) {
+        $p = new clsKetNoi();
+        $con = $p->moketnoi();
+        $truyvan = "DELETE FROM phieumuon WHERE maPhieuMuon=$maPhieuMuon";
+        $kq = mysqli_query($con, $truyvan);
+        $p->dongketnoi($con);
+        return $kq;
     }
 }
 ?>

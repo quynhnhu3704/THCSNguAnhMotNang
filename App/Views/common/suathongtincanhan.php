@@ -94,9 +94,9 @@ if(isset($_POST['btnluu'])) {
         // Cập nhật session ngay lập tức
         $_SESSION['tenDangNhap'] = $tenDangNhap;
         
-        echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=thongtincanhan";</script>';
+        echo '<script>alert("Cập nhật thông tin cá nhân thành công!"); window.location.href="index.php?page=thongtincanhan";</script>';
     } else {
-        echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
+        echo '<script>alert("Cập nhật thông tin cá nhân thất bại!"); window.history.back();</script>';
     }
 }
 ?>

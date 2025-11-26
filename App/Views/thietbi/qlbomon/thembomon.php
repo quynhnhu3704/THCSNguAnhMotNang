@@ -54,12 +54,12 @@ if(isset($_POST['btnluu'])) {
     $moTa = trim($_POST['moTa']);
 
     if($p->checkName($tenBoMon)) {
-        echo '<script>alert("Tên bộ môn đã tồn tại!"); window.location.href="index.php?page=thembomon";</script>';
+        echo '<script>alert("Tên bộ môn đã tồn tại!"); window.history.back();</script>';
     } else {
         if($p->insertBoMon($tenBoMon, $moTa)) {
-            echo '<script>alert("Thêm thành công!"); window.location.href="index.php?page=dsbomon";</script>';
+            echo '<script>alert("Thêm bộ môn thành công!"); window.location.href="index.php?page=dsbomon";</script>';
         } else {
-            echo '<script>alert("Thêm thất bại!"); window.history.back();</script>';
+            echo '<script>alert("Thêm bộ môn thất bại!"); window.history.back();</script>';
         }
     }
 }

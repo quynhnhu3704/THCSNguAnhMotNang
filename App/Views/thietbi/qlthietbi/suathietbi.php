@@ -168,7 +168,7 @@ if(isset($_POST['btnluu'])) {
     $maBoMon = trim($_POST['maBoMon']);
     $maNhaCungCap = trim($_POST['maNhaCungCap']);
     $moTa = trim($_POST['moTa']);
-    
+
     // Xử lý hình ảnh
     if (is_uploaded_file($hinhAnh['tmp_name'])) {
         $hinh = upload($hinhAnh);
@@ -181,12 +181,12 @@ if(isset($_POST['btnluu'])) {
         if($kq === false) {
             echo '<script>alert("Không thể giảm số lượng! Hiện còn thiết bị đang mượn hoặc hỏng."); window.history.back();</script>';
         } else if($kq) {
-            echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=dsthietbi";</script>';
+            echo '<script>alert("Cập nhật thiết bị thành công!"); window.location.href="index.php?page=dsthietbi";</script>';
         } else {
-            echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
+            echo '<script>alert("Cập nhật thiết bị thất bại!"); window.history.back();</script>';
         }
     } else {
-        echo '<script>alert("Cập nhật thất bại! Hình ảnh không hợp lệ!"); window.history.back();</script>';
+        echo '<script>alert("Cập nhật thiết bị thất bại! Hình ảnh không hợp lệ!"); window.history.back();</script>';
     }
 }
 ?>
