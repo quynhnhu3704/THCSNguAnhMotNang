@@ -181,6 +181,19 @@ session_start();
                 case 'xoanhacungcap':
                     include_once('App/Views/thietbi/qlnhacungcap/xoanhacungcap.php');
                     break;
+                // Quản lý phiếu mượn (CRUD)
+                case 'dsphieumuon':
+                    include_once('App/Views/thietbi/qlphieumuon/dsphieumuon.php');
+                    break;
+                case 'suaphieumuon':
+                    include_once('App/Views/thietbi/qlphieumuon/suaphieumuon.php');
+                    break;
+                case 'themphieumuon':
+                    include_once('App/Views/thietbi/qlphieumuon/themphieumuon.php');
+                    break;
+                case 'xoaphieumuon':
+                    include_once('App/Views/thietbi/qlphieumuon/xoaphieumuon.php');
+                    break;
                 // Báo hỏng thiết bị
                 case 'dsbaohong':
                     include_once('App/Views/thietbi/baohong/dsbaohong.php');
