@@ -5,8 +5,13 @@ include_once('mketnoi.php');
 class modelPhieuMuon{
     public function selectAllPhieuMuon() {
         $p = new clsKetNoi();
-        $truyvan = "SELECT * from phieumuon pm
-                    ";
+        $truyvan = "SELECT pm.*, nd.hoTen, nd.email, nd.soDienThoai, vt.tenVaiTro, bm.tenBoMon, COUNT(ct.maChiTietPM) AS soLuongMuon
+                    FROM phieumuon pm
+                    LEFT JOIN nguoidung nd ON pm.maNguoiDung = nd.maNguoiDung
+                    LEFT JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
+                    LEFT JOIN bomon bm ON nd.maBoMon = bm.maBoMon
+                    LEFT JOIN chitietphieumuon ct ON pm.maPhieuMuon = ct.maPhieuMuon
+                    GROUP BY pm.maPhieuMuon";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -15,7 +20,7 @@ class modelPhieuMuon{
 
     public function select01PhieuMuon($maPhieuMuon) {
         $p = new clsKetNoi();
-        $truyvan = "select * from phieumuon where maPhieuMuon=$maPhieuMuon";
+        $truyvan = "SELECT * FROM phieumuon WHERE maPhieuMuon = $maPhieuMuon";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -24,7 +29,14 @@ class modelPhieuMuon{
 
     public function searchPhieuMuon($keyword) {
         $p = new clsKetNoi();
-        $truyvan = "select * from phieumuon where tenNguoiDung like N'%$keyword%'";
+        $truyvan = "SELECT pm.*, nd.hoTen, nd.email, nd.soDienThoai, vt.tenVaiTro, bm.tenBoMon, COUNT(ct.maChiTietPM) AS soLuongMuon
+                    FROM phieumuon pm
+                    LEFT JOIN nguoidung nd ON pm.maNguoiDung = nd.maNguoiDung
+                    LEFT JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
+                    LEFT JOIN bomon bm ON nd.maBoMon = bm.maBoMon
+                    LEFT JOIN chitietphieumuon ct ON pm.maPhieuMuon = ct.maPhieuMuon
+                    WHERE hoTen LIKE N'%$keyword%'
+                    GROUP BY pm.maPhieuMuon";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -34,9 +46,9 @@ class modelPhieuMuon{
     public function selectAllChiTietPM() {
         $p = new clsKetNoi();
         $truyvan = "SELECT * FROM chitietphieumuon ct
-                    JOIN thietbi tb ON ct.maThietBi=tb.maThietBi
-                    JOIN bomon bm ON tb.maBoMon=bm.maBoMon
-                    JOIN nhacungcap ncc ON ncc.maNhaCungCap=tb.maNhaCungCap";
+                    JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
+                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
+                    JOIN nhacungcap ncc ON ncc.maNhaCungCap = tb.maNhaCungCap";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -46,9 +58,9 @@ class modelPhieuMuon{
     public function select01ChiTietPM($maChiTietPM) {
         $p = new clsKetNoi();
         $truyvan = "SELECT * FROM chitietphieumuon ct
-                    JOIN thietbi tb ON ct.maThietBi=tb.maThietBi
-                    JOIN bomon bm ON tb.maBoMon=bm.maBoMon
-                    JOIN nhacungcap ncc ON tb.maNhaCungCap=ncc.maNhaCungCap
+                    JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
+                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
+                    JOIN nhacungcap ncc ON tb.maNhaCungCap = ncc.maNhaCungCap
                     WHERE maChiTietTB = $maChiTietPM";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
@@ -80,7 +92,7 @@ class modelPhieuMuon{
             // 1. Đếm số lượng khả dụng
             $truyvan = "SELECT COUNT(*) AS soLuongKhaDung 
                         FROM chitietthietbi 
-                        WHERE maThietBi=$maThietBi AND tinhTrang='Khả dụng'";
+                        WHERE maThietBi = $maThietBi AND tinhTrang = 'Khả dụng'";
             $kq = mysqli_query($con, $truyvan);
             $r = mysqli_fetch_assoc($kq);
             $soLuongKhaDung = (int)$r['soLuongKhaDung'];
@@ -96,22 +108,20 @@ class modelPhieuMuon{
             // 2. Lấy các chi tiết khả dụng
             $truyvan = "SELECT maChiTietTB 
                         FROM chitietthietbi 
-                        WHERE maThietBi=$maThietBi AND tinhTrang='Khả dụng'
+                        WHERE maThietBi = $maThietBi AND tinhTrang = N'Khả dụng'
                         LIMIT $soLuongMuon";
             $kq = mysqli_query($con, $truyvan);
 
             // 3. Insert vào chi tiết phiếu mượn và cập nhật tình trạng
             while($r = mysqli_fetch_assoc($kq)) {
                 $maChiTietTB = $r['maChiTietTB'];
-                $insert = mysqli_query($con, "INSERT INTO chitietphieumuon (maPhieuMuon, maThietBi, maChiTietTB) 
-                                                            VALUES ($maPhieuMuon, $maThietBi, $maChiTietTB)");
+                $insert = mysqli_query($con, "INSERT INTO chitietphieumuon (maPhieuMuon, maThietBi, maChiTietTB) VALUES ($maPhieuMuon, $maThietBi, $maChiTietTB)");
                 if(!$insert) {
                     $p->dongketnoi($con);
                     return false; // Insert thất bại => rollback bên controller
                 }
                 
-                mysqli_query($con, "UPDATE chitietthietbi SET tinhTrang='Đang mượn' 
-                                    WHERE maChiTietTB=$maChiTietTB");
+                mysqli_query($con, "UPDATE chitietthietbi SET tinhTrang = N'Đang mượn' WHERE maChiTietTB = $maChiTietTB");
             }
         }
         $p->dongketnoi($con);
@@ -121,7 +131,7 @@ class modelPhieuMuon{
     public function deletePhieuMuon($maPhieuMuon) {
         $p = new clsKetNoi();
         $con = $p->moketnoi();
-        $truyvan = "DELETE FROM phieumuon WHERE maPhieuMuon=$maPhieuMuon";
+        $truyvan = "DELETE FROM phieumuon WHERE maPhieuMuon = $maPhieuMuon";
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
         return $kq;

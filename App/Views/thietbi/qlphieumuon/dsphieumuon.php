@@ -63,10 +63,10 @@ if(!isset($_SESSION['login'])) {
 
                     echo '<tr>';
                         echo '<td class="text-center"><strong>' . $dem . '</strong></td>';
-                        echo '<td class="text-center">' . $r['tenNguoiDung'] . '</td>';
-                        echo '<td class="text-center">' . $r['maVaiTro'] . '</td>';
-                        echo '<td class="text-center">' . $r['maBoMon'] . '</td>';
-                        echo '<td class="text-center">' . $r['soLuong'] . '</td>';
+                        echo '<td class="text-center">' . $r['hoTen'] . '</td>';
+                        echo '<td class="text-center">' . $r['tenVaiTro'] . '</td>';
+                        echo '<td class="text-center">' . $r['tenBoMon'] . '</td>';
+                        echo '<td class="text-center">' . $r['soLuongMuon'] . '</td>';
                         echo '<td class="text-center">' . $r['ngayMuon'] . '</td>';
                         echo '<td class="text-center">' . $r['ngayTra'] . '</td>';
 
@@ -74,8 +74,8 @@ if(!isset($_SESSION['login'])) {
                             switch ($r['trangThai']) {
                                 case "Chờ xử lý": echo '<span class="badge bg-success">' . $r['trangThai'] . '</span>'; break;
                                 case "Đang mượn": echo '<span class="badge bg-warning text-dark">' . $r['trangThai'] . '</span>'; break;
-                                case "Thanh lý": echo '<span class="badge bg-secondary">' . $r['trangThai'] . '</span>'; break;
-                                case "Báo hỏng": echo '<span class="badge bg-danger">' . $r['trangThai'] . '</span>'; break;
+                                case "Đã trả": echo '<span class="badge bg-success">' . $r['trangThai'] . '</span>'; break;
+                                case "Đã xác nhận": echo '<span class="badge bg-info text-dark">' . $r['trangThai'] . '</span>'; break;
                                 default: echo '<span class="badge bg-light text-dark">Không xác định</span>';
                             }
                         echo '</td>';

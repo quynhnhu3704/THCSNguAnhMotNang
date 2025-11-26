@@ -6,8 +6,8 @@ class modelThietBi{
     public function selectAllThietBi() {
         $p = new clsKetNoi();
         $truyvan = "SELECT *, tb.moTa FROM thietbi tb
-                    JOIN bomon bm ON tb.maBoMon=bm.maBoMon
-                    JOIN nhacungcap ncc ON ncc.maNhaCungCap=tb.maNhaCungCap";
+                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
+                    JOIN nhacungcap ncc ON ncc.maNhaCungCap = tb.maNhaCungCap";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -17,9 +17,9 @@ class modelThietBi{
     public function select01ThietBi($maThietBi) {
         $p = new clsKetNoi();
         $truyvan = "SELECT *, tb.moTa FROM thietbi tb
-                    JOIN bomon bm ON tb.maBoMon=bm.maBoMon
-                    JOIN nhacungcap ncc ON tb.maNhaCungCap=ncc.maNhaCungCap
-                    WHERE maThietBi=$maThietBi";
+                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
+                    JOIN nhacungcap ncc ON tb.maNhaCungCap = ncc.maNhaCungCap
+                    WHERE maThietBi = $maThietBi";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -29,8 +29,8 @@ class modelThietBi{
     public function searchThietBi($keyword) {
         $p = new clsKetNoi();
         $truyvan = "SELECT * FROM thietbi tb
-                    JOIN bomon bm ON tb.maBoMon=bm.maBoMon
-                    JOIN nhacungcap ncc ON tb.maNhaCungCap=ncc.maNhaCungCap
+                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
+                    JOIN nhacungcap ncc ON tb.maNhaCungCap = ncc.maNhaCungCap
                     WHERE tenThietBi LIKE N'%$keyword%'";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
@@ -41,8 +41,8 @@ class modelThietBi{
     public function selectAllThietBiTheoBoMon($maBoMon) {
         $p = new clsKetNoi();
         $truyvan = "SELECT * FROM thietbi tb
-                    JOIN bomon bm ON tb.maBoMon=bm.maBoMon
-                    WHERE tb.maBoMon=$maBoMon";
+                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
+                    WHERE tb.maBoMon = $maBoMon";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -51,7 +51,7 @@ class modelThietBi{
 
     public function checkName($tenThietBi) {
         $p = new clsKetNoi();
-        $truyvan = "SELECT * FROM thietbi WHERE tenThietBi=N'$tenThietBi'";
+        $truyvan = "SELECT * FROM thietbi WHERE tenThietBi = N'$tenThietBi'";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -84,22 +84,22 @@ class modelThietBi{
         $con = $p->moketnoi();
 
         // 1. Lấy số lượng hiện tại trong bảng thietbi
-        $truyvan = "SELECT soLuong FROM thietbi WHERE maThietBi=$maThietBi";
+        $truyvan = "SELECT soLuong FROM thietbi WHERE maThietBi = $maThietBi";
         $kq = mysqli_query($con, $truyvan);
         $r = mysqli_fetch_assoc($kq);
         $soLuongCu = (int) $r['soLuong'];
 
         // 2. Cập nhật bảng thietbi
         $truyvan = "UPDATE thietbi SET
-                    tenThietBi=N'$tenThietBi',
-                    hinhAnh=N'$hinh',
-                    donVi=N'$donVi',
-                    soLuong=$soLuongMoi,
-                    lop=N'$lop',
-                    maBoMon=$maBoMon,
-                    maNhaCungCap=$maNhaCungCap,
-                    moTa=N'$moTa'
-                    WHERE maThietBi=$maThietBi";
+                    tenThietBi = N'$tenThietBi',
+                    hinhAnh = N'$hinh',
+                    donVi = N'$donVi',
+                    soLuong = $soLuongMoi,
+                    lop = N'$lop',
+                    maBoMon = $maBoMon,
+                    maNhaCungCap = $maNhaCungCap,
+                    moTa = N'$moTa'
+                    WHERE maThietBi = $maThietBi";
 
         $kq = mysqli_query($con, $truyvan);
 
@@ -108,14 +108,14 @@ class modelThietBi{
             // Thêm bản ghi mới
             $them = $soLuongMoi - $soLuongCu;
             for($i=0; $i<$them; $i++) {
-                mysqli_query($con, "INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu) VALUES ($maThietBi, 'Khả dụng', NULL)");
+                mysqli_query($con, "INSERT INTO chitietthietbi (maThietBi, tinhTrang, ghiChu) VALUES ($maThietBi, N'Khả dụng', NULL)");
             }
         } else if($soLuongMoi < $soLuongCu) {
             // Xóa bản "Khả dụng" dư thừa
             $xoa = $soLuongCu - $soLuongMoi;
 
             // --- Check số lượng khả dụng ---
-            $truyvan = "SELECT COUNT(*) AS soLuongKhaDung FROM chitietthietbi WHERE maThietBi=$maThietBi AND tinhTrang='Khả dụng'";
+            $truyvan = "SELECT COUNT(*) AS soLuongKhaDung FROM chitietthietbi WHERE maThietBi = $maThietBi AND tinhTrang = N'Khả dụng'";
             $kq = mysqli_query($con, $truyvan);
             $soLuongKhaDung = (int) mysqli_fetch_assoc($kq)['soLuongKhaDung'];
 
@@ -129,7 +129,7 @@ class modelThietBi{
                             SELECT maChiTietTB FROM (
                                 SELECT maChiTietTB 
                                 FROM chitietthietbi 
-                                WHERE maThietBi=$maThietBi AND tinhTrang='Khả dụng'
+                                WHERE maThietBi = $maThietBi AND tinhTrang = N'Khả dụng'
                                 LIMIT $xoa
                             ) AS tmp
                         )";
@@ -142,7 +142,7 @@ class modelThietBi{
 
     public function deleteThietBi($maThietBi) {
         $p = new clsKetNoi();
-        $truyvan = "DELETE FROM thietbi WHERE maThietBi=$maThietBi";
+        $truyvan = "DELETE FROM thietbi WHERE maThietBi = $maThietBi";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -152,9 +152,9 @@ class modelThietBi{
     public function selectAllChiTietTB() {
         $p = new clsKetNoi();
         $truyvan = "SELECT * FROM chitietthietbi ct
-                    JOIN thietbi tb ON ct.maThietBi=tb.maThietBi
-                    JOIN bomon bm ON tb.maBoMon=bm.maBoMon
-                    JOIN nhacungcap ncc ON ncc.maNhaCungCap=tb.maNhaCungCap";
+                    JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
+                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
+                    JOIN nhacungcap ncc ON ncc.maNhaCungCap = tb.maNhaCungCap";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -164,9 +164,9 @@ class modelThietBi{
     public function select01ChiTietTB($maChiTietTB) {
         $p = new clsKetNoi();
         $truyvan = "SELECT * FROM chitietthietbi ct
-                    JOIN thietbi tb ON ct.maThietBi=tb.maThietBi
-                    JOIN bomon bm ON tb.maBoMon=bm.maBoMon
-                    JOIN nhacungcap ncc ON tb.maNhaCungCap=ncc.maNhaCungCap
+                    JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
+                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
+                    JOIN nhacungcap ncc ON tb.maNhaCungCap = ncc.maNhaCungCap
                     WHERE maChiTietTB = $maChiTietTB";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
@@ -177,9 +177,9 @@ class modelThietBi{
     public function searchChiTietTB($keyword) {
         $p = new clsKetNoi();
         $truyvan = "SELECT * FROM chitietthietbi ct
-                    JOIN thietbi tb ON ct.maThietBi=tb.maThietBi
-                    JOIN bomon bm ON tb.maBoMon=bm.maBoMon
-                    JOIN nhacungcap ncc ON tb.maNhaCungCap=ncc.maNhaCungCap
+                    JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
+                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
+                    JOIN nhacungcap ncc ON tb.maNhaCungCap = ncc.maNhaCungCap
                     WHERE tenThietBi LIKE N'%$keyword%'";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
@@ -189,9 +189,9 @@ class modelThietBi{
 
     public function updateHong($maChiTietTB, $tinhTrang, $ghiChu) {
         $p = new clsKetNoi();
-        $truyvan = "UPDATE chitietthietbi SET tinhTrang=N'$tinhTrang', 
-                    ghiChu=N'$ghiChu' 
-                    WHERE maChiTietTB=$maChiTietTB";
+        $truyvan = "UPDATE chitietthietbi SET tinhTrang = N'$tinhTrang', 
+                    ghiChu = N'$ghiChu' 
+                    WHERE maChiTietTB = $maChiTietTB";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);

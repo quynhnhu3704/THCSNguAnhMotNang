@@ -14,7 +14,7 @@ class modelNhaCungCap{
 
     public function select01NhaCungCap($maNhaCungCap) {
         $p = new clsKetNoi();
-        $truyvan = "SELECT * FROM nhacungcap WHERE maNhaCungCap=$maNhaCungCap";
+        $truyvan = "SELECT * FROM nhacungcap WHERE maNhaCungCap = $maNhaCungCap";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -32,7 +32,7 @@ class modelNhaCungCap{
 
     public function checkName($tenNhaCungCap) {
         $p = new clsKetNoi();
-        $truyvan = "SELECT * FROM nhacungcap WHERE tenNhaCungCap=N'$tenNhaCungCap'";
+        $truyvan = "SELECT * FROM nhacungcap WHERE tenNhaCungCap = N'$tenNhaCungCap'";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -41,7 +41,8 @@ class modelNhaCungCap{
 
     public function insertNhaCungCap($tenNhaCungCap, $diaChi, $soDienThoai, $email) {
         $p = new clsKetNoi();
-        $truyvan = "insert into nhacungcap(tenNhaCungCap, diaChi, soDienThoai, email) values(N'$tenNhaCungCap', N'$diaChi', N'$soDienThoai', N'$email')";
+        $truyvan = "INSERT INTO nhacungcap (tenNhaCungCap, diaChi, soDienThoai, email) 
+                    VALUES (N'$tenNhaCungCap', N'$diaChi', N'$soDienThoai', N'$email')";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -50,7 +51,12 @@ class modelNhaCungCap{
 
     public function updateNhaCungCap($maNhaCungCap, $tenNhaCungCap, $diaChi, $soDienThoai, $email) {
         $p = new clsKetNoi();
-        $truyvan = "update nhacungcap set tenNhaCungCap=N'$tenNhaCungCap', diaChi=N'$diaChi', soDienThoai=N'$soDienThoai', email=N'$email' where maNhaCungCap=$maNhaCungCap";
+        $truyvan = "UPDATE nhacungcap SET 
+                    tenNhaCungCap = N'$tenNhaCungCap', 
+                    diaChi = N'$diaChi', 
+                    soDienThoai = N'$soDienThoai', 
+                    email = N'$email' 
+                    WHERE maNhaCungCap = $maNhaCungCap";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -59,7 +65,7 @@ class modelNhaCungCap{
 
     public function deleteNhaCungCap($maNhaCungCap) {
         $p = new clsKetNoi();
-        $truyvan = "delete from nhacungcap where maNhaCungCap=$maNhaCungCap";
+        $truyvan = "DELETE FROM nhacungcap WHERE maNhaCungCap = $maNhaCungCap";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
