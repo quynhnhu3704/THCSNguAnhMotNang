@@ -5,7 +5,8 @@ include_once('mketnoi.php');
 class modelPhieuMuon{
     public function selectAllPhieuMuon() {
         $p = new clsKetNoi();
-        $truyvan = "select * from phieumuon";
+        $truyvan = "SELECT * from phieumuon pm
+                    ";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);

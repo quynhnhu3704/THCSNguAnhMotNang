@@ -5,7 +5,7 @@ include_once('mketnoi.php');
 class modelNguoiDung {
     public function mLogin($tenDangNhap, $matKhau) {
         $p = new clsKetNoi();
-        $truyvan = "select * from nguoidung where tenDangNhap = '$tenDangNhap' and matKhau = '$matKhau'";
+        $truyvan = "SELECT * FROM nguoidung WHERE tenDangNhap=N'$tenDangNhap' AND matKhau=N'$matKhau'";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -14,7 +14,7 @@ class modelNguoiDung {
 
     public function mCheckTenDangNhap($tenDangNhap) {
         $p = new clsKetNoi();
-        $truyvan = "select * from nguoidung where tenDangNhap = '$tenDangNhap'";
+        $truyvan = "SELECT * FROM nguoidung WHERE tenDangNhap=N'$tenDangNhap'";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -23,10 +23,10 @@ class modelNguoiDung {
 
     public function selectAllNguoiDung() {
         $p = new clsKetNoi();
-        $truyvan = "select * from nguoidung nd
-                    left join bomon bm on bm.maBoMon=nd.maBoMon
-                    left join vaitro vt on vt.maVaiTro=nd.maVaiTro
-                    order by tenDangNhap";
+        $truyvan = "SELECT * FROM nguoidung nd
+                    LEFT JOIN bomon bm ON bm.maBoMon=nd.maBoMon
+                    LEFT JOIN vaitro vt ON vt.maVaiTro=nd.maVaiTro
+                    ORDER BY tenDangNhap";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -35,10 +35,10 @@ class modelNguoiDung {
 
     public function searchNguoiDung($keyword) {
         $p = new clsKetNoi();
-        $truyvan = "select * from nguoidung nd
-                    left join bomon bm on bm.maBoMon=nd.maBoMon
-                    left join vaitro vt on vt.maVaiTro=nd.maVaiTro
-                    where hoTen like N'%$keyword%'";
+        $truyvan = "SELECT * FROM nguoidung nd
+                    LEFT JOIN bomon bm ON bm.maBoMon=nd.maBoMon
+                    LEFT JOIN vaitro vt ON vt.maVaiTro=nd.maVaiTro
+                    WHERE hoTen LIKE N'%$keyword%'";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -47,10 +47,10 @@ class modelNguoiDung {
 
     public function select01NguoiDung($maNguoiDung) {
         $p = new clsKetNoi();
-        $truyvan = "select * from nguoidung nd
-                    left join bomon bm on bm.maBoMon=nd.maBoMon
-                    left join vaitro vt on vt.maVaiTro=nd.maVaiTro
-                    where maNguoiDung=$maNguoiDung";
+        $truyvan = "SELECT * FROM nguoidung nd
+                    LEFT JOIN bomon bm ON bm.maBoMon=nd.maBoMon
+                    LEFT JOIN vaitro vt ON vt.maVaiTro=nd.maVaiTro
+                    WHERE maNguoiDung=$maNguoiDung";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -59,7 +59,7 @@ class modelNguoiDung {
 
     public function checkName($tenDangNhap) {
         $p = new clsKetNoi();
-        $truyvan = "select * from nguoidung where tenDangNhap=N'$tenDangNhap'";
+        $truyvan = "SELECT * FROM nguoidung WHERE tenDangNhap=N'$tenDangNhap'";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -68,8 +68,8 @@ class modelNguoiDung {
 
     public function insertNguoiDung($tenDangNhap, $hoTen, $matKhauTamThoi, $soDienThoai, $email, $maVaiTro, $maBoMon)  {
         $p = new clsKetNoi();
-        $truyvan = "insert into nguoidung(tenDangNhap, hoTen, matKhau, soDienThoai, email, maVaiTro, maBoMon)
-                    values(N'$tenDangNhap', N'$hoTen', N'$matKhauTamThoi', N'$soDienThoai', N'$email', $maVaiTro, $maBoMon)";
+        $truyvan = "INSERT INTO nguoidung (tenDangNhap, hoTen, matKhau, soDienThoai, email, maVaiTro, maBoMon)
+                    VALUES (N'$tenDangNhap', N'$hoTen', N'$matKhauTamThoi', N'$soDienThoai', N'$email', $maVaiTro, $maBoMon)";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -83,22 +83,22 @@ class modelNguoiDung {
         $maBoMon = empty($maBoMon) ? "NULL" : $maBoMon;
 
         if($matKhauMoi == "") {
-            $truyvan = "update nguoidung set tenDangNhap=N'$tenDangNhap',
+            $truyvan = "UPDATE nguoidung SET tenDangNhap=N'$tenDangNhap',
                         hoTen=N'$hoTen',
                         soDienThoai=N'$soDienThoai',
                         email=N'$email',
                         maVaiTro=$maVaiTro,
                         maBoMon=$maBoMon
-                        where maNguoiDung=$maNguoiDung";
+                        WHERE maNguoiDung=$maNguoiDung";
         } else {
-            $truyvan = "update nguoidung set tenDangNhap=N'$tenDangNhap',
+            $truyvan = "UPDATE nguoidung SET tenDangNhap=N'$tenDangNhap',
                         hoTen=N'$hoTen',
                         matKhau=N'$matKhauMoi',
                         soDienThoai=N'$soDienThoai',
                         email=N'$email',
                         maVaiTro=$maVaiTro,
                         maBoMon=$maBoMon
-                        where maNguoiDung=$maNguoiDung";
+                        WHERE maNguoiDung=$maNguoiDung";
         }
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
@@ -108,7 +108,7 @@ class modelNguoiDung {
 
     public function deleteNguoiDung($maNguoiDung) {
         $p = new clsKetNoi();
-        $truyvan = "delete from nguoidung where maNguoiDung=$maNguoiDung";
+        $truyvan = "DELETE FROM nguoidung WHERE maNguoiDung=$maNguoiDung";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -117,12 +117,12 @@ class modelNguoiDung {
 
     public function updateThongTinCaNhan($maNguoiDung, $tenDangNhap, $hoTen, $soDienThoai, $email) {
         $p = new clsKetNoi();
-        $truyvan = "update nguoidung set
-                    tenDangNhap = N'$tenDangNhap',
-                    hoTen = N'$hoTen',
-                    soDienThoai = N'$soDienThoai',
-                    email = N'$email'
-                    where maNguoiDung = $maNguoiDung";
+        $truyvan = "UPDATE nguoidung SET
+                    tenDangNhap=N'$tenDangNhap',
+                    hoTen=N'$hoTen',
+                    soDienThoai=N'$soDienThoai',
+                    email=N'$email'
+                    WHERE maNguoiDung=$maNguoiDung";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -131,7 +131,7 @@ class modelNguoiDung {
 
     public function updateMatKhau($maNguoiDung, $matKhauMoi) {
         $p = new clsKetNoi();
-        $truyvan = "update nguoidung set matKhau = N'$matKhauMoi' where maNguoiDung = $maNguoiDung";
+        $truyvan = "UPDATE nguoidung SET matKhau=N'$matKhauMoi' WHERE maNguoiDung=$maNguoiDung";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -144,10 +144,10 @@ class modelNguoiDung {
         // Nếu maBoMon là NULL
         $maBoMon = empty($maBoMon) ? "NULL" : $maBoMon;
         
-        $truyvan = "update nguoidung set
-                    maVaiTro = $maVaiTro,
-                    maBoMon = $maBoMon
-                    where maNguoiDung = $maNguoiDung";
+        $truyvan = "UPDATE nguoidung SET
+                    maVaiTro=$maVaiTro,
+                    maBoMon=$maBoMon
+                    WHERE maNguoiDung=$maNguoiDung";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);

@@ -5,7 +5,7 @@ include_once('mketnoi.php');
 class modelNhaCungCap{
     public function selectAllNhaCungCap() {
         $p = new clsKetNoi();
-        $truyvan = "select * from nhacungcap";
+        $truyvan = "SELECT * FROM nhacungcap";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -14,7 +14,7 @@ class modelNhaCungCap{
 
     public function select01NhaCungCap($maNhaCungCap) {
         $p = new clsKetNoi();
-        $truyvan = "select * from nhacungcap where maNhaCungCap=$maNhaCungCap";
+        $truyvan = "SELECT * FROM nhacungcap WHERE maNhaCungCap=$maNhaCungCap";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -23,7 +23,7 @@ class modelNhaCungCap{
 
     public function searchNhaCungCap($keyword) {
         $p = new clsKetNoi();
-        $truyvan = "select * from nhacungcap where tenNhaCungCap like N'%$keyword%'";
+        $truyvan = "SELECT * FROM nhacungcap WHERE tenNhaCungCap LIKE N'%$keyword%'";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -32,7 +32,7 @@ class modelNhaCungCap{
 
     public function checkName($tenNhaCungCap) {
         $p = new clsKetNoi();
-        $truyvan = "select * from nhacungcap where tenNhaCungCap=N'$tenNhaCungCap'";
+        $truyvan = "SELECT * FROM nhacungcap WHERE tenNhaCungCap=N'$tenNhaCungCap'";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);

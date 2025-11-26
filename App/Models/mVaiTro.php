@@ -5,7 +5,7 @@ include_once('mketnoi.php');
 class modelVaiTro{
     public function selectAllVaiTro() {
         $p = new clsKetNoi();
-        $truyvan = "select * from vaitro";
+        $truyvan = "SELECT * FROM vaitro";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);

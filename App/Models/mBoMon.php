@@ -5,7 +5,7 @@ include_once('mketnoi.php');
 class modelBoMon{
     public function selectAllBoMon() {
         $p = new clsKetNoi();
-        $truyvan = "select * from bomon";
+        $truyvan = "SELECT * FROM bomon";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -14,7 +14,7 @@ class modelBoMon{
 
     public function select01BoMon($maBoMon) {
         $p = new clsKetNoi();
-        $truyvan = "select * from bomon where maBoMon=$maBoMon";
+        $truyvan = "SELECT * FROM bomon WHERE maBoMon=$maBoMon";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -23,7 +23,7 @@ class modelBoMon{
 
     public function searchBoMon($keyword) {
         $p = new clsKetNoi();
-        $truyvan = "select * from bomon where tenBoMon like N'%$keyword%'";
+        $truyvan = "SELECT * FROM bomon WHERE tenBoMon like N'%$keyword%'";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -32,7 +32,7 @@ class modelBoMon{
 
     public function checkName($tenBoMon) {
         $p = new clsKetNoi();
-        $truyvan = "select * from bomon where tenBoMon=N'$tenBoMon'";
+        $truyvan = "SELECT * FROM bomon WHERE tenBoMon=N'$tenBoMon'";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -41,7 +41,7 @@ class modelBoMon{
 
     public function insertBoMon($tenBoMon, $moTa) {
         $p = new clsKetNoi();
-        $truyvan = "insert into bomon(tenBoMon, moTa) values(N'$tenBoMon', N'$moTa')";
+        $truyvan = "INSERT INTO bomon(tenBoMon, moTa) VALUES(N'$tenBoMon', N'$moTa')";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -50,7 +50,7 @@ class modelBoMon{
 
     public function updateBoMon($maBoMon, $tenBoMon, $moTa) {
         $p = new clsKetNoi();
-        $truyvan = "update bomon set tenBoMon=N'$tenBoMon', moTa=N'$moTa' where maBoMon=$maBoMon";
+        $truyvan = "UPDATE bomon SET tenBoMon=N'$tenBoMon', moTa=N'$moTa' WHERE maBoMon=$maBoMon";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -59,7 +59,7 @@ class modelBoMon{
 
     public function deleteBoMon($maBoMon) {
         $p = new clsKetNoi();
-        $truyvan = "delete from bomon where maBoMon=$maBoMon";
+        $truyvan = "DELETE FROM bomon WHERE maBoMon=$maBoMon";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);

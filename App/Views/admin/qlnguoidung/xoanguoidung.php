@@ -1,7 +1,7 @@
 <!-- App/Views/admin/qlnguoidung/xoanguoidung.php -->
 <?php
 if(!isset($_SESSION['login'])) {
-    echo "<script>alert('Bạn chưa đăng nhập!'); window.location.href='index.php?page=dangnhap'</script>";
+    echo "<script>alert('Vui lòng đăng nhập để tiếp tục.'); window.location.href='index.php?page=dangnhap'</script>";
     exit();
 }
 
