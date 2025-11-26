@@ -1,3 +1,4 @@
+<!-- App/Controllers/cNhaCungCap.php -->
 <?php
 include_once('App/Models/mNhaCungCap.php');
 

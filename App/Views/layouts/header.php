@@ -1,3 +1,4 @@
+<!-- App/Views/layouts/header.php -->
 <header class="hero py-5 py-lg-6" style="height:40vh;">
     <div class="container position-relative" style="z-index:2">
         <div class="row align-items-center">

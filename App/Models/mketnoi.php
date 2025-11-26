@@ -1,3 +1,4 @@
+<!-- App/Models/mketnoi.php -->
 <?php
 class clsKetNoi {
     public function moketnoi() {

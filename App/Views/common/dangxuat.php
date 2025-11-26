@@ -1,3 +1,4 @@
+<!-- App/Views/common/dangxuat.php -->
 <?php
 if(!isset($_SESSION['login'])) {
     echo "<script>alert('Vui lòng đăng nhập để tiếp tục.'); window.location.href='index.php?page=dangnhap'</script>";

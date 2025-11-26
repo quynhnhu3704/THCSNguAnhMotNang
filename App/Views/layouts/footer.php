@@ -1,3 +1,4 @@
+<!-- App/Views/layouts/footer.php -->
 <footer class="pt-5" style="background:linear-gradient(180deg,var(--na-primary), var(--na-primary-2)); color:#fff;">
     <div class="container pb-4">
         <div class="row g-4">

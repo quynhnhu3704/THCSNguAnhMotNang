@@ -1,3 +1,4 @@
+<!-- App/Controllers/cNguoiDung.php -->
 <?php
 include_once('App/Models/mNguoiDung.php');
 

@@ -1,3 +1,4 @@
+<!-- App/Models/mNguoiDung.php -->
 <?php
 include_once('mketnoi.php');
 

@@ -1,3 +1,4 @@
+<!-- App/Controllers/cThietBi.php -->
 <?php
 include_once('App/Models/mThietBi.php');
 

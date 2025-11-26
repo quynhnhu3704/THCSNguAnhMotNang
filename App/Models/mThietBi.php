@@ -1,3 +1,4 @@
+<!-- App/Models/mThietBi.php -->
 <?php
 include_once('mketnoi.php');
 

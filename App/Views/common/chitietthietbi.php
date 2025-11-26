@@ -1,3 +1,4 @@
+<!-- App/Views/common/chitietthietbi.php -->
 <?php
 include_once('App/Controllers/cThietBi.php');
 $p = new controlThietBi();

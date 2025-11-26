@@ -1,3 +1,4 @@
+<!-- App/Views/admin/qlnguoidung/suanguoidung.php -->
 <?php
 if(!isset($_SESSION['login'])) {
     echo "<script>alert('Bạn chưa đăng nhập!'); window.location.href='index.php?page=dangnhap'</script>";
