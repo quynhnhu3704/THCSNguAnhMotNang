@@ -40,7 +40,7 @@ session_start();
                     </li>
 
                     <li class="nav-item"><a class="nav-link" href="index.php">Trang chủ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.php?page=phieumuon">Phiếu mượn</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.php?page=dangkymuon">Phiếu mượn</a></li>
 
                     <?php
                     if(isset($_SESSION['login'])) {
@@ -82,7 +82,7 @@ session_start();
             } else {
                 echo '<li><a href="index.php?page=dsthietbi" class="text-decoration-none d-block text-dark py-2">Quản lý thiết bị</a></li>';
                 echo '<li><a href="index.php?page=dsbomon" class="text-decoration-none d-block text-dark py-2">Quản lý bộ môn</a></li>';
-                echo '<li><a href="#" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>';
+                echo '<li><a href="index.php?page=dsphieumuon" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>';
                 echo '<li><a href="index.php?page=dsnhacungcap" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>';
                 echo '<li><a href="index.php?page=dsnguoidung" class="text-decoration-none d-block text-dark py-2">Quản lý người dùng</a></li>';
                 echo '<li><a href="index.php?page=dsquyen" class="text-decoration-none d-block text-dark py-2">Phân quyền</a></li>';
@@ -137,7 +137,9 @@ session_start();
                 // Chức năng cho Hiệu trưởng
                 // Chức năng cho Tổ trưởng chuyên môn
                 // Chức năng cho Giáo viên bộ môn
-
+                case 'dangkymuon':
+                    include_once('App/Views/giaovien/dangkymuon/dangkymuon.php');
+                    break;
 
                 // Chức năng cho Nhân viên quản lý thiết bị
                 // Quản lý thiết bị (CRUD)

@@ -1,5 +1,5 @@
 <!-- App/Views/common/thietbi.php -->
-<section id="rooms" class="py-5">
+<section id="thietbi" class="py-5">
     <div class="container-fluid px-4">
         <div class="row">
             <!-- Sidebar bộ môn -->

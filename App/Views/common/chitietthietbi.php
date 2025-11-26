@@ -57,11 +57,41 @@ if ($kq && $kq->num_rows > 0) {
                         <strong>Mô tả:</strong> <?php echo nl2br($r['moTa']); ?>
                     </div>
                 </div>
-
-                <a href="index.php?page=dangkymuon?maThietBi=<?php echo $r['maThietBi']; ?>" class="btn btn-primary btn-lg mt-auto align-self-start fw-semibold">
-                    <i class="bi bi-cart-plus me-2 fw-semibold"></i>Thêm vào phiếu mượn
-                </a>
+                
+                <form action="#" method="post">
+                    <button type="submit" name="btnmuon" class="btn btn-primary btn-lg mt-auto align-self-start fw-semibold">
+                        <i class="bi bi-cart-plus me-2 fw-semibold"></i>Thêm vào phiếu mượn
+                    </button>
+                </form>
             </div>
         </div>        
     </div>
 </div>
+
+<?php
+// Xử lý thêm thiết bị vào session khi nhấn nút
+if(isset($_POST['btnmuon'])) {
+    $maThietBi = $r['maThietBi'];
+    $soLuongMuon = 1; // mặc định thêm vào phiếu mượn 1 thiết bị
+
+    if(!isset($_SESSION['gioHangMuon'])) {
+        $_SESSION['gioHangMuon'] = [];
+    }
+
+    // Nếu đã có thiết bị trong giỏ, cộng số lượng
+    if(isset($_SESSION['gioHangMuon'][$maThietBi])) {
+        $_SESSION['gioHangMuon'][$maThietBi] += $soLuongMuon;
+    } else {
+        $_SESSION['gioHangMuon'][$maThietBi] = $soLuongMuon;
+    }
+
+    // Giới hạn số lượng tối đa 3 loại thiết bị
+    if(count($_SESSION['gioHangMuon']) > 3) {
+        unset($_SESSION['gioHangMuon'][$maThietBi]); // remove item vừa thêm
+        echo "<script>alert('Chỉ được mượn tối đa 3 thiết bị!'); window.history.back();</script>";
+        exit();
+    }
+
+    echo "<script>alert('Đã thêm thiết bị vào phiếu mượn'); window.history.back();</script>";
+}
+?>
