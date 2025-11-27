@@ -32,7 +32,7 @@ if(!isset($_SESSION['login'])) {
             <thead class="text-center">
                 <tr>
                     <th>STT</th>
-                    <th>Tên người dùng</th>
+                    <th>Họ tên</th>
                     <th>Vai trò</th>
                     <th>Bộ môn</th>
                     <th>Số lượng</th>

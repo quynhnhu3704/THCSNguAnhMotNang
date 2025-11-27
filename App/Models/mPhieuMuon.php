@@ -68,13 +68,13 @@ class modelPhieuMuon{
         return $kq;
     }
 
-    public function insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, $ghiChu) {
+    public function insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, $trangThai, $ghiChu) {
         $p = new clsKetNoi();
         $con = $p->moketnoi();
-        $truyvan = "INSERT INTO phieumuon (maNguoiDung, ngayMuon, ngayTra, ghiChu) 
-                    VALUES ($maNguoiDung, '$ngayMuon', '$ngayTra', N'$ghiChu')";
+        $truyvan = "INSERT INTO phieumuon (maNguoiDung, ngayMuon, ngayTra, trangThai, ghiChu) 
+                    VALUES ($maNguoiDung, '$ngayMuon', '$ngayTra', N'$trangThai', N'$ghiChu')";
         if(mysqli_query($con, $truyvan)) {
-            $id = mysqli_insert_id($con); // lấy mã phiếu mượn vừa thêm
+            $id = mysqli_insert_id($con); // lấy mã phiếu mượn vừa thêm để dùng chèn chi tiết phiếu mượn
             $p->dongketnoi($con);
             return $id;
         } else {

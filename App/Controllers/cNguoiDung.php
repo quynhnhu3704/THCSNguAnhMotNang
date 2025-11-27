@@ -108,5 +108,11 @@ class controlNguoiDung {
         $kq = $p->updateQuyen($maNguoiDung, $maVaiTro, $maBoMon);
         return $kq;
     }
+
+    public function getNguoiDungTheoVaiTro($maVaiTroArray) {
+        $p = new modelNguoiDung();
+        $kq = $p->selectNguoiDungTheoVaiTro($maVaiTroArray);
+        return $kq;
+    }
 }
 ?>

@@ -153,5 +153,19 @@ class modelNguoiDung {
         $p->dongketnoi($con);
         return $kq;
     }
+
+    public function selectNguoiDungTheoVaiTro($dsMaVaiTro) {
+        $p = new clsKetNoi();
+        $chuoiVaiTro = implode(',', $dsMaVaiTro);
+        $truyvan = "SELECT * FROM nguoidung nd
+                    LEFT JOIN bomon bm ON bm.maBoMon = nd.maBoMon
+                    LEFT JOIN vaitro vt ON vt.maVaiTro = nd.maVaiTro
+                    WHERE nd.maVaiTro IN ($chuoiVaiTro)
+                    ORDER BY nd.hoTen";
+        $con = $p->moketnoi();
+        $kq = mysqli_query($con, $truyvan);
+        $p->dongketnoi($con);
+        return $kq;
+    }
 }
 ?>

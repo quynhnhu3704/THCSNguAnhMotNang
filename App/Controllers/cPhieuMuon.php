@@ -38,9 +38,9 @@ class controlPhieuMuon {
         return false;
     }
 
-    public function insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, $ghiChu) {
+    public function insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, $trangThai, $ghiChu) {
         $p = new modelPhieuMuon();
-        return $p->insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, $ghiChu);
+        return $p->insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, $trangThai, $ghiChu);
     }
 
     public function insertChiTietPM($maPhieuMuon, $chiTiet) {

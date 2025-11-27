@@ -43,11 +43,11 @@ $gioHang = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                     <div class="col-6">
                         <div class="mb-3">
                             <label class="form-label fw-medium">Ngày mượn</label>
-                            <input type="date" name="ngayMuon" class="form-control" required>
+                            <input type="date" name="ngayMuon" class="form-control" min="<?= date('Y-m-d') ?>" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-medium">Ngày trả</label>
-                            <input type="date" name="ngayTra" class="form-control" required>
+                            <input type="date" name="ngayTra" class="form-control" min="<?= date('Y-m-d') ?>" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-medium">Ghi chú</label>
@@ -58,7 +58,7 @@ $gioHang = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                 <h5 class="my-2 fw-semibold text-secondary text-center">Danh sách thiết bị</h5>
                 <div class="d-flex justify-content-center mb-3">
                     <div class="table-responsive text-center" style="width: 100%;">
-                        <table class="table table-striped table-hover table-borderless align-middle" style="font-size: 0.85em;">
+                        <table class="table table-striped table-borderless align-middle" style="font-size: 0.85em;">
                             <thead>
                                 <tr>
                                     <th>STT</th>
@@ -79,7 +79,7 @@ $gioHang = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                                         $r = $p->get01ThietBi($maThietBi)->fetch_assoc();
                                 ?>
                                 <tr>
-                                    <td><?= $dem++ ?></td>
+                                    <td><strong><?= $dem++ ?></strong></td>
                                     <td><?= $r['tenThietBi'] ?></td>
                                     <td><?= $r['tenBoMon'] ?></td>
                                     <td>
@@ -125,11 +125,7 @@ if(isset($_POST['btnXacNhan'])) {
     $ngayTra = $_POST['ngayTra'];
     $ghiChu = trim($_POST['ghiChu']);
 
-    $today = date('Y-m-d');
-    if($ngayMuon < $today) {
-        echo "<script>alert('Ngày mượn không được trước ngày hiện tại'); window.history.back();</script>";
-        exit();
-    }
+    // Ngày trả phải sau ngày mượn
     if($ngayTra < $ngayMuon) {
         echo "<script>alert('Ngày trả phải sau ngày mượn'); window.history.back();</script>";
         exit();
@@ -148,16 +144,16 @@ if(isset($_POST['btnXacNhan'])) {
         exit();
     }
 
-    $maPhieuMuon = $p->insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, $ghiChu);
+    $maPhieuMuon = $p->insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, "Chờ xử lý", $ghiChu);
 
     if($maPhieuMuon) {
         // truyền toàn bộ giỏ mượn làm mảng
         if($p->insertChiTietPM($maPhieuMuon, $_SESSION['cart'])) {
             unset($_SESSION['cart']); // xóa giỏ mượn sau khi đăng ký thành công
-            echo "<script>alert('Đăng ký mượn thành công!'); window.location.href='index.php?page=dsphieumuon';</script>";
+            echo "<script>alert('Đăng ký mượn thành công!'); window.location.href='index.php';</script>";
         } else {
             $p->deletePhieuMuon($maPhieuMuon); // rollback phiếu mượn
-            echo "<script>alert('Không đủ thiết bị khả dụng'); window.history.back();</script>";
+            echo "<script>alert('Không đủ thiết bị khả dụng.'); window.history.back();</script>";
         }
     } else {
         echo "<script>alert('Đăng ký mượn thất bại!'); window.history.back();</script>";
