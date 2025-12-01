@@ -2,7 +2,7 @@
 <?php
 include_once('mketnoi.php');
 
-class modelThietBi{
+class modelThietBi {
     public function selectAllThietBi() {
         $p = new clsKetNoi();
         $truyvan = "SELECT *, tb.moTa FROM thietbi tb
@@ -174,6 +174,19 @@ class modelThietBi{
         return $kq;
     }
 
+    public function selectAllChiTietTBTheoTinhTrang($tinhTrang) {
+        $p = new clsKetNoi();
+        $truyvan = "SELECT * FROM chitietthietbi ct
+                    JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
+                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
+                    JOIN nhacungcap ncc ON tb.maNhaCungCap = ncc.maNhaCungCap
+                    WHERE ct.tinhTrang = N'$tinhTrang'";
+        $con = $p->moketnoi();
+        $kq = mysqli_query($con, $truyvan);
+        $p->dongketnoi($con);
+        return $kq;
+    }
+
     public function searchChiTietTB($keyword) {
         $p = new clsKetNoi();
         $truyvan = "SELECT * FROM chitietthietbi ct
@@ -187,13 +200,36 @@ class modelThietBi{
         return $kq;
     }
 
-    public function updateHong($maChiTietTB, $tinhTrang, $ghiChu) {
+    public function searchChiTietTBTheoTinhTrang($keyword, $tinhTrang) {
         $p = new clsKetNoi();
-        $truyvan = "UPDATE chitietthietbi SET tinhTrang = N'$tinhTrang', 
-                    ghiChu = N'$ghiChu' 
-                    WHERE maChiTietTB = $maChiTietTB";
+        $truyvan = "SELECT * FROM chitietthietbi ct
+                    JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
+                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
+                    JOIN nhacungcap ncc ON tb.maNhaCungCap = ncc.maNhaCungCap
+                    WHERE tenThietBi LIKE N'%$keyword%' AND ct.tinhTrang = N'$tinhTrang'";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
+        $p->dongketnoi($con);
+        return $kq;
+    }
+
+    public function updateHong($maChiTietTB, $tinhTrang, $ghiChu) {
+        $p = new clsKetNoi();
+        $con = $p->moketnoi();
+
+        // 1. Cập nhật bảng chitietthietbi
+        $truyvan = "UPDATE chitietthietbi SET 
+                    tinhTrang = N'$tinhTrang', 
+                    ghiChu = N'$ghiChu' 
+                    WHERE maChiTietTB = $maChiTietTB";
+        $kq = mysqli_query($con, $truyvan);
+
+        // 2. Nếu cập nhật thành công và tình trạng là 'Báo hỏng', insert vào yeucauscbtbh
+        if($kq && $tinhTrang === 'Báo hỏng') {
+            $truyvan = "INSERT INTO yeucauscbtbh (maChiTietTB) VALUES ($maChiTietTB)";
+            $kq = mysqli_query($con, $truyvan);
+        }
+        
         $p->dongketnoi($con);
         return $kq;
     }

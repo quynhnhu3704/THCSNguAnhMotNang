@@ -2,7 +2,7 @@
 <?php
 include_once('mketnoi.php');
 
-class modelVaiTro{
+class modelVaiTro {
     public function selectAllVaiTro() {
         $p = new clsKetNoi();
         $truyvan = "SELECT * FROM vaitro";

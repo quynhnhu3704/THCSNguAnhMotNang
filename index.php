@@ -87,7 +87,10 @@ session_start();
                 echo '<li><a href="index.php?page=dsnguoidung" class="text-decoration-none d-block text-dark py-2">Quản lý người dùng</a></li>';
                 echo '<li><a href="index.php?page=dsquyen" class="text-decoration-none d-block text-dark py-2">Phân quyền</a></li>';
                 echo '<li><a href="index.php?page=dsbaohong" class="text-decoration-none d-block text-dark py-2">Báo hỏng thiết bị</a></li>';
-                echo '<li><a href="index.php?page=dsghinhan" class="text-decoration-none d-block text-dark py-2">Sữa chữa/bảo trì/bảo hành</a></li>';
+                echo '<li><a href="index.php?page=dsghinhan" class="text-decoration-none d-block text-dark py-2">Ghi nhận SC/BT/BH</a></li>';
+                echo '<li><a href="index.php?page=dsyeucau" class="text-decoration-none d-block text-dark py-2">Cập nhật tiến độ SC/BT/BH</a></li>';
+                echo '<li><a href="index.php?page=dskehoachmuasam" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch mua sắm</a></li>';
+                // echo '<li><a href="index.php?page=dskehoachthanhly" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch thanh lý</a></li>';
             }
             ?>
         </ul>
@@ -137,6 +140,14 @@ session_start();
                 
                 // Chức năng cho Hiệu trưởng
                 // Chức năng cho Tổ trưởng chuyên môn
+                // Lập kế hoạch mua sắm
+                case 'dskehoachmuasam':
+                    include_once('App/Views/totruong/kehoachmuasam/dskehoachmuasam.php');
+                    break;
+                case 'themkehoachmuasam':
+                    include_once('App/Views/totruong/kehoachmuasam/themkehoachmuasam.php');
+                    break;
+
                 // Chức năng cho Giáo viên bộ môn
                 case 'dangkymuon':
                     include_once('App/Views/giaovien/dangkymuon/dangkymuon.php');
@@ -206,12 +217,19 @@ session_start();
                 case 'dsghinhan':
                     include_once('App/Views/thietbi/ghinhanscbtbh/dsghinhan.php');
                     break;
-                case 'ghinhanthietbi':
-                    include_once('App/Views/thietbi/ghinhanscbtbh/ghinhanthietbi.php');
+                case 'ghinhanyeucau':
+                    include_once('App/Views/thietbi/ghinhanscbtbh/ghinhanyeucau.php');
                     break;
+                
 
                 // Chức năng cho Nhân viên kỹ thuật
-                
+                // Cập nhật tiến độ sửa chữa/bảo trì/bảo hành
+                case 'dsyeucau':
+                    include_once('App/Views/kythuat/tiendoscbtbh/dsyeucau.php');
+                    break;
+                case 'suatiendo':
+                    include_once('App/Views/kythuat/tiendoscbtbh/suatiendo.php');
+                    break;
 
                 // Chức năng cho Quản trị hệ thống
                 // Quản lý người dùng (CRUD)

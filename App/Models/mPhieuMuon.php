@@ -2,7 +2,7 @@
 <?php
 include_once('mketnoi.php');
 
-class modelPhieuMuon{
+class modelPhieuMuon {
     public function selectAllPhieuMuon() {
         $p = new clsKetNoi();
         $truyvan = "SELECT pm.*, nd.hoTen, nd.email, nd.soDienThoai, vt.tenVaiTro, bm.tenBoMon, COUNT(ct.maChiTietPM) AS soLuongMuon

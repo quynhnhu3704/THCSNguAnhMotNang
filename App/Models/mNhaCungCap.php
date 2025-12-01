@@ -2,7 +2,7 @@
 <?php
 include_once('mketnoi.php');
 
-class modelNhaCungCap{
+class modelNhaCungCap {
     public function selectAllNhaCungCap() {
         $p = new clsKetNoi();
         $truyvan = "SELECT * FROM nhacungcap";

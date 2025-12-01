@@ -16,7 +16,7 @@ if(!isset($_SESSION['login'])) {
 <div class="d-flex mx-auto justify-content-between align-items-center" style="width: 95%">
     <!-- Thanh tìm kiếm -->
     <form class="d-flex ms-auto" action="index.php" method="get">
-        <input type="hidden" name="page" value="dsghinhan"> <!-- Submit sẽ tạo URL: index.php?page=dsghinhan&keyword=xxxxx -->
+        <input type="hidden" name="page" value="dsyeucau"> <!-- Submit sẽ tạo URL: index.php?page=dsyeucau&keyword=xxxxx -->
 
         <input class="form-control me-2" type="text" name="keyword" placeholder="Tìm kiếm yêu cầu..." style="width: 220px;">
         <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
@@ -49,9 +49,9 @@ if(!isset($_SESSION['login'])) {
 
             if(isset($_GET['keyword'])) {
                 $keyword = $_GET['keyword'];
-                $kq = $p->searchYeuCauSCBTBH($keyword);
+                $kq = $p->searchYeuCauSCBTBHDaGui($keyword);
             } else {
-                $kq = $p->getAllYeuCauSCBTBH();
+                $kq = $p->getAllYeuCauSCCBTBHDaGui();
             }
 
             if ($kq && $kq->num_rows > 0) {
@@ -89,7 +89,7 @@ if(!isset($_SESSION['login'])) {
                         echo '<td>' . $r['ghiChu'] . '</td>';
 
                         echo '<td class="text-center">';
-                            echo '<a href="index.php?page=ghinhanyeucau&maYeuCau=' . $r['maYeuCau'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Ghi nhận</a>&nbsp;';
+                            echo '<a href="index.php?page=suatiendo&maYeuCau=' . $r['maYeuCau'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Cập nhật</a>&nbsp;';
                         echo '</td>';
                     echo '</tr>';
                 }

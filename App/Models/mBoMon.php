@@ -2,7 +2,7 @@
 <?php
 include_once('mketnoi.php');
 
-class modelBoMon{
+class modelBoMon {
     public function selectAllBoMon() {
         $p = new clsKetNoi();
         $truyvan = "SELECT * FROM bomon";
