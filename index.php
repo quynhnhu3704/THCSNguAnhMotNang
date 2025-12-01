@@ -87,6 +87,7 @@ session_start();
                 echo '<li><a href="index.php?page=dsnguoidung" class="text-decoration-none d-block text-dark py-2">Quản lý người dùng</a></li>';
                 echo '<li><a href="index.php?page=dsquyen" class="text-decoration-none d-block text-dark py-2">Phân quyền</a></li>';
                 echo '<li><a href="index.php?page=dsbaohong" class="text-decoration-none d-block text-dark py-2">Báo hỏng thiết bị</a></li>';
+                echo '<li><a href="index.php?page=dsghinhan" class="text-decoration-none d-block text-dark py-2">Sữa chữa/bảo trì/bảo hành</a></li>';
             }
             ?>
         </ul>
@@ -201,10 +202,16 @@ session_start();
                 case 'baohongthietbi':
                     include_once('App/Views/thietbi/baohong/baohongthietbi.php');
                     break;
-
+                // Ghi nhận sửa chữa/bảo trì/bảo hành
+                case 'dsghinhan':
+                    include_once('App/Views/thietbi/ghinhanscbtbh/dsghinhan.php');
+                    break;
+                case 'ghinhanthietbi':
+                    include_once('App/Views/thietbi/ghinhanscbtbh/ghinhanthietbi.php');
+                    break;
 
                 // Chức năng cho Nhân viên kỹ thuật
-
+                
 
                 // Chức năng cho Quản trị hệ thống
                 // Quản lý người dùng (CRUD)

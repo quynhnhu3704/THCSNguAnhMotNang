@@ -73,9 +73,9 @@ if(!isset($_SESSION['login'])) {
                         echo '<td class="text-center">';
                             switch ($r['trangThai']) {
                                 case "Chờ xử lý": echo '<span class="badge bg-success">' . $r['trangThai'] . '</span>'; break;
-                                case "Đang mượn": echo '<span class="badge bg-warning text-dark">' . $r['trangThai'] . '</span>'; break;
-                                case "Đã trả": echo '<span class="badge bg-success">' . $r['trangThai'] . '</span>'; break;
                                 case "Đã xác nhận": echo '<span class="badge bg-info text-dark">' . $r['trangThai'] . '</span>'; break;
+                                case "Đang mượn": echo '<span class="badge bg-warning text-dark">' . $r['trangThai'] . '</span>'; break;
+                                case "Đã trả": echo '<span class="badge bg-success">' . $r['trangThai'] . '</span>'; break; 
                                 default: echo '<span class="badge bg-light text-dark">Không xác định</span>';
                             }
                         echo '</td>';

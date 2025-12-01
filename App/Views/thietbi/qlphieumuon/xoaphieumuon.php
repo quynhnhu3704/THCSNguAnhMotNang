@@ -31,8 +31,12 @@ if($kq && $kq->num_rows > 0) {
 
 
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
+    // 1. Trả tất cả thiết bị về Khả dụng
+    $p->restoreThietBi($maPhieuMuon);
+
+    // 2. Xóa phiếu mượn
     if ($p->deletePhieuMuon($maPhieuMuon)) {
-        echo "<script>alert('Xóa phiếu mượn thành công!'); window.location.href='index.php?page=dsphieumuon';</script>";
+        echo "<script>alert('Xóa phiếu mượn thành công! Thiết bị đã được trả về trạng thái khả dụng.'); window.location.href='index.php?page=dsphieumuon'</script>";
     } else {
         echo "<script>alert('Xóa phiếu mượn thất bại!'); window.history.back();</script>";
     }

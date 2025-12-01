@@ -48,9 +48,24 @@ class controlPhieuMuon {
         return $p->insertChiTietPM($maPhieuMuon, $chiTiet); // truyền mảng maThietBi => soLuong
     }
 
+    public function restoreThietBi($maPhieuMuon) {
+        $p = new modelPhieuMuon();
+        return $p->restoreThietBi($maPhieuMuon);
+    }
+
     public function deletePhieuMuon($maPhieuMuon) {
         $p = new modelPhieuMuon();
         return $p->deletePhieuMuon($maPhieuMuon);
+    }
+
+    public function deleteChiTietPM($maChiTietPM) {
+        $p = new modelPhieuMuon();
+        return $p->deleteChiTietPM($maChiTietPM);
+    }
+
+    public function updatePhieuMuon($maPhieuMuon, $maNguoiDung, $ngayMuon, $ngayTra, $trangThai, $ghiChu) {
+        $p = new modelPhieuMuon();
+        return $p->updatePhieuMuon($maPhieuMuon, $maNguoiDung, $ngayMuon, $ngayTra, $trangThai, $ghiChu);
     }
 }
 ?>

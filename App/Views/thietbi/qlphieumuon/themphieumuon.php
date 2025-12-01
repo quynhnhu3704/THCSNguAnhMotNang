@@ -39,16 +39,16 @@ if(!isset($_SESSION['login'])) {
                     </select>
                 </div>
                 
-                <!-- Bộ môn -->
+                <!-- Vai trò -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Vai trò <span class="text-danger">*</span></label>
                     <input type="text" id="vaiTro" name="maVaiTro" class="form-control" disabled>
                 </div>
 
-                <!-- Vai trò -->
+                <!-- Bộ môn -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Bộ môn <span class="text-danger">*</span></label>
-                    <input type="text"  id="boMon" name="maBoMon" class="form-control" disabled>
+                    <input type="text" id="boMon" name="maBoMon" class="form-control" disabled>
                 </div>
 
                 <!-- Ngày mượn -->
@@ -75,26 +75,28 @@ if(!isset($_SESSION['login'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php for ($i=1; $i<=3; $i++): ?>
+                                <?php 
+                                include_once('App/Controllers/cThietBi.php');
+                                $p = new controlThietBi();
+                                $kq = $p->getAllThietBi();
+                                // Lấy toàn bộ thiết bị 1 lần để tránh lỗi fetch_assoc bị cạn
+                                $res = $kq ? $kq->fetch_all(MYSQLI_ASSOC) : [];
+
+                                // Hiển thị 3 dòng nhập thiết bị
+                                for ($i=1; $i<=3; $i++): 
+                                ?>
                                 <tr>
                                     <td><strong><?= $i ?></strong></td>
                                     <td>
                                         <select name="maThietBi[]" class="form-select thietBiSelect">
-                                            <option value="" disabled selected>-- Chọn thiết bị --</option>
-                                            <?php
-                                            include_once('App/Controllers/cThietBi.php');
-                                            $p = new controlThietBi();
-
-                                            // lấy thiết bị theo bộ môn đã chọn ở trên nguoiDungSelect với data-bomon, ko dùng $maBoMon = 1
-                                            $kq = $p->getAllThietBi();
-                                            while ($r = $kq->fetch_assoc()) {
-                                                echo "<option value='{$r['maThietBi']}' data-bomon='{$r['tenBoMon']}'>{$r['tenThietBi']}</option>";
-                                            }  
-                                            ?>
+                                            <option value="" selected>-- Chọn thiết bị --</option>
+                                            <?php foreach($res as $r): ?>
+                                                <option value="<?= $r["maThietBi"] ?>" data-bomon="<?= $r["tenBoMon"] ?>"><?= $r["tenThietBi"] ?></option>
+                                            <?php endforeach; ?>
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="number" name="soLuong[]" value="" min="1" class="form-control text-center">
+                                        <input type="number" name="" value="" min="1" class="form-control text-center soLuongInput">
                                     </td>
                                 </tr>
                                 <?php endfor; ?>
@@ -121,7 +123,7 @@ if(!isset($_SESSION['login'])) {
                         <button type="submit" name="btnluu" class="btn btn-primary w-100">Lưu</button>
                     </div>
                     <div class="col-6 mb-2">
-                        <button type="reset" class="btn btn-outline-secondary w-100">Đặt lại</button>
+                        <button type="reset" name="btnreset" class="btn btn-outline-secondary w-100">Đặt lại</button>
                     </div>
                 </div>
             </form>
@@ -140,42 +142,30 @@ if(isset($_POST['btnluu'])) {
     $ghiChu = trim($_POST['ghiChu']);
 
     // Ngày trả phải sau ngày mượn
-    // if($ngayTra < $ngayMuon) {
-    //     echo "<script>alert('Ngày trả phải sau ngày mượn'); window.history.back();</script>";
-    //     exit();
-    // }
-
-    // $chiTiet = []; // mảng chi tiết thiết bị để truyền vào insertChiTietPM
-    // foreach($_POST['maThietBi'] as $maThietBi){
-    //     if(!empty($maThietBi)){
-    //         $soLuong = (int)$_POST['soLuong'][$maThietBi]; // lấy số lượng tương ứng
-    //         if($soLuong > 0){
-    //             $chiTiet[$maThietBi] = $soLuong; // thêm vào mảng chi tiết
-    //         }
-    //     }
-    // }
-
-    $chiTiet = [];
-foreach($_POST['maThietBi'] as $maThietBi){
-    if(!empty($maThietBi)){
-        if(empty($_POST['soLuong'][$maThietBi]) || (int)$_POST['soLuong'][$maThietBi] <= 0){
-            echo "<script>alert('Bạn phải nhập số lượng cho tất cả thiết bị đã chọn!'); window.history.back();</script>";
-            exit();
-        }
-        $soLuong = (int)$_POST['soLuong'][$maThietBi];
-        $chiTiet[$maThietBi] = $soLuong;
+    if($ngayTra < $ngayMuon) {
+        echo "<script>alert('Ngày trả phải sau ngày mượn'); window.history.back();</script>";
+        exit();
     }
-}
 
-if(empty($chiTiet)){
-    echo "<script>alert('Vui lòng chọn ít nhất 1 thiết bị'); window.history.back();</script>";
-    exit();
-}
-
+    $chiTiet = []; // mảng chi tiết thiết bị để truyền vào insertChiTietPM
+    if(!empty($_POST['maThietBi']) && is_array($_POST['maThietBi'])) {
+        foreach($_POST['maThietBi'] as $index => $maThietBi) {
+            $maThietBi = trim($maThietBi);
+            if($maThietBi === '') continue;
+            // server-side sẽ tìm $_POST['soLuong'][$maThietBi], do đó gửi đúng cặp key/value là cần thiết
+            $soLuong = 0;
+            if(isset($_POST['soLuong'][$maThietBi])) $soLuong = (int)$_POST['soLuong'][$maThietBi];
+            if($soLuong <= 0) {
+                echo "<script>alert('Bạn phải nhập số lượng > 0 cho tất cả thiết bị đã chọn'); window.location.href='index.php?page=themphieumuon';</script>";
+                exit();
+            }
+            $chiTiet[$maThietBi] = $soLuong;
+        }
+    }
 
     // Kiểm tra có chọn thiết bị không
     if(empty($chiTiet)){
-        echo "<script>alert('Vui lòng chọn ít nhất 1 thiết bị'); window.history.back();</script>";
+        echo "<script>alert('Vui lòng chọn ít nhất 1 thiết bị'); window.location.href='index.php?page=themphieumuon';</script>";
         exit();
     }
 
@@ -188,84 +178,130 @@ if(empty($chiTiet)){
             echo "<script>alert('Thêm phiếu mượn thành công'); window.location.href='index.php?page=dsphieumuon'</script>";
         } else {
             $p->deletePhieuMuon($maPhieuMuon);  // rollback phiếu mượn
-            echo "<script>alert('Thêm phiếu mượn thất bại do không đủ thiết bị khả dụng.'); window.history.back();</script>";
+            echo "<script>alert('Thêm phiếu mượn thất bại do không đủ thiết bị khả dụng.'); window.location.href='index.php?page=themphieumuon';</script>";
         }
     } else {
-        echo "<script>alert('Thêm phiếu mượn thất bại!'); window.history.back();</script>";
+        echo "<script>alert('Thêm phiếu mượn thất bại!'); window.location.href='index.php?page=themphieumuon';</script>";
         exit();
     }
 }
 ?>
 
 <script>
-// Hàm tự động điền bộ môn và vai trò khi chọn người dùng
-document.getElementById('nguoiDungSelect').addEventListener('change', function () {
-    let option = this.options[this.selectedIndex];
-    document.getElementById('boMon').value = option.getAttribute('data-bomon') || '';
-    document.getElementById('vaiTro').value = option.getAttribute('data-vaitro') || '';
+// Helpers
+function qs(sel, ctx=document) { return ctx.querySelector(sel); }
+function qsa(sel, ctx=document) { return Array.from(ctx.querySelectorAll(sel)); }
 
-    filterThietBi(); // lọc thiết bị theo bộ môn
+// Tham số DOM
+const nguoiDungSelect = qs('#nguoiDungSelect');
+const selects = () => qsa('.thietBiSelect');
+const soLuongInputs = () => qsa('.soLuongInput');
+const form = qs('#frmThemPhieuMuon');
+const btnReset = qs('#btnreset');
+
+// Khi chọn người dùng: điền bộ môn/vai trò và lọc thiết bị theo bộ môn
+nguoiDungSelect && nguoiDungSelect.addEventListener('change', function(){
+    const opt = this.selectedOptions[0];
+    const boMon = opt ? opt.getAttribute('data-bomon') : '';
+    const vaiTro = opt ? opt.getAttribute('data-vaitro') : '';
+    qs('#boMon').value = boMon || '';
+    qs('#vaiTro').value = vaiTro || '';
+    updateAllOptionVisibility();
 });
 
-// Hàm lọc thiết bị theo bộ môn khi chọn người dùng
-// document.getElementById('nguoiDungSelect').addEventListener('change', function () {
-//     let selectedBoMon = this.options[this.selectedIndex].getAttribute('data-bomon');
-//     let selects = document.querySelectorAll('.thietBiSelect'); // lấy tất cả select
+// Hàm cập nhật tên attribute cho input số lượng tương ứng với select đã chọn
+function syncInputNameForRow(selectEl) {
+    const tr = selectEl.closest('tr');
+    const input = qs('input.soLuongInput', tr);
+    // xóa tên cũ (nếu có)
+    input.removeAttribute('name');
 
-//     selects.forEach(select => {
-//         Array.from(select.options).forEach(option => {
-//             option.style.display = (option.getAttribute('data-bomon') === selectedBoMon || option.value === '') ? '' : 'none'; // ẩn những option không cùng bộ môn
-//         });
-//         select.value = ''; // reset chọn thiết bị
-//     });
-// });
+    const val = selectEl.value;
+    if(val && val !== '') {
+        // đặt tên theo server mong đợi: soLuong[<maThietBi>]
+        input.setAttribute('name', `soLuong[${val}]`);
+    } else {
+        // nếu chọn rỗng => giữ trống để server không thấy trường đó
+        input.removeAttribute('name');
+    }
+}
 
-// Hàm lọc thiết bị theo bộ môn và loại những thiết bị đã chọn
-function filterThietBi() {
-    let selectedBoMon = document.getElementById('nguoiDungSelect').selectedOptions[0].getAttribute('data-bomon');
-    let selects = document.querySelectorAll('.thietBiSelect');
+// Cập nhật visibility option theo bộ môn đã chọn và loại thiết bị đã chọn trên các select khác
+function updateAllOptionVisibility() {
+    const selectedBoMon = nguoiDungSelect.selectedOptions[0] ? nguoiDungSelect.selectedOptions[0].getAttribute('data-bomon') : null;
+    const currentValues = selects().map(s => s.value).filter(v => v !== '');
 
-    // Lấy danh sách thiết bị đã chọn
-    let daChon = Array.from(selects).map(s => s.value).filter(v => v !== '');
-
-    selects.forEach(select => {
-        Array.from(select.options).forEach(option => {
-            if(option.value === '') {
-                option.style.display = ''; // luôn hiển thị option rỗng
-            } else if(option.getAttribute('data-bomon') !== selectedBoMon) {
-                option.style.display = 'none'; // khác bộ môn => ẩn
-            } else if(daChon.includes(option.value) && select.value !== option.value) {
-                option.style.display = 'none'; // đã chọn ở select khác => ẩn
+    selects().forEach(select => {
+        Array.from(select.options).forEach(opt => {
+            if(opt.value === '') {
+                opt.style.display = ''; // luôn hiển thị option rỗng
+                return;
+            }
+            // ẩn nếu khác bộ môn (nếu đã chọn bộ môn), hoặc ẩn nếu đã được chọn trên select khác
+            if(selectedBoMon && opt.getAttribute('data-bomon') !== selectedBoMon) {
+                opt.style.display = 'none';
+            } else if(currentValues.includes(opt.value) && select.value !== opt.value) {
+                opt.style.display = 'none';
             } else {
-                option.style.display = ''; // hiển thị
+                opt.style.display = '';
             }
         });
+        // đảm bảo mỗi select sync lại tên input tương ứng
+        syncInputNameForRow(select);
     });
 }
 
-// Event mỗi khi thay đổi select thiết bị => update filter
-document.querySelectorAll('.thietBiSelect').forEach(select => {
-    select.addEventListener('change', filterThietBi); // 
+// Gắn event change cho từng select (để sync tên input & update filter)
+selects().forEach(select => {
+    select.addEventListener('change', function(){
+        // khi thay đổi select: cập nhật tên input ở hàng đó
+        syncInputNameForRow(this);
+        // cập nhật ẩn/hiện option cho các select còn lại
+        updateAllOptionVisibility();
+    });
 });
 
-// Kiểm tra khi submit form
-document.querySelector('form').addEventListener('submit', function(e){
-    let selects = document.querySelectorAll('.thietBiSelect');
-    let valid = true;
+// Reset form: xóa name input số lượng và hiển thị lại toàn bộ options
+btnReset && btnReset.addEventListener('click', function(){
+    // timeout để reset sau khi form thực sự được reset bởi browser
+    setTimeout(() => {
+        soLuongInputs().forEach(inp => inp.removeAttribute('name'));
+        qsa('.thietBiSelect').forEach(s => s.value = '');
+        qs('#boMon').value = '';
+        qs('#vaiTro').value = '';
+        updateAllOptionVisibility();
+    }, 10);
+});
 
-    selects.forEach(select => {
-        let maThietBi = select.value;
-        if(maThietBi !== '') {
-            let soLuongInput = document.querySelector(`input[name="soLuong[]"]`);
-            if(!soLuongInput || soLuongInput.value === '' || parseInt(soLuongInput.value) <= 0) {
-                alert('Bạn phải nhập số lượng cho tất cả thiết bị đã chọn!');
-                valid = false;
-                soLuongInput.focus();
-                return false;
-            }
+// Trước submit: kiểm tra mỗi select có giá trị thì input cùng hàng có name và >0
+form && form.addEventListener('submit', function(e){
+    const selected = selects().filter(s => s.value !== '');
+    for(let s of selected){
+        const tr = s.closest('tr');
+        const inp = qs('input.soLuongInput', tr);
+        const val = inp ? inp.value.trim() : '';
+        if(!inp || val === '' || parseInt(val) <= 0) {
+            alert('Bạn phải nhập số lượng cho tất cả thiết bị đã chọn!');
+            inp && inp.focus();
+            e.preventDefault();
+            return;
         }
-    });
+    }
+    // nếu pass -> trước submit đảm bảo mỗi input đã có name đúng (đã sync trong updateAllOptionVisibility)
+});
 
-    if(!valid) e.preventDefault();
+// Khởi tạo ban đầu: đảm bảo input names trống và filter đúng (tránh trường hợp user reload)
+document.addEventListener('DOMContentLoaded', function(){
+    soLuongInputs().forEach(inp => inp.removeAttribute('name'));
+    updateAllOptionVisibility();
 });
 </script>
+
+<style>
+    th, td {
+        border: 1px solid #ddd;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>

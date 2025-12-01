@@ -20,7 +20,11 @@ class modelPhieuMuon{
 
     public function select01PhieuMuon($maPhieuMuon) {
         $p = new clsKetNoi();
-        $truyvan = "SELECT * FROM phieumuon WHERE maPhieuMuon = $maPhieuMuon";
+        $truyvan = "SELECT * FROM phieumuon pm
+                    JOIN nguoidung nd ON pm.maNguoiDung = nd.maNguoiDung
+                    JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
+                    JOIN bomon bm ON nd.maBoMon = bm.maBoMon
+                    WHERE maPhieuMuon = $maPhieuMuon";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -55,13 +59,14 @@ class modelPhieuMuon{
         return $kq;
     }
 
-    public function select01ChiTietPM($maChiTietPM) {
+    public function select01ChiTietPM($maPhieuMuon) {
         $p = new clsKetNoi();
-        $truyvan = "SELECT * FROM chitietphieumuon ct
+        $truyvan = "SELECT ct.maThietBi, tb.tenThietBi, COUNT(ct.maChiTietTB) AS soLuong FROM chitietphieumuon ct
                     JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
-                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
-                    JOIN nhacungcap ncc ON tb.maNhaCungCap = ncc.maNhaCungCap
-                    WHERE maChiTietTB = $maChiTietPM";
+                    JOIN phieumuon pm ON ct.maPhieuMuon = pm.maPhieuMuon
+                    JOIN nguoidung nd ON pm.maNguoiDung = nd.maNguoiDung
+                    WHERE ct.maPhieuMuon = $maPhieuMuon
+                    GROUP BY ct.maThietBi";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -128,13 +133,79 @@ class modelPhieuMuon{
         return true;
     }
 
+    public function restoreThietBi($maPhieuMuon) {
+        $p = new clsKetNoi();
+        $con = $p->moketnoi();
+
+        // Lấy tất cả chi tiết thiết bị thuộc phiếu mượn
+        $truyvan = "SELECT maChiTietTB FROM chitietphieumuon WHERE maPhieuMuon = $maPhieuMuon";
+        $kq = mysqli_query($con, $truyvan);
+
+        // Trả từng thiết bị về trạng thái Khả dụng
+        while($r = mysqli_fetch_assoc($kq)) {
+            $maChiTietTB = $r['maChiTietTB'];
+            mysqli_query($con, "UPDATE chitietthietbi SET tinhTrang = N'Khả dụng' WHERE maChiTietTB = $maChiTietTB");
+        }
+
+        $p->dongketnoi($con);
+        return true;
+    }
+
+    public function deleteChiTietPM($maChiTietPM) {
+        $p = new clsKetNoi();
+        $con = $p->moketnoi();
+
+        // Lấy mã chi tiết thiết bị
+        $qr = mysqli_query($con, "SELECT maChiTietTB FROM chitietphieumuon WHERE maChiTietPM = $maChiTietPM");
+        if (!$qr || $qr->num_rows == 0) {
+            $p->dongketnoi($con);
+            return false;
+        }
+
+        $r = mysqli_fetch_assoc($qr);
+        $maChiTietTB = $r['maChiTietTB'];
+
+        // Trả thiết bị về khả dụng
+        mysqli_query($con, "UPDATE chitietthietbi SET tinhTrang = N'Khả dụng' WHERE maChiTietTB = $maChiTietTB");
+
+        // Xóa chi tiết phiếu mượn
+        $kq = mysqli_query($con, "DELETE FROM chitietphieumuon WHERE maChiTietPM = $maChiTietPM");
+
+        $p->dongketnoi($con);
+        return $kq;
+    }
+
     public function deletePhieuMuon($maPhieuMuon) {
         $p = new clsKetNoi();
         $con = $p->moketnoi();
-        $truyvan = "DELETE FROM phieumuon WHERE maPhieuMuon = $maPhieuMuon";
+
+        // Xóa chi tiết phiếu mượn trước
+        mysqli_query($con,  "DELETE FROM chitietphieumuon WHERE maPhieuMuon = $maPhieuMuon");
+
+        // Xóa phiếu mượn
+        $kq = mysqli_query($con, "DELETE FROM phieumuon WHERE maPhieuMuon = $maPhieuMuon");
+
+        $p->dongketnoi($con);
+        return $kq;
+    }
+
+    public function updatePhieuMuon($maPhieuMuon, $maNguoiDung, $ngayMuon, $ngayTra, $trangThai, $ghiChu) {
+        $p = new clsKetNoi();
+        $con = $p->moketnoi();
+
+        $truyvan = "UPDATE phieumuon SET 
+                    maNguoiDung = $maNguoiDung,
+                    ngayMuon = '$ngayMuon',
+                    ngayTra = '$ngayTra',
+                    trangThai = N'$trangThai',
+                    ghiChu = N'$ghiChu'
+                    WHERE maPhieuMuon = $maPhieuMuon";
+
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
         return $kq;
     }
+
+
 }
 ?>
