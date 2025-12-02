@@ -9,10 +9,10 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>THCS Ngũ Anh Một Nàng</title>
     <meta name="description" content="Website đặt phòng khách sạn NguAnhMotNang – sang trọng, thân thiện, đặt phòng nhanh trong 60 giây."/>
-
+    
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link rel="icon" href="public/uploads/icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="public/css/style.css">
     <script src="public/js/bootstrap.bundle.min.js"></script>
