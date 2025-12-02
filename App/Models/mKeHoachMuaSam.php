@@ -101,8 +101,7 @@ class modelKeHoachMuaSam {
                     JOIN bomon bm ON tb.maBoMon = bm.maBoMon
                     JOIN nhacungcap ncc ON ncc.maNhaCungCap = tb.maNhaCungCap
                     JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
-                    WHERE ct.maKeHoachMuaSam = $maKeHoachMuaSam
-                    GROUP BY ct.maChiTietKHMuaSam";
+                    WHERE ct.maKeHoachMuaSam = $maKeHoachMuaSam";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);

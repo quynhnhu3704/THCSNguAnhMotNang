@@ -1,4 +1,4 @@
-<!-- App/Views/thietbi/qlphieumuon/themphieumuon.php -->
+<!-- App/Views/totruong/kehoachmuasam/themkehoachmuasam.php -->
 <?php
 if(!isset($_SESSION['login'])) {
     echo "<script>alert('Vui lòng đăng nhập để tiếp tục.'); window.location.href='index.php?page=dangnhap'</script>";
@@ -105,7 +105,7 @@ if($kq && $kq->num_rows > 0) {
                 <!-- Trạng thái -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Trạng thái <span class="text-danger">*</span></label>
-                    <input type="text" value="Đã xác nhận" class="form-control" disabled>
+                    <input type="text" value="Chờ duyệt" class="form-control" disabled>
                 </div>
 
                 <!-- Ghi chú -->

@@ -90,7 +90,7 @@ session_start();
                 echo '<li><a href="index.php?page=dsghinhan" class="text-decoration-none d-block text-dark py-2">Ghi nhận SC/BT/BH</a></li>';
                 echo '<li><a href="index.php?page=dsyeucau" class="text-decoration-none d-block text-dark py-2">Cập nhật tiến độ SC/BT/BH</a></li>';
                 echo '<li><a href="index.php?page=dskehoachmuasam" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch mua sắm</a></li>';
-                // echo '<li><a href="index.php?page=dskehoachthanhly" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch thanh lý</a></li>';
+                echo '<li><a href="index.php?page=dskehoachthanhly" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch thanh lý</a></li>';
             }
             ?>
         </ul>
@@ -227,6 +227,19 @@ session_start();
                     break;
                 case 'ghinhanyeucau':
                     include_once('App/Views/thietbi/ghinhanscbtbh/ghinhanyeucau.php');
+                    break;
+                // Lập kế hoạch thanh lý
+                case 'dskehoachthanhly':
+                    include_once('App/Views/thietbi/kehoachthanhly/dskehoachthanhly.php');
+                    break;
+                case 'themkehoachthanhly':
+                    include_once('App/Views/thietbi/kehoachthanhly/themkehoachthanhly.php');
+                    break;
+                case 'xemkehoachthanhly':
+                    include_once('App/Views/thietbi/kehoachthanhly/xemkehoachthanhly.php');
+                    break;
+                case 'xoakehoachthanhly':
+                    include_once('App/Views/thietbi/kehoachthanhly/xoakehoachthanhly.php');
                     break;
                 
 
