@@ -48,13 +48,13 @@ if($kq && $kq->num_rows > 0) {
                 <!-- Vai trò -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Vai trò</label>
-                    <input type="text" class="form-control" name="maVaiTro" value="<?php echo $r['tenVaiTro']; ?>" disabled>
+                    <input type="text" class="form-control" value="<?php echo $r['tenVaiTro']; ?>" disabled>
                 </div>
 
                 <!-- Bộ môn -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Bộ môn</label>
-                    <input type="text" class="form-control" name="maBoMon" value="<?php echo $r['tenBoMon']; ?>" disabled>
+                    <input type="text" class="form-control" value="<?php echo $r['tenBoMon']; ?>" disabled>
                 </div>
 
                 <!-- Số điện thoại -->

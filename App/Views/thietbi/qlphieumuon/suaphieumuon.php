@@ -11,25 +11,23 @@ if(!isset($_SESSION['login'])) {
 // }
 
 include_once('App/Controllers/cPhieuMuon.php');
-include_once('App/Controllers/cNguoiDung.php');
-include_once('App/Controllers/cThietBi.php');
-
-$pPM = new controlPhieuMuon();
-$pND = new controlNguoiDung();
-$pTB = new controlThietBi();
+$p = new controlPhieuMuon();
 
 $maPhieuMuon = $_GET['maPhieuMuon'];
 
-$pm = $pPM->get01PhieuMuon($maPhieuMuon)->fetch_assoc();
-$ct = $pPM->get01ChiTietPM($maPhieuMuon);
-$dsCT = [];
-
-while($ct && $r = $ct->fetch_assoc()) {
-    $dsCT[] = $r;   // maThietBi, tenThietBi, soLuong, maCTTB...
+if(!$maPhieuMuon) {
+    echo "<script>alert('Không tìm thấy phiếu mượn!'); window.location.href='index.php?page=dsphieumuon';</script>";
+    exit();
 }
 
-$dsNguoi = $pND->getNguoiDungTheoVaiTro([2,3])->fetch_all(MYSQLI_ASSOC);
-$dsTB = $pTB->getAllThietBi()->fetch_all(MYSQLI_ASSOC);
+$kq = $p->get01PhieuMuon($maPhieuMuon);
+
+if($kq && $kq->num_rows > 0) {
+    $r = $kq->fetch_assoc();
+} else {
+    echo "<script>alert('Không tìm thấy phiếu mượn!'); window.location.href='index.php?page=dsphieumuon';</script>";
+    exit();
+}
 ?>
 
 <button type="button" class="btn btn-outline-primary ms-4 my-4" onclick="window.location.href='index.php?page=dsphieumuon'"><i class="bi bi-arrow-left"></i> Quay lại</button>
@@ -42,37 +40,32 @@ $dsTB = $pTB->getAllThietBi()->fetch_all(MYSQLI_ASSOC);
             <form action="#" method="post">
                 <!-- Họ tên -->
                 <div class="mb-3">
-                    <label class="form-label fw-medium">Họ tên <span class="text-danger">*</span></label>
-                    <select id="nguoiDungSelect" name="maNguoiDung" class="form-select" required>
-                        <option value="">-- Chọn người dùng --</option>
-                        <?php foreach($dsNguoi as $u): ?>
-                            <option value="<?= $u['maNguoiDung'] ?>" data-bomon="<?= $u['tenBoMon'] ?>" data-vaitro="<?= $u['tenVaiTro'] ?>"<?= $u['maNguoiDung']==$pm['maNguoiDung']?'selected':'' ?>><?= $u['hoTen'] ?></option>
-                        <?php endforeach; ?>
-                    </select>
+                    <label class="form-label fw-medium">Họ tên</label>
+                    <input type="text" class="form-control" value="<?= $r['hoTen'] ?>" disabled>
                 </div>
                 
                 <!-- Vai trò -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Vai trò</label>
-                    <input type="text" id="vaiTro" class="form-control" value="<?= $pm['tenVaiTro'] ?>" disabled>
+                    <input type="text" class="form-control" value="<?= $r['tenVaiTro'] ?>" disabled>
                 </div>
 
                 <!-- Bộ môn -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Bộ môn</label>
-                    <input type="text" id="boMon" class="form-control" value="<?= $pm['tenBoMon'] ?>" disabled>
+                    <input type="text" class="form-control" value="<?= $r['tenBoMon'] ?>" disabled>
                 </div>
 
                 <!-- Ngày mượn -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Ngày mượn</label>
-                    <input type="date" name="ngayMuon" class="form-control" value="<?= $pm['ngayMuon'] ?>" required>
+                    <input type="date" class="form-control" value="<?= $r['ngayMuon'] ?>" disabled>
                 </div>
 
                 <!-- Ngày trả -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Ngày trả</label>
-                    <input type="date" name="ngayTra" class="form-control" value="<?= $pm['ngayTra'] ?>" required>
+                    <input type="date" class="form-control" value="<?= $r['ngayTra'] ?>" disabled>
                 </div>
                 
                 <h5 class="my-2 fw-semibold text-secondary text-center">Danh sách thiết bị</h5>
@@ -88,30 +81,16 @@ $dsTB = $pTB->getAllThietBi()->fetch_all(MYSQLI_ASSOC);
                             </thead>
                             <tbody>
                                 <?php 
-                                for($i=0; $i<3; $i++):
-                                    $old = $dsCT[$i] ?? null;
+                                $res = $p->get01ChiTietPM($maPhieuMuon);
+                                $dem = 1;
+                                while($row = $res->fetch_assoc()) {
+                                    echo '<tr>';
+                                        echo '<td><strong>' . $dem++ . '</strong></td>';
+                                        echo '<td title="'. $row['tenThietBi'] .'" class="text-start">' . $row['tenThietBi'] . '</td>';
+                                        echo '<td>' . $row['soLuong'] . '</td>';
+                                    echo '</tr>';
+                                }
                                 ?>
-                                <tr>
-                                    <td><b><?= $i+1 ?></b></td>
-                                    <td>
-                                        <select name="maThietBi[]" class="form-select thietBiSelect">
-                                            <option value="">-- Chọn thiết bị --</option>
-                                            <?php foreach($dsTB as $tb): ?>
-                                                <option 
-                                                    value="<?= $tb['maThietBi'] ?>"
-                                                    data-bomon="<?= $tb['tenBoMon'] ?>"
-                                                    <?= $old && $tb['maThietBi']==$old['maThietBi']?'selected':'' ?>
-                                                ><?= $tb['tenThietBi'] ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="number" min="1" class="form-control text-center soLuongInput"
-                                            name="soLuong[<?= $old['maThietBi'] ?>]"
-                                            value="<?= $old ? $old['soLuong']:"" ?>">
-                                    </td>
-                                </tr>
-                                <?php endfor; ?>
                             </tbody>
                         </table>
                     </div>
@@ -119,22 +98,20 @@ $dsTB = $pTB->getAllThietBi()->fetch_all(MYSQLI_ASSOC);
         
                 <!-- Trạng thái -->
                 <div class="mb-3">
-                    <label class="form-label fw-medium">Trạng thái</label>
+                    <label class="form-label fw-medium">Trạng thái <span class="text-danger">*</span></label>
                     <select name="trangThai" class="form-select" required>
-                        <?php 
-                        $st = ["Chờ xử lý","Đã xác nhận","Đang mượn","Đã trả"];
-                        foreach($st as $t): ?>
-                            <option value="<?= $t ?>" <?= $pm['trangThai']==$t?'selected':'' ?>>
-                                <?= $t ?>
-                            </option>
-                        <?php endforeach; ?>
+                        <option value="" disabled>-- Chọn trạng thái --</option>
+                        <option value="Chờ xử lý" <?= ($r["trangThai"] == 'Chờ xử lý') ? 'selected' : '' ?>>Chờ xử lý</option>
+                        <option value="Đã xác nhận" <?= ($r["trangThai"] == 'Đã xác nhận') ? 'selected' : '' ?>>Đã xác nhận</option>
+                        <option value="Đang mượn" <?= ($r["trangThai"] == 'Đang mượn') ? 'selected' : '' ?>>Đang mượn</option>
+                        <option value="Đã trả" <?= ($r["trangThai"] == 'Đã trả') ? 'selected' : '' ?>>Đã trả</option>
                     </select>
                 </div>
 
                 <!-- Ghi chú -->
                 <div class="mb-4">
                     <label class="form-label fw-medium">Ghi chú</label>
-                    <textarea name="ghiChu" rows="3" class="form-control" style="resize:none;"><?= $pm['ghiChu'] ?></textarea>
+                    <textarea name="ghiChu" rows="3" class="form-control" style="resize:none;"><?= $r['ghiChu'] ?></textarea>
                 </div>
 
                 <!-- Nút submit/reset -->
@@ -153,116 +130,19 @@ $dsTB = $pTB->getAllThietBi()->fetch_all(MYSQLI_ASSOC);
 
 <?php
 if(isset($_POST['btnluu'])){
-    $maNguoiDung = $_POST['maNguoiDung'];
-    $ngayMuon    = $_POST['ngayMuon'];
-    $ngayTra     = $_POST['ngayTra'];
-    $ghiChu      = trim($_POST['ghiChu']);
-    $trangThai   = $_POST['trangThai'];
+    $trangThai = trim($_POST["trangThai"]);
+    $ghiChu = trim($_POST['ghiChu']);
 
-    if($ngayTra < $ngayMuon){
-        echo "<script>alert('Ngày trả phải sau ngày mượn'); window.location.href='index.php?page=suaphieumuon';</script>";
-        exit();
-    }
-
-    // Chuẩn bị chi tiết thiết bị
-    $chiTiet = [];
-    if(!empty($_POST['maThietBi'])){
-        foreach($_POST['maThietBi'] as $maTB){
-            if($maTB==='') continue;
-            if(isset($_POST['soLuong'][$maTB])){
-                $sl = (int)$_POST['soLuong'][$maTB];
-                if($sl<=0){
-                    echo "<script>alert('Số lượng phải > 0'); window.location.href='index.php?page=suaphieumuon';</script>";
-                    exit();
-                }
-                $chiTiet[$maTB] = $sl;
-            }
-        }
-    }
-
-    if(empty($chiTiet)){
-        echo "<script>alert('Phải chọn ít nhất 1 thiết bị'); window.location.href='index.php?page=suaphieumuon';</script>";
-        exit();
-    }
-
-    // Update phiếu mượn
-    $pPM->updatePhieuMuon($maPhieuMuon,$maNguoiDung,$ngayMuon,$ngayTra,$trangThai,$ghiChu);
-
-    // Xóa chi tiết cũ + trả thiết bị cũ về khả dụng
-    $pPM->restoreThietBi($maPhieuMuon);
-    $pPM->deleteChiTietPM($maPhieuMuon);
-
-    // Thêm chi tiết mới
-    $ok = $pPM->insertChiTietPM($maPhieuMuon,$chiTiet);
-
-    if($ok){
-        echo "<script>alert('Cập nhật thành công'); window.location.href='index.php?page=dsphieumuon';</script>";
+    if($p->updatePhieuMuon($maPhieuMuon, $trangThai,$ghiChu)) {
+        echo "<script>alert('Cập nhật phiếu mượn thành công'); window.location.href='index.php?page=dsphieumuon';</script>";
     }else{
-        echo "<script>alert('Cập nhật thất bại'); window.location.href='index.php?page=suaphieumuon';</script>";
+        echo "<script>alert('Cập nhật phiếu mượn thất bại'); window.location.href='index.php?page=suaphieumuon';</script>";
     }
 }
 ?>
 
-
-<script>
-function qs(s,ctx=document){return ctx.querySelector(s);}
-function qsa(s,ctx=document){return [...ctx.querySelectorAll(s)];}
-
-const nguoiDungSelect = qs('#nguoiDungSelect');
-
-nguoiDungSelect.addEventListener('change', ()=>{
-    const opt = nguoiDungSelect.selectedOptions[0];
-    qs('#boMon').value = opt.getAttribute('data-bomon');
-    qs('#vaiTro').value = opt.getAttribute('data-vaitro');
-    updateOptionVisibility();
-});
-
-function updateOptionVisibility(){
-    const selectedBoMon = nguoiDungSelect.selectedOptions[0].getAttribute('data-bomon');
-    const selects = qsa('.thietBiSelect');
-    const used = selects.map(s=>s.value).filter(v=>v!=='');
-
-    selects.forEach(s=>{
-        [...s.options].forEach(o=>{
-            if(o.value==='') { o.style.display=''; return; }
-
-            if(o.getAttribute('data-bomon')!==selectedBoMon){
-                o.style.display='none';
-            } else if(used.includes(o.value) && s.value!==o.value){
-                o.style.display='none';
-            } else {
-                o.style.display='';
-            }
-        });
-
-        syncInputName(s);
-    });
-}
-
-function syncInputName(select){
-    const tr = select.closest('tr');
-    const input = qs('.soLuongInput',tr);
-    input.removeAttribute('name');
-
-    if(select.value!==''){
-        input.setAttribute('name',`soLuong[${select.value}]`);
-    }
-}
-
-qsa('.thietBiSelect').forEach(s=>{
-    s.addEventListener('change', ()=>{
-        syncInputName(s);
-        updateOptionVisibility();
-    });
-});
-
-document.addEventListener('DOMContentLoaded', updateOptionVisibility);
-</script>
-
-
 <style>
     th, td {
-        border: 1px solid #ddd;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

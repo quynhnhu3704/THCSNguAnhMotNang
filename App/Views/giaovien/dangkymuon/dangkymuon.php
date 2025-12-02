@@ -175,7 +175,6 @@ if(isset($_GET['xoa'])) {
 
 <style>
     th, td {
-        border: 1px solid #ddd;
         white-space: nowrap;   /* không xuống dòng */
         overflow: hidden;      /* ẩn phần thừa */
         text-overflow: ellipsis; /* hiện dấu ... */

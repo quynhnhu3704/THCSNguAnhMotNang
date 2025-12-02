@@ -72,7 +72,7 @@ if(!isset($_SESSION['login'])) {
 
                         echo '<td class="text-center">';
                             switch ($r['trangThai']) {
-                                case "Chờ xử lý": echo '<span class="badge bg-success">' . $r['trangThai'] . '</span>'; break;
+                                case "Chờ xử lý": echo '<span class="badge bg-secondary">' . $r['trangThai'] . '</span>'; break;
                                 case "Đã xác nhận": echo '<span class="badge bg-info text-dark">' . $r['trangThai'] . '</span>'; break;
                                 case "Đang mượn": echo '<span class="badge bg-warning text-dark">' . $r['trangThai'] . '</span>'; break;
                                 case "Đã trả": echo '<span class="badge bg-success">' . $r['trangThai'] . '</span>'; break; 
@@ -99,8 +99,7 @@ if(!isset($_SESSION['login'])) {
 
 <style>
     th, td {
-        border: 1px solid #ddd;
-        max-width: 7.25em;      /* độ rộng tối đa của cột */
+        max-width: 12.5em;      /* độ rộng tối đa của cột */
         white-space: nowrap;   /* không xuống dòng */
         overflow: hidden;      /* ẩn phần thừa */
         text-overflow: ellipsis; /* hiện dấu ... */

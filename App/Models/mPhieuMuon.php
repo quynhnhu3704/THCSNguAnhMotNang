@@ -5,7 +5,7 @@ include_once('mketnoi.php');
 class modelPhieuMuon {
     public function selectAllPhieuMuon() {
         $p = new clsKetNoi();
-        $truyvan = "SELECT pm.*, nd.hoTen, nd.email, nd.soDienThoai, vt.tenVaiTro, bm.tenBoMon, COUNT(ct.maChiTietPM) AS soLuongMuon
+        $truyvan = "SELECT pm.*, nd.hoTen, vt.tenVaiTro, bm.tenBoMon, COUNT(ct.maChiTietPM) AS soLuongMuon
                     FROM phieumuon pm
                     LEFT JOIN nguoidung nd ON pm.maNguoiDung = nd.maNguoiDung
                     LEFT JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
@@ -33,7 +33,7 @@ class modelPhieuMuon {
 
     public function searchPhieuMuon($keyword) {
         $p = new clsKetNoi();
-        $truyvan = "SELECT pm.*, nd.hoTen, nd.email, nd.soDienThoai, vt.tenVaiTro, bm.tenBoMon, COUNT(ct.maChiTietPM) AS soLuongMuon
+        $truyvan = "SELECT pm.*, nd.hoTen, vt.tenVaiTro, bm.tenBoMon, COUNT(ct.maChiTietPM) AS soLuongMuon
                     FROM phieumuon pm
                     LEFT JOIN nguoidung nd ON pm.maNguoiDung = nd.maNguoiDung
                     LEFT JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
@@ -156,13 +156,13 @@ class modelPhieuMuon {
         $con = $p->moketnoi();
 
         // Lấy mã chi tiết thiết bị
-        $qr = mysqli_query($con, "SELECT maChiTietTB FROM chitietphieumuon WHERE maChiTietPM = $maChiTietPM");
-        if (!$qr || $qr->num_rows == 0) {
+        $kq = mysqli_query($con, "SELECT maChiTietTB FROM chitietphieumuon WHERE maChiTietPM = $maChiTietPM");
+        if (!$kq || $kq->num_rows == 0) {
             $p->dongketnoi($con);
             return false;
         }
 
-        $r = mysqli_fetch_assoc($qr);
+        $r = mysqli_fetch_assoc($kq);
         $maChiTietTB = $r['maChiTietTB'];
 
         // Trả thiết bị về khả dụng
@@ -189,23 +189,39 @@ class modelPhieuMuon {
         return $kq;
     }
 
-    public function updatePhieuMuon($maPhieuMuon, $maNguoiDung, $ngayMuon, $ngayTra, $trangThai, $ghiChu) {
+    public function updatePhieuMuon($maPhieuMuon, $trangThai, $ghiChu) {
         $p = new clsKetNoi();
         $con = $p->moketnoi();
-
         $truyvan = "UPDATE phieumuon SET 
-                    maNguoiDung = $maNguoiDung,
-                    ngayMuon = '$ngayMuon',
-                    ngayTra = '$ngayTra',
                     trangThai = N'$trangThai',
                     ghiChu = N'$ghiChu'
                     WHERE maPhieuMuon = $maPhieuMuon";
-
         $kq = mysqli_query($con, $truyvan);
+
+        if($kq) {
+            // Lấy danh sách thiết bị chi tiết
+            $truyvan = "SELECT maChiTietTB FROM chitietphieumuon WHERE maPhieuMuon = $maPhieuMuon";
+            $kq = mysqli_query($con, $truyvan);
+
+            if($trangThai == "Đã trả") {
+                // Trả thiết bị → cập nhật thành Khả dụng
+                while($r = mysqli_fetch_assoc($kq)) {
+                    $maChiTietTB = $r['maChiTietTB'];
+                    $truyvan = "UPDATE chitietthietbi SET tinhTrang = N'Khả dụng' WHERE maChiTietTB = $maChiTietTB";
+                    mysqli_query($con, $truyvan);
+                }
+            } else {
+                // Các trạng thái khác → "Đang mượn"
+                while($r = mysqli_fetch_assoc($kq)) {
+                    $maChiTietTB = $r['maChiTietTB'];
+                    $truyvan = "UPDATE chitietthietbi SET tinhTrang = N'Đang mượn' WHERE maChiTietTB = $maChiTietTB";
+                    mysqli_query($con, $truyvan);
+                }
+            }
+        }
+
         $p->dongketnoi($con);
         return $kq;
     }
-
-
 }
 ?>

@@ -95,9 +95,7 @@ if(!isset($_SESSION['login'])) {
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
-                                    <td>
-                                        <input type="number" name="" value="" min="1" class="form-control text-center soLuongInput">
-                                    </td>
+                                    <td><input type="number" name="" value="" min="1" class="form-control text-center soLuongInput"></td>
                                 </tr>
                                 <?php endfor; ?>
                             </tbody>
@@ -299,7 +297,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <style>
     th, td {
-        border: 1px solid #ddd;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

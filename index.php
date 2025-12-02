@@ -9,7 +9,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>THCS Ngũ Anh Một Nàng</title>
     <meta name="description" content="Website đặt phòng khách sạn NguAnhMotNang – sang trọng, thân thiện, đặt phòng nhanh trong 60 giây."/>
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
@@ -138,6 +138,7 @@ session_start();
                     include_once('App/Views/common/chitietthietbi.php');
                     break;
                 
+
                 // Chức năng cho Hiệu trưởng
                 // Chức năng cho Tổ trưởng chuyên môn
                 // Lập kế hoạch mua sắm
@@ -147,11 +148,18 @@ session_start();
                 case 'themkehoachmuasam':
                     include_once('App/Views/totruong/kehoachmuasam/themkehoachmuasam.php');
                     break;
+                case 'xemkehoachmuasam':
+                    include_once('App/Views/totruong/kehoachmuasam/xemkehoachmuasam.php');
+                    break;
+                case 'xoakehoachmuasam':
+                    include_once('App/Views/totruong/kehoachmuasam/xoakehoachmuasam.php');
+                    break;
 
                 // Chức năng cho Giáo viên bộ môn
                 case 'dangkymuon':
                     include_once('App/Views/giaovien/dangkymuon/dangkymuon.php');
                     break;
+
 
                 // Chức năng cho Nhân viên quản lý thiết bị
                 // Quản lý thiết bị (CRUD)
@@ -231,6 +239,7 @@ session_start();
                     include_once('App/Views/kythuat/tiendoscbtbh/suatiendo.php');
                     break;
 
+                    
                 // Chức năng cho Quản trị hệ thống
                 // Quản lý người dùng (CRUD)
                 case 'dsnguoidung':

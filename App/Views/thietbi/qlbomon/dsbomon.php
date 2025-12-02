@@ -77,7 +77,6 @@ if(!isset($_SESSION['login'])) {
 
 <style>
     th, td {
-        border: 1px solid #ddd;
         max-width: 7.25em;      /* độ rộng tối đa của cột */
         white-space: nowrap;   /* không xuống dòng */
         overflow: hidden;      /* ẩn phần thừa */
