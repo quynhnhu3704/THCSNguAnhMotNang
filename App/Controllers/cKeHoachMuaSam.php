@@ -47,5 +47,10 @@ class controlKeHoachMuaSam {
         $p = new modelKeHoachMuaSam();
         return $p->insertChiTietKHMuaSam($maKeHoachMuaSam, $chiTiet); // truyền mảng chi tiết
     }
+
+    public function deleteKeHoachMuaSam($maKeHoachMuaSam) {
+        $p = new modelKeHoachMuaSam();
+        return $p->deleteKeHoachMuaSam($maKeHoachMuaSam);
+    }
 }
 ?>

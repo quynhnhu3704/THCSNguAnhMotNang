@@ -82,13 +82,17 @@ if($kq && $kq->num_rows > 0) {
                             <tbody>
                                 <?php 
                                 $res = $p->get01ChiTietPM($maPhieuMuon);
-                                $dem = 1;
-                                while($row = $res->fetch_assoc()) {
-                                    echo '<tr>';
-                                        echo '<td><strong>' . $dem++ . '</strong></td>';
-                                        echo '<td title="'. $row['tenThietBi'] .'" class="text-start">' . $row['tenThietBi'] . '</td>';
-                                        echo '<td>' . $row['soLuong'] . '</td>';
-                                    echo '</tr>';
+                                if($res && $res->num_rows > 0) {
+                                    $dem = 1;
+                                    while($row = $res->fetch_assoc()) {
+                                        echo '<tr>';
+                                            echo '<td><strong>' . $dem++ . '</strong></td>';
+                                            echo '<td title="'. $row['tenThietBi'] .'" class="text-start">' . $row['tenThietBi'] . '</td>';
+                                            echo '<td>' . $row['soLuong'] . '</td>';
+                                        echo '</tr>';
+                                    }
+                                } else {
+                                echo '<tr><td colspan="7" class="text-center text-muted">Chưa có thiết bị nào trong phiếu mượn này.</td></tr>';
                                 }
                                 ?>
                             </tbody>

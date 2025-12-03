@@ -151,30 +151,6 @@ class modelPhieuMuon {
         return true;
     }
 
-    public function deleteChiTietPM($maChiTietPM) {
-        $p = new clsKetNoi();
-        $con = $p->moketnoi();
-
-        // Lấy mã chi tiết thiết bị
-        $kq = mysqli_query($con, "SELECT maChiTietTB FROM chitietphieumuon WHERE maChiTietPM = $maChiTietPM");
-        if (!$kq || $kq->num_rows == 0) {
-            $p->dongketnoi($con);
-            return false;
-        }
-
-        $r = mysqli_fetch_assoc($kq);
-        $maChiTietTB = $r['maChiTietTB'];
-
-        // Trả thiết bị về khả dụng
-        mysqli_query($con, "UPDATE chitietthietbi SET tinhTrang = N'Khả dụng' WHERE maChiTietTB = $maChiTietTB");
-
-        // Xóa chi tiết phiếu mượn
-        $kq = mysqli_query($con, "DELETE FROM chitietphieumuon WHERE maChiTietPM = $maChiTietPM");
-
-        $p->dongketnoi($con);
-        return $kq;
-    }
-
     public function deletePhieuMuon($maPhieuMuon) {
         $p = new clsKetNoi();
         $con = $p->moketnoi();

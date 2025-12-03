@@ -29,7 +29,6 @@ if($kq && $kq->num_rows > 0) {
     exit();
 }
 
-
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     // 1. Trả tất cả thiết bị về Khả dụng
     $p->restoreThietBi($maPhieuMuon);

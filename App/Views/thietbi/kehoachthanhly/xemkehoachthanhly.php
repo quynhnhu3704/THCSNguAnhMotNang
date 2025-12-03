@@ -66,16 +66,20 @@ if($kq && $kq->num_rows > 0) {
                         <tbody>
                             <?php
                             $res = $p->get01ChiTietKHThanhLy($maKeHoachThanhLy);
-                            $dem = 1;
-                            while($row = $res->fetch_assoc()) {
-                                echo '<tr>';
-                                    echo '<td><strong>' . $dem++ . '</strong></td>';
-                                    echo '<td title="'. $row['tenThietBi'] .'">' . $row['tenThietBi'] . '</td>';
-                                    echo '<td>' . $row['tenBoMon'] . '</td>';
-                                    echo '<td>' . $row['soLuong'] . '</td>';
-                                    echo '<td>' . number_format($row['donGia'], 0, ',', '.') . ' ₫</td>';
-                                    echo '<td>' . number_format($row['thanhTien'], 0, ',', '.') . ' ₫</td>';
-                                echo '</tr>';
+                            if($res && $res->num_rows > 0) {
+                                $dem = 1;
+                                while($row = $res->fetch_assoc()) {
+                                    echo '<tr>';
+                                        echo '<td><strong>' . $dem++ . '</strong></td>';
+                                        echo '<td title="'. $row['tenThietBi'] .'">' . $row['tenThietBi'] . '</td>';
+                                        echo '<td>' . $row['tenBoMon'] . '</td>';
+                                        echo '<td>' . $row['soLuong'] . '</td>';
+                                        echo '<td>' . number_format($row['donGia'], 0, ',', '.') . ' ₫</td>';
+                                        echo '<td>' . number_format($row['thanhTien'], 0, ',', '.') . ' ₫</td>';
+                                    echo '</tr>';
+                                }
+                            } else {
+                                echo '<tr><td colspan="7" class="text-center text-muted">Chưa có thiết bị nào trong kế hoạch này.</td></tr>';
                             }
                             ?>
                         </tbody>

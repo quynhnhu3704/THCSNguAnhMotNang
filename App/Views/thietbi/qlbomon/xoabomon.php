@@ -29,7 +29,6 @@ if($kq && $kq->num_rows > 0) {
     exit();
 }
 
-
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     if ($p->deleteBoMon($maBoMon)) {
         echo "<script>alert('Xóa bộ môn thành công!'); window.location.href='index.php?page=dsbomon';</script>";

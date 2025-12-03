@@ -29,7 +29,6 @@ if($kq && $kq->num_rows > 0) {
     exit();
 }
 
-
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     if ($p->deleteNguoiDung($maNguoiDung)) {
         echo "<script>alert('Xóa người dùng thành công!'); window.location.href='index.php?page=dsnguoidung';</script>";

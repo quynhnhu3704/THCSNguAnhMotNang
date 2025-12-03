@@ -5,11 +5,11 @@ include_once('mketnoi.php');
 class modelKeHoachThanhLy {
     public function selectAllKeHoachThanhLy() {
         $p = new clsKetNoi();
-        $truyvan = "SELECT tl.*, nd.hoTen, vt.tenVaiTro, COUNT(ct.maChiTietKHThanhLy) AS soLuongThanhLy
+        $truyvan = "SELECT tl.*, nd.hoTen, vt.tenVaiTro, SUM(ct.soLuong) AS soLuongThanhLy
                     FROM kehoachthanhly tl
-                    JOIN nguoidung nd ON tl.maNguoiDung = nd.maNguoiDung
-                    JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
-                    JOIN chitietkehoachthanhly ct ON tl.maKeHoachThanhLy = ct.maKeHoachThanhLy
+                    LEFT JOIN nguoidung nd ON tl.maNguoiDung = nd.maNguoiDung
+                    LEFT JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
+                    LEFT JOIN chitietkehoachthanhly ct ON tl.maKeHoachThanhLy = ct.maKeHoachThanhLy
                     GROUP BY tl.maKeHoachThanhLy";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
@@ -31,11 +31,11 @@ class modelKeHoachThanhLy {
 
     public function searchKeHoachThanhLy($keyword) {
         $p = new clsKetNoi();
-        $truyvan = "SELECT tl.*, nd.hoTen, vt.tenVaiTro, COUNT(ct.maChiTietKHThanhLy) AS soLuongThanhLy
+        $truyvan = "SELECT tl.*, nd.hoTen, vt.tenVaiTro, SUM(ct.soLuong) AS soLuongThanhLy
                     FROM kehoachthanhly tl
-                    JOIN nguoidung nd ON tl.maNguoiDung = nd.maNguoiDung
-                    JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
-                    JOIN chitietkehoachthanhly ct ON tl.maKeHoachThanhLy = ct.maKeHoachThanhLy
+                    LEFT JOIN nguoidung nd ON tl.maNguoiDung = nd.maNguoiDung
+                    LEFT JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
+                    LEFT JOIN chitietkehoachthanhly ct ON tl.maKeHoachThanhLy = ct.maKeHoachThanhLy
                     WHERE hoTen LIKE N'%$keyword%'
                     GROUP BY tl.maKeHoachThanhLy";
         $con = $p->moketnoi();

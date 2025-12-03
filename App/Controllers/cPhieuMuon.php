@@ -58,11 +58,6 @@ class controlPhieuMuon {
         return $p->deletePhieuMuon($maPhieuMuon);
     }
 
-    public function deleteChiTietPM($maChiTietPM) {
-        $p = new modelPhieuMuon();
-        return $p->deleteChiTietPM($maChiTietPM);
-    }
-
     public function updatePhieuMuon($maPhieuMuon, $trangThai, $ghiChu) {
         $p = new modelPhieuMuon();
         return $p->updatePhieuMuon($maPhieuMuon, $trangThai, $ghiChu);

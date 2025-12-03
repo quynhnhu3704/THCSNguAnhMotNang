@@ -29,7 +29,6 @@ if($kq && $kq->num_rows > 0) {
     exit();
 }
 
-
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
     if ($p->deleteNhaCungCap($maNhaCungCap)) {
         echo "<script>alert('Xóa nhà cung cấp thành công!'); window.location.href='index.php?page=dsnhacungcap';</script>";

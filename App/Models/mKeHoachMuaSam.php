@@ -5,12 +5,12 @@ include_once('mketnoi.php');
 class modelKeHoachMuaSam {
     public function selectAllKeHoachMuaSam() {
         $p = new clsKetNoi();
-        $truyvan = "SELECT ms.*, nd.hoTen, vt.tenVaiTro, bm.tenBoMon, COUNT(ct.maChiTietKHMuaSam) AS soLuongMuaSam
+        $truyvan = "SELECT ms.*, nd.hoTen, vt.tenVaiTro, bm.tenBoMon, SUM(ct.soLuong) AS soLuongMuaSam
                     FROM kehoachmuasam ms
-                    JOIN nguoidung nd ON ms.maNguoiDung = nd.maNguoiDung
-                    JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
-                    JOIN bomon bm ON nd.maBoMon = bm.maBoMon
-                    JOIN chitietkehoachmuasam ct ON ms.maKeHoachMuaSam = ct.maKeHoachMuaSam
+                    LEFT JOIN nguoidung nd ON ms.maNguoiDung = nd.maNguoiDung
+                    LEFT JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
+                    LEFT JOIN bomon bm ON nd.maBoMon = bm.maBoMon
+                    LEFT JOIN chitietkehoachmuasam ct ON ms.maKeHoachMuaSam = ct.maKeHoachMuaSam
                     GROUP BY ms.maKeHoachMuaSam";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
@@ -21,9 +21,9 @@ class modelKeHoachMuaSam {
     public function select01KeHoachMuaSam($maKeHoachMuaSam) {
         $p = new clsKetNoi();
         $truyvan = "SELECT * FROM kehoachmuasam ms
-                    JOIN nguoidung nd ON ms.maNguoiDung = nd.maNguoiDung
-                    JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
-                    JOIN bomon bm ON nd.maBoMon = bm.maBoMon
+                    LEFT JOIN nguoidung nd ON ms.maNguoiDung = nd.maNguoiDung
+                    LEFT JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
+                    LEFT JOIN bomon bm ON nd.maBoMon = bm.maBoMon
                     WHERE maKeHoachMuaSam = $maKeHoachMuaSam";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
@@ -33,12 +33,12 @@ class modelKeHoachMuaSam {
 
     public function searchKeHoachMuaSam($keyword) {
         $p = new clsKetNoi();
-        $truyvan = "SELECT ms.*, nd.hoTen, vt.tenVaiTro, bm.tenBoMon, COUNT(ct.maChiTietKHMuaSam) AS soLuongMuaSam
+        $truyvan = "SELECT ms.*, nd.hoTen, vt.tenVaiTro, bm.tenBoMon, SUM(ct.soLuong) AS soLuongMuaSam
                     FROM kehoachmuasam ms
-                    JOIN nguoidung nd ON ms.maNguoiDung = nd.maNguoiDung
-                    JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
-                    JOIN bomon bm ON nd.maBoMon = bm.maBoMon
-                    JOIN chitietkehoachmuasam ct ON ms.maKeHoachMuaSam = ct.maKeHoachMuaSam
+                    LEFT JOIN nguoidung nd ON ms.maNguoiDung = nd.maNguoiDung
+                    LEFT JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
+                    LEFT JOIN bomon bm ON nd.maBoMon = bm.maBoMon
+                    LEFT JOIN chitietkehoachmuasam ct ON ms.maKeHoachMuaSam = ct.maKeHoachMuaSam
                     WHERE hoTen LIKE N'%$keyword%'
                     GROUP BY ms.maKeHoachMuaSam";
         $con = $p->moketnoi();
@@ -104,6 +104,20 @@ class modelKeHoachMuaSam {
                     WHERE ct.maKeHoachMuaSam = $maKeHoachMuaSam";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
+        $p->dongketnoi($con);
+        return $kq;
+    }
+    
+    public function deleteKeHoachMuaSam($maKeHoachMuaSam) {
+        $p = new clsKetNoi();
+        $con = $p->moketnoi();
+
+        // Xóa chi tiết kế hoạch mua sắm trước
+        mysqli_query($con,  "DELETE FROM chitietkehoachmuasam WHERE maKeHoachMuaSam = $maKeHoachMuaSam");
+
+        // Xóa kế hoạch mua sắm
+        $kq = mysqli_query($con, "DELETE FROM kehoachmuasam WHERE maKeHoachMuaSam = $maKeHoachMuaSam");
+
         $p->dongketnoi($con);
         return $kq;
     }
