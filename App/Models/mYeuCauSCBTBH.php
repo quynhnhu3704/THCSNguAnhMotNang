@@ -101,8 +101,10 @@ class modelYeuCauSCBTBH{
             $tinhTrang = "Khả dụng";
         } elseif ($tienDo == "Không thể sửa") {
             $tinhTrang = "Thanh lý";
+        } elseif ($tienDo == "Chờ xác nhận" || $tienDo == "Đang xử lý") {
+            $tinhTrang = "Báo hỏng";
         } else {
-            $tinhTrang = null; // các tiến độ khác không cập nhật tình trạng
+            $tinhTrang = null;
         }
 
         // 3. Update tình trạng nếu có thay đổi trong chitietthietbi
