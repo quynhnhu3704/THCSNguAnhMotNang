@@ -16,7 +16,7 @@ $p = new controlKeHoachMuaSam();
 $maKeHoachMuaSam = $_GET['maKeHoachMuaSam'];
 
 if(!$maKeHoachMuaSam) {
-    echo "<script>alert('Không tìm thấy kế hoạch!'); window.location.href='index.php?page=dskehoachmuasam';</script>";
+    echo "<script>alert('Không tìm thấy kế hoạch!'); window.location.href='index.php?page=dsmuasam';</script>";
     exit();
 }
 
@@ -25,7 +25,7 @@ $kq = $p->get01KeHoachMuaSam($maKeHoachMuaSam);
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy kế hoạch!'); window.location.href='index.php?page=dskehoachmuasam';</script>";
+    echo "<script>alert('Không tìm thấy kế hoạch!'); window.location.href='index.php?page=dsmuasam';</script>";
     exit();
 }
 ?>
@@ -122,17 +122,18 @@ if($kq && $kq->num_rows > 0) {
             <!-- Phê duyệt -->
             <form action="#" method="post">
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Kết quả phê duyệt <span class="text-danger">*</span></label>
+                    <label class="form-label fw-semibold">Trạng thái <span class="text-danger">*</span></label>
                     <select name="trangThai" class="form-select" required>
-                        <option value="" disabled selected>-- Chọn kết quả phê duyệt --</option>
-                        <option value="Chấp thuận">Chấp thuận</option>
-                        <option value="Từ chối">Từ chối</option>
+                        <option value="" disabled>-- Chọn trạng thái --</option>
+                        <option value="Chờ duyệt" <?= ($r["trangThai"] == 'Chờ duyệt') ? 'selected' : '' ?>>Chờ duyệt</option>
+                        <option value="Chấp thuận" <?= ($r["trangThai"] == 'Chấp thuận') ? 'selected' : '' ?>>Chấp thuận</option>
+                        <option value="Từ chối" <?= ($r["trangThai"] == 'Từ chối') ? 'selected' : '' ?>>Từ chối</option>
                     </select>
                 </div>
 
                 <div class="mb-4">
                     <label class="form-label fw-semibold">Ghi chú</label>
-                    <textarea class="form-control" rows="3" style="resize: none;" placeholder="Nhập ý kiến nhận xét..."></textarea>
+                    <textarea class="form-control" name="ghiChu" rows="3" style="resize: none;" placeholder="Nhập ý kiến nhận xét..."></textarea>
                 </div>
 
                 <div class="text-end mb-2">
@@ -154,7 +155,7 @@ if($kq && $kq->num_rows > 0) {
                         <!-- simple stylized "signature" -->
                         <svg width="220" height="70" viewBox="0 0 220 70" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 45 C30 10, 80 70, 110 50 C140 30, 170 60, 210 20" stroke="#1a237e" stroke-width="2" fill="none" stroke-linecap="round"/>
-                            <text x="12" y="62" font-size="10" fill="#1a237e" font-family="Momo Signature, cursive"><?= htmlspecialchars($r['hoTen']) ?></text>
+                            <text x="12" y="62" font-size="12.5" fill="#1a237e" font-family="Momo Signature, cursive"><?= htmlspecialchars($r['hoTen']) ?></text>
                         </svg>
                     </div>
                 </div>
@@ -163,7 +164,8 @@ if($kq && $kq->num_rows > 0) {
                 <div class="col-6 text-center">
                     <div class="fw-semibold">Hiệu trưởng</div>
                     <div class="fst-italic" style="font-size:0.85rem;">(Ký, đóng dấu)</div>
-
+                    
+                    <?php if(isset($trangThai) && $trangThai != "Chờ duyệt"): ?>
                     <div style="margin-top:6px; display:flex; justify-content:center; gap:20px; align-items:center;">
                         <!-- Fake round red seal made with CSS + SVG text -->
                         <div style="width:120px; height:120px; border-radius:50%; border:6px solid #d32f2f; display:flex; justify-content:center; align-items:center; position:relative;">
@@ -179,19 +181,30 @@ if($kq && $kq->num_rows > 0) {
                         <div style="text-align:left;">
                             <svg width="180" height="70" viewBox="0 0 180 70" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5 50 C35 10, 90 65, 140 45" stroke="#0b6623" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                                <text x="8" y="64" font-size="10" fill="#0b6623" font-family="Momo Signature, cursive">TS. Nguyễn Văn Hiệu</text>
+                                <text x="8" y="64" font-size="12.5" fill="#0b6623" font-family="Momo Signature, cursive">TS. Nguyễn Văn Hiệu</text>
                             </svg>
                             <div style="font-size:12px; margin-top:4px; font-weight:600;">(Hiệu trưởng)</div>
                         </div>
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>               
     </div>
 </div>
 
-
-
+<?php
+if(isset($_POST['btnluu'])) {
+    $trangThai = trim($_POST['trangThai']);
+    $ghiChu = trim($_POST['ghiChu']) !== '' ? trim($_POST['ghiChu']) : $r['ghiChu']; // Không nhập ghi chú mới thì giữ nguyên ghi chú cũ từ db
+    
+    if($p->updateKeHoachMuaSam($maKeHoachMuaSam, $trangThai, $ghiChu)) {
+        echo '<script>alert("Duyệt kế hoạch thành công!"); window.location.href="index.php?page=dsmuasam";</script>';
+    } else {
+        echo '<script>alert("Duyệt kế hoạch thất bại!"); window.history.back();</script>';
+    }
+}
+?>
 
 <style>
     th, td {

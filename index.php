@@ -150,12 +150,18 @@ session_start();
                 case 'dsmuasam':
                     include_once('App/Views/hieutruong/kehoachmuasam/dsmuasam.php');
                     break;
+                case 'xemmuasam':
+                    include_once('App/Views/hieutruong/kehoachmuasam/xemmuasam.php');
+                    break;
                 case 'duyetkehoachmuasam':
                     include_once('App/Views/hieutruong/kehoachmuasam/duyetkehoachmuasam.php');
                     break;
                 // Duyệt kế hoạch thanh lý
                 case 'dsthanhly':
                     include_once('App/Views/hieutruong/kehoachthanhly/dsthanhly.php');
+                    break;
+                case 'xemthanhly':
+                    include_once('App/Views/hieutruong/kehoachthanhly/xemthanhly.php');
                     break;
                 case 'duyetkehoachthanhly':
                     include_once('App/Views/hieutruong/kehoachthanhly/duyetkehoachthanhly.php');

@@ -52,5 +52,10 @@ class controlKeHoachThanhLy {
         $p = new modelKeHoachThanhLy();
         return $p->deleteKeHoachThanhLy($maKeHoachThanhLy);
     }
+
+    public function updateKeHoachThanhLy($maKeHoachThanhLy, $trangThai, $ghiChu) {
+        $p = new modelKeHoachThanhLy();
+        return $p->updateKeHoachThanhLy($maKeHoachThanhLy, $trangThai, $ghiChu);
+    }
 }
 ?>

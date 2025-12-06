@@ -52,5 +52,10 @@ class controlKeHoachMuaSam {
         $p = new modelKeHoachMuaSam();
         return $p->deleteKeHoachMuaSam($maKeHoachMuaSam);
     }
+
+    public function updateKeHoachMuaSam($maKeHoachMuaSam, $trangThai, $ghiChu) {
+        $p = new modelKeHoachMuaSam();
+        return $p->updateKeHoachMuaSam($maKeHoachMuaSam, $trangThai, $ghiChu);
+    }
 }
 ?>

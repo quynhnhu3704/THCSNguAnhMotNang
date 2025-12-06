@@ -121,5 +121,17 @@ class modelKeHoachMuaSam {
         $p->dongketnoi($con);
         return $kq;
     }
+
+    public function updateKeHoachMuaSam($maKeHoachMuaSam, $trangThai, $ghiChu) {
+        $p = new clsKetNoi();
+        $truyvan = "UPDATE kehoachmuasam SET 
+                    trangThai = N'$trangThai',
+                    ghiChu = N'$ghiChu'
+                    WHERE maKeHoachMuaSam = $maKeHoachMuaSam";
+        $con = $p->moketnoi();
+        $kq = mysqli_query($con, $truyvan);
+        $p->dongketnoi($con);
+        return $kq;
+    }
 }
 ?>

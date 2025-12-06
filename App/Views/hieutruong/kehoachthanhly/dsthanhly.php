@@ -77,7 +77,8 @@ if(!isset($_SESSION['login'])) {
                         echo '<td>' . $r['ghiChu'] . '</td>';
 
                         echo '<td class="text-center">';
-                            echo '<a href="index.php?page=duyetkehoachthanhly&maKeHoachThanhLy=' . $r['maKeHoachThanhLy'] . '" class="btn btn-sm btn-info" style="font-size: 0.95em;"><i class="bi bi-info-circle"></i> Xem</a>&nbsp;';
+                            echo '<a href="index.php?page=xemthanhly&maKeHoachThanhLy=' . $r['maKeHoachThanhLy'] . '" class="btn btn-sm btn-info" style="font-size: 0.95em;"><i class="bi bi-info-circle"></i> Xem</a>&nbsp;';
+                            echo '<a href="index.php?page=duyetkehoachthanhly&maKeHoachThanhLy=' . $r['maKeHoachThanhLy'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-clipboard-check"></i> Duyệt</a>&nbsp;';
                         echo '</td>';
                     echo '</tr>';
                 }

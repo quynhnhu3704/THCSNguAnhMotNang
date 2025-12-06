@@ -1,4 +1,4 @@
-<!-- App/Views/totruong/kehoachthanhly/xemkehoachthanhly.php -->
+<!-- App/Views/hieutruong/kehoachmuasam/xemmuasam.php -->
 <?php
 if(!isset($_SESSION['login'])) {
     echo "<script>alert('Vui lòng đăng nhập để tiếp tục.'); window.location.href='index.php?page=dangnhap'</script>";
@@ -10,22 +10,22 @@ if(!isset($_SESSION['login'])) {
 //     exit();
 // }
 
-include_once('App/Controllers/cKeHoachThanhLy.php');
-$p = new controlKeHoachThanhLy();
+include_once('App/Controllers/cKeHoachMuaSam.php');
+$p = new controlKeHoachMuaSam();
 
-$maKeHoachThanhLy = $_GET['maKeHoachThanhLy'];
+$maKeHoachMuaSam = $_GET['maKeHoachMuaSam'];
 
-if(!$maKeHoachThanhLy) {
-    echo "<script>alert('Không tìm thấy kế hoạch!'); window.location.href='index.php?page=dskehoachthanhly';</script>";
+if(!$maKeHoachMuaSam) {
+    echo "<script>alert('Không tìm thấy kế hoạch!'); window.location.href='index.php?page=dskehoachmuasam';</script>";
     exit();
 }
 
-$kq = $p->get01KeHoachThanhLy($maKeHoachThanhLy);
+$kq = $p->get01KeHoachMuaSam($maKeHoachMuaSam);
 
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy kế hoạch!'); window.location.href='index.php?page=dskehoachthanhly';</script>";
+    echo "<script>alert('Không tìm thấy kế hoạch!'); window.location.href='index.php?page=dskehoachmuasam';</script>";
     exit();
 }
 ?>
@@ -64,15 +64,16 @@ if($kq && $kq->num_rows > 0) {
             </p>
 
             <!-- Tiêu đề đơn -->
-            <h4 class="text-center fw-bold text-primary text-uppercase mb-4">Đơn đề nghị phê duyệt kế hoạch thanh lý thiết bị</h4>
+            <h4 class="text-center fw-bold text-primary text-uppercase mb-4">Đơn đề nghị phê duyệt kế hoạch mua sắm thiết bị</h4>
 
             <!-- Thông tin người lập -->
             <p><strong>Họ tên:</strong> <?= $r['hoTen'] ?></p>
             <p><strong>Vai trò:</strong> <?= $r['tenVaiTro'] ?></p>
+            <p><strong>Bộ môn:</strong> <?= !empty($r['tenBoMon']) ? $r['tenBoMon'] : 'Không có' ?></p>
             <p><strong>Ngày lập:</strong> <?= date("d/m/Y", strtotime($r['ngayLap'])) ?></p>
 
             <!-- Danh sách thiết bị -->
-            <h5 class="fw-semibold text-secondary mt-4 mb-2">Danh sách thiết bị đề nghị thanh lý</h5>
+            <h5 class="fw-semibold text-secondary mt-4 mb-2">Danh sách thiết bị đề nghị mua sắm</h5>
             <div class="d-flex justify-content-center mb-3">
                 <div class="table-responsive text-center" style="width: 100%;">
                     <table class="table table-striped table-borderless align-middle" style="font-size: 0.85em;">
@@ -81,6 +82,7 @@ if($kq && $kq->num_rows > 0) {
                                 <th>STT</th>
                                 <th>Tên thiết bị</th>
                                 <th>Bộ môn</th>
+                                <th>Nhà cung cấp</th>
                                 <th>Số lượng</th>
                                 <th>Đơn giá</th>
                                 <th>Thành tiền</th>
@@ -88,7 +90,7 @@ if($kq && $kq->num_rows > 0) {
                         </thead>
                         <tbody>
                             <?php
-                            $res = $p->get01ChiTietKHThanhLy($maKeHoachThanhLy);
+                            $res = $p->get01ChiTietKHMuaSam($maKeHoachMuaSam);
                             if($res && $res->num_rows > 0) {
                                 $dem = 1;
                                 while($row = $res->fetch_assoc()) {
@@ -96,6 +98,7 @@ if($kq && $kq->num_rows > 0) {
                                     echo '<td><strong>' . $dem++ . '</strong></td>';
                                     echo '<td title="'. $row['tenThietBi'] .'">' . $row['tenThietBi'] . '</td>';
                                     echo '<td>' . $row['tenBoMon'] . '</td>';
+                                    echo '<td>' . $row['tenNhaCungCap'] . '</td>';
                                     echo '<td>' . $row['soLuong'] . '</td>';
                                     echo '<td>' . number_format($row['donGia'], 0, ',', '.') . ' ₫</td>';
                                     echo '<td>' . number_format($row['thanhTien'], 0, ',', '.') . ' ₫</td>';
@@ -110,10 +113,10 @@ if($kq && $kq->num_rows > 0) {
                 </div>
             </div>
             
-            <!-- Tổng thu nhập -->
+            <!-- Tổng chi phí -->
             <p class="fw-bold mb-4" style="font-size: 1.25rem; border-left: 4px solid crimson; padding-left: 1em;">
-                Tổng thu nhập: 
-                <span class="text-danger"><?= number_format($r['tongThuNhap'], 0, ',', '.') ?> ₫</span>
+                Tổng chi phí: 
+                <span class="text-danger"><?= number_format($r['tongChiPhi'], 0, ',', '.') ?> ₫</span>
             </p>
             
             <p><strong>Trạng thái:</strong>
@@ -126,7 +129,7 @@ if($kq && $kq->num_rows > 0) {
             }
             ?>
             </p>
-
+            
             <p><strong>Ghi chú:</strong> <?= $r['ghiChu'] ?></p>
 
             <br><br>

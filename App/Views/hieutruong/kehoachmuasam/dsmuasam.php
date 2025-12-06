@@ -80,7 +80,7 @@ if(!isset($_SESSION['login'])) {
 
                         echo '<td class="text-center">';
                             echo '<a href="index.php?page=xemmuasam&maKeHoachMuaSam=' . $r['maKeHoachMuaSam'] . '" class="btn btn-sm btn-info" style="font-size: 0.95em;"><i class="bi bi-info-circle"></i> Xem</a>&nbsp;';
-                            echo '<a href="index.php?page=duyetkehoachmuasam&maKeHoachMuaSam=' . $r['maKeHoachMuaSam'] . '" class="btn btn-sm btn-info" style="font-size: 0.95em;"><i class="bi bi-info-circle"></i> Duyệt</a>&nbsp;';
+                            echo '<a href="index.php?page=duyetkehoachmuasam&maKeHoachMuaSam=' . $r['maKeHoachMuaSam'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-clipboard-check"></i> Duyệt</a>&nbsp;';
                         echo '</td>';
                     echo '</tr>';
                 }

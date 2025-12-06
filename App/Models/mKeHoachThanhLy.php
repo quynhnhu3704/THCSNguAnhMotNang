@@ -91,11 +91,11 @@ class modelKeHoachThanhLy {
     public function select01ChiTietKHThanhLy($maKeHoachThanhLy) {
         $p = new clsKetNoi();
         $truyvan = "SELECT *, ct.soLuong FROM chitietkehoachthanhly ct
-                    JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
-                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
-                    JOIN kehoachthanhly tl ON ct.maKeHoachThanhLy = tl.maKeHoachThanhLy
-                    JOIN nguoidung nd ON tl.maNguoiDung = nd.maNguoiDung
-                    JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
+                    LEFT JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
+                    LEFT JOIN bomon bm ON tb.maBoMon = bm.maBoMon
+                    LEFT JOIN kehoachthanhly tl ON ct.maKeHoachThanhLy = tl.maKeHoachThanhLy
+                    LEFT JOIN nguoidung nd ON tl.maNguoiDung = nd.maNguoiDung
+                    LEFT JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
                     WHERE ct.maKeHoachThanhLy = $maKeHoachThanhLy";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
@@ -113,6 +113,18 @@ class modelKeHoachThanhLy {
         // Xóa kế hoạch thanh lý
         $kq = mysqli_query($con, "DELETE FROM kehoachthanhly WHERE maKeHoachThanhLy = $maKeHoachThanhLy");
 
+        $p->dongketnoi($con);
+        return $kq;
+    }
+
+    public function updateKeHoachThanhLy($maKeHoachThanhLy, $trangThai, $ghiChu) {
+        $p = new clsKetNoi();
+        $truyvan = "UPDATE kehoachthanhly SET 
+                    trangThai = N'$trangThai',
+                    ghiChu = N'$ghiChu'
+                    WHERE maKeHoachThanhLy = $maKeHoachThanhLy";
+        $con = $p->moketnoi();
+        $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
         return $kq;
     }
