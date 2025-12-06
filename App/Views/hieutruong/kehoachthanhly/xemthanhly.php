@@ -141,10 +141,8 @@ if($kq && $kq->num_rows > 0) {
                     <!-- Fake digital signature (SVG) -->
                     <div style="margin-top:18px;">
                         <!-- simple stylized "signature" -->
-                        <svg width="220" height="70" viewBox="0 0 220 70" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 45 C30 10, 80 70, 110 50 C140 30, 170 60, 210 20" stroke="#1a237e" stroke-width="2" fill="none" stroke-linecap="round"/>
-                            <text x="12" y="62" font-size="12.5" fill="#1a237e" font-family="Momo Signature, cursive"><?= htmlspecialchars($r['hoTen']) ?></text>
-                        </svg>
+                        <img src="../public/uploads/signature_nguoilap.png" alt="Chữ ký người lập" style="max-width:180px; max-height:70px; filter: brightness(0) saturate(100%) invert(12%) sepia(97%) saturate(7490%) hue-rotate(241deg) brightness(95%) contrast(106%);"">
+                        <div style="font-family: 'Playwrite NO', cursive; font-size: 15px; color: blue"><?= $r['hoTen'] ?></div>
                     </div>
                 </div>
                 
@@ -155,23 +153,16 @@ if($kq && $kq->num_rows > 0) {
 
                     <?php if(isset($r['trangThai']) && $r['trangThai'] != "Chờ duyệt"): ?>
                     <div style="margin-top:6px; display:flex; justify-content:center; gap:20px; align-items:center;">
-                        <!-- Fake round red seal made with CSS + SVG text -->
-                        <div style="width:120px; height:120px; border-radius:50%; border:6px solid #d32f2f; display:flex; justify-content:center; align-items:center; position:relative;">
-                            <div style="text-align:center; transform:rotate(-12deg);">
-                                <div style="font-weight:700; color:#d32f2f; font-size:10px; letter-spacing:1px;">TRƯỜNG THCS</div>
-                                <div style="font-weight:900; color:#d32f2f; font-size:14px; margin-top:4px;">NGŨ ANH</div>
-                                <div style="font-weight:900; color:#d32f2f; font-size:14px;">MỘT NÀNG</div>
-                                <div style="font-size:9px; color:#d32f2f; margin-top:6px;">Số: <?= date("Y") ?>-QĐ</div>
-                            </div>
+                        <!-- Con dấu thật -->
+                        <div style="width:120px; height:120px; display:flex; justify-content:center; align-items:center; position:relative;">
+                            <img src="../public/uploads/condau.png" alt="Con dấu" style="width:120px; height:120px; object-fit:contain;">
                         </div>
 
-                        <!-- Signature under seal -->
+                        <!-- Chữ ký hiệu trưởng -->
                         <div style="text-align:left;">
-                            <svg width="180" height="70" viewBox="0 0 180 70" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M5 50 C35 10, 90 65, 140 45" stroke="#0b6623" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                                <text x="8" y="64" font-size="12.5" fill="#0b6623" font-family="Momo Signature, cursive">TS. Nguyễn Văn Hiệu</text>
-                            </svg>
-                            <div style="font-size:12px; margin-top:4px; font-weight:600;">(Hiệu trưởng)</div>
+                            <img src="../public/uploads/signature_hieutruong.png" alt="Chữ ký Hiệu trưởng" style="max-width:180px; max-height:70px; filter: brightness(0) saturate(100%) invert(12%) sepia(97%) saturate(7490%) hue-rotate(241deg) brightness(95%) contrast(106%);">
+                            <div style="font-family: 'Playwrite NO', cursive; font-size: 15px; color: blue">TS. Nguyễn Văn Hiệu</div>
+                            <div style="font-size:15px; margin-top:4px; font-weight:600;">(Hiệu trưởng)</div>
                         </div>
                     </div>
                     <?php endif; ?>
