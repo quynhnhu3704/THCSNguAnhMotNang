@@ -69,7 +69,7 @@ if ($kq && $kq->num_rows > 0) {
                 
                 <form action="#" method="post">
                     <button type="submit" name="btnmuon" class="btn btn-primary btn-lg mt-auto align-self-start fw-semibold">
-                        <i class="bi bi-cart-plus me-2 fw-semibold"></i>Thêm vào phiếu mượn
+                        <i class="bi bi-clipboard-check me-2 fw-semibold"></i>Thêm vào phiếu mượn
                     </button>
                 </form>
             </div>
