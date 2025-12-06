@@ -96,6 +96,8 @@ session_start();
                 echo '<li><a href="index.php?page=dskehoachthanhly" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch thanh lý</a></li>';
                 echo '<li><a href="index.php?page=dsmuasam" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch mua sắm</a></li>';
                 echo '<li><a href="index.php?page=dsthanhly" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch thanh lý</a></li>';
+                echo '<li><a href="index.php?page=dsbaocaothongke" class="text-decoration-none d-block text-dark py-2">Lập báo cáo thống kê</a></li>';
+                echo '<li><a href="index.php?page=xembaocao" class="text-decoration-none d-block text-dark py-2">Xem báo cáo thống kê</a></li>';
 
             }
             ?>
@@ -165,6 +167,13 @@ session_start();
                     break;
                 case 'duyetkehoachthanhly':
                     include_once('App/Views/hieutruong/kehoachthanhly/duyetkehoachthanhly.php');
+                    break;
+                // Xem báo cáo thống kê
+                case 'dsbaocao':
+                    include_once('App/Views/hieutruong/baocaothongke/dsbaocao.php');
+                    break;
+                case 'xembaocao':
+                    include_once('App/Views/hieutruong/baocaothongke/xembaocao.php');
                     break;
 
                 // Chức năng cho Tổ trưởng chuyên môn
@@ -269,6 +278,16 @@ session_start();
                     break;
                 case 'xoakehoachthanhly':
                     include_once('App/Views/thietbi/kehoachthanhly/xoakehoachthanhly.php');
+                    break;
+                // Lập báo cáo thống kê
+                case 'dsbaocaothongke':
+                    include_once('App/Views/thietbi/baocaothongke/dsbaocaothongke.php');
+                    break;
+                case 'xembaocaothongke':
+                    include_once('App/Views/thietbi/baocaothongke/xembaocaothongke.php');
+                    break;
+                case 'xoabaocaothongke':
+                    include_once('App/Views/thietbi/baocaothongke/xoabaocaothongke.php');
                     break;
                 
 
