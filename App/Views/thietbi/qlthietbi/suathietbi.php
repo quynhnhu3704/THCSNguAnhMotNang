@@ -171,6 +171,12 @@ if(isset($_POST['btnluu'])) {
 
     // Xử lý hình ảnh
     if (is_uploaded_file($hinhAnh['tmp_name'])) {
+        // Xóa hình cũ nếu có
+        if(!empty($r['hinhAnh']) && file_exists('public/uploads/' . $r['hinhAnh'])) {
+            unlink('public/uploads/' . $r['hinhAnh']);
+        }
+
+        // Upload hình mới
         $hinh = upload($hinhAnh);
     } else {
         $hinh = $r['hinhAnh']; // Giữ nguyên hình cũ nếu không có hình mới
