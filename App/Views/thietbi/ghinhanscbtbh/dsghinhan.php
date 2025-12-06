@@ -68,12 +68,7 @@ if(!isset($_SESSION['login'])) {
                         echo '<td class="text-center">' . $r['tenNhaCungCap'] . '</td>';
 
                         echo '<td class="text-center">';
-                            switch ($r['loaiYeuCau']) {
-                                case "Sửa chữa": echo '<span class="badge bg-danger">' . $r['loaiYeuCau'] . '</span>'; break;
-                                case "Bảo trì": echo '<span class="badge bg-warning text-dark">' . $r['loaiYeuCau'] . '</span>'; break;
-                                case "Bảo hành": echo '<span class="badge bg-info text-dark">' . $r['loaiYeuCau'] . '</span>'; break;
-                                default: echo '<span class="badge bg-light text-dark">Chưa có</span>';
-                            }
+                            echo ($r['loaiYeuCau'] === NULL) ? '—' : $r['loaiYeuCau'];
                         echo '</td>';
                         
                         echo '<td class="text-center">';
@@ -82,7 +77,7 @@ if(!isset($_SESSION['login'])) {
                                 case "Đang xử lý": echo '<span class="badge bg-warning text-dark">' . $r['tienDo'] . '</span>'; break;
                                 case "Đã sửa": echo '<span class="badge bg-success">' . $r['tienDo'] . '</span>'; break;
                                 case "Không thể sửa": echo '<span class="badge bg-danger">' . $r['tienDo'] . '</span>'; break;
-                                default: echo '<span class="badge bg-light text-dark">Chưa có</span>';
+                                default: echo '—';
                             }
                         echo '</td>';
 

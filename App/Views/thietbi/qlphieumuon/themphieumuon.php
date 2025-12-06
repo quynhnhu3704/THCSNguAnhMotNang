@@ -90,8 +90,18 @@ if(!isset($_SESSION['login'])) {
                                     <td>
                                         <select name="maThietBi[]" class="form-select thietBiSelect">
                                             <option value="" selected>-- Chọn thiết bị --</option>
-                                            <?php foreach($res as $r): ?>
-                                                <option value="<?= $r["maThietBi"] ?>" data-bomon="<?= $r["tenBoMon"] ?>"><?= $r["tenThietBi"] ?></option>
+                                            <?php foreach($res as $r): 
+                                            // lấy số lượng khả dụng cho mỗi thiết bị (1 query mỗi thiết bị)
+                                            $soLuongKhaDung = 0;
+                                            if (isset($r['maThietBi'])) {
+                                                // dùng controller để lấy count
+                                                $tmp = $p->countSoLuongKhaDung($r['maThietBi']);
+                                                $soLuongKhaDung = $tmp ? (int)($tmp->fetch_assoc()['soLuongKhaDung'] ?? 0) : 0;
+                                            }
+                                            ?>
+                                            <?php if ($soLuongKhaDung > 0): ?>
+                                                <option value="<?= $r["maThietBi"] ?>" data-bomon="<?= $r["tenBoMon"] ?>" data-max="<?= $soLuongKhaDung ?>"><?= $r["tenThietBi"] ?> (Khả dụng: <?= $soLuongKhaDung ?>)</option>
+                                            <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
@@ -112,7 +122,7 @@ if(!isset($_SESSION['login'])) {
                 <!-- Ghi chú -->
                 <div class="mb-4">
                     <label class="form-label fw-medium">Ghi chú</label>
-                    <textarea name="ghiChu" class="form-control" rows="3" style="resize:none;"></textarea>
+                    <textarea name="ghiChu" class="form-control" rows="3" placeholder="Yêu cầu hoặc lưu ý đặc biệt..." style="resize:none;"></textarea>
                 </div>
 
                 <!-- Nút submit/reset -->
@@ -292,6 +302,19 @@ form && form.addEventListener('submit', function(e){
 document.addEventListener('DOMContentLoaded', function(){
     soLuongInputs().forEach(inp => inp.removeAttribute('name'));
     updateAllOptionVisibility();
+});
+
+// Ràng buộc số lượng max = chitietthietbi có tinhTrang = "Khả dụng"
+document.querySelectorAll('.thietBiSelect').forEach(select => {
+    select.addEventListener('change', function () {
+        const opt = this.selectedOptions[0];
+        const max = parseInt(opt?.dataset.max || 0);
+
+        const input = this.closest('tr').querySelector('.soLuongInput');
+        input.disabled = max <= 0;
+        input.max = max > 0 ? max : 0;
+        input.value = "";
+    });
 });
 </script>
 

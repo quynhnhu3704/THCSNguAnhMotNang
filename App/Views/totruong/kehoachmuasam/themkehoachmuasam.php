@@ -81,8 +81,8 @@ if($kq && $kq->num_rows > 0) {
                             <tbody>
                                 <?php 
                                 include_once('App/Controllers/cThietBi.php');
-                                $pTB = new controlThietBi();
-                                $kq = $pTB->getAllThietBi();
+                                $p = new controlThietBi();
+                                $kq = $p->getAllThietBi();
                                 // Lấy toàn bộ thiết bị 1 lần để tránh lỗi fetch_assoc bị cạn
                                 $res = $kq ? $kq->fetch_all(MYSQLI_ASSOC) : [];
 
@@ -105,8 +105,8 @@ if($kq && $kq->num_rows > 0) {
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
-                                    <td><input type="text" class="form-control" disabled></td>
-                                    <td><input type="text" class="form-control" disabled></td>
+                                    <td><input type="text" class="form-control" disabled></td> <!-- Bộ môn -->
+                                    <td><input type="text" class="form-control" disabled></td> <!-- Nhà cung cấp -->
                                     <td><input type="number" min="1" class="form-control text-center soLuongInput"></td>
                                     <td><input type="number" min="1" class="form-control donGiaInput"></td>
                                     <td><input type="number" class="form-control text-end thanhTienInput" readonly></td>
@@ -132,7 +132,7 @@ if($kq && $kq->num_rows > 0) {
                 <!-- Ghi chú -->
                 <div class="mb-4">
                     <label class="form-label fw-medium">Ghi chú</label>
-                    <textarea name="ghiChu" class="form-control" rows="3" style="resize:none;"></textarea>
+                    <textarea name="ghiChu" class="form-control" placeholder="Thông tin bổ sung cho kế hoạch..." rows="3" style="resize:none;"></textarea>
                 </div>
 
                 <!-- Nút submit/reset -->

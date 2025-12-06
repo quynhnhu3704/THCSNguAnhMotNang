@@ -102,5 +102,19 @@ class modelKeHoachThanhLy {
         $p->dongketnoi($con);
         return $kq;
     }
+
+    public function deleteKeHoachThanhLy($maKeHoachThanhLy) {
+        $p = new clsKetNoi();
+        $con = $p->moketnoi();
+
+        // Xóa chi tiết kế hoạch thanh lý trước
+        mysqli_query($con,  "DELETE FROM chitietkehoachthanhly WHERE maKeHoachThanhLy = $maKeHoachThanhLy");
+
+        // Xóa kế hoạch thanh lý
+        $kq = mysqli_query($con, "DELETE FROM kehoachthanhly WHERE maKeHoachThanhLy = $maKeHoachThanhLy");
+
+        $p->dongketnoi($con);
+        return $kq;
+    }
 }
 ?>

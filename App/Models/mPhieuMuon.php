@@ -22,8 +22,8 @@ class modelPhieuMuon {
         $p = new clsKetNoi();
         $truyvan = "SELECT * FROM phieumuon pm
                     JOIN nguoidung nd ON pm.maNguoiDung = nd.maNguoiDung
-                    JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
-                    JOIN bomon bm ON nd.maBoMon = bm.maBoMon
+                    LEFT JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
+                    LEFT JOIN bomon bm ON nd.maBoMon = bm.maBoMon
                     WHERE maPhieuMuon = $maPhieuMuon";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);

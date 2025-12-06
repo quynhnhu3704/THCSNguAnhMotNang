@@ -47,5 +47,10 @@ class controlKeHoachThanhLy {
         $p = new modelKeHoachThanhLy();
         return $p->insertChiTietKHThanhLy($maKeHoachThanhLy, $chiTiet); // truyền mảng chi tiết
     }
+
+    public function deleteKeHoachThanhLy($maKeHoachThanhLy) {
+        $p = new modelKeHoachThanhLy();
+        return $p->deleteKeHoachThanhLy($maKeHoachThanhLy);
+    }
 }
 ?>

@@ -51,7 +51,7 @@ $gioHang = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-medium">Ghi chú</label>
-                            <textarea name="ghiChu" class="form-control" style="resize:none;" placeholder="Ghi chú thông tin phiếu mượn..."></textarea>
+                            <textarea name="ghiChu" class="form-control" style="resize:none;" placeholder="Yêu cầu hoặc lưu ý đặc biệt..."></textarea>
                         </div>
                     </div>
 
@@ -77,13 +77,14 @@ $gioHang = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                                     $dem = 1;
                                     foreach($gioHang as $maThietBi => $soLuong) {
                                         $r = $p->get01ThietBi($maThietBi)->fetch_assoc();
+                                        $soLuongKhaDung = $p->countSoLuongKhaDung($maThietBi)->fetch_assoc()['soLuongKhaDung'];
                                 ?>
                                 <tr>
                                     <td><strong><?= $dem++ ?></strong></td>
                                     <td><?= $r['tenThietBi'] ?></td>
                                     <td><?= $r['tenBoMon'] ?></td>
                                     <td>
-                                        <input type="number" name="soLuong[<?= $maThietBi ?>]" value="<?= $soLuong ?>" min="1" max="<?= $r['soLuong'] ?>" class="form-control text-center">
+                                        <input type="number" name="soLuong[<?= $maThietBi ?>]" value="<?= $soLuong ?>" min="1" max="<?= $soLuongKhaDung ?>" class="form-control text-center">
                                     </td>
                                     <td>
                                         <a href="index.php?page=dangkymuon&xoa=<?= $maThietBi ?>" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm('Bạn có chắc muốn xóa thiết bị này không?')"><i class="bi bi-trash"></i> Xóa</a>
@@ -150,7 +151,7 @@ if(isset($_POST['btnXacNhan'])) {
         // truyền toàn bộ giỏ mượn làm mảng
         if($p->insertChiTietPM($maPhieuMuon, $_SESSION['cart'])) {
             unset($_SESSION['cart']); // xóa giỏ mượn sau khi đăng ký thành công
-            echo "<script>alert('Đăng ký mượn thành công!'); window.location.href='index.php';</script>";
+            echo "<script>alert('Đăng ký mượn thành công!'); window.location.href='index.php?page=xemphieumuon';</script>";
         } else {
             $p->deletePhieuMuon($maPhieuMuon); // rollback phiếu mượn
             echo "<script>alert('Không đủ thiết bị khả dụng.'); window.history.back();</script>";

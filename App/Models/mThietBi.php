@@ -174,18 +174,18 @@ class modelThietBi {
         return $kq;
     }
 
-    public function selectAllChiTietTBTheoTinhTrang($tinhTrang) {
-        $p = new clsKetNoi();
-        $truyvan = "SELECT * FROM chitietthietbi ct
-                    JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
-                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
-                    JOIN nhacungcap ncc ON tb.maNhaCungCap = ncc.maNhaCungCap
-                    WHERE ct.tinhTrang = N'$tinhTrang'";
-        $con = $p->moketnoi();
-        $kq = mysqli_query($con, $truyvan);
-        $p->dongketnoi($con);
-        return $kq;
-    }
+    // public function selectAllChiTietTBTheoTinhTrang($tinhTrang) {
+    //     $p = new clsKetNoi();
+    //     $truyvan = "SELECT * FROM chitietthietbi ct
+    //                 JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
+    //                 JOIN bomon bm ON tb.maBoMon = bm.maBoMon
+    //                 JOIN nhacungcap ncc ON tb.maNhaCungCap = ncc.maNhaCungCap
+    //                 WHERE ct.tinhTrang = N'$tinhTrang'";
+    //     $con = $p->moketnoi();
+    //     $kq = mysqli_query($con, $truyvan);
+    //     $p->dongketnoi($con);
+    //     return $kq;
+    // }
 
     public function searchChiTietTB($keyword) {
         $p = new clsKetNoi();
@@ -200,13 +200,11 @@ class modelThietBi {
         return $kq;
     }
 
-    public function searchChiTietTBTheoTinhTrang($keyword, $tinhTrang) {
+    public function countSoLuongKhaDung($maThietBi) {
         $p = new clsKetNoi();
-        $truyvan = "SELECT * FROM chitietthietbi ct
-                    JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
-                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
-                    JOIN nhacungcap ncc ON tb.maNhaCungCap = ncc.maNhaCungCap
-                    WHERE tenThietBi LIKE N'%$keyword%' AND ct.tinhTrang = N'$tinhTrang'";
+        $truyvan = "SELECT COUNT(*) AS soLuongKhaDung
+                    FROM chitietthietbi
+                    WHERE maThietBi = $maThietBi AND tinhTrang = 'Khả dụng'";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -230,6 +228,20 @@ class modelThietBi {
             $kq = mysqli_query($con, $truyvan);
         }
         
+        $p->dongketnoi($con);
+        return $kq;
+    }
+
+    public function selectThietBiCanThanhLy() {
+        $p = new clsKetNoi();
+        $truyvan = "SELECT *, COUNT(ct.maChiTietTB) AS soLuongThanhLy
+                    FROM thietbi tb
+                    JOIN bomon bm ON tb.maBoMon = bm.maBoMon
+                    LEFT JOIN chitietthietbi ct ON tb.maThietBi = ct.maThietBi AND ct.tinhTrang = 'Thanh lý'
+                    GROUP BY tb.maThietBi
+                    HAVING soLuongThanhLy > 0";
+        $con = $p->moketnoi();
+        $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
         return $kq;
     }

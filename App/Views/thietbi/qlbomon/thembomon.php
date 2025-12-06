@@ -28,7 +28,7 @@ if(!isset($_SESSION['login'])) {
                 <!-- Mô tả -->
                 <div class="mb-4">
                     <label class="form-label fw-medium">Mô tả</label>
-                    <textarea name="moTa" class="form-control" rows="3" style="resize:none;"></textarea>
+                    <textarea name="moTa" class="form-control" rows="3" placeholder="Mô tả chức năng và phạm vi của bộ môn..." style="resize:none;"></textarea>
                 </div>
 
                 <!-- Nút submit/reset -->

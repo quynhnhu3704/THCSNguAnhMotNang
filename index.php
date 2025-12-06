@@ -12,6 +12,9 @@ session_start();
 
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Momo+Signature&family=Playwrite+NO:wght@100..400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link rel="icon" href="public/uploads/icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="public/css/style.css">
@@ -23,7 +26,7 @@ session_start();
     <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
         <div class="container-fluid px-5">
             <!-- Nút mở sidebar -->
-            <button id="menuToggle" class="btn btn-outline-primary me-3">&#9776;</button>
+       <button id="menuToggle" class="btn btn-outline-primary me-3">&#9776;</button>
 
             <a class="navbar-brand fw-bold ms-3" href="index.php">
                 <i class="bi bi-mortarboard me-2"></i>THCS Ngũ Anh Một Nàng
@@ -91,6 +94,9 @@ session_start();
                 echo '<li><a href="index.php?page=dsyeucau" class="text-decoration-none d-block text-dark py-2">Cập nhật tiến độ SC/BT/BH</a></li>';
                 echo '<li><a href="index.php?page=dskehoachmuasam" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch mua sắm</a></li>';
                 echo '<li><a href="index.php?page=dskehoachthanhly" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch thanh lý</a></li>';
+                echo '<li><a href="index.php?page=dsmuasam" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch mua sắm</a></li>';
+                echo '<li><a href="index.php?page=dsthanhly" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch thanh lý</a></li>';
+
             }
             ?>
         </ul>
@@ -140,6 +146,21 @@ session_start();
                 
 
                 // Chức năng cho Hiệu trưởng
+                // Duyệt kế hoạch mua sắm
+                case 'dsmuasam':
+                    include_once('App/Views/hieutruong/kehoachmuasam/dsmuasam.php');
+                    break;
+                case 'duyetkehoachmuasam':
+                    include_once('App/Views/hieutruong/kehoachmuasam/duyetkehoachmuasam.php');
+                    break;
+                // Duyệt kế hoạch thanh lý
+                case 'dsthanhly':
+                    include_once('App/Views/hieutruong/kehoachthanhly/dsthanhly.php');
+                    break;
+                case 'duyetkehoachthanhly':
+                    include_once('App/Views/hieutruong/kehoachthanhly/duyetkehoachthanhly.php');
+                    break;
+
                 // Chức năng cho Tổ trưởng chuyên môn
                 // Lập kế hoạch mua sắm
                 case 'dskehoachmuasam':
@@ -157,9 +178,11 @@ session_start();
 
                 // Chức năng cho Giáo viên bộ môn
                 case 'dangkymuon':
-                    include_once('App/Views/giaovien/dangkymuon/dangkymuon.php');
+                    include_once('App/Views/giaovien/dangkymuon.php');
                     break;
-
+                case 'xemphieumuon':
+                    include_once('App/Views/giaovien/xemphieumuon.php');
+                    break;
 
                 // Chức năng cho Nhân viên quản lý thiết bị
                 // Quản lý thiết bị (CRUD)

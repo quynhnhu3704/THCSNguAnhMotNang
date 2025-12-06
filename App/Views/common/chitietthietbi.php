@@ -35,7 +35,7 @@ if ($kq && $kq->num_rows > 0) {
 
         <div class="col-lg-7">
             <div class="card-na p-4 h-100 d-flex flex-column fs-5">
-                <h2 class="mb-3 fw-semibold text-primary"><?php echo $r['tenThietBi']; ?></h2>
+                <h2 class="mb-3 fw-bold text-primary"><?php echo $r['tenThietBi']; ?></h2>
 
                 <div class="grid grid-cols-2 gap-3 text-sm bg-light rounded-4 mb-4">
                     <div class="p-3">
@@ -69,7 +69,7 @@ if ($kq && $kq->num_rows > 0) {
 </div>
 
 <?php
-// Xử lý thêm thiết bị vào session khi nhấn nút
+// Xử lý thêm thiết bị vào session lưu bộ nhớ tạm khi nhấn nút
 if(isset($_POST['btnmuon'])) {
     $maThietBi = $r['maThietBi'];
     $soLuongMuon = 1; // mặc định thêm vào phiếu mượn 1 thiết bị

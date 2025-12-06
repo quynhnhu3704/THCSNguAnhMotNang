@@ -138,7 +138,7 @@ if($kq && $kq->num_rows > 0) {
                 <!-- Mô tả -->
                 <div class="mb-4">
                     <label class="form-label fw-medium">Mô tả</label>
-                    <textarea name="moTa" class="form-control" rows="3" style="resize:none;"><?= $r['moTa'] ?></textarea>
+                    <textarea name="moTa" class="form-control" rows="3" placeholder="Thông tin mô tả về thiết bị..." style="resize:none;"><?= $r['moTa'] ?></textarea>
                 </div>
 
                 <!-- Nút submit/reset -->

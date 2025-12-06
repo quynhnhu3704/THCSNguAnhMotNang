@@ -93,6 +93,22 @@ class controlThietBi {
         return $kq;
     }
 
+    public function countSoLuongKhaDung($maThietBi) {
+        $p = new modelThietBi();
+        return $p->countSoLuongKhaDung($maThietBi);
+    }
+
+    // public function getAllChiTietTBTheoTinhTrang($tinhTrang) {
+    //     $p = new modelThietBi();
+    //     $kq = $p->selectAllChiTietTBTheoTinhTrang($tinhTrang);
+
+    //     if(mysqli_num_rows($kq) > 0) {
+    //         return $kq;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
     public function searchChiTietTB($keyword) {
         $p = new modelThietBi();
         $kq = $p->searchChiTietTB($keyword);
@@ -108,6 +124,17 @@ class controlThietBi {
         $p = new modelThietBi();
         $kq = $p->updateHong($maChiTietTB, $tinhTrang, $ghiChu);
         return $kq;
+    }
+
+    public function getThietBiCanThanhLy() {
+        $p = new modelThietBi();
+        $kq = $p->selectThietBiCanThanhLy();
+
+        if(mysqli_num_rows($kq) > 0) {
+            return $kq;
+        } else {
+            return false;
+        }
     }
 }
 ?>

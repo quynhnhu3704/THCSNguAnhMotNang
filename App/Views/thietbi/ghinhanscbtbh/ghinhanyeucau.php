@@ -88,7 +88,7 @@ if($kq && $kq->num_rows > 0) {
                 <!-- Ghi chú -->
                 <div class="mb-4">
                     <label class="form-label fw-medium">Ghi chú</label>
-                    <textarea name="ghiChu" class="form-control" rows="3" style="resize:none;"><?= $r['ghiChu'] ?></textarea>
+                    <textarea name="ghiChu" class="form-control" rows="3" placeholder="Mô tả tình trạng thiết bị và nội dung sửa chữa..." style="resize:none;"><?= $r['ghiChu'] ?></textarea>
                 </div>
 
                 <!-- Nút submit/reset -->
