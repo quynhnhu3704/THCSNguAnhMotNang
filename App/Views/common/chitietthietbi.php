@@ -41,8 +41,17 @@ if ($kq && $kq->num_rows > 0) {
                     <div class="p-3">
                         <strong>Đơn vị:</strong> <?php echo $r['donVi']; ?>
                     </div>
+
+                    <?php
+                    // Lấy số lượng khả dụng
+                    $soLuongKhaDung = 0;
+                    if (isset($r['maThietBi'])) {
+                        $tmp = $p->countSoLuongKhaDung($r['maThietBi']);
+                        $soLuongKhaDung = $tmp ? (int)($tmp->fetch_assoc()['soLuongKhaDung'] ?? 0) : 0;
+                    }
+                    ?>
                     <div class="p-3">
-                        <strong>Số lượng:</strong> <?php echo $r['soLuong']; ?>
+                        <strong>Số lượng khả dụng:</strong> <?php echo $soLuongKhaDung ?>
                     </div>
                     <div class="p-3">
                         <strong>Lớp:</strong> <?php echo $r['lop']; ?>
@@ -74,16 +83,29 @@ if(isset($_POST['btnmuon'])) {
     $maThietBi = $r['maThietBi'];
     $soLuongMuon = 1; // mặc định thêm vào phiếu mượn 1 thiết bị
 
+    // Lấy số lượng khả dụng
+    $soLuongKhaDung = 0;
+    $tmp = $p->countSoLuongKhaDung($maThietBi);
+    $soLuongKhaDung = $tmp ? (int)($tmp->fetch_assoc()['soLuongKhaDung'] ?? 0) : 0;
+    
     if(!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
     }
 
     // Nếu đã có thiết bị trong giỏ, cộng số lượng
     if(isset($_SESSION['cart'][$maThietBi])) {
-        $_SESSION['cart'][$maThietBi] += $soLuongMuon;
+        $tongMuon = $_SESSION['cart'][$maThietBi] + $soLuongMuon;
     } else {
-        $_SESSION['cart'][$maThietBi] = $soLuongMuon;
+        $tongMuon = $soLuongMuon;
     }
+
+    if($tongMuon > $soLuongKhaDung) {
+        echo "<script>alert('Không đủ số lượng khả dụng! Bạn chỉ có thể mượn tối đa $soLuongKhaDung thiết bị.'); window.history.back();</script>";
+        exit();
+    }
+
+    // Nếu đủ -> thêm vào session
+    $_SESSION['cart'][$maThietBi] = $tongMuon;
 
     // Giới hạn số lượng tối đa 3 loại thiết bị
     if(count($_SESSION['cart']) > 3) {
