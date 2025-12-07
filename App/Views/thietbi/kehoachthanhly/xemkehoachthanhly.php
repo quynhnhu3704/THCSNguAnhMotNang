@@ -16,7 +16,7 @@ $p = new controlKeHoachThanhLy();
 $maKeHoachThanhLy = $_GET['maKeHoachThanhLy'];
 
 if(!$maKeHoachThanhLy) {
-    echo "<script>alert('Không tìm thấy kế hoạch!'); window.location.href='index.php?page=dskehoachthanhly';</script>";
+    echo "<script>alert('Không tìm thấy kế hoạch.'); window.location.href='index.php?page=dskehoachthanhly';</script>";
     exit();
 }
 
@@ -25,7 +25,7 @@ $kq = $p->get01KeHoachThanhLy($maKeHoachThanhLy);
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy kế hoạch!'); window.location.href='index.php?page=dskehoachthanhly';</script>";
+    echo "<script>alert('Không tìm thấy kế hoạch.'); window.location.href='index.php?page=dskehoachthanhly';</script>";
     exit();
 }
 ?>

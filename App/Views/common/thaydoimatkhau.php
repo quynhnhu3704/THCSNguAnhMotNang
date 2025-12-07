@@ -11,7 +11,7 @@ $p = new controlNguoiDung();
 $maNguoiDung = $_SESSION['maNguoiDung'];
 
 if(!$maNguoiDung) {
-    echo "<script>alert('Không tìm thấy người dùng!'); window.history.back();</script>";
+    echo "<script>alert('Không tìm thấy người dùng.'); window.history.back();</script>";
     exit();
 }
 
@@ -20,7 +20,7 @@ $kq = $p->get01NguoiDung($maNguoiDung);
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy người dùng!'); window.history.back();</script>";
+    echo "<script>alert('Không tìm thấy người dùng.'); window.history.back();</script>";
     exit();
 }
 ?>

@@ -16,7 +16,7 @@ $p = new controlNguoiDung();
 $maNguoiDung = $_GET['maNguoiDung'];
 
 if(!$maNguoiDung) {
-    echo "<script>alert('Không tìm thấy người dùng!'); window.location.href='index.php?page=dsquyen';</script>";
+    echo "<script>alert('Không tìm thấy người dùng.'); window.location.href='index.php?page=dsquyen';</script>";
     exit();
 }
 
@@ -25,7 +25,7 @@ $kq = $p->get01NguoiDung($maNguoiDung);
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy người dùng!'); window.location.href='index.php?page=dsquyen';</script>";
+    echo "<script>alert('Không tìm thấy người dùng.'); window.location.href='index.php?page=dsquyen';</script>";
     exit();
 }
 ?>
@@ -123,9 +123,9 @@ if(isset($_POST['btnluu'])) {
     }
     
     if($p->updateQuyen($maNguoiDung, $maVaiTro, $maBoMon)) {
-        echo '<script>alert("Cập nhật thành công!"); window.location.href="index.php?page=dsquyen";</script>';
+        echo '<script>alert("Cập nhật quyền người dùng thành công!"); window.location.href="index.php?page=dsquyen";</script>';
     } else {
-        echo '<script>alert("Cập nhật thất bại!"); window.history.back();</script>';
+        echo '<script>alert("Cập nhật quyền người dùng không thành công. Vui lòng thử lại!"); window.history.back();</script>';
     }
 }
 ?>

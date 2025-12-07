@@ -16,7 +16,7 @@ $p = new controlBoMon();
 $maBoMon = $_GET['maBoMon'];
 
 if(!$maBoMon) {
-    echo "<script>alert('Không tìm thấy bộ môn!'); window.location.href='index.php?page=dsbomon';</script>";
+    echo "<script>alert('Không tìm thấy bộ môn.'); window.location.href='index.php?page=dsbomon';</script>";
     exit();
 }
 
@@ -25,7 +25,7 @@ $kq = $p->get01BoMon($maBoMon);
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy bộ môn!'); window.location.href='index.php?page=dsbomon';</script>";
+    echo "<script>alert('Không tìm thấy bộ môn.'); window.location.href='index.php?page=dsbomon';</script>";
     exit();
 }
 ?>

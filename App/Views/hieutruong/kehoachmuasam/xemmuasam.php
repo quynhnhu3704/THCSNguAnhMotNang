@@ -16,7 +16,7 @@ $p = new controlKeHoachMuaSam();
 $maKeHoachMuaSam = $_GET['maKeHoachMuaSam'];
 
 if(!$maKeHoachMuaSam) {
-    echo "<script>alert('Không tìm thấy kế hoạch!'); window.location.href='index.php?page=dskehoachmuasam';</script>";
+    echo "<script>alert('Không tìm thấy kế hoạch.'); window.location.href='index.php?page=dskehoachmuasam';</script>";
     exit();
 }
 
@@ -25,7 +25,7 @@ $kq = $p->get01KeHoachMuaSam($maKeHoachMuaSam);
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy kế hoạch!'); window.location.href='index.php?page=dskehoachmuasam';</script>";
+    echo "<script>alert('Không tìm thấy kế hoạch.'); window.location.href='index.php?page=dskehoachmuasam';</script>";
     exit();
 }
 ?>

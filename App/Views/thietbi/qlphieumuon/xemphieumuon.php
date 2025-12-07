@@ -16,7 +16,7 @@ $p = new controlPhieuMuon();
 $maPhieuMuon = $_GET['maPhieuMuon'];
 
 if(!$maPhieuMuon) {
-    echo "<script>alert('Không tìm thấy phiếu mượn!'); window.location.href='index.php?page=dskehoachthanhly';</script>";
+    echo "<script>alert('Không tìm thấy phiếu mượn.'); window.location.href='index.php?page=dskehoachthanhly';</script>";
     exit();
 }
 
@@ -25,7 +25,7 @@ $kq = $p->get01PhieuMuon($maPhieuMuon);
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy phiếu mượn!'); window.location.href='index.php?page=dskehoachthanhly';</script>";
+    echo "<script>alert('Không tìm thấy phiếu mượn.'); window.location.href='index.php?page=dskehoachthanhly';</script>";
     exit();
 }
 ?>

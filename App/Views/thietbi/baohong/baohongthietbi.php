@@ -16,7 +16,7 @@ $p = new controlThietBi();
 $maChiTietTB = $_GET['maChiTietTB'];
 
 if(!$maChiTietTB) {
-    echo "<script>alert('Không tìm thấy thiết bị!'); window.location.href='index.php?page=dsbaohong';</script>";
+    echo "<script>alert('Không tìm thấy thiết bị.'); window.location.href='index.php?page=dsbaohong';</script>";
     exit();
 }
 
@@ -25,7 +25,7 @@ $kq = $p->get01ChiTietTB($maChiTietTB);
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy thiết bị!'); window.location.href='index.php?page=dsbaohong';</script>";
+    echo "<script>alert('Không tìm thấy thiết bị.'); window.location.href='index.php?page=dsbaohong';</script>";
     exit();
 }
 ?>

@@ -16,7 +16,7 @@ $p = new controlNguoiDung();
 $maNguoiDung = $_SESSION['maNguoiDung'];
 
 if(!$maNguoiDung) {
-    echo "<script>alert('Không tìm thấy người dùng!'); window.location.href='index.php?page=dskehoachthanhly';</script>";
+    echo "<script>alert('Không tìm thấy người dùng.'); window.location.href='index.php?page=dskehoachthanhly';</script>";
     exit();
 }
 
@@ -26,7 +26,7 @@ if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
     $userBoMon = $r['tenBoMon']; // Lưu bộ môn người dùng
 } else {
-    echo "<script>alert('Không tìm thấy người dùng!'); window.location.href='index.php?page=dskehoachthanhly';</script>";
+    echo "<script>alert('Không tìm thấy người dùng.'); window.location.href='index.php?page=dskehoachthanhly';</script>";
     exit();
 }
 ?>

@@ -16,7 +16,7 @@ $p = new controlThietBi();
 $maThietBi = $_GET['maThietBi'];
 
 if(!$maThietBi) {
-    echo "<script>alert('Không tìm thấy thiết bị!'); window.location.href='index.php?page=dsthietbi';</script>";
+    echo "<script>alert('Không tìm thấy thiết bị.'); window.location.href='index.php?page=dsthietbi';</script>";
     exit();
 }
 
@@ -25,7 +25,7 @@ $kq = $p->get01ThietBi($maThietBi);
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy thiết bị!'); window.location.href='index.php?page=dsthietbi';</script>";
+    echo "<script>alert('Không tìm thấy thiết bị.'); window.location.href='index.php?page=dsthietbi';</script>";
     exit();
 }
 ?>

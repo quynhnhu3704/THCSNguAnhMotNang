@@ -16,7 +16,7 @@ $p = new controlYeuCauSCBTBH();
 $maYeuCau = $_GET['maYeuCau'];
 
 if(!$maYeuCau) {
-    echo "<script>alert('Không tìm thấy yêu cầu!'); window.location.href='index.php?page=dsyeucau';</script>";
+    echo "<script>alert('Không tìm thấy yêu cầu.'); window.location.href='index.php?page=dsyeucau';</script>";
     exit();
 }
 
@@ -25,7 +25,7 @@ $kq = $p->get01YeuCauSCBTBH($maYeuCau);
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy yêu cầu!'); window.location.href='index.php?page=dsyeucau';</script>";
+    echo "<script>alert('Không tìm thấy yêu cầu.'); window.location.href='index.php?page=dsyeucau';</script>";
     exit();
 }
 ?>

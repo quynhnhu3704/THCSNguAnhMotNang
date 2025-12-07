@@ -16,7 +16,7 @@ $p = new controlNguoiDung();
 $maNguoiDung = $_GET['maNguoiDung'];
 
 if(!$maNguoiDung) {
-    echo "<script>alert('Không tìm thấy người dùng!'); window.location.href='index.php?page=dsnguoidung';</script>";
+    echo "<script>alert('Không tìm thấy người dùng.'); window.location.href='index.php?page=dsnguoidung';</script>";
     exit();
 }
 
@@ -25,7 +25,7 @@ $kq = $p->get01NguoiDung($maNguoiDung);
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy người dùng!'); window.location.href='index.php?page=dsnguoidung';</script>";
+    echo "<script>alert('Không tìm thấy người dùng.'); window.location.href='index.php?page=dsnguoidung';</script>";
     exit();
 }
 ?>
@@ -137,20 +137,20 @@ if(isset($_POST['btnluu'])) {
     
     if($p->updateNguoiDung($maNguoiDung, $tenDangNhap, $matKhauMoi, $hoTen, $maVaiTro, $maBoMon, $soDienThoai, $email)) {
 
-        if($maNguoiDung == $_SESSION['maNguoiDung'] && !empty($matKhauMoi)) {
-            // Admin thay đổi mật khẩu của chính mình
-            session_unset();
-            session_destroy();
-            echo '<script>alert("Bạn đã thay đổi mật khẩu của mình, vui lòng đăng nhập lại!"); window.location.href="index.php?page=dangnhap";</script>';
-            exit();
-        } else if($maNguoiDung == $_SESSION['maNguoiDung']) {
-            // Admin sửa thông tin khác của chính mình => chỉ cập nhật lại session
-            $_SESSION['tenDangNhap'] = $tenDangNhap;
-        }
+        // if($maNguoiDung == $_SESSION['maNguoiDung'] && !empty($matKhauMoi)) {
+        //     // Admin thay đổi mật khẩu của chính mình
+        //     session_unset();
+        //     session_destroy();
+        //     echo '<script>alert("Bạn đã thay đổi mật khẩu của mình, vui lòng đăng nhập lại!"); window.location.href="index.php?page=dangnhap";</script>';
+        //     exit();
+        // } else if($maNguoiDung == $_SESSION['maNguoiDung']) {
+        //     // Admin sửa thông tin khác của chính mình => chỉ cập nhật lại session
+        //     $_SESSION['tenDangNhap'] = $tenDangNhap;
+        // }
         
-        echo '<script>alert("Cập nhật người dùng thành công!"); window.location.href="index.php?page=dsnguoidung";</script>';
+        echo '<script>alert("Thông tin người dùng đã được cập nhật thành công!"); window.location.href="index.php?page=dsnguoidung";</script>';
     } else {
-        echo '<script>alert("Cập nhật người dùng thất bại!"); window.history.back();</script>';
+        echo '<script>alert("Cập nhật thông tin người dùng không thành công. Vui lòng thử lại!"); window.history.back();</script>';
     }
 }
 ?>
@@ -172,4 +172,110 @@ if(isset($_POST['btnluu'])) {
 
     document.addEventListener("DOMContentLoaded", checkBoMon);
     document.querySelector('select[name="maVaiTro"]').addEventListener("change", checkBoMon);
+</script>
+
+<script>
+$(document).ready(function () {
+    const $tenDangNhap = $('input[name="tenDangNhap"]');
+    const $hoTen = $('input[name="hoTen"]');
+    const $soDienThoai = $('input[name="soDienThoai"]');
+    const $email = $('input[name="email"]');
+    const $matKhau = $('input[name="matKhauMoi"]');
+
+    // blur
+    $tenDangNhap.blur(checkTenDangNhap);
+    $hoTen.blur(checkHoTen);
+    $soDienThoai.blur(checkSDT);
+    $email.blur(checkEmail);
+    $matKhau.blur(checkMatKhau);
+
+    // submit
+    $('form').submit(function(e) {
+        if(!(checkTenDangNhap() && checkHoTen() && checkSDT() && checkEmail() && checkMatKhau())) {
+            e.preventDefault();
+        }
+    });
+
+    // --- Hàm kiểm tra ---
+    function checkTenDangNhap() {
+        const val = $tenDangNhap.val().trim();
+        const regex = /^[a-zA-Z0-9_.]+$/;
+
+        if(val === "") return showError($tenDangNhap, 'Tên đăng nhập không được để trống!');
+        if(val.length > 255) return showError($tenDangNhap, 'Tên đăng nhập quá dài. Tối đa 255 ký tự!');
+        if(!regex.test(val)) return showError($tenDangNhap, 'Tên đăng nhập không hợp lệ. Chỉ dùng chữ, số, dấu _ hoặc .');
+        clearError($tenDangNhap);
+        return true;
+    }
+
+    function checkHoTen() {
+        const val = $hoTen.val().trim();
+        const regex = /^[a-zA-ZÀ-ỹ\s]+$/;
+
+        if(val === "") return showError($hoTen, 'Họ tên không được để trống!');
+        if(val.length > 255) return showError($hoTen, 'Họ tên quá dài. Tối đa 255 ký tự!');
+        if(!regex.test(val)) return showError($hoTen, 'Họ tên không được chứa ký tự đặc biệt hoặc số!');
+
+        // Kiểm tra chữ hoa đầu mỗi từ
+        const words = val.split(/\s+/);
+        for(let word of words) {
+            if(word[0] !== word[0].toUpperCase()) {
+                return showError($hoTen, 'Chữ cái đầu mỗi từ trong họ tên phải viết hoa!');
+            }
+        }
+        clearError($hoTen);
+        return true;
+    }
+
+    function checkSDT() {
+        const val = $soDienThoai.val().trim();
+        const regex = /^(03|05|07|08|09)\d{8}$/;
+
+        if(val === "") return showError($soDienThoai, 'Số điện thoại không được để trống!');
+        if(!regex.test(val)) return showError($soDienThoai, 'Số điện thoại không hợp lệ. Phải bắt đầu bằng 03, 05, 07, 08, 09 và đủ 10 số.');
+        clearError($soDienThoai);
+        return true;
+    }
+
+    function checkEmail() {
+        const val = $email.val().trim();
+        const regex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com)$/;
+
+        if(val === "") return showError($email, 'Email không được để trống!');
+        if(!regex.test(val)) return showError($email, 'Email không hợp lệ. Chỉ chấp nhận @gmail.com, @yahoo.com.');
+        clearError($email);
+        return true;
+    }
+
+    function checkMatKhau() {
+        const val = $matKhau.val().trim();
+        if(val === "") {
+            // Nếu để trống, không báo lỗi và không validate
+            clearError($matKhau);
+            return true;
+        }
+
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/;
+        if(!regex.test(val)) {
+            return showError($matKhau, 
+                'Mật khẩu phải có ít nhất 6 ký tự, bao gồm 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt!');
+        }
+
+        clearError($matKhau);
+        return true;
+    }
+
+    // --- Hàm hiển thị / xóa lỗi ---
+    function showError($input, msg) {
+        let $span = $input.next('.error');
+        if($span.length === 0) $input.after('<span class="error text-danger"></span>');
+        $input.next('.error').text(msg);
+        $input.focus();
+        return false;
+    }
+
+    function clearError($input) {
+        $input.next('.error').text('');
+    }
+});
 </script>
