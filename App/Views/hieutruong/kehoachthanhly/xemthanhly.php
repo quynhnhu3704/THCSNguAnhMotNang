@@ -30,7 +30,10 @@ if($kq && $kq->num_rows > 0) {
 }
 ?>
 
-<button type="button" class="btn btn-outline-primary ms-4 my-4" onclick="window.history.back();"><i class="bi bi-arrow-left"></i> Quay lại</button>
+<div class="d-flex justify-content-between align-items-center mx-4 my-4">
+    <button type="button" class="btn btn-outline-primary" onclick="window.history.back();"><i class="bi bi-arrow-left"></i> Quay lại</button>
+    <button type="button" id="exportPDF" class="btn btn-dark"><i class="bi bi-download"></i> Xuất PDF</button>
+</div>
 
 <div class="container d-flex justify-content-center align-items-center mb-5">
     <div class="card-na border-0" style="max-width: 56rem; width: 100%;">
@@ -180,3 +183,21 @@ if($kq && $kq->num_rows > 0) {
         text-overflow: ellipsis; /* hiện dấu ... */
     }
 </style>
+
+<script>
+// Export PDF
+document.getElementById('exportPDF').onclick = function() {
+    const card = document.querySelector('.card-na');
+
+    html2canvas(card, { scale: 2 }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+        
+        const imgWidth = 190;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+
+        pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+        pdf.save("kehoach-thanh-ly.pdf");
+    });
+}
+</script>
