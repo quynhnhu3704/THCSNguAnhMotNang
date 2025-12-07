@@ -12,7 +12,10 @@
 
                 <div class="mb-5">
                     <label class="form-label fw-medium">Mật khẩu</label>
-                    <input type="password" name="matKhau" value="123456" class="form-control" required>
+                    <div class="input-group">
+                        <input type="password" name="matKhau" id="matKhau" value="Nguanhmotnang123@" class="form-control" required>
+                        <span class="input-group-text" id="togglePassword" style="cursor: pointer;"><i class="bi bi-eye-slash"></i></span>
+                    </div>
                 </div>
 
                 <div class="row">
@@ -39,3 +42,21 @@ if(isset($_POST['btnlogin'])) {
     $p->cLogin($tenDangNhap, $matKhau);
 }
 ?>
+
+<script>
+// Con mắt ẩn hiện mật khẩu
+$(document).ready(function () {
+    $('#togglePassword').click(function () {
+        const input = $('#matKhau');
+        const icon = $(this).find('i');
+
+        if (input.attr('type') === 'password') {
+            input.attr('type', 'text');
+            icon.removeClass('bi-eye-slash').addClass('bi-eye');
+        } else {
+            input.attr('type', 'password');
+            icon.removeClass('bi-eye').addClass('bi-eye-slash');
+        }
+    });
+});
+</script>

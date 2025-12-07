@@ -19,7 +19,7 @@ class controlNguoiDung {
             $_SESSION['maNguoiDung'] = $r['maNguoiDung'];
             echo "<script>alert('Đăng nhập thành công! Chào mừng bạn trở lại.'); window.location.href='index.php';</script>";
         } else {
-            echo "<script>alert('Tên đăng nhập hoặc mật khẩu không chính xác. Vui lòng thử lại.')</script>";
+            echo "<script>alert('Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng kiểm tra và thử lại.')</script>";
         }
     }
 

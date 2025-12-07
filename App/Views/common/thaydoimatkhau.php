@@ -33,22 +33,32 @@ if($kq && $kq->num_rows > 0) {
             <h3 class="text-center mb-4 fw-bold text-primary">Thay đổi mật khẩu</h3>
 
             <form action="#" method="post" enctype="multipart/form-data">
-                <!-- Mật khẩu mới -->
+                <!-- Mật khẩu hiện tại -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Mật khẩu hiện tại</label>
-                    <input type="password" name="matKhauHienTai" value="123456" class="form-control" required>
+                    <div class="input-group">
+                        <input type="password" name="matKhauHienTai" value="Nguanhmotnang123@" class="form-control" required>
+                        <span class="input-group-text" style="cursor: pointer;"><i class="bi bi-eye-slash toggle-pass"></i></span>
+                    </div>
                 </div>
 
                 <!-- Mật khẩu mới -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Mật khẩu mới</label>
-                    <input type="password" name="matKhauMoi" value="123" class="form-control" required>
+                    <div class="input-group">
+                        <input type="password" name="matKhauMoi" id="matKhauMoi" value="Thcs123@" class="form-control" required>
+                        <span class="input-group-text" style="cursor: pointer;"><i class="bi bi-eye-slash toggle-pass"></i></span>
+                    </div>
+                    <span class="error" id="matKhauMoiError"></span>
                 </div>
 
                 <!-- Mật khẩu mới -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Xác nhận mật khẩu mới</label>
-                    <input type="password" name="xacNhanMatKhauMoi" value="123" class="form-control" required>
+                    <div class="input-group">
+                        <input type="password" name="xacNhanMatKhauMoi" value="Thcs123@" class="form-control" required>
+                        <span class="input-group-text" style="cursor: pointer;"><i class="bi bi-eye-slash toggle-pass"></i></span>
+                    </div>
                 </div>
 
                 <!-- Nút submit/reset -->
@@ -72,13 +82,13 @@ if(isset($_POST['btnluu'])) {
     $xacNhanMatKhauMoi = trim($_POST['xacNhanMatKhauMoi']);
     
     if(md5($matKhauHienTai) != $r['matKhau']) {
-        echo '<script>alert("Mật khẩu hiện tại không đúng!"); window.history.back();</script>';
+        echo '<script>alert("Mật khẩu hiện tại không đúng. Vui lòng kiểm tra lại."); window.history.back();</script>';
         exit();
     } else if($matKhauMoi != $xacNhanMatKhauMoi) {
-        echo '<script>alert("Mật khẩu mới và xác nhận mật khẩu mới không khớp!"); window.history.back();</script>';
+        echo '<script>alert("Mật khẩu mới và xác nhận mật khẩu chưa khớp. Hãy nhập lại."); window.history.back();</script>';
         exit();
     } else if(md5($matKhauMoi) == $r['matKhau']) {
-        echo '<script>alert("Mật khẩu mới không được trùng với mật khẩu hiện tại!"); window.history.back();</script>';
+        echo '<script>alert("Mật khẩu mới không được trùng với mật khẩu hiện tại."); window.history.back();</script>';
         exit();
     } else {
         if($p->updateMatKhau($maNguoiDung, $matKhauMoi)) {
@@ -86,8 +96,61 @@ if(isset($_POST['btnluu'])) {
             session_destroy(); // Hủy phiên hiện tại
             echo '<script>alert("Thay đổi mật khẩu thành công! Vui lòng đăng nhập lại."); window.location.href="index.php?page=dangnhap";</script>';
         } else {
-            echo '<script>alert("Thay đổi mật khẩu thất bại!"); window.history.back();</script>';
+            echo '<script>alert("Thay đổi mật khẩu thất bại. Vui lòng thử lại."); window.history.back();</script>';
         }
     }
 }
 ?>
+
+<script>
+$(document).ready(function () {
+    $('#matKhauMoi').blur(checkMatKhauMoi);
+
+    $('form').submit(function(e) {
+        if(!checkMatKhauMoi()) {
+            e.preventDefault();
+        }
+    });
+
+    function checkMatKhauMoi() {
+        const val = $('#matKhauMoi').val().trim();
+
+        // Kiểm tra rỗng
+        if(val === "") return showError('#matKhauMoiError', 'Mật khẩu mới không được để trống!');
+
+        // Regex: ít nhất 6 ký tự, 1 chữ hoa, 1 chữ thường, 1 số, 1 ký tự đặc biệt
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/;
+
+        if(!regex.test(val)) return showError('#matKhauMoiError', 
+            'Mật khẩu phải có ít nhất 6 ký tự, bao gồm 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt!');
+
+        clearError('#matKhauMoiError');
+        return true;
+    }
+
+    function showError(elem, msg) {
+        // Nếu chưa có span hiển thị lỗi thì thêm
+        if($(elem).length === 0) {
+            $('#matKhauMoi').after('<span class="error" id="matKhauMoiError"></span>');
+        }
+        $(elem).text(msg);
+        $('#matKhauMoi').focus();
+        return false;
+    }
+
+    function clearError(elem) {
+        $(elem).text('');
+    }
+
+    // Ẩn/hiện mật khẩu khi click vào icon trong input-group
+    $('.toggle-pass').click(function() {
+        // tìm input cha gần nhất
+        const input = $(this).closest('.input-group').find('input');
+        const type = input.attr('type') === 'password' ? 'text' : 'password';
+        input.attr('type', type);
+        
+        // đổi icon
+        $(this).toggleClass('bi-eye bi-eye-slash');
+    });
+});
+</script>

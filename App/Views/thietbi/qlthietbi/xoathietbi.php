@@ -16,7 +16,7 @@ $p = new controlThietBi();
 $maThietBi = $_GET['maThietBi'];
 
 if(!$maThietBi) {
-    echo "<script>alert('Không tìm thấy thiết bị!'); window.location.href='index.php?page=dsthietbi'</script>";
+    echo "<script>alert('Không tìm thấy thiết bị.'); window.location.href='index.php?page=dsthietbi'</script>";
     exit();
 }
 
@@ -25,7 +25,7 @@ $kq = $p->get01ThietBi($maThietBi);
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy thiết bị!'); window.location.href='index.php?page=dsthietbi'</script>";
+    echo "<script>alert('Không tìm thấy thiết bị.'); window.location.href='index.php?page=dsthietbi'</script>";
     exit();
 }
 
@@ -41,12 +41,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
                 unlink($image_url);
             }
 
-            echo "<script>alert('Xóa thiết bị thành công!'); window.location.href='index.php?page=dsthietbi';</script>";
+            echo "<script>alert('Xóa thiết bị thành công.'); window.location.href='index.php?page=dsthietbi';</script>";
         } else {
-            echo "<script>alert('Xóa thiết bị thất bại!'); window.history.back();</script>";
+            echo "<script>alert('Xóa thiết bị thất bại. Vui lòng thử lại.'); window.history.back();</script>";
         }
     } catch (mysqli_sql_exception $e) {
-        echo "<script>alert('Không thể xóa vì thiết bị đang được sử dụng!'); window.location.href='index.php?page=dsthietbi';</script>";
+        echo "<script>alert('Không thể xóa thiết bị này vì đang được sử dụng ở nơi khác.'); window.location.href='index.php?page=dsthietbi';</script>";
     }
 }
 ?>

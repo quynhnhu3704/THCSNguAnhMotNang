@@ -60,7 +60,8 @@ if($kq && $kq->num_rows > 0) {
                 <!-- Ngày lập -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Ngày lập <span class="text-danger">*</span></label>
-                    <input type="date" name="ngayLap" class="form-control" min="<?= date('Y-m-d') ?>" required>
+                    <input type="date" name="ngayLap" id="ngayLap" class="form-control" min="<?= date('Y-m-d') ?>" required>
+                    <span class="error" id="ngayLapError"></span>
                 </div>
                 
                 <h5 class="my-2 fw-semibold text-secondary text-center">Danh sách thiết bị</h5>
@@ -169,12 +170,12 @@ if(isset($_POST['btnluu'])) {
             $thanhTien = isset($_POST['thanhTien'][$maThietBi]) ? $_POST['thanhTien'][$maThietBi] : 0;
 
             if($soLuong <= 0) {
-                echo "<script>alert('Bạn phải nhập số lượng > 0 cho tất cả thiết bị đã chọn'); window.location.href='index.php?page=themkehoachmuasam';</script>";
+                echo "<script>alert('Bạn phải nhập số lượng > 0 cho tất cả thiết bị đã chọn.'); window.location.href='index.php?page=themkehoachmuasam';</script>";
                 exit();
             }
 
             if($donGia <= 0) {
-                echo "<script>alert('Bạn phải nhập đơn giá > 0 cho tất cả thiết bị đã chọn'); window.location.href='index.php?page=themkehoachmuasam';</script>";
+                echo "<script>alert('Bạn phải nhập đơn giá > 0 cho tất cả thiết bị đã chọn.'); window.location.href='index.php?page=themkehoachmuasam';</script>";
                 exit();
             }
 
@@ -197,13 +198,13 @@ if(isset($_POST['btnluu'])) {
         $kq = $p->insertChiTietKHMuaSam($maKeHoachMuaSam, $chiTiet);
 
         if($kq) {
-            echo "<script>alert('Thêm kế hoạch thành công'); window.location.href='index.php?page=dskehoachmuasam'</script>";
+            echo "<script>alert('Kế hoạch mua sắm đã được thêm thành công!'); window.location.href='index.php?page=dskehoachmuasam'</script>";
         } else {
             $p->deleteKeHoachMuaSam($maKeHoachMuaSam); // rollback: xóa kế hoạch nếu thêm chi tiết thất bại
-            echo "<script>alert('Thêm kế hoạch thất bại.'); window.location.href='index.php?page=themkehoachmuasam';</script>";
+            echo "<script>alert('Thêm chi tiết kế hoạch thất bại. Kế hoạch đã được hủy. Vui lòng thử lại.'); window.location.href='index.php?page=themkehoachmuasam';</script>";
         }
     } else {
-        echo "<script>alert('Thêm kế hoạch thất bại!'); window.location.href='index.php?page=themkehoachmuasam';</script>";
+        echo "<script>alert('Thêm kế hoạch thất bại. Vui lòng kiểm tra lại thông tin và thử lại.'); window.location.href='index.php?page=themkehoachmuasam';</script>";
         exit();
     }
 }
@@ -370,3 +371,41 @@ document.addEventListener("DOMContentLoaded", function () {
         border-color: #ced4da !important;
     }
 </style>
+
+<script>
+// Ràng buộc JQuery ngày lập
+$(document).ready(function() {
+    $('#ngayLap').blur(checkNgayLap);
+
+    $('form').submit(function(e) {
+        if(!checkNgayLap()) {
+            e.preventDefault();
+        }
+    });
+
+    function checkNgayLap() {
+        const val = $('#ngayLap').val();
+        if(!val) return showError('#ngayLapError', 'Ngày lập không được để trống!');
+
+        const selectedDate = new Date(val);
+        const today = new Date();
+        const maxDate = new Date();
+        maxDate.setDate(today.getDate() + 30); // tối đa 30 ngày từ hôm nay
+
+        if(selectedDate > maxDate) return showError('#ngayLapError', 'Ngày lập không được sau quá 30 ngày từ hôm nay.');
+
+        clearError('#ngayLapError');
+        return true;
+    }
+
+    function showError(elem, msg) {
+        $(elem).text(msg);
+        $('#ngayLap').focus();
+        return false;
+    }
+
+    function clearError(elem) {
+        $(elem).text('');
+    }
+});
+</script>

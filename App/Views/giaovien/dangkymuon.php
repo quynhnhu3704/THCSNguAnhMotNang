@@ -43,11 +43,12 @@ $gioHang = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                     <div class="col-6">
                         <div class="mb-3">
                             <label class="form-label fw-medium">Ngày mượn</label>
-                            <input type="date" name="ngayMuon" class="form-control" min="<?= date('Y-m-d') ?>" required>
+                            <input type="date" name="ngayMuon" id="ngayMuon" class="form-control" min="<?= date('Y-m-d') ?>" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-medium">Ngày trả</label>
-                            <input type="date" name="ngayTra" class="form-control" min="<?= date('Y-m-d') ?>" required>
+                            <input type="date" name="ngayTra" id="ngayTra" class="form-control" min="<?= date('Y-m-d') ?>" required>
+                            <span class="error" id="ngayTraError"></span>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-medium">Ghi chú</label>
@@ -126,12 +127,6 @@ if(isset($_POST['btnXacNhan'])) {
     $ngayTra = $_POST['ngayTra'];
     $ghiChu = trim($_POST['ghiChu']);
 
-    // Ngày trả phải sau ngày mượn
-    if($ngayTra < $ngayMuon) {
-        echo "<script>alert('Ngày trả phải sau ngày mượn'); window.history.back();</script>";
-        exit();
-    }
-
     // Cập nhật SESSION số lượng trong giỏ mượn nếu có tăng/giảm, nếu không thì nó mặc định là 1 như lúc thêm vào giỏ
     if(isset($_POST['soLuong'])) {
         foreach($_POST['soLuong'] as $maTB => $sl) {
@@ -141,7 +136,7 @@ if(isset($_POST['btnXacNhan'])) {
 
     // Kiểm tra giỏ mượn không được rỗng
     if(empty($_SESSION['cart'])) {
-        echo "<script>alert('Không có thiết bị nào trong phiếu mượn'); window.history.back();</script>";
+        echo "<script>alert('Phiếu mượn trống. Vui lòng chọn thiết bị trước khi đăng ký.'); window.history.back();</script>";
         exit();
     }
 
@@ -151,13 +146,13 @@ if(isset($_POST['btnXacNhan'])) {
         // truyền toàn bộ giỏ mượn làm mảng
         if($p->insertChiTietPM($maPhieuMuon, $_SESSION['cart'])) {
             unset($_SESSION['cart']); // xóa giỏ mượn sau khi đăng ký thành công
-            echo "<script>alert('Đăng ký mượn thành công!'); window.location.href='index.php?page=xemphieumuon';</script>";
+            echo "<script>alert('Phiếu mượn đã được đăng ký thành công!'); window.location.href='index.php?page=xemphieumuon';</script>";
         } else {
             $p->deletePhieuMuon($maPhieuMuon); // rollback phiếu mượn
-            echo "<script>alert('Không đủ thiết bị khả dụng.'); window.history.back();</script>";
+            echo "<script>alert('Không đủ số lượng thiết bị khả dụng. Vui lòng kiểm tra lại.'); window.history.back();</script>";
         }
     } else {
-        echo "<script>alert('Đăng ký mượn thất bại!'); window.history.back();</script>";
+        echo "<script>alert('Đăng ký phiếu mượn không thành công. Vui lòng thử lại.'); window.history.back();</script>";
     }
 }
 ?>
@@ -181,3 +176,38 @@ if(isset($_GET['xoa'])) {
         text-overflow: ellipsis; /* hiện dấu ... */
     }
 </style>
+
+<script>
+// Ràng buộc JQuery ngày trả phải sau ngày mượn
+$(document).ready(function () {
+    $('#ngayMuon, #ngayTra').change(checkNgayTra);
+
+    $('form').submit(function(e) {
+        if(!checkNgayTra()) e.preventDefault();
+    });
+
+    function checkNgayTra() {
+        const ngayMuon = $('#ngayMuon').val();
+        const ngayTra = $('#ngayTra').val();
+
+        if(!ngayMuon || !ngayTra) return true; // chưa nhập đủ
+
+        if(new Date(ngayTra) <= new Date(ngayMuon)) {
+            showError('#ngayTraError', 'Ngày trả phải sau ngày mượn!');
+            return false;
+        } else {
+            clearError('#ngayTraError');
+            return true;
+        }
+    }
+
+    function showError(elem, msg) {
+        $(elem).text(msg);
+        return false;
+    }
+
+    function clearError(elem) {
+        $(elem).text('');
+    }
+});
+</script>

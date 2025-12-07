@@ -175,12 +175,12 @@ if(isset($_POST['btnluu'])) {
         }
 
         if($kq) {
-            echo '<script>alert("Thêm thiết bị thành công! Đã tạo ' . $soLuong . ' chi tiết thiết bị."); window.location.href="index.php?page=dsthietbi";</script>';
+            echo '<script>alert("Thêm thiết bị thành công! Đã tạo ' . $soLuong . ' bản ghi chi tiết thiết bị."); window.location.href="index.php?page=dsthietbi";</script>';
         } else {
-            echo '<script>alert("Thêm thiết bị thành công nhưng tạo chi tiết thất bại!"); window.location.href="index.php?page=dsthietbi";</script>';
+            echo '<script>alert("Thiết bị đã được thêm nhưng tạo chi tiết thất bại. Vui lòng kiểm tra lại."); window.location.href="index.php?page=dsthietbi";</script>';
         }
     } else {
-        echo '<script>alert("Thêm thiết bị thất bại!"); window.history.back();</script>';
+        echo '<script>alert("Thêm thiết bị thất bại! Vui lòng thử lại."); window.history.back();</script>';
     }
 }
 ?>

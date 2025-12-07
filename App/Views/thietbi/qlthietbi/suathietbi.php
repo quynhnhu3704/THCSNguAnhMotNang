@@ -192,11 +192,11 @@ if(isset($_POST['btnluu'])) {
 
     $kq = $p->updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $moTa);
     if($kq === false) {
-        echo '<script>alert("Không thể giảm số lượng! Hiện còn thiết bị đang mượn hoặc hỏng."); window.history.back();</script>';
+        echo '<script>alert("Không thể giảm số lượng! Vẫn còn thiết bị đang được mượn hoặc bị hỏng."); window.history.back();</script>';
     } else if($kq) {
-        echo '<script>alert("Cập nhật thiết bị thành công!"); window.location.href="index.php?page=dsthietbi";</script>';
+        echo '<script>alert("Cập nhật thông tin thiết bị thành công!"); window.location.href="index.php?page=dsthietbi";</script>';
     } else {
-        echo '<script>alert("Cập nhật thiết bị thất bại!"); window.history.back();</script>';
+        echo '<script>alert("Cập nhật thông tin thiết bị thất bại! Vui lòng thử lại."); window.history.back();</script>';
     }
 }
 ?>
