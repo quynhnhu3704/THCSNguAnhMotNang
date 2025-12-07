@@ -1,4 +1,3 @@
-<!-- App/Controllers/cUpload.php -->
 <?php
 function changeName($ten) {
     $unicode = array(
@@ -21,26 +20,26 @@ function changeName($ten) {
 }
 
 function upload($hinhAnh) {
+    $loi = []; // thêm biến lỗi
+
     if(!isset($hinhAnh) || $hinhAnh['error'] != 0) {
-        echo "<script>alert('Lỗi upload hoặc không có file!');</script>";
-        return false;
+        $loi[] = "Không thể tải lên ảnh. Vui lòng thử lại.";
+        return $loi;
     }
 
     $ext = strtolower(pathinfo($hinhAnh['name'], PATHINFO_EXTENSION));
     $size = $hinhAnh['size'];
-    $loi = [];
 
     if(!in_array($ext, ['jpeg', 'jpg', 'png'])) {
-        $loi[] = 'Định dạng ảnh không hợp lệ! Chỉ cho phép jpeg, jpg, png.';
+        $loi[] = "Định dạng ảnh không hợp lệ. Chỉ hỗ trợ JPEG, JPG hoặc PNG.";
     }
 
     if($size > 500 * 1024) {
-        $loi[] = 'Dung lượng ảnh quá lớn! Tối đa 500KB.';
+        $loi[] = "Kích thước ảnh vượt quá giới hạn 500KB.";
     }
 
     if(!empty($loi)) {
-        echo "<script>alert('" . implode("\\n", $loi) . "');</script>";
-        return false;
+        return $loi;
     }
 
     $ten = pathinfo($hinhAnh['name'], PATHINFO_FILENAME);
@@ -48,10 +47,10 @@ function upload($hinhAnh) {
     $path = 'public/uploads/' . $hinh;
 
     if(!move_uploaded_file($hinhAnh['tmp_name'], $path)) {
-        echo "<script>alert('Upload thất bại!');</script>";
-        return false;
+        $loi[] = "Không thể lưu ảnh lên máy chủ.";
+        return $loi;
     }
 
-    return $hinh;
+    return $hinh; // trả về tên file nếu ok
 }
 ?>

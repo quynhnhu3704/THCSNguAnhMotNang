@@ -41,7 +41,8 @@ if($kq && $kq->num_rows > 0) {
                 <!-- Tên thiết bị -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Tên thiết bị <span class="text-danger">*</span></label>
-                    <input type="text" name="tenThietBi" value="<?= $r['tenThietBi'] ?>" class="form-control" required>
+                    <input type="text" name="tenThietBi" id="tenThietBi" value="<?= $r['tenThietBi'] ?>" class="form-control" required>
+                    <span class="error" id="tenThietBiError"></span>
                 </div>
 
                 <!-- Hình ảnh -->
@@ -87,6 +88,7 @@ if($kq && $kq->num_rows > 0) {
                             echo '</div>';
                         }
                     ?>
+                    <br><span class="error" id="lopError"></span>
                 </div>
 
                 <!-- Bộ môn -->
@@ -171,28 +173,85 @@ if(isset($_POST['btnluu'])) {
 
     // Xử lý hình ảnh
     if (is_uploaded_file($hinhAnh['tmp_name'])) {
+        // Upload hình mới
+        $hinh = upload($hinhAnh);
+        // Nếu upload lỗi → $hinh là mảng $loi[]
+        if (is_array($hinh)) {
+            $msg = implode("\n", $hinh); // Ghép mỗi lỗi thành 1 dòng
+            echo "<script>alert(`$msg`); window.history.back(); </script>";
+            exit();
+        }
+
         // Xóa hình cũ nếu có
         if(!empty($r['hinhAnh']) && file_exists('public/uploads/' . $r['hinhAnh'])) {
             unlink('public/uploads/' . $r['hinhAnh']);
         }
-
-        // Upload hình mới
-        $hinh = upload($hinhAnh);
     } else {
         $hinh = $r['hinhAnh']; // Giữ nguyên hình cũ nếu không có hình mới
     }
 
-    if($hinh) {
-        $kq = $p->updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $moTa);
-        if($kq === false) {
-            echo '<script>alert("Không thể giảm số lượng! Hiện còn thiết bị đang mượn hoặc hỏng."); window.history.back();</script>';
-        } else if($kq) {
-            echo '<script>alert("Cập nhật thiết bị thành công!"); window.location.href="index.php?page=dsthietbi";</script>';
-        } else {
-            echo '<script>alert("Cập nhật thiết bị thất bại!"); window.history.back();</script>';
-        }
+    $kq = $p->updateThietBi($maThietBi, $tenThietBi, $hinh, $donVi, $soLuong, $lop, $maBoMon, $maNhaCungCap, $moTa);
+    if($kq === false) {
+        echo '<script>alert("Không thể giảm số lượng! Hiện còn thiết bị đang mượn hoặc hỏng."); window.history.back();</script>';
+    } else if($kq) {
+        echo '<script>alert("Cập nhật thiết bị thành công!"); window.location.href="index.php?page=dsthietbi";</script>';
     } else {
-        echo '<script>alert("Cập nhật thiết bị thất bại! Hình ảnh không hợp lệ!"); window.history.back();</script>';
+        echo '<script>alert("Cập nhật thiết bị thất bại!"); window.history.back();</script>';
     }
 }
 ?>
+
+<script>
+$(document).ready(function () {
+    $('#tenThietBi').blur(checkTenThietBi);
+    $('input[name="lop[]"]').change(checkLop);
+
+    $('form').submit(function(e) {
+        if(!(checkTenThietBi() && checkLop())) {
+            e.preventDefault();
+        }
+    });
+
+    function checkTenThietBi() {
+        const val = $('#tenThietBi').val().trim();
+
+        if(val === "") {
+            return showError('#tenThietBiError', 'Tên thiết bị không được để trống!');
+        }
+
+        const regex = /^[a-zA-Z0-9\s\-_À-ỹ]+$/;
+        if(!regex.test(val)) {
+            return showError('#tenThietBiError', 'Tên thiết bị không hợp lệ. Không dùng ký tự đặc biệt!');
+        }
+
+        if(val.length > 255) {
+            return showError('#tenThietBiError', 'Tên thiết bị quá dài. Tối đa 255 ký tự!');
+        }
+
+        clearError('#tenThietBiError');
+        return true;
+    }
+
+    function checkLop() {
+        const count = $('input[name="lop[]"]:checked').length;
+
+        if(count === 0) {
+            return showError('#lopError', 'Vui lòng chọn ít nhất một khối lớp!');
+        }
+
+        clearError('#lopError');
+        return true;
+    }
+
+    function showError(elem, msg) {
+        $(elem).text(msg);
+        const input = $(elem).prevAll('input, select, textarea').first();
+        if(input.length) input.focus();
+        return false;
+    }
+
+    function clearError(elem) {
+        $(elem).text('');
+    }
+});
+</script>

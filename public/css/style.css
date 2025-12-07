@@ -153,3 +153,10 @@
     .footer-link {
         color:#dfe9ed
     }
+
+    .error {
+        color: red;
+        font-size: 0.9em;
+        margin-top: 0.25em;
+        font-style: italic;
+    }

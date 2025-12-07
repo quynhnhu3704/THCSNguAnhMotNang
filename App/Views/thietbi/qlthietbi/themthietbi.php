@@ -22,7 +22,8 @@ if(!isset($_SESSION['login'])) {
                 <!-- Tên thiết bị -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Tên thiết bị <span class="text-danger">*</span></label>
-                    <input type="text" name="tenThietBi" value="Bộ thí nghiệm Khoa học tổng hợp STEM Junior Lab Kit" class="form-control" required>
+                    <input type="text" name="tenThietBi" id="tenThietBi" class="form-control" required>
+                    <span class="error" id="tenThietBiError"></span>
                 </div>
 
                 <!-- Hình ảnh -->
@@ -63,6 +64,7 @@ if(!isset($_SESSION['login'])) {
                         echo '</div>';
                     }
                     ?>
+                    <br><span class="error" id="lopError"></span>
                 </div>
 
                 <!-- Bộ môn -->
@@ -151,8 +153,10 @@ if(isset($_POST['btnluu'])) {
     }
 
     $hinh = upload($hinhAnh);
-    if(!$hinh) {
-        echo '<script>alert("Lỗi tải hình ảnh! Vui lòng thử lại."); window.history.back();</script>';
+    // Nếu upload lỗi → $hinh là mảng $loi[]
+    if (is_array($hinh)) {
+        $msg = implode("\n", $hinh); // Ghép mỗi lỗi thành 1 dòng
+        echo "<script>alert(`$msg`); window.history.back(); </script>";
         exit();
     }
 
@@ -180,3 +184,61 @@ if(isset($_POST['btnluu'])) {
     }
 }
 ?>
+
+<script>
+$(document).ready(function () {
+    $('#tenThietBi').blur(checkTenThietBi);
+    $('input[name="lop[]"]').change(checkLop);
+
+    // Ngăn submit khi có lỗi
+    $('form').submit(function(e) {
+        if(!(checkTenThietBi() && checkLop())) {
+            e.preventDefault();
+        }
+    });
+
+    function checkTenThietBi() {
+        const val = $('#tenThietBi').val().trim();
+
+        if(val === "") {
+            return showError('#tenThietBiError', 'Tên thiết bị không được để trống!');
+        }
+
+        const regex = /^[a-zA-Z0-9\s\-_À-ỹ]+$/;
+        if(!regex.test(val)) {
+            return showError('#tenThietBiError', 'Tên thiết bị không hợp lệ. Không dùng ký tự đặc biệt!');
+        }
+
+        if(val.length > 255) {
+            return showError('#tenThietBiError', 'Tên thiết bị quá dài. Tối đa 255 ký tự!');
+        }
+
+        // Hợp lệ → xóa lỗi và trả về true
+        clearError('#tenThietBiError');
+        return true;
+    }
+
+    function checkLop() {
+        const count = $('input[name="lop[]"]:checked').length;
+
+        if(count === 0) {
+            return showError('#lopError', 'Vui lòng chọn ít nhất một khối lớp!');
+        }
+        
+        clearError('#lopError');
+        return true;
+    }
+
+    function showError(elem, msg) {
+        $(elem).text(msg);
+        // focus vào input tương ứng (nếu có)
+        const input = $(elem).prevAll('input, select, textarea').first();
+        if(input.length) input.focus();
+        return false;
+    }
+
+    function clearError(elem) {
+        $(elem).text(''); // nếu nhập đúng thì dòng error biến mất
+    }
+});
+</script>

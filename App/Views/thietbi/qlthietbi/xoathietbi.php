@@ -31,17 +31,22 @@ if($kq && $kq->num_rows > 0) {
 
 
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
-    if ($p->deleteThietBi($maThietBi)) {
-        
-        // Xóa hình ảnh khỏi thư mục
-        $image_url = 'public/uploads/' . $r['hinhAnh'];
-        if (file_exists($image_url)) {
-            unlink($image_url);
-        }
+    // try catch để bắt lỗi khóa ngoại nếu thiết bị đang được tham chiếu ở bảng khác => không được xóa
+    try {
+        if ($p->deleteThietBi($maThietBi)) {
+            
+            // Xóa hình ảnh khỏi thư mục
+            $image_url = 'public/uploads/' . $r['hinhAnh'];
+            if (file_exists($image_url)) {
+                unlink($image_url);
+            }
 
-        echo "<script>alert('Xóa thiết bị thành công!'); window.location.href='index.php?page=dsthietbi';</script>";
-    } else {
-        echo "<script>alert('Xóa thiết bị thất bại!'); window.history.back();</script>";
+            echo "<script>alert('Xóa thiết bị thành công!'); window.location.href='index.php?page=dsthietbi';</script>";
+        } else {
+            echo "<script>alert('Xóa thiết bị thất bại!'); window.history.back();</script>";
+        }
+    } catch (mysqli_sql_exception $e) {
+        echo "<script>alert('Không thể xóa vì thiết bị đang được sử dụng!'); window.location.href='index.php?page=dsthietbi';</script>";
     }
 }
 ?>
