@@ -98,8 +98,9 @@ session_start();
                 echo '<li><a href="index.php?page=dskehoachthanhly" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch thanh lý</a></li>';
                 echo '<li><a href="index.php?page=dsmuasam" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch mua sắm</a></li>';
                 echo '<li><a href="index.php?page=dsthanhly" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch thanh lý</a></li>';
-                echo '<li><a href="index.php?page=dsbaocaothongke" class="text-decoration-none d-block text-dark py-2">Lập báo cáo thống kê</a></li>';
+                // echo '<li><a href="index.php?page=dsbaocaothongke" class="text-decoration-none d-block text-dark py-2">Lập báo cáo thống kê</a></li>';
                 echo '<li><a href="index.php?page=xembaocao" class="text-decoration-none d-block text-dark py-2">Xem báo cáo thống kê</a></li>';
+                echo '<li><a href="index.php?page=dsbaocao" class="text-decoration-none d-block text-dark py-2">Xem báo cáo chính nèeeeeeeee</a></li>';
 
             }
             ?>
@@ -178,6 +179,26 @@ session_start();
                     include_once('App/Views/hieutruong/baocaothongke/xembaocao.php');
                     break;
 
+
+                
+                case 'dashboard':
+                    include_once('App/Views/hieutruong/baocaothongke/dashboard.php');
+                    break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 // Chức năng cho Tổ trưởng chuyên môn
                 // Lập kế hoạch mua sắm
                 case 'dskehoachmuasam':
@@ -197,8 +218,8 @@ session_start();
                 case 'dangkymuon':
                     include_once('App/Views/giaovien/dangkymuon.php');
                     break;
-                case 'xemphieumuon':
-                    include_once('App/Views/giaovien/xemphieumuon.php');
+                case 'xemphieumuon_gvbm':
+                    include_once('App/Views/giaovien/xemphieumuon_gvbm.php');
                     break;
 
                 // Chức năng cho Nhân viên quản lý thiết bị
@@ -253,6 +274,9 @@ session_start();
                     break;
                 case 'xoaphieumuon':
                     include_once('App/Views/thietbi/qlphieumuon/xoaphieumuon.php');
+                    break;
+                case 'xemphieumuon':
+                    include_once('App/Views/thietbi/qlphieumuon/xemphieumuon.php');
                     break;
                 // Báo hỏng thiết bị
                 case 'dsbaohong':

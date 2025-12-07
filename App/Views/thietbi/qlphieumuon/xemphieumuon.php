@@ -1,4 +1,4 @@
-<!-- App/Views/totruong/kehoachmuasam/xemkehoachmuasam.php -->
+<!-- App/Views/thietbi/qlphieumuon/xemphieumuon.php -->
 <?php
 if(!isset($_SESSION['login'])) {
     echo "<script>alert('Vui lòng đăng nhập để tiếp tục.'); window.location.href='index.php?page=dangnhap'</script>";
@@ -10,22 +10,22 @@ if(!isset($_SESSION['login'])) {
 //     exit();
 // }
 
-include_once('App/Controllers/cKeHoachMuaSam.php');
-$p = new controlKeHoachMuaSam();
+include_once('App/Controllers/cPhieuMuon.php');
+$p = new controlPhieuMuon();
 
-$maKeHoachMuaSam = $_GET['maKeHoachMuaSam'];
+$maPhieuMuon = $_GET['maPhieuMuon'];
 
-if(!$maKeHoachMuaSam) {
-    echo "<script>alert('Không tìm thấy kế hoạch!'); window.location.href='index.php?page=dskehoachmuasam';</script>";
+if(!$maPhieuMuon) {
+    echo "<script>alert('Không tìm thấy phiếu mượn!'); window.location.href='index.php?page=dskehoachthanhly';</script>";
     exit();
 }
 
-$kq = $p->get01KeHoachMuaSam($maKeHoachMuaSam);
+$kq = $p->get01PhieuMuon($maPhieuMuon);
 
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy kế hoạch!'); window.location.href='index.php?page=dskehoachmuasam';</script>";
+    echo "<script>alert('Không tìm thấy phiếu mượn!'); window.location.href='index.php?page=dskehoachthanhly';</script>";
     exit();
 }
 ?>
@@ -59,24 +59,24 @@ if($kq && $kq->num_rows > 0) {
             <!-- Ngày tháng -->
             <p class="text-end mb-4">
                 <?php 
-                    $ngay = date("d", strtotime($r['ngayLap']));
-                    $thang = date("m", strtotime($r['ngayLap']));
-                    $nam = date("Y", strtotime($r['ngayLap']));
+                    $ngay = date("d", strtotime($r['ngayMuon']));
+                    $thang = date("m", strtotime($r['ngayMuon']));
+                    $nam = date("Y", strtotime($r['ngayMuon']));
                     echo "<i>TP. Hồ Chí Minh, ngày $ngay tháng $thang năm $nam</i>";
                 ?>
             </p>
 
             <!-- Tiêu đề đơn -->
-            <h4 class="text-center fw-bold text-primary text-uppercase mb-4">Đơn đề nghị phê duyệt kế hoạch mua sắm thiết bị</h4>
+            <h4 class="text-center fw-bold text-primary text-uppercase mb-4">Đơn đề nghị mượn thiết bị</h4>
 
-            <!-- Thông tin người lập -->
+            <!-- Thông tin người mượn -->
             <p><strong>Họ tên:</strong> <?= $r['hoTen'] ?></p>
             <p><strong>Vai trò:</strong> <?= $r['tenVaiTro'] ?></p>
-            <p><strong>Bộ môn:</strong> <?= !empty($r['tenBoMon']) ? $r['tenBoMon'] : 'Không có' ?></p>
-            <p><strong>Ngày lập:</strong> <?= date("d/m/Y", strtotime($r['ngayLap'])) ?></p>
+            <p><strong>Bộ môn:</strong> <?= $r['tenBoMon'] ?></p>
+            <p><strong>Ngày lập:</strong> <?= date("d/m/Y", strtotime($r['ngayMuon'])) ?></p>
 
             <!-- Danh sách thiết bị -->
-            <h5 class="fw-semibold text-secondary mt-4 mb-2">Danh sách thiết bị đề nghị mua sắm</h5>
+            <h5 class="fw-semibold text-secondary mt-4 mb-2">Danh sách thiết bị mượn</h5>
             <div class="d-flex justify-content-center mb-3">
                 <div class="table-responsive text-center" style="width: 100%;">
                     <table class="table table-striped table-borderless align-middle" style="font-size: 0.85em;">
@@ -84,31 +84,23 @@ if($kq && $kq->num_rows > 0) {
                             <tr>
                                 <th>STT</th>
                                 <th>Tên thiết bị</th>
-                                <th>Bộ môn</th>
-                                <th>Nhà cung cấp</th>
                                 <th>Số lượng</th>
-                                <th>Đơn giá</th>
-                                <th>Thành tiền</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $res = $p->get01ChiTietKHMuaSam($maKeHoachMuaSam);
+                            $res = $p->get01ChiTietPM($maPhieuMuon);
                             if($res && $res->num_rows > 0) {
                                 $dem = 1;
                                 while($row = $res->fetch_assoc()) {
                                     echo '<tr>';
                                     echo '<td><strong>' . $dem++ . '</strong></td>';
                                     echo '<td title="'. $row['tenThietBi'] .'">' . $row['tenThietBi'] . '</td>';
-                                    echo '<td>' . $row['tenBoMon'] . '</td>';
-                                    echo '<td>' . $row['tenNhaCungCap'] . '</td>';
                                     echo '<td>' . $row['soLuong'] . '</td>';
-                                    echo '<td>' . number_format($row['donGia'], 0, ',', '.') . ' ₫</td>';
-                                    echo '<td>' . number_format($row['thanhTien'], 0, ',', '.') . ' ₫</td>';
                                     echo '</tr>';
                                 }
                             } else {
-                                echo '<tr><td colspan="7" class="text-center text-muted">Chưa có thiết bị nào trong kế hoạch này.</td></tr>';
+                                echo '<tr><td colspan="7" class="text-center text-muted">Chưa có thiết bị nào trong phiếu mượn này.</td></tr>';
                             }
                             ?>
                         </tbody>
@@ -116,18 +108,13 @@ if($kq && $kq->num_rows > 0) {
                 </div>
             </div>
             
-            <!-- Tổng chi phí -->
-            <p class="fw-bold mb-4" style="font-size: 1.25rem; border-left: 4px solid crimson; padding-left: 1em;">
-                Tổng chi phí: 
-                <span class="text-danger"><?= number_format($r['tongChiPhi'], 0, ',', '.') ?> ₫</span>
-            </p>
-            
             <p><strong>Trạng thái:</strong>
             <?php
             switch ($r['trangThai']) {
-                case "Chấp thuận": echo '<span class="badge bg-success">' . $r['trangThai'] . '</span>'; break;
-                case "Chờ duyệt": echo '<span class="badge bg-warning text-dark">' . $r['trangThai'] . '</span>'; break;
-                case "Từ chối": echo '<span class="badge bg-danger">' . $r['trangThai'] . '</span>'; break;
+                case "Chờ xử lý": echo '<span class="badge bg-secondary">' . $r['trangThai'] . '</span>'; break;
+                case "Đã xác nhận": echo '<span class="badge bg-info text-dark">' . $r['trangThai'] . '</span>'; break;
+                case "Đang mượn": echo '<span class="badge bg-warning text-dark">' . $r['trangThai'] . '</span>'; break;
+                case "Đã trả": echo '<span class="badge bg-success">' . $r['trangThai'] . '</span>'; break;
                 default: echo '<span class="badge bg-light text-dark">Không có</span>';
             }
             ?>
@@ -141,7 +128,7 @@ if($kq && $kq->num_rows > 0) {
             <div class="row">
                 <!-- Người lập -->
                 <div class="col-6 text-center">
-                    <div class="fw-semibold">Người lập kế hoạch</div>
+                    <div class="fw-semibold">Người mượn</div>
                     <div class="fst-italic" style="font-size:0.85rem;">(Ký, ghi rõ họ tên)</div>
 
                     <!-- Fake digital signature (SVG) -->
@@ -152,23 +139,22 @@ if($kq && $kq->num_rows > 0) {
                     </div>
                 </div>
                 
-                <!-- Hiệu trưởng + Con dấu -->
+                <!-- Quản lý thiết bị + Con dấu -->
                 <div class="col-6 text-center">
-                    <div class="fw-semibold">Hiệu trưởng</div>
+                    <div class="fw-semibold">Phòng Quản lý Thiết bị</div>
                     <div class="fst-italic" style="font-size:0.85rem;">(Ký, đóng dấu)</div>
 
-                    <?php if(isset($r['trangThai']) && $r['trangThai'] != "Chờ duyệt"): ?>
+                    <?php if(isset($r['trangThai']) && $r['trangThai'] != "Chờ xử lý"): ?>
                     <div style="margin-top:6px; display:flex; justify-content:center; gap:20px; align-items:center;">
                         <!-- Con dấu thật -->
                         <div style="width:120px; height:120px; display:flex; justify-content:center; align-items:center; position:relative;">
-                            <img src="../public/uploads/stamp_hieutruong.png" alt="Con dấu" style="width:120px; height:120px; object-fit:contain;">
+                            <img src="../public/uploads/stamp_thietbi.png" alt="Con dấu" style="width:120px; height:120px; object-fit:contain;">
                         </div>
 
-                        <!-- Chữ ký hiệu trưởng -->
+                        <!-- Chữ ký nhân viên quản lý thiết bị -->
                         <div style="text-align:left;">
-                            <img src="../public/uploads/signature_hieutruong.png" alt="Chữ ký Hiệu trưởng" style="max-width:180px; max-height:70px; filter: brightness(0) saturate(100%) invert(12%) sepia(97%) saturate(7490%) hue-rotate(241deg) brightness(95%) contrast(106%);">
-                            <div style="font-family: 'Playwrite NO', cursive; font-size: 15px; color: blue">TS. Nguyễn Văn Hiệu</div>
-                            <div style="font-size:15px; margin-top:4px; font-weight:600;">(Hiệu trưởng)</div>
+                            <div style="font-family: 'Playwrite NO', cursive; font-size: 15px; color: blue">Xác nhận phiếu mượn</div>
+                            <div style="font-size:15px; margin-top:4px; font-weight:600;">(Nhân viên quản lý thiết bị)</div>
                         </div>
                     </div>
                     <?php endif; ?>
@@ -200,7 +186,7 @@ document.getElementById('exportPDF').onclick = function() {
         const imgHeight = canvas.height * imgWidth / canvas.width;
 
         pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
-        pdf.save("kehoach-mua-sam.pdf");
+        pdf.save("phieu-muon.pdf");
     });
 }
 </script>

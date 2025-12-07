@@ -83,6 +83,7 @@ if(!isset($_SESSION['login'])) {
                         echo '<td>' . $r['ghiChu'] . '</td>';
 
                         echo '<td class="text-center">';
+                            echo '<a href="index.php?page=xemphieumuon&maPhieuMuon=' . $r['maPhieuMuon'] . '" class="btn btn-sm btn-info" style="font-size: 0.95em;"><i class="bi bi-info-circle"></i> Xem</a>&nbsp;';
                             echo '<a href="index.php?page=suaphieumuon&maPhieuMuon=' . $r['maPhieuMuon'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
                             echo '<a href="index.php?page=xoaphieumuon&action=delete&maPhieuMuon=' . $r['maPhieuMuon'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa phiếu mượn này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
                         echo '</td>';

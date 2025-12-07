@@ -158,7 +158,7 @@ if($kq && $kq->num_rows > 0) {
                     <div style="margin-top:6px; display:flex; justify-content:center; gap:20px; align-items:center;">
                         <!-- Con dấu thật -->
                         <div style="width:120px; height:120px; display:flex; justify-content:center; align-items:center; position:relative;">
-                            <img src="../public/uploads/condau.png" alt="Con dấu" style="width:120px; height:120px; object-fit:contain;">
+                            <img src="../public/uploads/stamp_hieutruong.png" alt="Con dấu" style="width:120px; height:120px; object-fit:contain;">
                         </div>
 
                         <!-- Chữ ký hiệu trưởng -->
