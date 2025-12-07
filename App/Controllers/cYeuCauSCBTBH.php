@@ -44,11 +44,5 @@ class controlYeuCauSCBTBH {
         $kq = $p->updateTienDo($maYeuCau, $maChiTietTB,$tienDo, $ghiChu);
         return $kq;
     }
-
-    public function checkInKeHoachThanhLy($maChiTietTB) {
-        $p = new modelYeuCauSCBTBH();
-        $kq = $p->checkInKeHoachThanhLy($maChiTietTB);
-        return $kq;
-    }
 }
 ?>
