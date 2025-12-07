@@ -138,9 +138,9 @@ if(isset($_POST['btnluu'])){
     $ghiChu = trim($_POST['ghiChu']);
 
     if($p->updatePhieuMuon($maPhieuMuon, $trangThai,$ghiChu)) {
-        echo "<script>alert('Cập nhật phiếu mượn thành công'); window.location.href='index.php?page=dsphieumuon';</script>";
+        echo "<script>alert('Phiếu mượn đã được cập nhật thành công.'); window.location.href='index.php?page=dsphieumuon';</script>";
     }else{
-        echo "<script>alert('Cập nhật phiếu mượn thất bại'); window.location.href='index.php?page=suaphieumuon';</script>";
+        echo "<script>alert('Cập nhật phiếu mượn thất bại. Vui lòng thử lại.'); window.location.href='index.php?page=suaphieumuon';</script>";
     }
 }
 ?>

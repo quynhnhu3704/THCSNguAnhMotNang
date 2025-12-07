@@ -85,7 +85,7 @@ if(!isset($_SESSION['login'])) {
                     echo '</tr>';
                 }
             } else {
-                echo '<tr><td colspan="10"><h5 class="text-center text-muted">Chúng tôi tạm thời chưa có kế hoạch nào, mời bạn quay lại sau.</h5></td></tr>';   
+                echo '<tr><td colspan="10"><h5 class="text-center text-muted">Hiện chưa có kế hoạch nào. Vui lòng quay lại sau.</h5></td></tr>';   
             }
             ?>
             </tbody>

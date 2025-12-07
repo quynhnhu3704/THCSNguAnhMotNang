@@ -91,7 +91,7 @@ if(!isset($_SESSION['login'])) {
                     echo '</tr>';
                 }
             } else {
-                echo '<tr><td colspan="11"><h5 class="text-center text-muted">Chúng tôi tạm thời chưa có thiết bị nào, mời bạn quay lại sau.</h5></td></tr>';   
+                echo '<tr><td colspan="11"><h5 class="text-center text-muted">Hiện chưa có thiết bị nào. Vui lòng quay lại sau.</h5></td></tr>';   
             }
             ?>
             </tbody>

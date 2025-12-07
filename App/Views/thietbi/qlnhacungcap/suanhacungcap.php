@@ -84,9 +84,86 @@ if(isset($_POST['btnluu'])) {
     $email = trim($_POST['email']);
     
     if($p->updateNhaCungCap($maNhaCungCap, $tenNhaCungCap, $diaChi, $soDienThoai, $email)) {
-        echo '<script>alert("Cập nhật nhà cung cấp thành công!"); window.location.href="index.php?page=dsnhacungcap";</script>';
+        echo '<script>alert("Nhà cung cấp đã được cập nhật thành công."); window.location.href="index.php?page=dsnhacungcap";</script>';
     } else {
-        echo '<script>alert("Cập nhật nhà cung cấp thất bại!"); window.history.back();</script>';
+        echo '<script>alert("Cập nhật nhà cung cấp không thành công. Vui lòng thử lại."); window.history.back();</script>';
     }
 }
 ?>
+
+<script>
+$(document).ready(function () {
+    const $tenNCC = $('input[name="tenNhaCungCap"]');
+    const $diaChi = $('input[name="diaChi"]');
+    const $sdt = $('input[name="soDienThoai"]');
+    const $email = $('input[name="email"]');
+
+    // blur
+    $tenNCC.blur(checkTenNCC);
+    $diaChi.blur(checkDiaChi);
+    $sdt.blur(checkSDT);
+    $email.blur(checkEmail);
+
+    // submit
+    $('form').submit(function(e) {
+        if(!(checkTenNCC() && checkDiaChi() && checkSDT() && checkEmail())) {
+            e.preventDefault();
+        }
+    });
+
+    // --- Hàm kiểm tra ---
+    function checkTenNCC() {
+        const val = $tenNCC.val().trim();
+        const regex = /^[a-zA-ZÀ-ỹ\s]{1,255}$/; // chỉ chữ và khoảng trắng, tối đa 255
+
+        if(val === "") return showError($tenNCC, 'Tên nhà cung cấp không được để trống!');
+        if(val.length > 255) return showError($tenNCC, 'Tên nhà cung cấp quá dài. Tối đa 255 ký tự!');
+        if(!regex.test(val)) return showError($tenNCC, 'Tên nhà cung cấp không được chứa số hoặc ký tự đặc biệt!');
+        clearError($tenNCC);
+        return true;
+    }
+
+    function checkDiaChi() {
+        const val = $diaChi.val().trim();
+        const regex = /^[a-zA-Z0-9À-ỹ\s.,\-]+$/; // chỉ chữ, số, khoảng trắng, dấu . , -
+
+        if(val === "") return showError($diaChi, 'Địa chỉ không được để trống!');
+        if(!regex.test(val)) return showError($diaChi, 'Địa chỉ chỉ được chứa chữ, số, khoảng trắng và dấu . , -');
+        clearError($diaChi);
+        return true;
+    }
+
+    function checkSDT() {
+        const val = $sdt.val().trim();
+        const regex = /^(03|05|07|08|09)\d{8}$/;
+
+        if(val === "") return showError($sdt, 'Số điện thoại không được để trống!');
+        if(!regex.test(val)) return showError($sdt, 'Số điện thoại không hợp lệ. Phải bắt đầu bằng 03, 05, 07, 08, 09 và đủ 10 số.');
+        clearError($sdt);
+        return true;
+    }
+
+    function checkEmail() {
+        const val = $email.val().trim();
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // email cơ bản, phải có @ và .
+
+        if(val === "") return showError($email, 'Email không được để trống!');
+        if(!regex.test(val)) return showError($email, 'Email không hợp lệ. Phải có @ và dấu .');
+        clearError($email);
+        return true;
+    }
+
+    // --- Hàm hiển thị / xóa lỗi ---
+    function showError($input, msg) {
+        let $span = $input.next('.error');
+        if($span.length === 0) $input.after('<span class="error text-danger"></span>');
+        $input.next('.error').text(msg);
+        $input.focus();
+        return false;
+    }
+
+    function clearError($input) {
+        $input.next('.error').text('');
+    }
+});
+</script>

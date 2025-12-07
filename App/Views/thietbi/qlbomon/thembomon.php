@@ -22,7 +22,8 @@ if(!isset($_SESSION['login'])) {
                 <!-- Tên bộ môn -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Tên bộ môn <span class="text-danger">*</span></label>
-                    <input type="text" name="tenBoMon" value="Ngũ Anh Một Nàng" class="form-control" required>
+                    <input type="text" name="tenBoMon" id="tenBoMon" value="Ngũ Anh Một Nàng" class="form-control" required>
+                    <span class="error" id="tenBoMonError"></span>
                 </div>
 
                 <!-- Mô tả -->
@@ -54,13 +55,46 @@ if(isset($_POST['btnluu'])) {
     $moTa = trim($_POST['moTa']);
 
     if($p->checkName($tenBoMon)) {
-        echo '<script>alert("Tên bộ môn đã tồn tại!"); window.history.back();</script>';
+        echo '<script>alert("Bộ môn này đã tồn tại. Vui lòng chọn tên khác."); window.history.back();</script>';
     } else {
         if($p->insertBoMon($tenBoMon, $moTa)) {
             echo '<script>alert("Thêm bộ môn thành công!"); window.location.href="index.php?page=dsbomon";</script>';
         } else {
-            echo '<script>alert("Thêm bộ môn thất bại!"); window.history.back();</script>';
+            echo '<script>alert("Thêm bộ môn thất bại. Vui lòng thử lại."); window.history.back();</script>';
         }
     }
 }
 ?>
+
+<script>
+// JQuery ràng buộc bộ môn
+$(document).ready(function () {
+    $('form').submit(function(e) {
+        if(!checkTenBoMon()) e.preventDefault();
+    });
+
+    $('#tenBoMon').blur(checkTenBoMon);
+
+    function checkTenBoMon() {
+        const val = $('input[name="tenBoMon"]').val().trim();
+        const regex = /^[a-zA-ZÀ-ỹ\s]+$/; // chỉ cho phép chữ và khoảng trắng
+
+        if(val === "") return showError('#tenBoMonError', 'Tên bộ môn không được để trống!');
+        if(val.length > 255) return showError('#tenBoMonError', 'Tên bộ môn quá dài. Tối đa 255 ký tự!');
+        if(!regex.test(val)) return showError('#tenBoMonError', 'Tên bộ môn chỉ được chứa chữ cái, không có số hay ký tự đặc biệt!');
+        
+        clearError('#tenBoMonError');
+        return true;
+    }
+
+    function showError(elem, msg) {
+        $(elem).text(msg);
+        $('input[name="tenBoMon"]').focus();
+        return false;
+    }
+
+    function clearError(elem) {
+        $(elem).text('');
+    }
+});
+</script>

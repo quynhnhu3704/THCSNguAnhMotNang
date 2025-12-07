@@ -113,9 +113,15 @@ if(isset($_POST['btnluu'])) {
     $ghiChu = trim($_POST['ghiChu']);
     
     if($p->updateTienDo($maYeuCau, $maChiTietTB, $tienDo, $ghiChu)) {
-        echo '<script>alert("Cập nhật tiến độ thành công!"); window.location.href="index.php?page=dsyeucau";</script>';
+        if($tienDo == "Đã sửa") {
+            echo '<script>alert("Cập nhật tiến độ thành công. Thiết bị đã được trả về tình trạng khả dụng."); window.location.href="index.php?page=dsyeucau";</script>';
+        } else if($tienDo == "Không thể sửa") {
+            echo '<script>alert("Cập nhật tiến độ thành công. Thiết bị được đánh dấu là thanh lý."); window.location.href="index.php?page=dsyeucau";</script>';
+        } else {
+            echo '<script>alert("Cập nhật tiến độ thành công."); window.location.href="index.php?page=dsyeucau";</script>';
+        }
     } else {
-        echo '<script>alert("Cập nhật tiến độ thất bại!"); window.history.back();</script>';
+        echo '<script>alert("Cập nhật tiến độ thất bại. Vui lòng thử lại."); window.history.back();</script>';
     }
 }
 ?>

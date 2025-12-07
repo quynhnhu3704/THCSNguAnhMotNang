@@ -54,13 +54,14 @@ if(!isset($_SESSION['login'])) {
                 <!-- Ngày mượn -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Ngày mượn <span class="text-danger">*</span></label>
-                    <input type="date" name="ngayMuon" class="form-control" min="<?= date('Y-m-d') ?>" required>
+                    <input type="date" name="ngayMuon" id="ngayMuon" class="form-control" min="<?= date('Y-m-d') ?>" required>
                 </div>
 
                 <!-- Ngày trả -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Ngày trả <span class="text-danger">*</span></label>
-                    <input type="date" name="ngayTra" class="form-control" min="<?= date('Y-m-d') ?>" required>
+                    <input type="date" name="ngayTra" id="ngayTra" class="form-control" min="<?= date('Y-m-d') ?>" required>
+                    <span class="error" id="ngayTraError"></span>
                 </div>
                 
                 <h5 class="my-2 fw-semibold text-secondary text-center">Danh sách thiết bị</h5>
@@ -149,12 +150,6 @@ if(isset($_POST['btnluu'])) {
     $ngayTra = $_POST['ngayTra'];
     $ghiChu = trim($_POST['ghiChu']);
 
-    // Ngày trả phải sau ngày mượn
-    if($ngayTra < $ngayMuon) {
-        echo "<script>alert('Ngày trả phải sau ngày mượn'); window.history.back();</script>";
-        exit();
-    }
-
     $chiTiet = []; // mảng chi tiết thiết bị để truyền vào insertChiTietPM
     if(!empty($_POST['maThietBi']) && is_array($_POST['maThietBi'])) {
         foreach($_POST['maThietBi'] as $index => $maThietBi) {
@@ -183,13 +178,13 @@ if(isset($_POST['btnluu'])) {
         $kq = $p->insertChiTietPM($maPhieuMuon, $chiTiet);
 
         if($kq) {
-            echo "<script>alert('Thêm phiếu mượn thành công'); window.location.href='index.php?page=dsphieumuon'</script>";
+            echo "<script>alert('Phiếu mượn đã được tạo thành công.'); window.location.href='index.php?page=dsphieumuon'</script>";
         } else {
             $p->deletePhieuMuon($maPhieuMuon);  // rollback phiếu mượn
-            echo "<script>alert('Thêm phiếu mượn thất bại do không đủ thiết bị khả dụng.'); window.location.href='index.php?page=themphieumuon';</script>";
+            echo "<script>alert('Không thể tạo phiếu mượn do thiết bị khả dụng không đủ. Vui lòng kiểm tra lại.'); window.location.href='index.php?page=themphieumuon';</script>";
         }
     } else {
-        echo "<script>alert('Thêm phiếu mượn thất bại!'); window.location.href='index.php?page=themphieumuon';</script>";
+        echo "<script>alert('Tạo phiếu mượn thất bại. Vui lòng thử lại.'); window.location.href='index.php?page=themphieumuon';</script>";
         exit();
     }
 }
@@ -325,3 +320,38 @@ document.querySelectorAll('.thietBiSelect').forEach(select => {
         text-overflow: ellipsis;
     }
 </style>
+
+<script>
+// Ràng buộc JQuery ngày trả phải sau ngày mượn
+$(document).ready(function () {
+    $('#ngayMuon, #ngayTra').change(checkNgayTra);
+
+    $('form').submit(function(e) {
+        if(!checkNgayTra()) e.preventDefault();
+    });
+
+    function checkNgayTra() {
+        const ngayMuon = $('#ngayMuon').val();
+        const ngayTra = $('#ngayTra').val();
+
+        if(!ngayMuon || !ngayTra) return true; // chưa nhập đủ
+
+        if(new Date(ngayTra) <= new Date(ngayMuon)) {
+            showError('#ngayTraError', 'Ngày trả phải sau ngày mượn!');
+            return false;
+        } else {
+            clearError('#ngayTraError');
+            return true;
+        }
+    }
+
+    function showError(elem, msg) {
+        $(elem).text(msg);
+        return false;
+    }
+
+    function clearError(elem) {
+        $(elem).text('');
+    }
+});
+</script>

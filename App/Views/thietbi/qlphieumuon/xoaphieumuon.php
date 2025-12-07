@@ -16,7 +16,7 @@ $p = new controlPhieuMuon();
 $maPhieuMuon = $_GET['maPhieuMuon'];
 
 if(!$maPhieuMuon) {
-    echo "<script>alert('Không tìm thấy phiếu mượn!'); window.location.href='index.php?page=dsphieumuon'</script>";
+    echo "<script>alert('Không tìm thấy phiếu mượn.'); window.location.href='index.php?page=dsphieumuon'</script>";
     exit();
 }
 
@@ -25,7 +25,7 @@ $kq = $p->get01PhieuMuon($maPhieuMuon);
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy phiếu mượn!'); window.location.href='index.php?page=dsphieumuon'</script>";
+    echo "<script>alert('Không tìm thấy phiếu mượn.'); window.location.href='index.php?page=dsphieumuon'</script>";
     exit();
 }
 
@@ -35,9 +35,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
 
     // 2. Xóa phiếu mượn
     if ($p->deletePhieuMuon($maPhieuMuon)) {
-        echo "<script>alert('Xóa phiếu mượn thành công! Thiết bị đã được trả về trạng thái khả dụng.'); window.location.href='index.php?page=dsphieumuon'</script>";
+        echo "<script>alert('Phiếu mượn đã được xóa thành công. Thiết bị đã trở về trạng thái khả dụng.'); window.location.href='index.php?page=dsphieumuon'</script>";
     } else {
-        echo "<script>alert('Xóa phiếu mượn thất bại!'); window.history.back();</script>";
+        echo "<script>alert('Xóa phiếu mượn thất bại. Vui lòng thử lại.'); window.history.back();</script>";
     }
 }
 ?>

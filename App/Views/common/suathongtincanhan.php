@@ -123,6 +123,7 @@ $(document).ready(function () {
         const regex = /^[a-zA-Z0-9_.]{3,255}$/;
 
         if(val === "") return showError('#tenDangNhapError', 'Tên đăng nhập không được để trống!');
+        if(val.length > 255) return showError('#tenDangNhapError', 'Tên đăng nhập quá dài. Tối đa 255 ký tự!');
         if(!regex.test(val)) return showError('#tenDangNhapError', 'Tên đăng nhập không hợp lệ. Chỉ dùng chữ, số, dấu _ hoặc .');
         clearError('#tenDangNhapError');
         return true;
@@ -133,6 +134,7 @@ $(document).ready(function () {
         const regex = /^[a-zA-ZÀ-ỹ\s]+$/;
 
         if(val === "") return showError('#hoTenError', 'Họ tên không được để trống!');
+        if(val.length > 255) return showError('#hoTenError', 'Họ tên quá dài. Tối đa 255 ký tự!');
         if(!regex.test(val)) return showError('#hoTenError', 'Họ tên không được chứa ký tự đặc biệt hoặc số!');
 
         // Kiểm tra chữ hoa đầu mỗi từ

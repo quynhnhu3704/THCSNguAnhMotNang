@@ -21,7 +21,7 @@
                                 echo '</li>';
                             }
                         } else {
-                            echo '<li class="list-group-item text-muted">Chưa có bộ môn</li>';
+                            echo '<li class="list-group-item text-muted">Hiện chưa có bộ môn nào. Vui lòng quay lại sau.</li>';
                         }
                         ?>
                     </ul>
@@ -85,7 +85,7 @@
                         echo '</div>';
                     }
                 } else {
-                    echo '<h5 class="text-muted">Chúng tôi tạm thời chưa có thiết bị nào, mời bạn quay lại sau.</h5>';
+                    echo '<h5 class="text-muted">Hiện chưa có thiết bị nào. Vui lòng quay lại sau.</h5>';
                 }
                 ?>
                 </div>

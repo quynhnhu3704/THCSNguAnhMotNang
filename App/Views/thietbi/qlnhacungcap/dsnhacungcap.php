@@ -71,7 +71,7 @@ if(!isset($_SESSION['login'])) {
                     echo '</tr>';
                 }
             } else {
-                echo '<tr><td colspan="6"><h5 class="text-center text-muted">Chúng tôi tạm thời chưa có nhà cung cấp nào, mời bạn quay lại sau.</h5></td></tr>';   
+                echo '<tr><td colspan="6"><h5 class="text-center text-muted">Hiện chưa có nhà cung cấp nào. Vui lòng quay lại sau.</h5></td></tr>';   
             }
             ?>
             </tbody>

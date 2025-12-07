@@ -194,11 +194,6 @@ session_start();
 
 
 
-
-
-
-
-
                 // Chức năng cho Tổ trưởng chuyên môn
                 // Lập kế hoạch mua sắm
                 case 'dskehoachmuasam':

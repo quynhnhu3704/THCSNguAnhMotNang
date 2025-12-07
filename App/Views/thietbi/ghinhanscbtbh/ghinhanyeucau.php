@@ -73,9 +73,9 @@ if($kq && $kq->num_rows > 0) {
                     <label class="form-label fw-medium">Loại yêu cầu <span class="text-danger">*</span></label>
                     <select name="loaiYeuCau" class="form-select" required>
                         <option value="" disabled selected>-- Chọn loại yêu cầu --</option>
-                        <option value="Sửa chữa">Sửa chữa</option>
-                        <option value="Bảo trì">Bảo trì</option>
-                        <option value="Bảo hành">Bảo hành</option>
+                        <option value="Sửa chữa" <?= ($r["loaiYeuCau"] == 'Sửa chữa') ? 'selected' : '' ?>>Sửa chữa</option>
+                        <option value="Bảo trì" <?= ($r["loaiYeuCau"] == 'Bảo trì') ? 'selected' : '' ?>>Bảo trì</option>
+                        <option value="Bảo hành" <?= ($r["loaiYeuCau"] == 'Bảo hành') ? 'selected' : '' ?>>Bảo hành</option>
                     </select>
                 </div>
 
@@ -113,9 +113,9 @@ if(isset($_POST['btnluu'])) {
     $ghiChu = trim($_POST['ghiChu']);
     
     if($p->updateYeuCauSCBTBH($maYeuCau, $loaiYeuCau, "Chờ xác nhận", $ghiChu)) {
-        echo '<script>alert("Ghi nhận yêu cầu thành công!"); window.location.href="index.php?page=dsghinhan";</script>';
+        echo '<script>alert("Yêu cầu đã được ghi nhận thành công."); window.location.href="index.php?page=dsghinhan";</script>';
     } else {
-        echo '<script>alert("Ghi nhận yêu cầu thất bại!"); window.history.back();</script>';
+        echo '<script>alert("Ghi nhận yêu cầu thất bại. Vui lòng thử lại."); window.history.back();</script>';
     }
 }
 ?>
