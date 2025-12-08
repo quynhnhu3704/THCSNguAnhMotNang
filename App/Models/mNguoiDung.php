@@ -45,12 +45,24 @@ class modelNguoiDung {
         return $kq;
     }
 
-    public function searchNguoiDungExcept($keyword, $maVaiTro) {
+    public function searchNguoiDungExceptVaiTro($keyword, $maVaiTro) {
         $p = new clsKetNoi();
         $truyvan = "SELECT * FROM nguoidung nd
                     LEFT JOIN bomon bm ON bm.maBoMon = nd.maBoMon
                     LEFT JOIN vaitro vt ON vt.maVaiTro = nd.maVaiTro
                     WHERE hoTen LIKE N'%$keyword%' AND nd.maVaiTro != $maVaiTro";
+        $con = $p->moketnoi();
+        $kq = mysqli_query($con, $truyvan);
+        $p->dongketnoi($con);
+        return $kq;
+    }
+
+    public function searchNguoiDungExceptBoMon($keyword, $maBoMon) {
+        $p = new clsKetNoi();
+        $truyvan = "SELECT * FROM nguoidung nd
+                    LEFT JOIN bomon bm ON bm.maBoMon = nd.maBoMon
+                    LEFT JOIN vaitro vt ON vt.maVaiTro = nd.maVaiTro
+                    WHERE hoTen LIKE N'%$keyword%' AND nd.maBoMon != $maBoMon";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
@@ -173,6 +185,19 @@ class modelNguoiDung {
                     LEFT JOIN bomon bm ON bm.maBoMon = nd.maBoMon
                     LEFT JOIN vaitro vt ON vt.maVaiTro = nd.maVaiTro
                     WHERE nd.maVaiTro IN ($chuoiVaiTro)
+                    ORDER BY nd.hoTen";
+        $con = $p->moketnoi();
+        $kq = mysqli_query($con, $truyvan);
+        $p->dongketnoi($con);
+        return $kq;
+    }
+
+    public function selectNguoiDungTheoBoMon($maBoMon) {
+        $p = new clsKetNoi();
+        $truyvan = "SELECT * FROM nguoidung nd
+                    LEFT JOIN bomon bm ON bm.maBoMon = nd.maBoMon
+                    LEFT JOIN vaitro vt ON vt.maVaiTro = nd.maVaiTro
+                    WHERE nd.maBoMon = $maBoMon
                     ORDER BY nd.hoTen";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);

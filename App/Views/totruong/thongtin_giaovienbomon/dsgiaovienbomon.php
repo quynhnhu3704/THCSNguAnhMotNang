@@ -1,4 +1,4 @@
-<!-- App/Views/hieutruong/thongtin_giaovien_nhanvien/ds_giaovien_nhanvien.php -->
+<!-- App/Views/totruong/thongtin_giaovienbomon/dsgiaovienbomon.php -->
 <?php
 if(!isset($_SESSION['login'])) {
     echo "<script>alert('Vui lòng đăng nhập để tiếp tục.'); window.location.href='index.php?page=dangnhap'</script>";
@@ -11,12 +11,12 @@ if(!isset($_SESSION['login'])) {
 // }
 ?>
 
-<h2 class="text-center fw-semibold my-3">Danh sách giáo viên/nhân viên</h2>
+<h2 class="text-center fw-semibold my-3">Danh sách giáo viên bộ môn</h2>
 
 <div class="d-flex mx-auto justify-content-between align-items-center" style="width: 95%">
     <!-- Thanh tìm kiếm -->
     <form class="d-flex ms-auto" action="index.php" method="get">
-        <input type="hidden" name="page" value="ds_giaovien_nhanvien"> <!-- Submit sẽ tạo URL: index.php?page=ds_giaovien_nhanvien&keyword=xxxxx -->
+        <input type="hidden" name="page" value="dsgiaovienbomon"> <!-- Submit sẽ tạo URL: index.php?page=dsgiaovienbomon&keyword=xxxxx -->
 
         <input class="form-control me-2" type="text" name="keyword" placeholder="Tìm kiếm GV/NV..." style="width: 220px;">
         <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
@@ -43,20 +43,23 @@ if(!isset($_SESSION['login'])) {
             include_once('App/Controllers/cNguoiDung.php');
             $p = new controlNguoiDung();
 
+            
+
             if(isset($_GET['keyword'])) {
                 $keyword = $_GET['keyword'];
-                $maVaiTro = 1;
-                $kq = $p->searchNguoiDungExceptVaiTro($keyword, $maVaiTro); // ẩn hiệu trưởng khỏi tìm kiếm
+                $maVaiTro = 2;
+                $kq = $p->searchNguoiDungExceptVaiTro($keyword, $maVaiTro); // ẩn tổ trưởng chuyên môn khỏi tìm kiếm
             } else {
-                $kq = $p->getAllNguoiDung();
+                $maBoMon = $_SESSION['maBoMon'];
+                $kq = $p->getNguoiDungTheoBoMon($maBoMon);
             }
 
             if ($kq && $kq->num_rows > 0) {
                 $dem = 0;
                 while ($r = $kq->fetch_assoc()) {
                     // Ẩn hiệu trưởng khỏi danh sách
-                    if ($r['maVaiTro'] == 1) continue;
-
+                    if ($r['maVaiTro'] == 2) continue;
+                    
                     $dem++;
 
                     echo '<tr>';
@@ -77,7 +80,7 @@ if(!isset($_SESSION['login'])) {
                     echo '</tr>';
                 }
             } else {
-                echo '<tr><td colspan="8"><h5 class="text-center text-muted">Hiện chưa có giáo viên/nhân viên nào. Vui lòng quay lại sau.</h5></td></tr>';   
+                echo '<tr><td colspan="8"><h5 class="text-center text-muted">Hiện chưa có giáo viên bộ môn nào. Vui lòng quay lại sau.</h5></td></tr>';   
             }
             ?>
             </tbody>

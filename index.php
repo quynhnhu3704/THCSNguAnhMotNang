@@ -102,6 +102,7 @@ session_start();
                 // echo '<li><a href="index.php?page=xembaocao" class="text-decoration-none d-block text-dark py-2">Xem báo cáo thống kê</a></li>';
                 // echo '<li><a href="index.php?page=dsbaocao" class="text-decoration-none d-block text-dark py-2">test báo cáo</a></li>';
                 echo '<li><a href="index.php?page=ds_giaovien_nhanvien" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên/nhân viên</a></li>';
+                echo '<li><a href="index.php?page=dsgiaovienbomon" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên bộ môn</a></li>';
 
             }
             ?>
@@ -176,6 +177,9 @@ session_start();
                 case 'ds_giaovien_nhanvien':
                     include_once('App/Views/hieutruong/thongtin_giaovien_nhanvien/ds_giaovien_nhanvien.php');
                     break;
+                case 'xem_giaovien_nhanvien':
+                    include_once('App/Views/hieutruong/thongtin_giaovien_nhanvien/xem_giaovien_nhanvien.php');
+                    break;
                 // Xem báo cáo thống kê
                 case 'dsbaocao':
                     include_once('App/Views/hieutruong/baocaothongke/dsbaocao.php');
@@ -212,6 +216,13 @@ session_start();
                     break;
                 case 'xoakehoachmuasam':
                     include_once('App/Views/totruong/kehoachmuasam/xoakehoachmuasam.php');
+                    break;
+                // Xem thông tin giáo viên bộ môn
+                case 'dsgiaovienbomon':
+                    include_once('App/Views/totruong/thongtin_giaovienbomon/dsgiaovienbomon.php');
+                    break;
+                case 'xemgiaovienbomon':
+                    include_once('App/Views/totruong/thongtin_giaovienbomon/xemgiaovienbomon.php');
                     break;
 
                 // Chức năng cho Giáo viên bộ môn

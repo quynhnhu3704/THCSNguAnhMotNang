@@ -17,6 +17,7 @@ class controlNguoiDung {
             $_SESSION['maVaiTro'] = $r['maVaiTro'];
             $_SESSION['tenDangNhap'] = $r['tenDangNhap'];
             $_SESSION['maNguoiDung'] = $r['maNguoiDung'];
+            $_SESSION['maBoMon'] = $r['maBoMon'];
             echo "<script>alert('Đăng nhập thành công! Chào mừng bạn trở lại.'); window.location.href='index.php';</script>";
         } else {
             echo "<script>alert('Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng kiểm tra và thử lại.')</script>";
@@ -34,9 +35,20 @@ class controlNguoiDung {
         }
     }
 
-    public function searchNguoiDungExcept($keyword, $maVaiTro) {
+    public function searchNguoiDungExceptVaiTro($keyword, $maVaiTro) {
         $p = new modelNguoiDung();
-        $kq = $p->searchNguoiDungExcept($keyword, $maVaiTro);
+        $kq = $p->searchNguoiDungExceptVaiTro($keyword, $maVaiTro);
+
+        if(mysqli_num_rows($kq) > 0) {
+            return $kq;
+        } else {
+            return false;
+        }
+    }
+
+    public function searchNguoiDungExceptBoMon($keyword, $maBoMon) {
+        $p = new modelNguoiDung();
+        $kq = $p->searchNguoiDungExceptBoMon($keyword, $maBoMon);
 
         if(mysqli_num_rows($kq) > 0) {
             return $kq;
@@ -123,6 +135,12 @@ class controlNguoiDung {
     public function getNguoiDungTheoVaiTro($maVaiTroArray) {
         $p = new modelNguoiDung();
         $kq = $p->selectNguoiDungTheoVaiTro($maVaiTroArray);
+        return $kq;
+    }
+
+    public function getNguoiDungTheoBoMon($maBoMon) {
+        $p = new modelNguoiDung();
+        $kq = $p->selectNguoiDungTheoBoMon($maBoMon);
         return $kq;
     }
 }
