@@ -28,7 +28,10 @@ if(!isset($_SESSION['login'])) {
                 <!-- Mật khẩu tạm thời -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Mật khẩu tạm thời <span class="text-danger">*</span></label>
-                    <input type="password" name="matKhauTamThoi" value="Nguanhmotnang123@" class="form-control" required>
+                    <div class="input-group">
+                        <input type="password" name="matKhauTamThoi" value="Nguanhmotnang123@" class="form-control" required>
+                        <span class="input-group-text" style="cursor: pointer;"><i class="bi bi-eye-slash toggle-pass"></i></span>
+                    </div>
                 </div>
 
                 <!-- Họ tên -->
@@ -208,10 +211,10 @@ $(document).ready(function () {
 
     function checkEmail() {
         const val = $email.val().trim();
-        const regex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com)$/;
+        const regex = /^[^\s@]+@(truong\.edu\.vn|gmail\.com|yahoo\.com)$/;
 
         if(val === "") return showError($email, 'Email không được để trống!');
-        if(!regex.test(val)) return showError($email, 'Email không hợp lệ. Chỉ chấp nhận @gmail.com, @yahoo.com.');
+        if(!regex.test(val)) return showError($email, 'Email không hợp lệ. Chỉ chấp nhận @truong.edu.vn, @gmail.com, @yahoo.com.');
         clearError($email);
         return true;
     }
@@ -239,5 +242,16 @@ $(document).ready(function () {
     function clearError($input) {
         $input.next('.error').text('');
     }
+
+    // Ẩn/hiện mật khẩu khi click vào icon trong input-group
+    $('.toggle-pass').click(function() {
+        // tìm input cha gần nhất
+        const input = $(this).closest('.input-group').find('input');
+        const type = input.attr('type') === 'password' ? 'text' : 'password';
+        input.attr('type', type);
+        
+        // đổi icon
+        $(this).toggleClass('bi-eye bi-eye-slash');
+    });
 });
 </script>

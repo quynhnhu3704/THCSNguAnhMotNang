@@ -41,20 +41,26 @@ if($kq && $kq->num_rows > 0) {
                 <!-- Tên đăng nhập -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Tên đăng nhập <span class="text-danger">*</span></label>
-                    <input type="text" name="tenDangNhap" value="<?= $r['tenDangNhap'] ?>" class="form-control" required>
+                    <input type="text" name="tenDangNhap" id="tenDangNhap" value="<?= $r['tenDangNhap'] ?>" class="form-control" required>
+                    <span class="error" id="tenDangNhapError"></span>
                 </div>
 
                 <!-- Mật khẩu mới -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Mật khẩu mới</label>
                     <span class="text-warning fst-italic" style="font-size:smaller">(Không bắt buộc)</span>
-                    <input type="password" name="matKhauMoi" value="" class="form-control">
+                    <div class="input-group">
+                        <input type="password" name="matKhauMoi" id="matKhauMoi" value="" class="form-control">
+                        <span class="input-group-text" style="cursor: pointer;"><i class="bi bi-eye-slash toggle-pass"></i></span>
+                    </div>
+                    <span class="error" id="matKhauMoiError"></span>
                 </div>
 
                 <!-- Họ tên -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Họ tên <span class="text-danger">*</span></label>
-                    <input type="text" name="hoTen" value="<?= $r['hoTen'] ?>" class="form-control" required>
+                    <input type="text" name="hoTen" id="hoTen" value="<?= $r['hoTen'] ?>" class="form-control" required>
+                    <span class="error" id="hoTenError"></span>
                 </div>
 
                 <!-- Vai trò -->
@@ -94,13 +100,15 @@ if($kq && $kq->num_rows > 0) {
                 <!-- Số điện thoại -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Số điện thoại <span class="text-danger">*</span></label>
-                    <input type="tel" name="soDienThoai" value="<?= $r['soDienThoai'] ?>" class="form-control" required>
+                    <input type="tel" name="soDienThoai" id="soDienThoai" value="<?= $r['soDienThoai'] ?>" class="form-control" required>
+                    <span class="error" id="soDienThoaiError"></span>
                 </div>
 
                 <!-- Email -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Email <span class="text-danger">*</span></label>
-                    <input type="email" name="email" value="<?= $r['email'] ?>" class="form-control" required>
+                    <input type="email" name="email" id="email" value="<?= $r['email'] ?>" class="form-control" required>
+                    <span class="error" id="emailError"></span>
                 </div>
 
                 <!-- Nút submit/reset -->
@@ -176,18 +184,12 @@ if(isset($_POST['btnluu'])) {
 
 <script>
 $(document).ready(function () {
-    const $tenDangNhap = $('input[name="tenDangNhap"]');
-    const $hoTen = $('input[name="hoTen"]');
-    const $soDienThoai = $('input[name="soDienThoai"]');
-    const $email = $('input[name="email"]');
-    const $matKhau = $('input[name="matKhauMoi"]');
-
-    // blur
-    $tenDangNhap.blur(checkTenDangNhap);
-    $hoTen.blur(checkHoTen);
-    $soDienThoai.blur(checkSDT);
-    $email.blur(checkEmail);
-    $matKhau.blur(checkMatKhau);
+    // blur events
+    $('#tenDangNhap').blur(checkTenDangNhap);
+    $('#hoTen').blur(checkHoTen);
+    $('#soDienThoai').blur(checkSDT);
+    $('#email').blur(checkEmail);
+    $('#matKhauMoi').blur(checkMatKhau);
 
     // submit
     $('form').submit(function(e) {
@@ -196,86 +198,92 @@ $(document).ready(function () {
         }
     });
 
-    // --- Hàm kiểm tra ---
+    // --- validation functions ---
     function checkTenDangNhap() {
-        const val = $tenDangNhap.val().trim();
+        const val = $('#tenDangNhap').val().trim();
         const regex = /^[a-zA-Z0-9_.]+$/;
 
-        if(val === "") return showError($tenDangNhap, 'Tên đăng nhập không được để trống!');
-        if(val.length > 255) return showError($tenDangNhap, 'Tên đăng nhập quá dài. Tối đa 255 ký tự!');
-        if(!regex.test(val)) return showError($tenDangNhap, 'Tên đăng nhập không hợp lệ. Chỉ dùng chữ, số, dấu _ hoặc .');
-        clearError($tenDangNhap);
+        if(val === "") return showError('#tenDangNhapError', 'Tên đăng nhập không được để trống!');
+        if(val.length > 255) return showError('#tenDangNhapError', 'Tên đăng nhập quá dài. Tối đa 255 ký tự!');
+        if(!regex.test(val)) return showError('#tenDangNhapError', 'Tên đăng nhập không hợp lệ. Chỉ dùng chữ, số, dấu _ hoặc .');
+
+        clearError('#tenDangNhapError');
         return true;
     }
 
     function checkHoTen() {
-        const val = $hoTen.val().trim();
+        const val = $('#hoTen').val().trim();
         const regex = /^[a-zA-ZÀ-ỹ\s]+$/;
 
-        if(val === "") return showError($hoTen, 'Họ tên không được để trống!');
-        if(val.length > 255) return showError($hoTen, 'Họ tên quá dài. Tối đa 255 ký tự!');
-        if(!regex.test(val)) return showError($hoTen, 'Họ tên không được chứa ký tự đặc biệt hoặc số!');
+        if(val === "") return showError('#hoTenError', 'Họ tên không được để trống!');
+        if(val.length > 255) return showError('#hoTenError', 'Họ tên quá dài. Tối đa 255 ký tự!');
+        if(!regex.test(val)) return showError('#hoTenError', 'Họ tên không được chứa ký tự đặc biệt hoặc số!');
 
-        // Kiểm tra chữ hoa đầu mỗi từ
         const words = val.split(/\s+/);
         for(let word of words) {
             if(word[0] !== word[0].toUpperCase()) {
-                return showError($hoTen, 'Chữ cái đầu mỗi từ trong họ tên phải viết hoa!');
+                return showError('#hoTenError', 'Chữ cái đầu mỗi từ trong họ tên phải viết hoa!');
             }
         }
-        clearError($hoTen);
+
+        clearError('#hoTenError');
         return true;
     }
 
     function checkSDT() {
-        const val = $soDienThoai.val().trim();
+        const val = $('#soDienThoai').val().trim();
         const regex = /^(03|05|07|08|09)\d{8}$/;
 
-        if(val === "") return showError($soDienThoai, 'Số điện thoại không được để trống!');
-        if(!regex.test(val)) return showError($soDienThoai, 'Số điện thoại không hợp lệ. Phải bắt đầu bằng 03, 05, 07, 08, 09 và đủ 10 số.');
-        clearError($soDienThoai);
+        if(val === "") return showError('#soDienThoaiError', 'Số điện thoại không được để trống!');
+        if(!regex.test(val)) return showError('#soDienThoaiError', 'Số điện thoại không hợp lệ. Phải bắt đầu 03,05,07,08,09 và đủ 10 số.');
+
+        clearError('#soDienThoaiError');
         return true;
     }
 
     function checkEmail() {
-        const val = $email.val().trim();
-        const regex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com)$/;
+        const val = $('#email').val().trim();
+        const regex = /^[^\s@]+@(truong\.edu\.vn|gmail\.com|yahoo\.com)$/;
 
-        if(val === "") return showError($email, 'Email không được để trống!');
-        if(!regex.test(val)) return showError($email, 'Email không hợp lệ. Chỉ chấp nhận @gmail.com, @yahoo.com.');
-        clearError($email);
+        if(val === "") return showError('#emailError', 'Email không được để trống!');
+        if(!regex.test(val)) return showError('#emailError', 'Email không hợp lệ. Chỉ chấp nhận @truong.edu.vn, @gmail.com, @yahoo.com.');
+
+        clearError('#emailError');
         return true;
     }
 
     function checkMatKhau() {
-        const val = $matKhau.val().trim();
+        const val = $('#matKhauMoi').val().trim();
         if(val === "") {
-            // Nếu để trống, không báo lỗi và không validate
-            clearError($matKhau);
+            clearError('#matKhauMoiError'); // không bắt buộc
             return true;
         }
 
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/;
-        if(!regex.test(val)) {
-            return showError($matKhau, 
-                'Mật khẩu phải có ít nhất 6 ký tự, bao gồm 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt!');
-        }
+        if(!regex.test(val)) return showError('#matKhauMoiError', 'Mật khẩu phải có ít nhất 6 ký tự, gồm 1 chữ hoa, 1 chữ thường, 1 số, 1 ký tự đặc biệt!');
 
-        clearError($matKhau);
+        clearError('#matKhauMoiError');
         return true;
     }
 
-    // --- Hàm hiển thị / xóa lỗi ---
-    function showError($input, msg) {
-        let $span = $input.next('.error');
-        if($span.length === 0) $input.after('<span class="error text-danger"></span>');
-        $input.next('.error').text(msg);
-        $input.focus();
+    // --- show / clear error ---
+    function showError(elem, msg) {
+        $(elem).text(msg);
+        const input = $(elem).prevAll('input, select, textarea').first();
+        if(input.length) input.focus();
         return false;
     }
 
-    function clearError($input) {
-        $input.next('.error').text('');
+    function clearError(elem) {
+        $(elem).text('');
     }
+
+    // toggle mật khẩu
+    $('.toggle-pass').click(function() {
+        const input = $(this).closest('.input-group').find('input');
+        const type = input.attr('type') === 'password' ? 'text' : 'password';
+        input.attr('type', type);
+        $(this).toggleClass('bi-eye bi-eye-slash');
+    });
 });
 </script>
