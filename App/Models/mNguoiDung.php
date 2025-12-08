@@ -57,17 +57,17 @@ class modelNguoiDung {
         return $kq;
     }
 
-    public function searchNguoiDungExceptBoMon($keyword, $maBoMon) {
-        $p = new clsKetNoi();
-        $truyvan = "SELECT * FROM nguoidung nd
-                    LEFT JOIN bomon bm ON bm.maBoMon = nd.maBoMon
-                    LEFT JOIN vaitro vt ON vt.maVaiTro = nd.maVaiTro
-                    WHERE hoTen LIKE N'%$keyword%' AND nd.maBoMon != $maBoMon";
-        $con = $p->moketnoi();
-        $kq = mysqli_query($con, $truyvan);
-        $p->dongketnoi($con);
-        return $kq;
-    }
+    // public function searchNguoiDungExceptBoMon($keyword, $maBoMon) {
+    //     $p = new clsKetNoi();
+    //     $truyvan = "SELECT * FROM nguoidung nd
+    //                 LEFT JOIN bomon bm ON bm.maBoMon = nd.maBoMon
+    //                 LEFT JOIN vaitro vt ON vt.maVaiTro = nd.maVaiTro
+    //                 WHERE hoTen LIKE N'%$keyword%' AND nd.maBoMon != $maBoMon";
+    //     $con = $p->moketnoi();
+    //     $kq = mysqli_query($con, $truyvan);
+    //     $p->dongketnoi($con);
+    //     return $kq;
+    // }
 
     public function select01NguoiDung($maNguoiDung) {
         $p = new clsKetNoi();

@@ -49,6 +49,21 @@ if(!isset($_SESSION['login'])) {
                 $keyword = $_GET['keyword'];
                 $maVaiTro = 2;
                 $kq = $p->searchNguoiDungExceptVaiTro($keyword, $maVaiTro); // ẩn tổ trưởng chuyên môn khỏi tìm kiếm
+
+// coi lại tìm kiếm chỉ hiện vai trò giáo viên và bộ môn của session
+
+
+
+
+
+
+
+
+
+
+
+
+
             } else {
                 $maBoMon = $_SESSION['maBoMon'];
                 $kq = $p->getNguoiDungTheoBoMon($maBoMon);

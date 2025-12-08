@@ -50,7 +50,7 @@ if(!isset($_SESSION['login'])) {
             if(isset($_GET['keyword'])) {
                 $keyword = $_GET['keyword'];
                 $maVaiTro = 6;
-                $kq = $p->searchNguoiDungExcept($keyword, $maVaiTro); // ẩn admin khỏi tìm kiếm
+                $kq = $p->searchNguoiDungExceptVaiTro($keyword, $maVaiTro); // ẩn admin khỏi tìm kiếm
             } else {
                 $kq = $p->getAllNguoiDung();
             }
