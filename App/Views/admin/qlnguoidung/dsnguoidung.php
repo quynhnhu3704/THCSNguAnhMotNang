@@ -49,7 +49,8 @@ if(!isset($_SESSION['login'])) {
 
             if(isset($_GET['keyword'])) {
                 $keyword = $_GET['keyword'];
-                $kq = $p->searchNguoiDung($keyword);
+                $maVaiTro = 6;
+                $kq = $p->searchNguoiDungExcept($keyword, $maVaiTro); // ẩn admin khỏi tìm kiếm
             } else {
                 $kq = $p->getAllNguoiDung();
             }
@@ -57,6 +58,9 @@ if(!isset($_SESSION['login'])) {
             if ($kq && $kq->num_rows > 0) {
                 $dem = 0;
                 while ($r = $kq->fetch_assoc()) {
+                    // Ẩn admin khỏi danh sách phân quyền
+                    if ($r['maVaiTro'] == 6) continue;
+                    
                     $dem++;
 
                     echo '<tr>';

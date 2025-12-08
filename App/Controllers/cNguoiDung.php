@@ -34,6 +34,17 @@ class controlNguoiDung {
         }
     }
 
+    public function searchNguoiDungExcept($keyword, $maVaiTro) {
+        $p = new modelNguoiDung();
+        $kq = $p->searchNguoiDungExcept($keyword, $maVaiTro);
+
+        if(mysqli_num_rows($kq) > 0) {
+            return $kq;
+        } else {
+            return false;
+        }
+    }
+
     public function searchNguoiDung($keyword) {
         $p = new modelNguoiDung();
         $kq = $p->searchNguoiDung($keyword);

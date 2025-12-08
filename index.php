@@ -99,8 +99,9 @@ session_start();
                 echo '<li><a href="index.php?page=dsmuasam" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch mua sắm</a></li>';
                 echo '<li><a href="index.php?page=dsthanhly" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch thanh lý</a></li>';
                 // echo '<li><a href="index.php?page=dsbaocaothongke" class="text-decoration-none d-block text-dark py-2">Lập báo cáo thống kê</a></li>';
-                echo '<li><a href="index.php?page=xembaocao" class="text-decoration-none d-block text-dark py-2">Xem báo cáo thống kê</a></li>';
-                echo '<li><a href="index.php?page=dsbaocao" class="text-decoration-none d-block text-dark py-2">Xem báo cáo chính nèeeeeeeee</a></li>';
+                // echo '<li><a href="index.php?page=xembaocao" class="text-decoration-none d-block text-dark py-2">Xem báo cáo thống kê</a></li>';
+                // echo '<li><a href="index.php?page=dsbaocao" class="text-decoration-none d-block text-dark py-2">test báo cáo</a></li>';
+                echo '<li><a href="index.php?page=ds_giaovien_nhanvien" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên/nhân viên</a></li>';
 
             }
             ?>
@@ -170,6 +171,10 @@ session_start();
                     break;
                 case 'duyetkehoachthanhly':
                     include_once('App/Views/hieutruong/kehoachthanhly/duyetkehoachthanhly.php');
+                    break;
+                // Xem thông tin GV/NV
+                case 'ds_giaovien_nhanvien':
+                    include_once('App/Views/hieutruong/thongtin_giaovien_nhanvien/ds_giaovien_nhanvien.php');
                     break;
                 // Xem báo cáo thống kê
                 case 'dsbaocao':

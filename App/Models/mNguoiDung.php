@@ -26,7 +26,6 @@ class modelNguoiDung {
         $truyvan = "SELECT * FROM nguoidung nd
                     LEFT JOIN bomon bm ON bm.maBoMon = nd.maBoMon
                     LEFT JOIN vaitro vt ON vt.maVaiTro = nd.maVaiTro
-                    WHERE nd.maVaiTro != 6
                     ORDER BY tenDangNhap";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
@@ -40,6 +39,18 @@ class modelNguoiDung {
                     LEFT JOIN bomon bm ON bm.maBoMon = nd.maBoMon
                     LEFT JOIN vaitro vt ON vt.maVaiTro = nd.maVaiTro
                     WHERE hoTen LIKE N'%$keyword%'";
+        $con = $p->moketnoi();
+        $kq = mysqli_query($con, $truyvan);
+        $p->dongketnoi($con);
+        return $kq;
+    }
+
+    public function searchNguoiDungExcept($keyword, $maVaiTro) {
+        $p = new clsKetNoi();
+        $truyvan = "SELECT * FROM nguoidung nd
+                    LEFT JOIN bomon bm ON bm.maBoMon = nd.maBoMon
+                    LEFT JOIN vaitro vt ON vt.maVaiTro = nd.maVaiTro
+                    WHERE hoTen LIKE N'%$keyword%' AND nd.maVaiTro != $maVaiTro";
         $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $p->dongketnoi($con);
