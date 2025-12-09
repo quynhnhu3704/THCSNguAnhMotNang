@@ -46,16 +46,16 @@ class controlNguoiDung {
         }
     }
 
-    // public function searchNguoiDungExceptBoMon($keyword, $maBoMon) {
-    //     $p = new modelNguoiDung();
-    //     $kq = $p->searchNguoiDungExceptBoMon($keyword, $maBoMon);
+    public function searchNguoiDungTheoVaiTroBoMon($keyword, $maVaiTro, $maBoMon) {
+        $p = new modelNguoiDung();
+        $kq = $p->searchNguoiDungTheoVaiTroBoMon($keyword, $maVaiTro, $maBoMon);
 
-    //     if(mysqli_num_rows($kq) > 0) {
-    //         return $kq;
-    //     } else {
-    //         return false;
-    //     }
-    // }
+        if(mysqli_num_rows($kq) > 0) {
+            return $kq;
+        } else {
+            return false;
+        }
+    }
 
     public function searchNguoiDung($keyword) {
         $p = new modelNguoiDung();

@@ -18,7 +18,7 @@ if(!isset($_SESSION['login'])) {
     <form class="d-flex ms-auto" action="index.php" method="get">
         <input type="hidden" name="page" value="dsgiaovienbomon"> <!-- Submit sẽ tạo URL: index.php?page=dsgiaovienbomon&keyword=xxxxx -->
 
-        <input class="form-control me-2" type="text" name="keyword" placeholder="Tìm kiếm GV/NV..." style="width: 220px;">
+        <input class="form-control me-2" type="text" name="keyword" placeholder="Tìm kiếm giáo viên..." style="width: 220px;">
         <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
     </form>
 </div>
@@ -43,36 +43,19 @@ if(!isset($_SESSION['login'])) {
             include_once('App/Controllers/cNguoiDung.php');
             $p = new controlNguoiDung();
 
+            $maBoMon = $_SESSION['maBoMon'];
             
-
             if(isset($_GET['keyword'])) {
                 $keyword = $_GET['keyword'];
-                $maVaiTro = 2;
-                $kq = $p->searchNguoiDungExceptVaiTro($keyword, $maVaiTro); // ẩn tổ trưởng chuyên môn khỏi tìm kiếm
-
-// coi lại tìm kiếm chỉ hiện vai trò giáo viên và bộ môn của session
-
-
-
-
-
-
-
-
-
-
-
-
-
+                $kq = $p->searchNguoiDungTheoVaiTroBoMon($keyword, 3, $maBoMon); // chỉ tìm kiếm theo vai trò là giáo viên bộ môn và theo bộ môn trong session
             } else {
-                $maBoMon = $_SESSION['maBoMon'];
                 $kq = $p->getNguoiDungTheoBoMon($maBoMon);
             }
 
             if ($kq && $kq->num_rows > 0) {
                 $dem = 0;
                 while ($r = $kq->fetch_assoc()) {
-                    // Ẩn hiệu trưởng khỏi danh sách
+                    // Ẩn tổ trưởng chuyên môn khỏi danh sách
                     if ($r['maVaiTro'] == 2) continue;
                     
                     $dem++;
@@ -90,7 +73,7 @@ if(!isset($_SESSION['login'])) {
                         echo '<td class="text-center">' . $r['email'] . '</td>';
 
                         echo '<td class="text-center">';
-                            echo '<a href="index.php?page=xem_giaovien_nhanvien&maNguoiDung=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-info" style="font-size: 0.95em;"><i class="bi bi-info-circle"></i> Xem</a>&nbsp;';
+                            echo '<a href="index.php?page=xemgiaovienbomon&maNguoiDung=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-info" style="font-size: 0.95em;"><i class="bi bi-info-circle"></i> Xem</a>&nbsp;';
                         echo '</td>';
                     echo '</tr>';
                 }

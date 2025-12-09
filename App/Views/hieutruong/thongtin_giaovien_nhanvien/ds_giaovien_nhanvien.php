@@ -45,8 +45,7 @@ if(!isset($_SESSION['login'])) {
 
             if(isset($_GET['keyword'])) {
                 $keyword = $_GET['keyword'];
-                $maVaiTro = 1;
-                $kq = $p->searchNguoiDungExceptVaiTro($keyword, $maVaiTro); // ẩn hiệu trưởng khỏi tìm kiếm
+                $kq = $p->searchNguoiDungExceptVaiTro($keyword, 1); // ẩn hiệu trưởng khỏi tìm kiếm
             } else {
                 $kq = $p->getAllNguoiDung();
             }
