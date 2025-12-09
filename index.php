@@ -98,9 +98,8 @@ session_start();
                 echo '<li><a href="index.php?page=dskehoachthanhly" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch thanh lý</a></li>';
                 echo '<li><a href="index.php?page=dsmuasam" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch mua sắm</a></li>';
                 echo '<li><a href="index.php?page=dsthanhly" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch thanh lý</a></li>';
-                echo '<li><a href="index.php?page=dsbaocaothongke" class="text-decoration-none d-block text-dark py-2">Báo cáo thống kê (qltb)</a></li>';
-                echo '<li><a href="index.php?page=dsbaocao" class="text-decoration-none d-block text-dark py-2">Báo cáo thống kê (ht)</a></li>';
-                // echo '<li><a href="index.php?page=dsbaocao" class="text-decoration-none d-block text-dark py-2">test báo cáo</a></li>';
+                echo '<li><a href="index.php?page=baocaothongke" class="text-decoration-none d-block text-dark py-2">Báo cáo thống kê (qltb)</a></li>';
+                echo '<li><a href="index.php?page=baocao" class="text-decoration-none d-block text-dark py-2">Báo cáo thống kê (ht)</a></li>';
                 echo '<li><a href="index.php?page=ds_giaovien_nhanvien" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên/nhân viên</a></li>';
                 echo '<li><a href="index.php?page=dsgiaovienbomon" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên bộ môn</a></li>';
                 echo '<li><a href="index.php?page=dsphieumuon_canhan" class="text-decoration-none d-block text-dark py-2">Phiếu mượn của tôi</a></li>';
@@ -159,9 +158,7 @@ session_start();
                 case 'xem_giaovien_nhanvien': include_once('App/Views/hieutruong/thongtin_giaovien_nhanvien/xem_giaovien_nhanvien.php'); break;
 
                 // Xem báo cáo thống kê
-                case 'dsbaocao': include_once('App/Views/hieutruong/baocaothongke/dsbaocao.php'); break;
-                case 'xembaocao': include_once('App/Views/hieutruong/baocaothongke/xembaocao.php'); break;
-                case 'dashboard': include_once('App/Views/hieutruong/baocaothongke/dashboard.php'); break;
+                case 'baocao': include_once('App/Views/hieutruong/baocao.php'); break;
 
 
 
@@ -236,9 +233,7 @@ session_start();
                 case 'xoakehoachthanhly': include_once('App/Views/thietbi/kehoachthanhly/xoakehoachthanhly.php'); break;
 
                 // Lập báo cáo thống kê
-                case 'dsbaocaothongke': include_once('App/Views/thietbi/baocaothongke/dsbaocaothongke.php'); break;
-                case 'xembaocaothongke': include_once('App/Views/thietbi/baocaothongke/xembaocaothongke.php'); break;
-                case 'xoabaocaothongke': include_once('App/Views/thietbi/baocaothongke/xoabaocaothongke.php'); break;
+                case 'baocaothongke': include_once('App/Views/thietbi/baocaothongke.php'); break;
                 
 
 
