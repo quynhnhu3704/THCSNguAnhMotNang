@@ -103,6 +103,8 @@ session_start();
                 // echo '<li><a href="index.php?page=dsbaocao" class="text-decoration-none d-block text-dark py-2">test báo cáo</a></li>';
                 echo '<li><a href="index.php?page=ds_giaovien_nhanvien" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên/nhân viên</a></li>';
                 echo '<li><a href="index.php?page=dsgiaovienbomon" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên bộ môn</a></li>';
+                echo '<li><a href="index.php?page=dsphieumuon_canhan" class="text-decoration-none d-block text-dark py-2">Phiếu mượn của tôi</a></li>';
+                echo '<li><a href="index.php?page=dsphieumuon_bomon" class="text-decoration-none d-block text-dark py-2">Phiếu mượn bộ môn</a></li>';
 
             }
             ?>
@@ -224,13 +226,29 @@ session_start();
                 case 'xemgiaovienbomon':
                     include_once('App/Views/totruong/thongtin_giaovienbomon/xemgiaovienbomon.php');
                     break;
+                // Xem phiếu mượn bộ môn
+                case 'dsphieumuon_bomon':
+                    include_once('App/Views/totruong/phieumuon_bomon/dsphieumuon_bomon.php');
+                    break;
+                case 'xemphieumuon_bomon':
+                    include_once('App/Views/totruong/phieumuon_bomon/xemphieumuon_bomon.php');
+                    break;
 
+                    
                 // Chức năng cho Giáo viên bộ môn
+                // Đăng ký mượn thiết bị
                 case 'dangkymuon':
                     include_once('App/Views/giaovien/dangkymuon.php');
                     break;
-                case 'xemphieumuon_gvbm':
-                    include_once('App/Views/giaovien/xemphieumuon_gvbm.php');
+                // Xem phiếu mượn của tôi
+                case 'dsphieumuon_canhan':
+                    include_once('App/Views/giaovien/phieumuon_canhan/dsphieumuon_canhan.php');
+                    break;
+                case 'xemphieumuon_canhan':
+                    include_once('App/Views/giaovien/phieumuon_canhan/xemphieumuon_canhan.php');
+                    break;
+                case 'xoaphieumuon_canhan':
+                    include_once('App/Views/giaovien/phieumuon_canhan/xoaphieumuon_canhan.php');
                     break;
 
                 // Chức năng cho Nhân viên quản lý thiết bị

@@ -30,6 +30,14 @@ if($kq && $kq->num_rows > 0) {
 }
 
 if (isset($_GET['action']) && $_GET['action'] == 'delete') {
+    // Chặn xóa nếu đã duyệt
+    $trangThai = $r['trangThai'];
+    if ($trangThai == 'Chấp thuận' || $trangThai == 'Từ chối') {
+        echo "<script>alert('Kế hoạch đã được hiệu trưởng duyệt. Không thể xóa.'); window.location.href='index.php?page=dskehoachthanhly'</script>"; 
+        exit();
+    }
+
+    // Cho xóa nếu vẫn còn Chờ duyệt
     if ($p->deleteKeHoachThanhLy($maKeHoachThanhLy)) {
         echo "<script>alert('Xóa kế hoạch thành công.'); window.location.href='index.php?page=dskehoachthanhly'</script>";
     } else {

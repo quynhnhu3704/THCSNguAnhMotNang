@@ -45,7 +45,7 @@ if(!isset($_SESSION['login'])) {
 
             if(isset($_GET['keyword'])) {
                 $keyword = $_GET['keyword'];
-                $kq = $p->searchNguoiDungExceptVaiTro($keyword, 1); // ẩn hiệu trưởng khỏi tìm kiếm
+                $kq = $p->searchNguoiDung($keyword);
             } else {
                 $kq = $p->getAllNguoiDung();
             }
@@ -74,6 +74,8 @@ if(!isset($_SESSION['login'])) {
                             echo '<a href="index.php?page=xem_giaovien_nhanvien&maNguoiDung=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-info" style="font-size: 0.95em;"><i class="bi bi-info-circle"></i> Xem</a>&nbsp;';
                         echo '</td>';
                     echo '</tr>';
+                }  if ($dem == 0) {
+                    echo '<tr><td colspan="10"><h5 class="text-center text-muted">Hiện chưa có giáo viên/nhân viên nào. Vui lòng quay lại sau.</h5></td></tr>';
                 }
             } else {
                 echo '<tr><td colspan="8"><h5 class="text-center text-muted">Hiện chưa có giáo viên/nhân viên nào. Vui lòng quay lại sau.</h5></td></tr>';   

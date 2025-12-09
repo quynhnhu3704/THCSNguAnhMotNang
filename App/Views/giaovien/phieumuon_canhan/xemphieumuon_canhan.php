@@ -1,4 +1,4 @@
-<!-- App/Views/thietbi/qlphieumuon/xemphieumuon.php -->
+<!-- App/Views/giaovien/phieumuon_canhan/xemphieumuon_canhan.php -->
 <?php
 if(!isset($_SESSION['login'])) {
     echo "<script>alert('Vui lòng đăng nhập để tiếp tục.'); window.location.href='index.php?page=dangnhap'</script>";
@@ -16,7 +16,7 @@ $p = new controlPhieuMuon();
 $maPhieuMuon = $_GET['maPhieuMuon'];
 
 if(!$maPhieuMuon) {
-    echo "<script>alert('Không tìm thấy phiếu mượn.'); window.location.href='index.php?page=dsphieumuon';</script>";
+    echo "<script>alert('Không tìm thấy phiếu mượn.'); window.location.href='index.php?page=dsphieumuon_canhan';</script>";
     exit();
 }
 
@@ -25,7 +25,7 @@ $kq = $p->get01PhieuMuon($maPhieuMuon);
 if($kq && $kq->num_rows > 0) {
     $r = $kq->fetch_assoc();
 } else {
-    echo "<script>alert('Không tìm thấy phiếu mượn.'); window.location.href='index.php?page=dsphieumuon';</script>";
+    echo "<script>alert('Không tìm thấy phiếu mượn.'); window.location.href='index.php?page=dsphieumuon_canhan';</script>";
     exit();
 }
 ?>

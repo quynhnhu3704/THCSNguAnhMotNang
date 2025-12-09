@@ -1,4 +1,4 @@
-<!-- App/Views/thietbi/qlphieumuon/dsphieumuon.php -->
+<!-- App/Views/totruong/phieumuon_bomon/dsphieumuon_bomon.php -->
 <?php
 if(!isset($_SESSION['login'])) {
     echo "<script>alert('Vui lòng đăng nhập để tiếp tục.'); window.location.href='index.php?page=dangnhap'</script>";
@@ -11,15 +11,12 @@ if(!isset($_SESSION['login'])) {
 // }
 ?>
 
-<h2 class="text-center fw-semibold my-3">Danh sách phiếu mượn</h2>
+<h2 class="text-center fw-semibold my-3">Danh sách phiếu mượn bộ môn</h2>
 
 <div class="d-flex mx-auto justify-content-between align-items-center" style="width: 95%">
-    <!-- Nút thêm -->
-    <a href="index.php?page=themphieumuon" class="btn btn-primary fw-semibold"><i class="bi bi-database-add me-1"></i> Thêm phiếu mượn</a>
-
     <!-- Thanh tìm kiếm -->
-    <form class="d-flex" action="index.php" method="get">
-        <input type="hidden" name="page" value="dsphieumuon"> <!-- Submit sẽ tạo URL: index.php?page=dsphieumuon&keyword=xxxxx -->
+    <form class="d-flex ms-auto" action="index.php" method="get">
+        <input type="hidden" name="page" value="dsphieumuon_bomon"> <!-- Submit sẽ tạo URL: index.php?page=dsphieumuon_bomon&keyword=xxxxx -->
 
         <input class="form-control me-2" type="text" name="keyword" placeholder="Tìm kiếm phiếu mượn..." style="width: 220px;">
         <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
@@ -59,6 +56,9 @@ if(!isset($_SESSION['login'])) {
             if ($kq && $kq->num_rows > 0) {
                 $dem = 0;
                 while ($r = $kq->fetch_assoc()) {
+                    // Chỉ lấy phiếu mượn thuộc bộ môn của người dùng đang đăng nhập
+                    if ($r['maBoMon'] != $_SESSION['maBoMon']) continue;
+
                     $dem++;
 
                     echo '<tr>';
@@ -83,13 +83,11 @@ if(!isset($_SESSION['login'])) {
                         echo '<td>' . $r['ghiChu'] . '</td>';
 
                         echo '<td class="text-center">';
-                            echo '<a href="index.php?page=xemphieumuon&maPhieuMuon=' . $r['maPhieuMuon'] . '" class="btn btn-sm btn-info" style="font-size: 0.95em;"><i class="bi bi-info-circle"></i> Xem</a>&nbsp;';
-                            echo '<a href="index.php?page=suaphieumuon&maPhieuMuon=' . $r['maPhieuMuon'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Sửa</a>&nbsp;';
-                            if($r['trangThai'] == "Chờ xử lý") {
-                                echo '<a href="index.php?page=xoaphieumuon&action=delete&maPhieuMuon=' . $r['maPhieuMuon'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa phiếu mượn này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
-                            }
+                            echo '<a href="index.php?page=xemphieumuon_bomon&maPhieuMuon=' . $r['maPhieuMuon'] . '" class="btn btn-sm btn-info" style="font-size: 0.95em;"><i class="bi bi-info-circle"></i> Xem</a>&nbsp;';
                         echo '</td>';
                     echo '</tr>';
+                } if ($dem == 0) {
+                    echo '<tr><td colspan="10"><h5 class="text-center text-muted">Hiện chưa có phiếu mượn nào. Vui lòng quay lại sau.</h5></td></tr>';
                 }
             } else {
                 echo '<tr><td colspan="10"><h5 class="text-center text-muted">Hiện chưa có phiếu mượn nào. Vui lòng quay lại sau.</h5></td></tr>';   

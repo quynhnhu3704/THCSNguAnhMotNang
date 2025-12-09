@@ -42,22 +42,20 @@ if(!isset($_SESSION['login'])) {
             <?php
             include_once('App/Controllers/cNguoiDung.php');
             $p = new controlNguoiDung();
-
-            $maBoMon = $_SESSION['maBoMon'];
             
             if(isset($_GET['keyword'])) {
                 $keyword = $_GET['keyword'];
-                $kq = $p->searchNguoiDungTheoVaiTroBoMon($keyword, 3, $maBoMon); // chỉ tìm kiếm theo vai trò là giáo viên bộ môn và theo bộ môn trong session
+                $kq = $p->searchNguoiDung($keyword);
             } else {
-                $kq = $p->getNguoiDungTheoBoMon($maBoMon);
+                $kq = $p->getAllNguoiDung();
             }
 
             if ($kq && $kq->num_rows > 0) {
                 $dem = 0;
                 while ($r = $kq->fetch_assoc()) {
-                    // Ẩn tổ trưởng chuyên môn khỏi danh sách
-                    if ($r['maVaiTro'] == 2) continue;
-                    
+                    if ($r['maVaiTro'] != 3) continue; // Ẩn các vai trò khác Giáo viên bộ môn khỏi danh sách => chỉ hiển thị Giáo viên bộ môn
+                    if ($r['maBoMon'] != $_SESSION["maBoMon"]) continue; // chỉ lấy Giáo viên bộ môn thuộc bộ môn của người đang đăng nhập
+
                     $dem++;
 
                     echo '<tr>';
@@ -76,6 +74,8 @@ if(!isset($_SESSION['login'])) {
                             echo '<a href="index.php?page=xemgiaovienbomon&maNguoiDung=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-info" style="font-size: 0.95em;"><i class="bi bi-info-circle"></i> Xem</a>&nbsp;';
                         echo '</td>';
                     echo '</tr>';
+                } if ($dem == 0) {
+                    echo '<tr><td colspan="10"><h5 class="text-center text-muted">Hiện chưa có giáo viên bộ môn nào. Vui lòng quay lại sau.</h5></td></tr>';
                 }
             } else {
                 echo '<tr><td colspan="8"><h5 class="text-center text-muted">Hiện chưa có giáo viên bộ môn nào. Vui lòng quay lại sau.</h5></td></tr>';   

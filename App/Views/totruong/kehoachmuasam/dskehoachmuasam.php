@@ -83,7 +83,9 @@ if(!isset($_SESSION['login'])) {
 
                         echo '<td class="text-center">';
                             echo '<a href="index.php?page=xemkehoachmuasam&maKeHoachMuaSam=' . $r['maKeHoachMuaSam'] . '" class="btn btn-sm btn-info" style="font-size: 0.95em;"><i class="bi bi-info-circle"></i> Xem</a>&nbsp;';
-                            echo '<a href="index.php?page=xoakehoachmuasam&action=delete&maKeHoachMuaSam=' . $r['maKeHoachMuaSam'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa kế hoạch này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
+                            if ($r['trangThai'] == "Chờ duyệt") {
+                                echo '<a href="index.php?page=xoakehoachmuasam&action=delete&maKeHoachMuaSam=' . $r['maKeHoachMuaSam'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa kế hoạch này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
+                            }
                         echo '</td>';
                     echo '</tr>';
                 }

@@ -146,7 +146,7 @@ if(isset($_POST['btnXacNhan'])) {
         // truyền toàn bộ giỏ mượn làm mảng
         if($p->insertChiTietPM($maPhieuMuon, $_SESSION['cart'])) {
             unset($_SESSION['cart']); // xóa giỏ mượn sau khi đăng ký thành công
-            echo "<script>alert('Phiếu mượn đã được đăng ký thành công!'); window.location.href='index.php?page=xemphieumuon';</script>";
+            echo "<script>alert('Phiếu mượn đã được đăng ký thành công!'); window.location.href='index.php?page=dsphieumuon_canhan';</script>";
         } else {
             $p->deletePhieuMuon($maPhieuMuon); // rollback phiếu mượn
             echo "<script>alert('Không đủ số lượng thiết bị khả dụng. Vui lòng kiểm tra lại.'); window.history.back();</script>";

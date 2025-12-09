@@ -5,7 +5,7 @@ include_once('mketnoi.php');
 class modelPhieuMuon {
     public function selectAllPhieuMuon() {
         $p = new clsKetNoi();
-        $truyvan = "SELECT pm.*, nd.hoTen, vt.tenVaiTro, bm.tenBoMon, COUNT(ct.maChiTietPM) AS soLuongMuon
+        $truyvan = "SELECT pm.*, nd.hoTen, vt.tenVaiTro, bm.tenBoMon, bm.maBoMon, COUNT(ct.maChiTietPM) AS soLuongMuon
                     FROM phieumuon pm
                     LEFT JOIN nguoidung nd ON pm.maNguoiDung = nd.maNguoiDung
                     LEFT JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
