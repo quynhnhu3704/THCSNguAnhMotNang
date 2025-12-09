@@ -84,7 +84,7 @@ if(!isset($_SESSION['login'])) {
                         echo '<td>' . $r['ghiChu'] . '</td>';
 
                         echo '<td class="text-center">';
-                            echo '<a href="index.php?page=ghinhanyeucau&maYeuCau=' . $r['maYeuCau'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Ghi nhận</a>&nbsp;';
+                            echo '<a href="index.php?page=ghinhanyeucau&maYeuCau=' . $r['maYeuCau'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-pencil-square"></i> Ghi nhận</a>';
                         echo '</td>';
                     echo '</tr>';
                 }

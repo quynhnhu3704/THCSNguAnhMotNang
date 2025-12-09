@@ -1,0 +1,56 @@
+<!-- App/Views/totruong/kehoachthanhly/dskehoachthanhly.php -->
+<?php
+if(!isset($_SESSION['login'])) {
+    echo "<script>alert('Vui lòng đăng nhập để tiếp tục.'); window.location.href='index.php?page=dangnhap'</script>";
+    exit();
+}
+
+// if($_SESSION['login'] != 1) {
+//     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
+//     exit();
+// }
+?>
+
+<h2 class="text-center fw-semibold my-3">Danh sách báo cáo thống kê</h2>
+
+<div class="d-flex mx-auto justify-content-between align-items-center" style="width: 95%">
+    <!-- Thanh tìm kiếm -->
+    <form class="d-flex ms-auto" action="index.php" method="get">
+        <input type="hidden" name="page" value="dskehoachthanhly"> <!-- Submit sẽ tạo URL: index.php?page=dskehoachthanhly&keyword=xxxxx -->
+
+        <input class="form-control me-2" type="text" name="keyword" placeholder="Tìm kiếm báo cáo..." style="width: 220px;">
+        <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+    </form>
+</div>
+
+<div class="d-flex justify-content-center">
+    <div class="table-responsive my-5" style="width: 95%;">
+        <table class="table table-striped table-hover table-borderless align-middle" style="font-size: 0.85em;">
+            <thead class="text-center">
+                <tr>
+                    <th>STT</th>
+                    <th>Tên báo cáo</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <?php $dem = 0; ?>
+                    <td class="text-center"><strong><?= $dem++ ?><strong></td>
+                    <td>abc</td>
+                    <td class="text-center"><a href="index.php?page=xembaocaothongke" class="btn btn-sm btn-info" style="font-size: 0.95em;"><i class="bi bi-info-circle"></i> Xem</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    th, td {
+        max-width: 12.5em;      /* độ rộng tối đa của cột */
+        white-space: nowrap;   /* không xuống dòng */
+        overflow: hidden;      /* ẩn phần thừa */
+        text-overflow: ellipsis; /* hiện dấu ... */
+    }
+</style>

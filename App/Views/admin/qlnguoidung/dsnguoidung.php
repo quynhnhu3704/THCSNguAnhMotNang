@@ -50,7 +50,7 @@ if(!isset($_SESSION['login'])) {
             if(isset($_GET['keyword'])) {
                 $keyword = $_GET['keyword'];
                 $maVaiTro = 6;
-                $kq = $p->searchNguoiDungExceptVaiTro($keyword, $maVaiTro); // ẩn admin khỏi tìm kiếm
+                $kq = $p->searchNguoiDung($keyword);
             } else {
                 $kq = $p->getAllNguoiDung();
             }
@@ -58,7 +58,7 @@ if(!isset($_SESSION['login'])) {
             if ($kq && $kq->num_rows > 0) {
                 $dem = 0;
                 while ($r = $kq->fetch_assoc()) {
-                    // Ẩn admin khỏi danh sách phân quyền
+                    // Ẩn admin khỏi danh sách
                     if ($r['maVaiTro'] == 6) continue;
                     
                     $dem++;
@@ -93,6 +93,8 @@ if(!isset($_SESSION['login'])) {
                             echo '<a href="index.php?page=xoanguoidung&action=delete&maNguoiDung=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-danger" style="font-size: 0.95em;" onclick="return confirm(\'Bạn có chắc muốn xóa người dùng này không?\')"><i class="bi bi-trash"></i> Xóa</a>';
                         echo '</td>';
                     echo '</tr>';
+                } if ($dem == 0) {
+                    echo '<tr><td colspan="10"><h5 class="text-center text-muted">Hiện chưa có người dùng nào. Vui lòng quay lại sau.</h5></td></tr>';
                 }
             } else {
                 echo '<tr><td colspan="8"><h5 class="text-center text-muted">Hiện chưa có người dùng nào. Vui lòng quay lại sau.</h5></td></tr>';   

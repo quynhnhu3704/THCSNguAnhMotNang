@@ -48,7 +48,7 @@ if(!isset($_SESSION['login'])) {
             if(isset($_GET['keyword'])) {
                 $keyword = $_GET['keyword'];
                 $maVaiTro = 6;
-                $kq = $p->searchNguoiDungExceptVaiTro($keyword, $maVaiTro); // ẩn admin khỏi tìm kiếm
+                $kq = $p->searchNguoiDung($keyword);
             } else {
                 $kq = $p->getAllNguoiDung();
             }
@@ -88,9 +88,11 @@ if(!isset($_SESSION['login'])) {
                         echo '<td class="text-center">' . $r['email'] . '</td>';
 
                         echo '<td class="text-center">';
-                            echo '<a href="index.php?page=suaquyen&maNguoiDung=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-person-fill-lock"></i> Phân quyền</a>&nbsp;';
+                            echo '<a href="index.php?page=suaquyen&maNguoiDung=' . $r['maNguoiDung'] . '" class="btn btn-sm btn-warning" style="font-size: 0.95em;"><i class="bi bi-person-fill-lock"></i> Phân quyền</a>';
                         echo '</td>';
                     echo '</tr>';
+                } if ($dem == 0) {
+                    echo '<tr><td colspan="10"><h5 class="text-center text-muted">Hiện chưa có người dùng nào. Vui lòng quay lại sau.</h5></td></tr>';
                 }
             } else {
                 echo '<tr><td colspan="8"><h5 class="text-center text-muted">Hiện chưa có người dùng nào. Vui lòng quay lại sau.</h5></td></tr>';   
