@@ -32,7 +32,7 @@ if($kq && $kq->num_rows > 0) {
 
 <div class="d-flex justify-content-between align-items-center mx-4 my-4">
     <button type="button" class="btn btn-outline-primary" onclick="window.history.back();"><i class="bi bi-arrow-left"></i> Quay lại</button>
-    <button type="button" id="exportPDF" class="btn btn-dark"><i class="bi bi-download"></i> Xuất PDF</button>
+    <button type="button" id="exportPDF" class="btn btn-outline-secondary"><i class="bi bi-download"></i> Xuất PDF</button>
 </div>
 
 <div class="container d-flex justify-content-center align-items-center mb-5">

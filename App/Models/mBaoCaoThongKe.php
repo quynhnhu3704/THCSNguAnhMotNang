@@ -1,133 +1,146 @@
-<!-- App/Models/mDashboard.php -->
+<!-- App/Models/mBaoCaoThongKe.php -->
 <?php
 include_once('mketnoi.php');
 
-class modelDashboard {
-    public function getTotalThietBi() {
-        $p = new clsKetNoi();
-        $truyvan = "SELECT COUNT(DISTINCT maThietBi) AS total FROM thietbi";
-        $con = $p->moketnoi();
-        $kq = mysqli_query($con, $truyvan);
-        $p->dongketnoi($con);
-        return $kq->fetch_assoc()['total'];
+class modelBaoCaoThongKe {
+
+    private $db;
+
+    public function __construct() {
+        $this->db = new clsKetNoi();
     }
 
+    // 1. Tổng số thiết bị (đếm theo maChiTietTB)
+    public function getTotalThietBi() {
+        $con = $this->db->moketnoi();
+        $truyvan = "SELECT COUNT(*) AS total FROM chitietthietbi";
+        $kq = mysqli_query($con, $truyvan);
+        $row = mysqli_fetch_assoc($kq);
+        $this->db->dongketnoi($con);
+        return (int)$row['total'];
+    }
+
+    // 2. Thống kê thiết bị theo tình trạng
     public function getThietBiByTinhTrang() {
-        $p = new clsKetNoi();
+        $con = $this->db->moketnoi();
         $truyvan = "SELECT tinhTrang, COUNT(*) AS count 
                     FROM chitietthietbi 
                     GROUP BY tinhTrang";
-        $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $data = [];
         while ($row = mysqli_fetch_assoc($kq)) {
-            $data[$row['tinhTrang']] = $row['count'];
+            $data[$row['tinhTrang']] = (int)$row['count'];
         }
-        $p->dongketnoi($con);
+        $this->db->dongketnoi($con);
         return $data;
     }
 
+    // 3. Thiết bị theo bộ môn
     public function getThietBiByBoMon() {
-        $p = new clsKetNoi();
+        $con = $this->db->moketnoi();
         $truyvan = "SELECT bm.tenBoMon, COUNT(ct.maChiTietTB) AS count 
                     FROM chitietthietbi ct
                     JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
                     JOIN bomon bm ON tb.maBoMon = bm.maBoMon
-                    GROUP BY bm.tenBoMon";
-        $con = $p->moketnoi();
+                    GROUP BY bm.maBoMon, bm.tenBoMon
+                    ORDER BY count DESC";
         $kq = mysqli_query($con, $truyvan);
         $data = [];
         while ($row = mysqli_fetch_assoc($kq)) {
-            $data[] = $row;
+            $data[] = [
+                'tenBoMon' => $row['tenBoMon'] ?? 'Chưa phân loại',
+                'count'    => (int)$row['count']
+            ];
         }
-        $p->dongketnoi($con);
+        $this->db->dongketnoi($con);
         return $data;
     }
 
-    // Thêm 2 hàm mới vào class modelDashboard
+    // 4. Thiết bị theo nhà cung cấp
     public function getThietBiByNhaCungCap() {
-        $p = new clsKetNoi();
+        $con = $this->db->moketnoi();
         $truyvan = "SELECT ncc.tenNhaCungCap, COUNT(ct.maChiTietTB) AS count 
                     FROM chitietthietbi ct
                     JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
-                    JOIN nhacungcap ncc ON tb.maNhaCungCap = ncc.maNhaCungCap
-                    GROUP BY ncc.tenNhaCungCap
+                    LEFT JOIN nhacungcap ncc ON tb.maNhaCungCap = ncc.maNhaCungCap
+                    GROUP BY ncc.maNhaCungCap, ncc.tenNhaCungCap
                     ORDER BY count DESC";
-        $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $data = [];
         while ($row = mysqli_fetch_assoc($kq)) {
-            $data[] = $row;
+            $data[] = [
+                'tenNhaCungCap' => $row['tenNhaCungCap'] ?? 'Không rõ',
+                'count'         => (int)$row['count']
+            ];
         }
-        $p->dongketnoi($con);
+        $this->db->dongketnoi($con);
         return $data;
     }
 
+    // 5. Thiết bị đang sửa chữa / bảo trì / bảo hành (chỉ lấy những cái đang xử lý)
     public function getThietBiDangSuaChua() {
-        $p = new clsKetNoi();
-        $truyvan = "SELECT y.loaiYeuCau, y.tienDo, COUNT(*) AS count
+        $con = $this->db->moketnoi();
+        $truyvan = "SELECT y.loaiYeuCau, COUNT(*) AS count
                     FROM yeucauscbtbh y
-                    JOIN chitietthietbi ct ON y.maChiTietTB = ct.maChiTietTB
                     WHERE y.loaiYeuCau IN ('Sửa chữa', 'Bảo trì', 'Bảo hành')
-                    AND y.tienDo NOT IN ('Đã sửa', 'Không thể sửa')
-                    GROUP BY y.loaiYeuCau, y.tienDo";
-        $con = $p->moketnoi();
+                      AND y.tienDo NOT IN ('Đã sửa', 'Không thể sửa', 'Hoàn thành')
+                    GROUP BY y.loaiYeuCau";
         $kq = mysqli_query($con, $truyvan);
-        $data = [];
+        $data = [
+            'Sửa chữa' => 0,
+            'Bảo trì'  => 0,
+            'Bảo hành' => 0
+        ];
         while ($row = mysqli_fetch_assoc($kq)) {
-            $label = $row['loaiYeuCau'] . " - " . $row['tienDo'];
-            $data[$label] = $row['count'];
+            if (isset($data[$row['loaiYeuCau']])) {
+                $data[$row['loaiYeuCau']] = (int)$row['count'];
+            }
         }
-        $p->dongketnoi($con);
+        $this->db->dongketnoi($con);
         return $data;
     }
 
+    // 6. Thống kê kế hoạch mua sắm theo trạng thái
     public function getKeHoachMuaSamStats() {
-        $p = new clsKetNoi();
-        $truyvan = "SELECT trangThai, COUNT(*) AS count, SUM(tongChiPhi) AS totalCost 
+        $con = $this->db->moketnoi();
+        $truyvan = "SELECT trangThai, 
+                           COUNT(*) AS soKeHoach,
+                           COALESCE(SUM(tongChiPhi), 0) AS tongChiPhi
                     FROM kehoachmuasam 
                     GROUP BY trangThai";
-        $con = $p->moketnoi();
         $kq = mysqli_query($con, $truyvan);
         $data = [];
         while ($row = mysqli_fetch_assoc($kq)) {
-            $data[$row['trangThai']] = ['count' => $row['count'], 'totalCost' => $row['totalCost']];
+            $data[$row['trangThai']] = [
+                'soKeHoach'  => (int)$row['soKeHoach'],
+                'tongChiPhi' => (float)$row['tongChiPhi']
+            ];
         }
-        $p->dongketnoi($con);
+        $this->db->dongketnoi($con);
         return $data;
     }
 
-    public function getThietBiHong() {
-        $p = new clsKetNoi();
-        $truyvan = "SELECT tb.tenThietBi, COUNT(ct.maChiTietTB) AS count 
-                    FROM chitietthietbi ct
+    // 7. Bonus: Top 10 thiết bị được mượn nhiều nhất (tất cả thời gian)
+    public function getTop10ThietBiMuon() {
+        $con = $this->db->moketnoi();
+        $truyvan = "SELECT tb.tenThietBi, COUNT(ctpm.maChiTietPhieuMuon) AS soLanMuon
+                    FROM ct_phieumuon ctpm
+                    JOIN chitietthietbi ct ON ctpm.maChiTietTB = ct.maChiTietTB
                     JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
-                    WHERE ct.tinhTrang IN ('Báo hỏng', 'Thanh lý')
-                    GROUP BY tb.tenThietBi";
-        $con = $p->moketnoi();
+                    JOIN phieumuon pm ON ctpm.maPhieuMuon = pm.maPhieuMuon
+                    WHERE pm.trangThai IN ('Đang mượn', 'Đã xác nhận', 'Đã trả')
+                    GROUP BY tb.maThietBi
+                    ORDER BY soLanMuon DESC
+                    LIMIT 10";
         $kq = mysqli_query($con, $truyvan);
         $data = [];
         while ($row = mysqli_fetch_assoc($kq)) {
-            $data[] = $row;
+            $data[] = [
+                'tenThietBi' => $row['tenThietBi'],
+                'soLanMuon'  => (int)$row['soLanMuon']
+            ];
         }
-        $p->dongketnoi($con);
-        return $data;
-    }
-
-    public function getDangMuon() {
-        $p = new clsKetNoi();
-        $truyvan = "SELECT nd.hoTen, COUNT(pm.maPhieuMuon) AS count 
-                    FROM phieumuon pm
-                    JOIN nguoidung nd ON pm.maNguoiDung = nd.maNguoiDung
-                    WHERE pm.trangThai IN ('Chờ xử lý', 'Đang mượn', 'Đã xác nhận')
-                    GROUP BY nd.hoTen";
-        $con = $p->moketnoi();
-        $kq = mysqli_query($con, $truyvan);
-        $data = [];
-        while ($row = mysqli_fetch_assoc($kq)) {
-            $data[] = $row;
-        }
-        $p->dongketnoi($con);
+        $this->db->dongketnoi($con);
         return $data;
     }
 }
