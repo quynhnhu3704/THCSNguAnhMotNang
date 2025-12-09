@@ -102,7 +102,7 @@ if(!isset($_SESSION['login'])) {
 
 <style>
     th, td {
-        max-width: 12.5em;      /* độ rộng tối đa của cột */
+        max-width: 15em;      /* độ rộng tối đa của cột */
         white-space: nowrap;   /* không xuống dòng */
         overflow: hidden;      /* ẩn phần thừa */
         text-overflow: ellipsis; /* hiện dấu ... */

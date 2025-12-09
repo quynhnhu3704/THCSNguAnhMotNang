@@ -105,7 +105,7 @@ session_start();
                 echo '<li><a href="index.php?page=dsgiaovienbomon" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên bộ môn</a></li>';
                 echo '<li><a href="index.php?page=dsphieumuon_canhan" class="text-decoration-none d-block text-dark py-2">Phiếu mượn của tôi</a></li>';
                 echo '<li><a href="index.php?page=dsphieumuon_bomon" class="text-decoration-none d-block text-dark py-2">Phiếu mượn bộ môn</a></li>';
-
+                echo '<li><a href="index.php?page=dsthietbi_bomon" class="text-decoration-none d-block text-dark py-2">Thiết bị bộ môn</a></li>';
             }
             ?>
         </ul>
@@ -129,259 +129,141 @@ session_start();
             switch($page) {
                 // Chức năng dùng chung
                 // Đăng nhập
-                case 'dangnhap':
-                    include_once('App/Views/common/dangnhap.php');
-                    break;
+                case 'dangnhap': include_once('App/Views/common/dangnhap.php'); break;
                 // Đăng xuất
-                case 'dangxuat':
-                    include_once('App/Views/common/dangxuat.php');
-                    break;
+                case 'dangxuat': include_once('App/Views/common/dangxuat.php'); break;
                 // Xem thông tin cá nhân
-                case 'thongtincanhan':
-                    include_once('App/Views/common/thongtincanhan.php');
-                    break;
+                case 'thongtincanhan': include_once('App/Views/common/thongtincanhan.php'); break;
                 // Cập nhật thông tin cá nhân
-                case 'suathongtincanhan':
-                    include_once('App/Views/common/suathongtincanhan.php');
-                    break;
+                case 'suathongtincanhan': include_once('App/Views/common/suathongtincanhan.php'); break;
                 //  Thay đổi mật khẩu
-                case 'thaydoimatkhau':
-                    include_once('App/Views/common/thaydoimatkhau.php');
-                    break;
+                case 'thaydoimatkhau': include_once('App/Views/common/thaydoimatkhau.php'); break;
                 // Xem chi tiết thiết bị
-                case 'chitietthietbi':
-                    include_once('App/Views/common/chitietthietbi.php');
-                    break;
+                case 'chitietthietbi': include_once('App/Views/common/chitietthietbi.php'); break;
                 
+
 
                 // Chức năng cho Hiệu trưởng
                 // Duyệt kế hoạch mua sắm
-                case 'dsmuasam':
-                    include_once('App/Views/hieutruong/kehoachmuasam/dsmuasam.php');
-                    break;
-                case 'xemmuasam':
-                    include_once('App/Views/hieutruong/kehoachmuasam/xemmuasam.php');
-                    break;
-                case 'duyetkehoachmuasam':
-                    include_once('App/Views/hieutruong/kehoachmuasam/duyetkehoachmuasam.php');
-                    break;
-                // Duyệt kế hoạch thanh lý
-                case 'dsthanhly':
-                    include_once('App/Views/hieutruong/kehoachthanhly/dsthanhly.php');
-                    break;
-                case 'xemthanhly':
-                    include_once('App/Views/hieutruong/kehoachthanhly/xemthanhly.php');
-                    break;
-                case 'duyetkehoachthanhly':
-                    include_once('App/Views/hieutruong/kehoachthanhly/duyetkehoachthanhly.php');
-                    break;
-                // Xem thông tin GV/NV
-                case 'ds_giaovien_nhanvien':
-                    include_once('App/Views/hieutruong/thongtin_giaovien_nhanvien/ds_giaovien_nhanvien.php');
-                    break;
-                case 'xem_giaovien_nhanvien':
-                    include_once('App/Views/hieutruong/thongtin_giaovien_nhanvien/xem_giaovien_nhanvien.php');
-                    break;
-                // Xem báo cáo thống kê
-                case 'dsbaocao':
-                    include_once('App/Views/hieutruong/baocaothongke/dsbaocao.php');
-                    break;
-                case 'xembaocao':
-                    include_once('App/Views/hieutruong/baocaothongke/xembaocao.php');
-                    break;
-
-
+                case 'dsmuasam': include_once('App/Views/hieutruong/kehoachmuasam/dsmuasam.php'); break;
+                case 'xemmuasam': include_once('App/Views/hieutruong/kehoachmuasam/xemmuasam.php'); break;
+                case 'duyetkehoachmuasam': include_once('App/Views/hieutruong/kehoachmuasam/duyetkehoachmuasam.php'); break;
                 
-                case 'dashboard':
-                    include_once('App/Views/hieutruong/baocaothongke/dashboard.php');
-                    break;
+                // Duyệt kế hoạch thanh lý
+                case 'dsthanhly': include_once('App/Views/hieutruong/kehoachthanhly/dsthanhly.php'); break;
+                case 'xemthanhly': include_once('App/Views/hieutruong/kehoachthanhly/xemthanhly.php'); break;
+                case 'duyetkehoachthanhly': include_once('App/Views/hieutruong/kehoachthanhly/duyetkehoachthanhly.php'); break;
 
+                // Xem thông tin GV/NV
+                case 'ds_giaovien_nhanvien': include_once('App/Views/hieutruong/thongtin_giaovien_nhanvien/ds_giaovien_nhanvien.php'); break;
+                case 'xem_giaovien_nhanvien': include_once('App/Views/hieutruong/thongtin_giaovien_nhanvien/xem_giaovien_nhanvien.php'); break;
 
-
-
-
-
-
+                // Xem báo cáo thống kê
+                case 'dsbaocao': include_once('App/Views/hieutruong/baocaothongke/dsbaocao.php'); break;
+                case 'xembaocao': include_once('App/Views/hieutruong/baocaothongke/xembaocao.php'); break;
+                case 'dashboard': include_once('App/Views/hieutruong/baocaothongke/dashboard.php'); break;
 
 
 
                 // Chức năng cho Tổ trưởng chuyên môn
                 // Lập kế hoạch mua sắm
-                case 'dskehoachmuasam':
-                    include_once('App/Views/totruong/kehoachmuasam/dskehoachmuasam.php');
-                    break;
-                case 'themkehoachmuasam':
-                    include_once('App/Views/totruong/kehoachmuasam/themkehoachmuasam.php');
-                    break;
-                case 'xemkehoachmuasam':
-                    include_once('App/Views/totruong/kehoachmuasam/xemkehoachmuasam.php');
-                    break;
-                case 'xoakehoachmuasam':
-                    include_once('App/Views/totruong/kehoachmuasam/xoakehoachmuasam.php');
-                    break;
+                case 'dskehoachmuasam': include_once('App/Views/totruong/kehoachmuasam/dskehoachmuasam.php'); break;
+                case 'themkehoachmuasam': include_once('App/Views/totruong/kehoachmuasam/themkehoachmuasam.php'); break;
+                case 'xemkehoachmuasam': include_once('App/Views/totruong/kehoachmuasam/xemkehoachmuasam.php'); break;
+                case 'xoakehoachmuasam': include_once('App/Views/totruong/kehoachmuasam/xoakehoachmuasam.php'); break;
+
                 // Xem thông tin giáo viên bộ môn
-                case 'dsgiaovienbomon':
-                    include_once('App/Views/totruong/thongtin_giaovienbomon/dsgiaovienbomon.php');
-                    break;
-                case 'xemgiaovienbomon':
-                    include_once('App/Views/totruong/thongtin_giaovienbomon/xemgiaovienbomon.php');
-                    break;
+                case 'dsgiaovienbomon': include_once('App/Views/totruong/thongtin_giaovienbomon/dsgiaovienbomon.php'); break;
+                case 'xemgiaovienbomon': include_once('App/Views/totruong/thongtin_giaovienbomon/xemgiaovienbomon.php'); break;
+
                 // Xem phiếu mượn bộ môn
-                case 'dsphieumuon_bomon':
-                    include_once('App/Views/totruong/phieumuon_bomon/dsphieumuon_bomon.php');
-                    break;
-                case 'xemphieumuon_bomon':
-                    include_once('App/Views/totruong/phieumuon_bomon/xemphieumuon_bomon.php');
-                    break;
+                case 'dsphieumuon_bomon': include_once('App/Views/totruong/phieumuon_bomon/dsphieumuon_bomon.php'); break;
+                case 'xemphieumuon_bomon': include_once('App/Views/totruong/phieumuon_bomon/xemphieumuon_bomon.php'); break;
+
+                // Xem thiết bị bộ môn
+                case 'dsthietbi_bomon': include_once('App/Views/totruong/thietbi_bomon/dsthietbi_bomon.php'); break;
+                case 'xemthietbi_bomon': include_once('App/Views/totruong/thietbi_bomon/xemthietbi_bomon.php'); break;
 
                     
+
                 // Chức năng cho Giáo viên bộ môn
                 // Đăng ký mượn thiết bị
-                case 'dangkymuon':
-                    include_once('App/Views/giaovien/dangkymuon.php');
-                    break;
+                case 'dangkymuon': include_once('App/Views/giaovien/dangkymuon.php'); break;
+
                 // Xem phiếu mượn của tôi
-                case 'dsphieumuon_canhan':
-                    include_once('App/Views/giaovien/phieumuon_canhan/dsphieumuon_canhan.php');
-                    break;
-                case 'xemphieumuon_canhan':
-                    include_once('App/Views/giaovien/phieumuon_canhan/xemphieumuon_canhan.php');
-                    break;
-                case 'xoaphieumuon_canhan':
-                    include_once('App/Views/giaovien/phieumuon_canhan/xoaphieumuon_canhan.php');
-                    break;
+                case 'dsphieumuon_canhan': include_once('App/Views/giaovien/phieumuon_canhan/dsphieumuon_canhan.php'); break;
+                case 'xemphieumuon_canhan': include_once('App/Views/giaovien/phieumuon_canhan/xemphieumuon_canhan.php'); break;
+                case 'xoaphieumuon_canhan': include_once('App/Views/giaovien/phieumuon_canhan/xoaphieumuon_canhan.php'); break;
+
 
                 // Chức năng cho Nhân viên quản lý thiết bị
                 // Quản lý thiết bị (CRUD)
-                case 'dsthietbi':
-                    include_once('App/Views/thietbi/qlthietbi/dsthietbi.php');
-                    break;
-                case 'suathietbi':
-                    include_once('App/Views/thietbi/qlthietbi/suathietbi.php');
-                    break;
-                case 'themthietbi':
-                    include_once('App/Views/thietbi/qlthietbi/themthietbi.php');
-                    break;
-                case 'xoathietbi':
-                    include_once('App/Views/thietbi/qlthietbi/xoathietbi.php');
-                    break;
-                // Quản lý bộ môn (CRUD)
-                case 'dsbomon':
-                    include_once('App/Views/thietbi/qlbomon/dsbomon.php');
-                    break;
-                case 'suabomon':
-                    include_once('App/Views/thietbi/qlbomon/suabomon.php');
-                    break;
-                case 'thembomon':
-                    include_once('App/Views/thietbi/qlbomon/thembomon.php');
-                    break;
-                case 'xoabomon':
-                    include_once('App/Views/thietbi/qlbomon/xoabomon.php');
-                    break;
-                // Quản lý nhà cung cấp (CRUD)
-                case 'dsnhacungcap':
-                    include_once('App/Views/thietbi/qlnhacungcap/dsnhacungcap.php');
-                    break;
-                case 'suanhacungcap':
-                    include_once('App/Views/thietbi/qlnhacungcap/suanhacungcap.php');
-                    break;
-                case 'themnhacungcap':
-                    include_once('App/Views/thietbi/qlnhacungcap/themnhacungcap.php');
-                    break;
-                case 'xoanhacungcap':
-                    include_once('App/Views/thietbi/qlnhacungcap/xoanhacungcap.php');
-                    break;
-                // Quản lý phiếu mượn (CRUD)
-                case 'dsphieumuon':
-                    include_once('App/Views/thietbi/qlphieumuon/dsphieumuon.php');
-                    break;
-                case 'suaphieumuon':
-                    include_once('App/Views/thietbi/qlphieumuon/suaphieumuon.php');
-                    break;
-                case 'themphieumuon':
-                    include_once('App/Views/thietbi/qlphieumuon/themphieumuon.php');
-                    break;
-                case 'xoaphieumuon':
-                    include_once('App/Views/thietbi/qlphieumuon/xoaphieumuon.php');
-                    break;
-                case 'xemphieumuon':
-                    include_once('App/Views/thietbi/qlphieumuon/xemphieumuon.php');
-                    break;
-                // Báo hỏng thiết bị
-                case 'dsbaohong':
-                    include_once('App/Views/thietbi/baohong/dsbaohong.php');
-                    break;
-                case 'baohongthietbi':
-                    include_once('App/Views/thietbi/baohong/baohongthietbi.php');
-                    break;
-                // Ghi nhận sửa chữa/bảo trì/bảo hành
-                case 'dsghinhan':
-                    include_once('App/Views/thietbi/ghinhanscbtbh/dsghinhan.php');
-                    break;
-                case 'ghinhanyeucau':
-                    include_once('App/Views/thietbi/ghinhanscbtbh/ghinhanyeucau.php');
-                    break;
-                // Lập kế hoạch thanh lý
-                case 'dskehoachthanhly':
-                    include_once('App/Views/thietbi/kehoachthanhly/dskehoachthanhly.php');
-                    break;
-                case 'themkehoachthanhly':
-                    include_once('App/Views/thietbi/kehoachthanhly/themkehoachthanhly.php');
-                    break;
-                case 'xemkehoachthanhly':
-                    include_once('App/Views/thietbi/kehoachthanhly/xemkehoachthanhly.php');
-                    break;
-                case 'xoakehoachthanhly':
-                    include_once('App/Views/thietbi/kehoachthanhly/xoakehoachthanhly.php');
-                    break;
-                // Lập báo cáo thống kê
-                case 'dsbaocaothongke':
-                    include_once('App/Views/thietbi/baocaothongke/dsbaocaothongke.php');
-                    break;
-                case 'xembaocaothongke':
-                    include_once('App/Views/thietbi/baocaothongke/xembaocaothongke.php');
-                    break;
-                case 'xoabaocaothongke':
-                    include_once('App/Views/thietbi/baocaothongke/xoabaocaothongke.php');
-                    break;
+                case 'dsthietbi': include_once('App/Views/thietbi/qlthietbi/dsthietbi.php'); break;
+                case 'suathietbi': include_once('App/Views/thietbi/qlthietbi/suathietbi.php'); break;
+                case 'themthietbi': include_once('App/Views/thietbi/qlthietbi/themthietbi.php'); break;
+                case 'xoathietbi': include_once('App/Views/thietbi/qlthietbi/xoathietbi.php'); break;
                 
+                // Quản lý bộ môn (CRUD)
+                case 'dsbomon': include_once('App/Views/thietbi/qlbomon/dsbomon.php'); break;
+                case 'suabomon': include_once('App/Views/thietbi/qlbomon/suabomon.php'); break;
+                case 'thembomon': include_once('App/Views/thietbi/qlbomon/thembomon.php'); break;
+                case 'xoabomon': include_once('App/Views/thietbi/qlbomon/xoabomon.php'); break;
+
+                // Quản lý nhà cung cấp (CRUD)
+                case 'dsnhacungcap': include_once('App/Views/thietbi/qlnhacungcap/dsnhacungcap.php'); break;
+                case 'suanhacungcap': include_once('App/Views/thietbi/qlnhacungcap/suanhacungcap.php'); break;
+                case 'themnhacungcap': include_once('App/Views/thietbi/qlnhacungcap/themnhacungcap.php'); break;
+                case 'xoanhacungcap': include_once('App/Views/thietbi/qlnhacungcap/xoanhacungcap.php'); break;
+
+                // Quản lý phiếu mượn (CRUD)
+                case 'dsphieumuon': include_once('App/Views/thietbi/qlphieumuon/dsphieumuon.php'); break;
+                case 'suaphieumuon': include_once('App/Views/thietbi/qlphieumuon/suaphieumuon.php'); break;
+                case 'themphieumuon': include_once('App/Views/thietbi/qlphieumuon/themphieumuon.php'); break;
+                case 'xoaphieumuon': include_once('App/Views/thietbi/qlphieumuon/xoaphieumuon.php'); break;
+                case 'xemphieumuon': include_once('App/Views/thietbi/qlphieumuon/xemphieumuon.php'); break;
+                // Báo hỏng thiết bị
+                case 'dsbaohong': include_once('App/Views/thietbi/baohong/dsbaohong.php'); break;
+                case 'baohongthietbi': include_once('App/Views/thietbi/baohong/baohongthietbi.php'); break;
+
+                // Ghi nhận sửa chữa/bảo trì/bảo hành
+                case 'dsghinhan': include_once('App/Views/thietbi/ghinhanscbtbh/dsghinhan.php'); break;
+                case 'ghinhanyeucau': include_once('App/Views/thietbi/ghinhanscbtbh/ghinhanyeucau.php'); break;
+
+                // Lập kế hoạch thanh lý
+                case 'dskehoachthanhly': include_once('App/Views/thietbi/kehoachthanhly/dskehoachthanhly.php'); break;
+                case 'themkehoachthanhly': include_once('App/Views/thietbi/kehoachthanhly/themkehoachthanhly.php'); break;
+                case 'xemkehoachthanhly': include_once('App/Views/thietbi/kehoachthanhly/xemkehoachthanhly.php'); break;
+                case 'xoakehoachthanhly': include_once('App/Views/thietbi/kehoachthanhly/xoakehoachthanhly.php'); break;
+
+                // Lập báo cáo thống kê
+                case 'dsbaocaothongke': include_once('App/Views/thietbi/baocaothongke/dsbaocaothongke.php'); break;
+                case 'xembaocaothongke': include_once('App/Views/thietbi/baocaothongke/xembaocaothongke.php'); break;
+                case 'xoabaocaothongke': include_once('App/Views/thietbi/baocaothongke/xoabaocaothongke.php'); break;
+                
+
 
                 // Chức năng cho Nhân viên kỹ thuật
                 // Cập nhật tiến độ sửa chữa/bảo trì/bảo hành
-                case 'dsyeucau':
-                    include_once('App/Views/kythuat/tiendoscbtbh/dsyeucau.php');
-                    break;
-                case 'suatiendo':
-                    include_once('App/Views/kythuat/tiendoscbtbh/suatiendo.php');
-                    break;
+                case 'dsyeucau': include_once('App/Views/kythuat/tiendoscbtbh/dsyeucau.php'); break;
+                case 'suatiendo': include_once('App/Views/kythuat/tiendoscbtbh/suatiendo.php'); break;
 
                     
+
                 // Chức năng cho Quản trị hệ thống
                 // Quản lý người dùng (CRUD)
-                case 'dsnguoidung':
-                    include_once('App/Views/admin/qlnguoidung/dsnguoidung.php');
-                    break;
-                case 'suanguoidung':
-                    include_once('App/Views/admin/qlnguoidung/suanguoidung.php');
-                    break;
-                case 'themnguoidung':
-                    include_once('App/Views/admin/qlnguoidung/themnguoidung.php');
-                    break;
-                case 'xoanguoidung':
-                    include_once('App/Views/admin/qlnguoidung/xoanguoidung.php');
-                    break;
+                case 'dsnguoidung': include_once('App/Views/admin/qlnguoidung/dsnguoidung.php'); break;
+                case 'suanguoidung': include_once('App/Views/admin/qlnguoidung/suanguoidung.php'); break;
+                case 'themnguoidung': include_once('App/Views/admin/qlnguoidung/themnguoidung.php'); break;
+                case 'xoanguoidung': include_once('App/Views/admin/qlnguoidung/xoanguoidung.php'); break;
+
                 // Phân quyền
-                case 'dsquyen':
-                    include_once('App/Views/admin/phanquyen/dsquyen.php');
-                    break;
-                case 'suaquyen':
-                    include_once('App/Views/admin/phanquyen/suaquyen.php');
-                    break;
+                case 'dsquyen': include_once('App/Views/admin/phanquyen/dsquyen.php'); break;
+                case 'suaquyen': include_once('App/Views/admin/phanquyen/suaquyen.php'); break;
                 
+
+
                 // Mặc định
-                default:
-                    include_once('App/Views/common/thietbi.php');
-                    break;
+                default: include_once('App/Views/common/thietbi.php'); break;
             }
             ?>
         </main>

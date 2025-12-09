@@ -35,7 +35,7 @@ if($kq && $kq->num_rows > 0) {
 <div class="container d-flex justify-content-center align-items-center mb-5">
     <div class="card-na border-0" style="max-width: 36rem; width: 100%;">
         <div class="card-body p-4">
-            <h3 class="text-center mb-4 fw-bold text-primary">Ghi nhận yêu cầu</h3>
+            <h3 class="text-center mb-4 fw-bold text-primary">Cập nhật tiến độ</h3>
 
             <form action="#" method="post" enctype="multipart/form-data">
                 <!-- Tên thiết bị -->

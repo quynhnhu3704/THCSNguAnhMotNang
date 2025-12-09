@@ -98,17 +98,6 @@ class controlThietBi {
         return $p->countSoLuongKhaDung($maThietBi);
     }
 
-    // public function getAllChiTietTBTheoTinhTrang($tinhTrang) {
-    //     $p = new modelThietBi();
-    //     $kq = $p->selectAllChiTietTBTheoTinhTrang($tinhTrang);
-
-    //     if(mysqli_num_rows($kq) > 0) {
-    //         return $kq;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
     public function searchChiTietTB($keyword) {
         $p = new modelThietBi();
         $kq = $p->searchChiTietTB($keyword);
@@ -120,9 +109,9 @@ class controlThietBi {
         }
     }
 
-    public function updateHong($maChiTietTB, $tinhTrang, $ghiChu) {
+    public function updateTinhTrangThietBi($maChiTietTB, $tinhTrang, $ghiChu) {
         $p = new modelThietBi();
-        $kq = $p->updateHong($maChiTietTB, $tinhTrang, $ghiChu);
+        $kq = $p->updateTinhTrangThietBi($maChiTietTB, $tinhTrang, $ghiChu);
         return $kq;
     }
 

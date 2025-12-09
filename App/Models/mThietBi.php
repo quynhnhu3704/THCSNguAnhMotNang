@@ -174,19 +174,6 @@ class modelThietBi {
         return $kq;
     }
 
-    // public function selectAllChiTietTBTheoTinhTrang($tinhTrang) {
-    //     $p = new clsKetNoi();
-    //     $truyvan = "SELECT * FROM chitietthietbi ct
-    //                 JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
-    //                 JOIN bomon bm ON tb.maBoMon = bm.maBoMon
-    //                 JOIN nhacungcap ncc ON tb.maNhaCungCap = ncc.maNhaCungCap
-    //                 WHERE ct.tinhTrang = N'$tinhTrang'";
-    //     $con = $p->moketnoi();
-    //     $kq = mysqli_query($con, $truyvan);
-    //     $p->dongketnoi($con);
-    //     return $kq;
-    // }
-
     public function searchChiTietTB($keyword) {
         $p = new clsKetNoi();
         $truyvan = "SELECT * FROM chitietthietbi ct
@@ -211,7 +198,7 @@ class modelThietBi {
         return $kq;
     }
 
-    public function updateHong($maChiTietTB, $tinhTrang, $ghiChu) {
+    public function updateTinhTrangThietBi($maChiTietTB, $tinhTrang, $ghiChu) {
         $p = new clsKetNoi();
         $con = $p->moketnoi();
 

@@ -36,8 +36,8 @@ if(isset($_POST['btnlogin'])) {
     include_once('App/Controllers/cNguoiDung.php');
     $p = new controlNguoiDung();
 
-    $tenDangNhap = $_POST['tenDangNhap'];
-    $matKhau = $_POST['matKhau'];
+    $tenDangNhap = trim($_POST['tenDangNhap']);
+    $matKhau = trim($_POST['matKhau']);
 
     $p->cLogin($tenDangNhap, $matKhau);
 }
