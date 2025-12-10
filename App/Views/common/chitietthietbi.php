@@ -92,6 +92,13 @@ if(isset($_POST['btnmuon'])) {
         $_SESSION['cart'] = [];
     }
 
+    // Kiểm tra bộ môn thiết bị
+    $maBoMon = $_SESSION['maBoMon'] ?? null;
+    if ($r['maBoMon'] != $maBoMon) {
+        echo "<script>alert('Bạn không được mượn thiết bị này vì không thuộc bộ môn của bạn.'); window.history.back();</script>";
+        exit();
+    }
+
     // Nếu đã có thiết bị trong giỏ, cộng số lượng
     if(isset($_SESSION['cart'][$maThietBi])) {
         $tongMuon = $_SESSION['cart'][$maThietBi] + $soLuongMuon;
