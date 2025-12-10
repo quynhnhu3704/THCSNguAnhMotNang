@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 07, 2025 lúc 12:38 PM
+-- Thời gian đã tạo: Th12 10, 2025 lúc 12:11 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -69,19 +69,14 @@ CREATE TABLE `chitietkehoachmuasam` (
 --
 
 INSERT INTO `chitietkehoachmuasam` (`maChiTietKHMuaSam`, `maKeHoachMuaSam`, `maThietBi`, `soLuong`, `donGia`, `thanhTien`) VALUES
-(1, 1, 10, 1, 200000.00, 200000.00),
-(2, 1, 12, 3, 100000.00, 300000.00),
-(3, 1, 15, 2, 100000.00, 200000.00),
-(8, 5, 6, 3, 100000.00, 300000.00),
-(9, 5, 14, 2, 50000.00, 100000.00),
-(11, 8, 5, 5, 25000.00, 125000.00),
-(12, 8, 6, 3, 6000.00, 18000.00),
-(13, 9, 1, 2, 50000.00, 100000.00),
-(14, 9, 63, 1, 400000.00, 400000.00),
-(15, 10, 62, 2, 30000.00, 60000.00),
-(16, 10, 16, 7, 10000.00, 70000.00),
-(17, 11, 19, 10, 500000.00, 5000000.00),
-(18, 11, 14, 5, 150000.00, 750000.00);
+(31, 19, 20, 1, 3500000.00, 3500000.00),
+(32, 19, 11, 3, 1200000.00, 3600000.00),
+(33, 19, 2, 5, 800000.00, 4000000.00),
+(34, 20, 3, 5, 135000.00, 675000.00),
+(35, 20, 4, 2, 90000.00, 180000.00),
+(36, 21, 14, 4, 265000.00, 1060000.00),
+(37, 22, 5, 5, 135000.00, 675000.00),
+(38, 22, 6, 2, 500000.00, 1000000.00);
 
 -- --------------------------------------------------------
 
@@ -103,9 +98,11 @@ CREATE TABLE `chitietkehoachthanhly` (
 --
 
 INSERT INTO `chitietkehoachthanhly` (`maChiTietKHThanhLy`, `maKeHoachThanhLy`, `maThietBi`, `soLuong`, `donGia`, `thanhTien`) VALUES
-(4, 2, 62, 2, 2000.00, 4000.00),
-(5, 2, 63, 3, 5000.00, 15000.00),
-(10, 5, 4, 1, 15000.00, 15000.00);
+(14, 8, 2, 1, 50000.00, 50000.00),
+(15, 9, 78, 2, 25000.00, 50000.00),
+(16, 9, 10, 1, 65000.00, 65000.00),
+(17, 10, 15, 1, 150000.00, 150000.00),
+(18, 11, 20, 1, 1500000.00, 1500000.00);
 
 -- --------------------------------------------------------
 
@@ -125,17 +122,20 @@ CREATE TABLE `chitietphieumuon` (
 --
 
 INSERT INTO `chitietphieumuon` (`maChiTietPM`, `maPhieuMuon`, `maThietBi`, `maChiTietTB`) VALUES
-(24, 33, 10, 28),
-(25, 33, 7, 19),
-(26, 33, 8, 22),
-(30, 38, 17, 49),
-(31, 43, 4, 10),
-(32, 43, 3, 7),
-(62, 48, 15, 43),
-(63, 48, 15, 44),
-(64, 48, 16, 46),
-(65, 48, 16, 47),
-(66, 48, 16, 48);
+(100, 68, 3, 7),
+(101, 68, 3, 8),
+(102, 68, 4, 10),
+(103, 69, 16, 46),
+(104, 69, 16, 47),
+(105, 69, 16, 48),
+(106, 69, 15, 43),
+(107, 70, 78, 144),
+(108, 70, 18, 52),
+(109, 70, 18, 53),
+(110, 70, 17, 49),
+(111, 71, 9, 25),
+(112, 71, 10, 28),
+(113, 71, 10, 29);
 
 -- --------------------------------------------------------
 
@@ -158,13 +158,13 @@ INSERT INTO `chitietthietbi` (`maChiTietTB`, `maThietBi`, `tinhTrang`, `ghiChu`)
 (1, 1, 'Khả dụng', 'Dùng tốt, không lỗi.'),
 (2, 1, 'Khả dụng', 'Đang được mượn phục vụ giảng dạy.'),
 (3, 1, 'Khả dụng', 'Hỏng do sử dụng lâu ngày.'),
-(4, 2, 'Báo hỏng', 'Dùng tốt, không lỗi.'),
+(4, 2, 'Khả dụng', 'Dùng tốt, không lỗi.'),
 (5, 2, 'Khả dụng', 'Đang được mượn phục vụ bài kiểm tra.'),
-(6, 2, 'Khả dụng', 'Hỏng do rơi vỡ.'),
-(7, 3, 'Khả dụng', 'Trang sách còn mới.'),
-(8, 3, 'Khả dụng', 'Giáo viên Ngữ văn mượn sử dụng.'),
+(6, 2, 'Thanh lý', 'Hỏng do rơi vỡ.'),
+(7, 3, 'Đang mượn', 'Trang sách còn mới.'),
+(8, 3, 'Đang mượn', 'Giáo viên Ngữ văn mượn sử dụng.'),
 (9, 3, 'Khả dụng', 'Rách gáy, cần sửa.'),
-(10, 4, 'Thanh lý', 'Không trầy xước.'),
+(10, 4, 'Đang mượn', 'Không trầy xước.'),
 (11, 4, 'Khả dụng', 'Mượn trong tiết Ngữ văn.'),
 (12, 4, 'Khả dụng', 'Bị cong góc.'),
 (13, 5, 'Khả dụng', 'Sách còn rất mới.'),
@@ -173,21 +173,21 @@ INSERT INTO `chitietthietbi` (`maChiTietTB`, `maThietBi`, `tinhTrang`, `ghiChu`)
 (16, 6, 'Khả dụng', 'Âm thanh hoạt động bình thường.'),
 (17, 6, 'Khả dụng', 'Dùng trong giờ sinh hoạt.'),
 (18, 6, 'Báo hỏng', 'Pin chai, không bật được.'),
-(19, 7, 'Đang mượn', 'Đo chính xác.'),
+(19, 7, 'Khả dụng', 'Đo chính xác.'),
 (20, 7, 'Khả dụng', 'Tổ Lý mượn thực hành.'),
 (21, 7, 'Khả dụng', 'Nứt màn hình.'),
-(22, 8, 'Đang mượn', 'Dùng tốt.'),
+(22, 8, 'Khả dụng', 'Dùng tốt.'),
 (23, 8, 'Khả dụng', 'Mượn cho tiết Vật lý.'),
 (24, 8, 'Khả dụng', 'Dây treo bị đứt.'),
-(25, 9, 'Khả dụng', 'Không rò rỉ.'),
+(25, 9, 'Đang mượn', 'Không rò rỉ.'),
 (26, 9, 'Khả dụng', 'Dùng trong thí nghiệm cháy.'),
-(27, 9, 'Khả dụng', 'Bị nứt bình cồn.'),
+(27, 9, 'Báo hỏng', 'Bị nứt bình cồn.'),
 (28, 10, 'Đang mượn', 'Đo chính xác.'),
-(29, 10, 'Khả dụng', 'GV Hóa đang sử dụng.'),
-(30, 10, 'Khả dụng', 'Đầu đo gãy.'),
+(29, 10, 'Đang mượn', 'GV Hóa đang sử dụng.'),
+(30, 10, 'Thanh lý', 'Đầu đo gãy.'),
 (31, 11, 'Khả dụng', 'Kính trong, rõ.'),
 (32, 11, 'Khả dụng', 'Dùng trong giờ Sinh học.'),
-(33, 11, 'Khả dụng', 'Bị lệch trục quang.'),
+(33, 11, 'Báo hỏng', 'Bị lệch trục quang.'),
 (34, 12, 'Khả dụng', 'Đầy đủ chi tiết.'),
 (35, 12, 'Khả dụng', 'Tổ Sinh đang sử dụng.'),
 (36, 12, 'Khả dụng', 'Thiếu 1 chi tiết nhỏ.'),
@@ -198,12 +198,12 @@ INSERT INTO `chitietthietbi` (`maChiTietTB`, `maThietBi`, `tinhTrang`, `ghiChu`)
 (41, 14, 'Khả dụng', 'HS lớp 8 dùng cho bài thuyết trình.'),
 (42, 14, 'Khả dụng', 'Băng bị rối, không tua được.'),
 (43, 15, 'Đang mượn', 'Quả cầu xoay mượt.'),
-(44, 15, 'Đang mượn', 'GV Địa lý mượn.'),
-(45, 15, 'Báo hỏng', 'Trục xoay cứng.'),
+(44, 15, 'Khả dụng', 'GV Địa lý mượn.'),
+(45, 15, 'Thanh lý', 'Trục xoay cứng.'),
 (46, 16, 'Đang mượn', 'Không cong mép.'),
 (47, 16, 'Đang mượn', 'Dùng trong tiết Địa lý.'),
 (48, 16, 'Đang mượn', 'Bị ố màu chỗ viền.'),
-(49, 17, 'Đang mượn', 'Màu còn đầy.'),
+(49, 17, 'Khả dụng', 'Màu còn đầy.'),
 (50, 17, 'Khả dụng', 'HS lớp 6 đang dùng.'),
 (51, 17, 'Khả dụng', 'Hộp bị gãy nắp.'),
 (52, 18, 'Khả dụng', 'Chưa sử dụng nhiều.'),
@@ -214,12 +214,10 @@ INSERT INTO `chitietthietbi` (`maChiTietTB`, `maThietBi`, `tinhTrang`, `ghiChu`)
 (57, 19, 'Khả dụng', 'Rách mặt trống.'),
 (58, 20, 'Khả dụng', 'Phím đàn nhạy tốt.'),
 (59, 20, 'Khả dụng', 'GV Âm nhạc đang luyện đàn.'),
-(60, 20, 'Khả dụng', 'Một phím bị kẹt.'),
-(110, 62, 'Thanh lý', 'con meo bi hong'),
-(111, 62, 'Thanh lý', 'hong that nha'),
-(112, 63, 'Thanh lý', ''),
-(113, 63, 'Thanh lý', 'hong roi'),
-(114, 63, 'Thanh lý', '');
+(60, 20, 'Thanh lý', 'Một phím bị kẹt.'),
+(144, 78, 'Khả dụng', NULL),
+(145, 78, 'Thanh lý', 'Một vài trang bị lem mực, cần phân loại để sử dụng cho bài tập phác thảo.'),
+(146, 78, 'Thanh lý', 'Giấy rách một số trang, bìa hư hỏng, không ảnh hưởng đến tất cả bộ, cần kiểm tra trước khi dùng lại.');
 
 -- --------------------------------------------------------
 
@@ -241,12 +239,10 @@ CREATE TABLE `kehoachmuasam` (
 --
 
 INSERT INTO `kehoachmuasam` (`maKeHoachMuaSam`, `maNguoiDung`, `ngayLap`, `tongChiPhi`, `trangThai`, `ghiChu`) VALUES
-(1, 3, '2025-01-15', 700000.00, 'Chờ duyệt', 'Mua bổ sung thiết bị thực hành CNTT'),
-(5, 32, '2025-12-04', 400000.00, 'Chờ duyệt', 'test lan 1'),
-(8, 4, '2025-12-04', 143000.00, 'Chấp thuận', 'đồng ý nha, cứ mua đi'),
-(9, 2, '2025-12-05', 500000.00, 'Chờ duyệt', 'test với ttcm toán học'),
-(10, 9, '2025-12-31', 130000.00, 'Từ chối', 'không cần thiết đâu'),
-(11, 33, '2025-12-20', 5750000.00, 'Chờ duyệt', 'dantrong-10-500k/cassette-5-150.000 = 5tr750');
+(19, 32, '2025-12-10', 11100000.00, 'Chấp thuận', 'Mua sắm bổ sung thiết bị dạy học phục vụ học kỳ II, ưu tiên chất lượng vừa phải, chi phí hợp lý.'),
+(20, 3, '2025-12-15', 855000.00, 'Chờ duyệt', 'Bổ sung tài liệu và tranh minh họa phục vụ giảng dạy, ưu tiên chi phí hợp lý và đáp ứng nhu cầu học sinh.'),
+(21, 33, '2025-12-12', 1060000.00, 'Từ chối', 'Mua bổ sung băng tư liệu phục vụ học sinh nghe và nghiên cứu lịch sử, ưu tiên số lượng vừa đủ và bảo quản cẩn thận.'),
+(22, 4, '2025-12-25', 1675000.00, 'Chờ duyệt', 'Mua bổ sung phục vụ học sinh lớp 6–9, đảm bảo đủ số lượng thiết bị cho các tiết học tiếng Anh thực hành nghe – nói.');
 
 -- --------------------------------------------------------
 
@@ -268,8 +264,10 @@ CREATE TABLE `kehoachthanhly` (
 --
 
 INSERT INTO `kehoachthanhly` (`maKeHoachThanhLy`, `maNguoiDung`, `ngayLap`, `tongThuNhap`, `trangThai`, `ghiChu`) VALUES
-(2, 32, '2025-12-06', 19000.00, 'Chấp thuận', 'đem cho vựa sắt vụn'),
-(5, 32, '2025-12-06', 15000.00, 'Chờ duyệt', 'dem ban cho ve chai');
+(8, 32, '2025-12-11', 50000.00, 'Từ chối', 'Thanh lý thiết bị hỏng, không thể sửa chữa, thu hồi một phần chi phí để mua sắm mới.'),
+(9, 33, '2025-12-12', 115000.00, 'Chấp thuận', 'Thanh lý các thiết bị hư hỏng, không thể sử dụng tiếp; thu hồi một phần chi phí để mua sắm mới phục vụ giảng dạy.'),
+(10, 33, '2025-12-20', 150000.00, 'Chờ duyệt', 'Thiết bị hư hỏng nhẹ, không còn sử dụng được trong giảng dạy; thanh lý để thu hồi một phần chi phí mua sắm mới.'),
+(11, 32, '2025-12-25', 1500000.00, 'Chấp thuận', 'Thiết bị đã hư hỏng nặng, không còn khả năng sử dụng trong giảng dạy, đề xuất thanh lý để thay thế.');
 
 -- --------------------------------------------------------
 
@@ -293,43 +291,42 @@ CREATE TABLE `nguoidung` (
 --
 
 INSERT INTO `nguoidung` (`maNguoiDung`, `tenDangNhap`, `matKhau`, `hoTen`, `email`, `soDienThoai`, `maBoMon`, `maVaiTro`) VALUES
-(1, 'hieutruong', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyễn Văn Hiệu', 'hieutruong@truong.edu.vn', '0901000001', NULL, 1),
-(2, 'toan_tt', 'e10adc3949ba59abbe56e057f20f883e', 'Trần Minh Toán', 'toan_tt@truong.edu.vn', '0902000001', 1, 2),
-(3, 'van_tt', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyễn Thị Văn', 'van_tt@truong.edu.vn', '0902000002', 2, 2),
-(4, 'anh_tt', 'e10adc3949ba59abbe56e057f20f883e', 'Lê Hồng Anh', 'anh_tt@truong.edu.vn', '0902000003', 3, 2),
-(5, 'ly_tt', 'e10adc3949ba59abbe56e057f20f883e', 'Phạm Quốc Lý', 'ly_tt@truong.edu.vn', '0902000004', 4, 2),
-(6, 'hoa_tt', 'e10adc3949ba59abbe56e057f20f883e', 'Đỗ Văn Hóa', 'hoa_tt@truong.edu.vn', '0902000005', 5, 2),
-(7, 'sinh_tt', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyễn Lan Sinh', 'sinh_tt@truong.edu.vn', '0902000006', 6, 2),
-(8, 'su_tt', 'e10adc3949ba59abbe56e057f20f883e', 'Phan Quốc Sử', 'su_tt@truong.edu.vn', '0902000007', 7, 2),
-(9, 'dia_tt', 'e10adc3949ba59abbe56e057f20f883e', 'Lý Hải Địa', 'dia_tt@truong.edu.vn', '0902000008', 8, 2),
-(10, 'mythuat_tt', 'e10adc3949ba59abbe56e057f20f883e', 'Trịnh Mỹ Thuật', 'mythuat_tt@truong.edu.vn', '0902000009', 9, 2),
-(11, 'amnhac_tt', 'e10adc3949ba59abbe56e057f20f883e', 'Vũ Thanh Nhạc', 'amnhac_tt@truong.edu.vn', '0902000010', 10, 2),
-(12, 'toan_gv1', 'e10adc3949ba59abbe56e057f20f883e', 'Lê Văn Số', 'toan_gv1@truong.edu.vn', '0903000001', 1, 3),
-(13, 'toan_gv2', 'e10adc3949ba59abbe56e057f20f883e', 'Ngô Thị Hàm', 'toan_gv2@truong.edu.vn', '0903000002', 1, 3),
-(14, 'van_gv1', 'e10adc3949ba59abbe56e057f20f883e', 'Trần Minh Thơ', 'van_gv1@truong.edu.vn', '0903000003', 2, 3),
-(15, 'van_gv2', 'e10adc3949ba59abbe56e057f20f883e', 'Phạm Ngọc Vân', 'van_gv2@truong.edu.vn', '0903000004', 2, 3),
-(16, 'anh_gv1', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyễn Thu Hương', 'anh_gv1@truong.edu.vn', '0903000005', 3, 3),
-(17, 'anh_gv2', 'e10adc3949ba59abbe56e057f20f883e', 'Hoàng Minh Quân', 'anh_gv2@truong.edu.vn', '0903000006', 3, 3),
-(18, 'ly_gv1', 'e10adc3949ba59abbe56e057f20f883e', 'Phan Quốc Bảo', 'ly_gv1@truong.edu.vn', '0903000007', 4, 3),
-(19, 'ly_gv2', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyễn Thị Hằng', 'ly_gv2@truong.edu.vn', '0903000008', 4, 3),
-(20, 'hoa_gv1', 'e10adc3949ba59abbe56e057f20f883e', 'Lưu Hồng Hoa', 'hoa_gv1@truong.edu.vn', '0903000009', 5, 3),
-(21, 'hoa_gv2', 'e10adc3949ba59abbe56e057f20f883e', 'Phạm Tiến Dũng', 'hoa_gv2@truong.edu.vn', '0903000010', 5, 3),
-(22, 'sinh_gv1', 'e10adc3949ba59abbe56e057f20f883e', 'Đỗ Bích Hạnh', 'sinh_gv1@truong.edu.vn', '0903000011', 6, 3),
-(23, 'sinh_gv2', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyễn Văn Sinh', 'sinh_gv2@truong.edu.vn', '0903000012', 6, 3),
-(24, 'su_gv1', 'e10adc3949ba59abbe56e057f20f883e', 'Phan Thị Sửu', 'su_gv1@truong.edu.vn', '0903000013', 7, 3),
-(25, 'su_gv2', 'e10adc3949ba59abbe56e057f20f883e', 'Trần Quốc Việt', 'su_gv2@truong.edu.vn', '0903000014', 7, 3),
-(26, 'dia_gv1', 'e10adc3949ba59abbe56e057f20f883e', 'Lê Thanh Bình', 'dia_gv1@truong.edu.vn', '0903000015', 8, 3),
-(27, 'dia_gv2', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyễn Hà Địa', 'dia_gv2@truong.edu.vn', '0903000016', 8, 3),
-(28, 'mythuat_gv1', 'e10adc3949ba59abbe56e057f20f883e', 'Trịnh Ngọc Vẽ', 'mythuat_gv1@truong.edu.vn', '0903000017', 9, 3),
-(29, 'mythuat_gv2', 'e10adc3949ba59abbe56e057f20f883e', 'Phạm Mỹ Linh', 'mythuat_gv2@truong.edu.vn', '0903000018', 9, 3),
-(30, 'amnhac_gv1', 'e10adc3949ba59abbe56e057f20f883e', 'Vũ Hoàng Ca', 'amnhac_gv1@truong.edu.vn', '0903000019', 10, 3),
-(31, 'amnhac_gv2', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyễn Minh Âm', 'amnhac_gv2@truong.edu.vn', '0903000020', 10, 3),
-(32, 'qltb1', 'e10adc3949ba59abbe56e057f20f883e', 'Lê Quản Lý', 'qltb1@truong.edu.vn', '0904000001', NULL, 4),
-(33, 'qltb2', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyễn Thiết Bị', 'qltb2@truong.edu.vn', '0904000002', NULL, 4),
-(34, 'kythuat1', 'e10adc3949ba59abbe56e057f20f883e', 'Phạm Văn Kỹ', 'kythuat1@truong.edu.vn', '0905000001', NULL, 5),
-(35, 'kythuat2', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyễn Công Nghệ', 'kythuat2@truong.edu.vn', '0905000002', NULL, 5),
-(36, 'admin', '0192023a7bbd73250516f069df18b500', 'Trần Quốc Hệ', 'admin@truong.edu.vn', '0909000001', NULL, 6),
-(50, 'nguanhmotnang', 'e10adc3949ba59abbe56e057f20f883e', 'Ngũ Anh Một Nàng', 'nguanhmotnang@gmail.com', '0908000003', NULL, 6);
+(1, 'hieutruong', '81c093a2740b0196eac42391210ecf6b', 'Nguyễn Văn Hiệu', 'hieutruong@truong.edu.vn', '0901000001', NULL, 1),
+(2, 'toan_tt', '81c093a2740b0196eac42391210ecf6b', 'Trần Minh Toán', 'toan_tt@truong.edu.vn', '0902000001', 1, 2),
+(3, 'van_tt', '81c093a2740b0196eac42391210ecf6b', 'Nguyễn Thị Văn', 'van_tt@truong.edu.vn', '0902000002', 2, 2),
+(4, 'anh_tt', '81c093a2740b0196eac42391210ecf6b', 'Lê Hồng Anh', 'anh_tt@truong.edu.vn', '0902000003', 3, 2),
+(5, 'ly_tt', '81c093a2740b0196eac42391210ecf6b', 'Phạm Quốc Lý', 'ly_tt@truong.edu.vn', '0902000004', 4, 2),
+(6, 'hoa_tt', '81c093a2740b0196eac42391210ecf6b', 'Đỗ Văn Hóa', 'hoa_tt@truong.edu.vn', '0902000005', 5, 2),
+(7, 'sinh_tt', '81c093a2740b0196eac42391210ecf6b', 'Nguyễn Lan Sinh', 'sinh_tt@truong.edu.vn', '0902000006', 6, 2),
+(8, 'su_tt', '81c093a2740b0196eac42391210ecf6b', 'Phan Quốc Sử', 'su_tt@truong.edu.vn', '0902000007', 7, 2),
+(9, 'dia_tt', '81c093a2740b0196eac42391210ecf6b', 'Lý Hải Địa', 'dia_tt@truong.edu.vn', '0902000008', 8, 2),
+(10, 'mythuat_tt', '81c093a2740b0196eac42391210ecf6b', 'Trịnh Mỹ Thuật', 'mythuat_tt@truong.edu.vn', '0902000009', 9, 2),
+(11, 'amnhac_tt', '81c093a2740b0196eac42391210ecf6b', 'Vũ Thanh Nhạc', 'amnhac_tt@truong.edu.vn', '0902000010', 10, 2),
+(12, 'toan_gv1', '81c093a2740b0196eac42391210ecf6b', 'Lê Văn Số', 'toan_gv1@truong.edu.vn', '0903000001', 1, 3),
+(13, 'toan_gv2', '81c093a2740b0196eac42391210ecf6b', 'Ngô Thị Hàm', 'toan_gv2@truong.edu.vn', '0903000002', 1, 3),
+(14, 'van_gv1', '81c093a2740b0196eac42391210ecf6b', 'Trần Minh Thơ', 'van_gv1@truong.edu.vn', '0903000003', 2, 3),
+(15, 'van_gv2', '81c093a2740b0196eac42391210ecf6b', 'Phạm Ngọc Vân', 'van_gv2@truong.edu.vn', '0903000004', 2, 3),
+(16, 'anh_gv1', '81c093a2740b0196eac42391210ecf6b', 'Nguyễn Thu Hương', 'anh_gv1@truong.edu.vn', '0903000005', 3, 3),
+(17, 'anh_gv2', '81c093a2740b0196eac42391210ecf6b', 'Hoàng Minh Quân', 'anh_gv2@truong.edu.vn', '0903000006', 3, 3),
+(18, 'ly_gv1', '81c093a2740b0196eac42391210ecf6b', 'Phan Quốc Bảo', 'ly_gv1@truong.edu.vn', '0903000007', 4, 3),
+(19, 'ly_gv2', '81c093a2740b0196eac42391210ecf6b', 'Nguyễn Thị Hằng', 'ly_gv2@truong.edu.vn', '0903000008', 4, 3),
+(20, 'hoa_gv1', '81c093a2740b0196eac42391210ecf6b', 'Lưu Hồng Hoa', 'hoa_gv1@truong.edu.vn', '0903000009', 5, 3),
+(21, 'hoa_gv2', '81c093a2740b0196eac42391210ecf6b', 'Phạm Tiến Dũng', 'hoa_gv2@truong.edu.vn', '0903000010', 5, 3),
+(22, 'sinh_gv1', '81c093a2740b0196eac42391210ecf6b', 'Đỗ Bích Hạnh', 'sinh_gv1@truong.edu.vn', '0903000011', 6, 3),
+(23, 'sinh_gv2', '81c093a2740b0196eac42391210ecf6b', 'Nguyễn Văn Sinh', 'sinh_gv2@truong.edu.vn', '0903000012', 6, 3),
+(24, 'su_gv1', '81c093a2740b0196eac42391210ecf6b', 'Phan Thị Sửu', 'su_gv1@truong.edu.vn', '0903000013', 7, 3),
+(25, 'su_gv2', '81c093a2740b0196eac42391210ecf6b', 'Trần Quốc Việt', 'su_gv2@truong.edu.vn', '0903000014', 7, 3),
+(26, 'dia_gv1', '81c093a2740b0196eac42391210ecf6b', 'Lê Thanh Bình', 'dia_gv1@truong.edu.vn', '0903000015', 8, 3),
+(27, 'dia_gv2', '81c093a2740b0196eac42391210ecf6b', 'Nguyễn Hà Địa', 'dia_gv2@truong.edu.vn', '0903000016', 8, 3),
+(28, 'mythuat_gv1', '81c093a2740b0196eac42391210ecf6b', 'Trịnh Ngọc Vẽ', 'mythuat_gv1@truong.edu.vn', '0903000017', 9, 3),
+(29, 'mythuat_gv2', '81c093a2740b0196eac42391210ecf6b', 'Phạm Mỹ Linh', 'mythuat_gv2@truong.edu.vn', '0903000018', 9, 3),
+(30, 'amnhac_gv1', '81c093a2740b0196eac42391210ecf6b', 'Vũ Hoàng Ca', 'amnhac_gv1@truong.edu.vn', '0903000019', 10, 3),
+(31, 'amnhac_gv2', '81c093a2740b0196eac42391210ecf6b', 'Nguyễn Minh Âm', 'amnhac_gv2@truong.edu.vn', '0903000020', 10, 3),
+(32, 'qltb1', '81c093a2740b0196eac42391210ecf6b', 'Lê Quản Lý', 'qltb1@truong.edu.vn', '0904000001', NULL, 4),
+(33, 'qltb2', '81c093a2740b0196eac42391210ecf6b', 'Nguyễn Thiết Bị', 'qltb2@truong.edu.vn', '0904000002', NULL, 4),
+(34, 'kythuat1', '81c093a2740b0196eac42391210ecf6b', 'Phạm Văn Kỹ', 'kythuat1@truong.edu.vn', '0905000001', NULL, 5),
+(35, 'kythuat2', '81c093a2740b0196eac42391210ecf6b', 'Nguyễn Công Nghệ', 'kythuat2@truong.edu.vn', '0905000002', NULL, 5),
+(36, 'admin', '81c093a2740b0196eac42391210ecf6b', 'Trần Quốc Hệ', 'admin@truong.edu.vn', '0909000001', NULL, 6);
 
 -- --------------------------------------------------------
 
@@ -381,10 +378,10 @@ CREATE TABLE `phieumuon` (
 --
 
 INSERT INTO `phieumuon` (`maPhieuMuon`, `maNguoiDung`, `ngayMuon`, `ngayTra`, `trangThai`, `ghiChu`) VALUES
-(33, 16, '2025-11-28', '2025-12-05', 'Chờ xử lý', 'test tình trạng'),
-(38, 29, '2025-11-28', '2025-12-03', 'Đã xác nhận', 'test lan 2'),
-(43, 14, '2025-11-29', '2025-11-30', 'Đã trả', 'gv này trả rồi'),
-(48, 27, '2025-12-03', '2025-12-04', 'Đã xác nhận', 'cho phép mượn');
+(68, 3, '2025-12-10', '2025-12-20', 'Đã xác nhận', 'Sử dụng cho tiết dạy lớp 6–9, lưu ý giữ nguyên trạng sách và tranh, tránh làm hư hỏng khi di chuyển giữa các lớp.'),
+(69, 26, '2025-12-11', '2025-12-25', 'Đang mượn', 'Sử dụng cho các tiết học địa lý lớp 6–9, lưu ý bảo quản bản đồ và quả địa cầu cẩn thận, tránh làm rách hoặc hỏng thiết bị khi di chuyển.'),
+(70, 28, '2025-12-12', '2025-12-22', 'Đã trả', 'Sử dụng cho các tiết học mỹ thuật, lưu ý giữ nguyên trạng thiết bị, tránh làm rách giấy hoặc làm hỏng màu và bút khi sử dụng trong lớp.'),
+(71, 21, '2025-12-10', '2025-12-30', 'Chờ xử lý', 'Thiết bị phục vụ thí nghiệm Hóa học cơ bản, chú ý an toàn khi sử dụng.');
 
 -- --------------------------------------------------------
 
@@ -413,7 +410,7 @@ INSERT INTO `thietbi` (`maThietBi`, `tenThietBi`, `hinhAnh`, `donVi`, `soLuong`,
 (2, 'Máy tính cầm tay Casio FX-580VN X', 'may_tinh_casio_fx580vnx.jpg', 'Chiếc', 3, '8,9', 1, 2, 'Máy tính Casio FX-580VN X, phục vụ các tiết học toán đại số, hình học, thống kê, giúp học sinh thực hiện các phép tính phức tạp nhanh chóng và chính xác.'),
 (3, 'Sách tham khảo Ngữ văn THCS – Cambridge Edition', 'sach_tham_khao_ngu_van_thcs_cambridge.jpg', 'Bộ', 3, '6,7,8,9', 2, 3, 'Sách tham khảo Ngữ văn THCS – Cambridge Edition, cung cấp kiến thức bổ sung cho chương trình chính khóa, hướng dẫn phân tích văn bản, soạn bài, bài tập nâng cao, giải thích ngữ nghĩa, bài học mở rộng về văn học thế giới và Việt Nam, giúp học sinh phát triển kỹ năng đọc hiểu, viết luận, tư duy phản biện và cảm thụ văn học một cách sâu sắc.'),
 (4, 'Tranh minh họa các tác phẩm văn học ArtMaster', 'tranh_van_hoc.jpg', 'Tấm', 3, '7,8,9', 2, 4, 'Tranh minh họa ArtMaster, giúp học sinh hình dung bối cảnh, nhân vật, cốt truyện các tác phẩm văn học, tăng hứng thú học tập, phát triển khả năng tư duy, sáng tạo và phân tích văn học.'),
-(5, 'Từ điển tiếng Anh Oxford Advanced Learner', 'tu_dien_oxford_advanced.jpg', 'Cuốn', 3, '6,7', 3, 5, 'Từ điển Oxford Advanced Learner’s Dictionary 10th Edition, xuất bản bởi Oxford University Press, hỗ trợ học sinh học từ vựng, ngữ pháp, phát âm, cải thiện kỹ năng đọc, viết, nghe, nói trong học tập tiếng Anh.'),
+(5, 'Từ điển tiếng Anh Oxford Advanced Learner', 'tu_dien_oxford_advanced.jpg', 'Bộ', 1, '6,7', 3, 5, 'Từ điển Oxford Advanced Learner’s Dictionary 10th Edition, xuất bản bởi Oxford University Press, hỗ trợ học sinh học từ vựng, ngữ pháp, phát âm, cải thiện kỹ năng đọc, viết, nghe, nói trong học tập tiếng Anh.'),
 (6, 'Loa Bluetooth mini JBL GO 3 Portable', 'loa_bluetooth_jbl_go3.jpg', 'Chiếc', 3, '8,9', 3, 6, 'Loa Bluetooth mini JBL GO 3 Portable, thiết kế nhỏ gọn, âm thanh rõ ràng, công suất phù hợp lớp học, phục vụ phát nhạc, nghe bài giảng, luyện nghe tiếng Anh, thuyết trình, hoạt động học tập nhóm, và nâng cao trải nghiệm âm nhạc, thính giác cho học sinh.'),
 (7, 'Đồng hồ đo điện đa năng Fluke 115', 'dong_ho_do_dien_fluke_115.jpg', 'Cái', 3, '8,9', 4, 7, 'Đồng hồ đo điện đa năng Fluke 115, phục vụ đo điện áp AC/DC, dòng điện, điện trở, kiểm tra mạch, đảm bảo an toàn và chính xác cho học sinh thực hành điện – điện tử.'),
 (8, 'Con lắc đơn PCE Instruments PL-100', 'con_lac_don_pl100.jpg', 'Cái', 3, '7,8,9', 4, 8, 'Con lắc đơn PCE Instruments PL-100, phục vụ thí nghiệm dao động cơ học, định luật con lắc, đo chu kỳ, biên độ, giúp học sinh nghiên cứu hiện tượng vật lý cơ bản về chuyển động điều hòa.'),
@@ -429,8 +426,7 @@ INSERT INTO `thietbi` (`maThietBi`, `tenThietBi`, `hinhAnh`, `donVi`, `soLuong`,
 (18, 'Màu nước Crayola Washable Artist Set', 'mau_nuoc_crayola_24.jpg', 'Hộp', 3, '8,9', 9, 8, 'Màu nước Crayola Washable Artist Set, sản phẩm chính hãng Crayola, gồm 24 màu cơ bản, dụng cụ vẽ giúp học sinh thực hành hội họa, sáng tạo tác phẩm, phối hợp màu sắc, phát triển kỹ năng thẩm mỹ và nghệ thuật, đồng thời an toàn, dễ rửa sạch và phù hợp cho các hoạt động mỹ thuật trong lớp học.'),
 (19, 'Đàn trống nhỏ học sinh Remo Rhythm Club', 'trong_nho_remo.jpg', 'Cái', 3, '6,7', 10, 9, 'Đàn trống nhỏ học sinh Remo Rhythm Club, nhạc cụ bộ gõ chất lượng cao, phục vụ các tiết học âm nhạc, giúp học sinh luyện nhịp điệu, phối hợp tay chân, phát triển kỹ năng cảm thụ âm nhạc, tăng sự hứng thú, khả năng sáng tạo và tham gia các hoạt động nhóm trong lớp học.'),
 (20, 'Đàn piano cơ YAMAHA U1J PE Professional', 'piano_yamaha_u1j_pe.jpg', 'Cái', 3, '8,9', 10, 10, 'Đàn piano cơ YAMAHA U1J PE Professional, nhạc cụ bàn phím chất lượng cao, phục vụ tiết học âm nhạc, luyện kỹ năng đọc nhạc, cảm thụ giai điệu, thực hành chơi đàn, phát triển năng khiếu âm nhạc, kỹ năng biểu diễn và âm nhạc thính giác cho học sinh.'),
-(62, 'conmeosuagaugau', 'meomeo_1765035433.png', 'Bộ', 2, '7,8', 8, 7, 'gaugauconmeo'),
-(63, 'Bộ thí nghiệm Khoa học tổng hợp STEM Junior Lab Kit', 'kiki_1765035336.png', 'Chiếc', 3, '6,7,8,9', 1, 10, 'bo thi nghiem lulu');
+(78, 'Sketch Pad vẽ Mỹ thuật - MathMaster Deluxe Edition', 'sketch-pad-ve-my-thuat_1765361948.jpg', 'Bộ', 3, '6,7,8,9', 9, 1, 'Sketch Pad vẽ Mỹ thuật MathMaster Deluxe Edition, giấy chất lượng cao, phục vụ vẽ tranh, phác thảo, phối màu, giúp học sinh thực hành kỹ năng mỹ thuật cơ bản và nâng cao, phát triển tư duy sáng tạo và thẩm mỹ.');
 
 -- --------------------------------------------------------
 
@@ -475,17 +471,16 @@ CREATE TABLE `yeucauscbtbh` (
 --
 
 INSERT INTO `yeucauscbtbh` (`maYeuCau`, `maChiTietTB`, `loaiYeuCau`, `tienDo`, `ghiChu`) VALUES
-(1, 45, 'Bảo trì', 'Đang xử lý', 'chờ sửa xíu đi'),
-(4, 110, 'Sửa chữa', 'Không thể sửa', 'thanh ly luon di'),
-(8, 111, 'Bảo hành', 'Đã sửa', 'sua xong roi nha'),
-(9, 113, 'Bảo trì', 'Không thể sửa', 'hu luon roi'),
-(10, 1, 'Sửa chữa', 'Đã sửa', 'hết hư rồi nha'),
-(11, 4, 'Sửa chữa', 'Chờ xác nhận', 'đem đi sửa đi'),
-(12, 10, 'Sửa chữa', 'Không thể sửa', ''),
-(13, 18, NULL, NULL, NULL),
-(14, 111, 'Sửa chữa', 'Không thể sửa', ''),
-(15, 112, 'Sửa chữa', 'Không thể sửa', ''),
-(16, 114, 'Sửa chữa', 'Không thể sửa', '');
+(19, 6, 'Sửa chữa', 'Không thể sửa', 'Lỗi mạch bàn phím, không thay thế được linh kiện.'),
+(20, 42, 'Bảo trì', 'Đã sửa', 'Đã vệ sinh và chỉnh lại băng, âm thanh ổn định.'),
+(21, 18, 'Bảo hành', 'Đang xử lý', 'Đang kiểm tra pin và module Bluetooth.'),
+(22, 30, 'Sửa chữa', 'Không thể sửa', 'Cảm biến hỏng nặng, không khắc phục được.'),
+(23, 27, 'Bảo hành', 'Chờ xác nhận', 'Ngọn lửa không đều, khó điều chỉnh van gió.'),
+(24, 33, NULL, NULL, NULL),
+(25, 45, 'Bảo trì', 'Không thể sửa', 'Trục xoay bị cong, không có linh kiện thay thế.'),
+(27, 146, 'Sửa chữa', 'Không thể sửa', 'Bìa và gáy hư nặng, không thể khắc phục; cần mua bộ mới thay thế.'),
+(28, 145, 'Bảo hành', 'Không thể sửa', 'Một số trang bị rách và bìa hư, đang chờ xác nhận bảo hành từ nhà cung cấp.'),
+(29, 60, 'Sửa chữa', 'Không thể sửa', 'Hư hỏng nặng, cần thay thế linh kiện chuyên dụng; tạm thời không thể sửa chữa.');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -502,16 +497,16 @@ ALTER TABLE `bomon`
 --
 ALTER TABLE `chitietkehoachmuasam`
   ADD PRIMARY KEY (`maChiTietKHMuaSam`),
-  ADD KEY `fk_ctkh_ms` (`maKeHoachMuaSam`),
-  ADD KEY `fk_ctkh_tb` (`maThietBi`);
+  ADD KEY `fk_ctkh_tb` (`maThietBi`),
+  ADD KEY `fk_ctkh_ms` (`maKeHoachMuaSam`);
 
 --
 -- Chỉ mục cho bảng `chitietkehoachthanhly`
 --
 ALTER TABLE `chitietkehoachthanhly`
   ADD PRIMARY KEY (`maChiTietKHThanhLy`),
-  ADD KEY `fk_ctkh_tl` (`maKeHoachThanhLy`),
-  ADD KEY `fk_ctkhtl_tb` (`maThietBi`);
+  ADD KEY `fk_ctkhtl_tb` (`maThietBi`),
+  ADD KEY `fk_ctkh_tl` (`maKeHoachThanhLy`);
 
 --
 -- Chỉ mục cho bảng `chitietphieumuon`
@@ -593,67 +588,67 @@ ALTER TABLE `yeucauscbtbh`
 -- AUTO_INCREMENT cho bảng `bomon`
 --
 ALTER TABLE `bomon`
-  MODIFY `maBoMon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `maBoMon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT cho bảng `chitietkehoachmuasam`
 --
 ALTER TABLE `chitietkehoachmuasam`
-  MODIFY `maChiTietKHMuaSam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `maChiTietKHMuaSam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT cho bảng `chitietkehoachthanhly`
 --
 ALTER TABLE `chitietkehoachthanhly`
-  MODIFY `maChiTietKHThanhLy` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `maChiTietKHThanhLy` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `chitietphieumuon`
 --
 ALTER TABLE `chitietphieumuon`
-  MODIFY `maChiTietPM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `maChiTietPM` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
 -- AUTO_INCREMENT cho bảng `chitietthietbi`
 --
 ALTER TABLE `chitietthietbi`
-  MODIFY `maChiTietTB` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
+  MODIFY `maChiTietTB` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 
 --
 -- AUTO_INCREMENT cho bảng `kehoachmuasam`
 --
 ALTER TABLE `kehoachmuasam`
-  MODIFY `maKeHoachMuaSam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `maKeHoachMuaSam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT cho bảng `kehoachthanhly`
 --
 ALTER TABLE `kehoachthanhly`
-  MODIFY `maKeHoachThanhLy` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `maKeHoachThanhLy` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `nguoidung`
 --
 ALTER TABLE `nguoidung`
-  MODIFY `maNguoiDung` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `maNguoiDung` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT cho bảng `nhacungcap`
 --
 ALTER TABLE `nhacungcap`
-  MODIFY `maNhaCungCap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `maNhaCungCap` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `phieumuon`
 --
 ALTER TABLE `phieumuon`
-  MODIFY `maPhieuMuon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `maPhieuMuon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT cho bảng `thietbi`
 --
 ALTER TABLE `thietbi`
-  MODIFY `maThietBi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `maThietBi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT cho bảng `vaitro`
@@ -665,7 +660,7 @@ ALTER TABLE `vaitro`
 -- AUTO_INCREMENT cho bảng `yeucauscbtbh`
 --
 ALTER TABLE `yeucauscbtbh`
-  MODIFY `maYeuCau` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `maYeuCau` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -675,14 +670,14 @@ ALTER TABLE `yeucauscbtbh`
 -- Các ràng buộc cho bảng `chitietkehoachmuasam`
 --
 ALTER TABLE `chitietkehoachmuasam`
-  ADD CONSTRAINT `fk_ctkh_ms` FOREIGN KEY (`maKeHoachMuaSam`) REFERENCES `kehoachmuasam` (`maKeHoachMuaSam`),
+  ADD CONSTRAINT `fk_ctkh_ms` FOREIGN KEY (`maKeHoachMuaSam`) REFERENCES `kehoachmuasam` (`maKeHoachMuaSam`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_ctkh_tb` FOREIGN KEY (`maThietBi`) REFERENCES `thietbi` (`maThietBi`);
 
 --
 -- Các ràng buộc cho bảng `chitietkehoachthanhly`
 --
 ALTER TABLE `chitietkehoachthanhly`
-  ADD CONSTRAINT `fk_ctkh_tl` FOREIGN KEY (`maKeHoachThanhLy`) REFERENCES `kehoachthanhly` (`maKeHoachThanhLy`),
+  ADD CONSTRAINT `fk_ctkh_tl` FOREIGN KEY (`maKeHoachThanhLy`) REFERENCES `kehoachthanhly` (`maKeHoachThanhLy`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_ctkhtl_tb` FOREIGN KEY (`maThietBi`) REFERENCES `thietbi` (`maThietBi`);
 
 --
@@ -728,8 +723,8 @@ ALTER TABLE `phieumuon`
 -- Các ràng buộc cho bảng `thietbi`
 --
 ALTER TABLE `thietbi`
-  ADD CONSTRAINT `fk_thietbi_bomon` FOREIGN KEY (`maBoMon`) REFERENCES `bomon` (`maBoMon`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_thietbi_nhacungcap` FOREIGN KEY (`maNhaCungCap`) REFERENCES `nhacungcap` (`maNhaCungCap`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_thietbi_bomon` FOREIGN KEY (`maBoMon`) REFERENCES `bomon` (`maBoMon`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_thietbi_nhacungcap` FOREIGN KEY (`maNhaCungCap`) REFERENCES `nhacungcap` (`maNhaCungCap`) ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `yeucauscbtbh`
