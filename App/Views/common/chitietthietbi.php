@@ -80,6 +80,12 @@ if ($kq && $kq->num_rows > 0) {
 <?php
 // Xử lý thêm thiết bị vào session lưu bộ nhớ tạm khi nhấn nút
 if(isset($_POST['btnmuon'])) {
+    // Nếu chưa đăng nhập thì chuyển đến trang đăng nhập
+    if(!isset($_SESSION['login'])) {
+        echo "<script>alert('Vui lòng đăng nhập để mượn thiết bị!'); window.location.href='index.php?page=dangnhap';</script>";
+        exit();
+    }
+
     $maThietBi = $r['maThietBi'];
     $soLuongMuon = 1; // mặc định thêm vào phiếu mượn 1 thiết bị
 

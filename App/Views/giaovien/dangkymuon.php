@@ -43,10 +43,10 @@ $gioHang = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                     <div class="col-6">
                         <div class="mb-3">
                             <label class="form-label fw-medium">Ngày mượn</label>
-                            <input type="date" name="ngayMuon" id="ngayMuon" class="form-control" min="<?= date('Y-m-d') ?>" required>
+                            <input type="date" name="ngayMuon" id="ngayMuon" class="form-control" value="<?= date('Y-m-d') ?>" disabled>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-medium">Ngày trả</label>
+                            <label class="form-label fw-medium">Ngày trả <span class="text-danger">*</span></label>
                             <input type="date" name="ngayTra" id="ngayTra" class="form-control" min="<?= date('Y-m-d') ?>" required>
                             <span class="error" id="ngayTraError"></span>
                         </div>
@@ -140,7 +140,7 @@ if(isset($_POST['btnXacNhan'])) {
         exit();
     }
 
-    $maPhieuMuon = $p->insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, "Chờ xử lý", $ghiChu);
+    $maPhieuMuon = $p->insertPhieuMuon($maNguoiDung, date('Y-m-d'), $ngayTra, "Chờ xử lý", $ghiChu);
 
     if($maPhieuMuon) {
         // truyền toàn bộ giỏ mượn làm mảng

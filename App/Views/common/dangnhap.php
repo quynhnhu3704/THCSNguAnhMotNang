@@ -6,12 +6,12 @@
             
             <form action="#" method="post">
                 <div class="mb-3">
-                    <label class="form-label fw-medium">Tên người dùng</label>
+                    <label class="form-label fw-medium">Tên đăng nhập <span class="text-danger">*</span></label>
                     <input type="text" name="tenDangNhap" value="qltb1" class="form-control" required>
                 </div>
 
                 <div class="mb-5">
-                    <label class="form-label fw-medium">Mật khẩu</label>
+                    <label class="form-label fw-medium">Mật khẩu <span class="text-danger">*</span></label>
                     <div class="input-group">
                         <input type="password" name="matKhau" id="matKhau" value="Nguanhmotnang123@" class="form-control" required>
                         <span class="input-group-text" id="togglePassword" style="cursor: pointer;"><i class="bi bi-eye-slash"></i></span>

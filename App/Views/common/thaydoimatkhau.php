@@ -35,7 +35,7 @@ if($kq && $kq->num_rows > 0) {
             <form action="#" method="post" enctype="multipart/form-data">
                 <!-- Mật khẩu hiện tại -->
                 <div class="mb-3">
-                    <label class="form-label fw-medium">Mật khẩu hiện tại</label>
+                    <label class="form-label fw-medium">Mật khẩu hiện tại <span class="text-danger">*</span></label>
                     <div class="input-group">
                         <input type="password" name="matKhauHienTai" value="Nguanhmotnang123@" class="form-control" required>
                         <span class="input-group-text" style="cursor: pointer;"><i class="bi bi-eye-slash toggle-pass"></i></span>
@@ -44,7 +44,7 @@ if($kq && $kq->num_rows > 0) {
 
                 <!-- Mật khẩu mới -->
                 <div class="mb-3">
-                    <label class="form-label fw-medium">Mật khẩu mới</label>
+                    <label class="form-label fw-medium">Mật khẩu mới <span class="text-danger">*</span></label>
                     <div class="input-group">
                         <input type="password" name="matKhauMoi" id="matKhauMoi" value="Thcs123@" class="form-control" required>
                         <span class="input-group-text" style="cursor: pointer;"><i class="bi bi-eye-slash toggle-pass"></i></span>
@@ -54,7 +54,7 @@ if($kq && $kq->num_rows > 0) {
 
                 <!-- Mật khẩu mới -->
                 <div class="mb-3">
-                    <label class="form-label fw-medium">Xác nhận mật khẩu mới</label>
+                    <label class="form-label fw-medium">Xác nhận mật khẩu mới <span class="text-danger">*</span></label>
                     <div class="input-group">
                         <input type="password" name="xacNhanMatKhauMoi" value="Thcs123@" class="form-control" required>
                         <span class="input-group-text" style="cursor: pointer;"><i class="bi bi-eye-slash toggle-pass"></i></span>
