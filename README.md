@@ -36,12 +36,12 @@
 - **Duyệt kế hoạch mua sắm thiết bị** (cập nhật)  
   `App/Views/hieutruong/kehoachmuasam`  
   Duyệt bình thường, nếu `trangThai = Chấp thuận/Từ chối` thì khi ấn "Xem" sẽ xuất hiện thêm chữ ký hiệu trưởng, còn nếu "Chờ duyệt" thì chỉ có chữ ký người lập.
-- **Xem thông tin giáo viên bộ môn**  
-  `App/Views/totruong/thongtin_giaovienbomon`  
-  Chức năng của tổ trưởng chuyên môn, chỉ lấy `vaiTro = "Giáo viên bộ môn"` và `boMon` = bộ môn của tổ trưởng chuyên môn đang đăng nhập.
-- **Xem thông tin giáo viên/nhân viên**  
-  `App/Views/hieutruong/thongtin_giaovien_nhanvien`  
-  Chức năng của hiệu trưởng, không được lấy `vaiTro = "Hiệu trưởng"` (vì ổng tự xem ổng làm gì?).
+- **Quản lý bộ môn** (tìm kiếm + xem + thêm + xóa + sửa)  
+  `App/Views/thietbi/qlbomon`  
+  Quản lý bình thường thôi, nếu bộ môn đang được sử dụng (làm khóa ngoại cho bảng `thietbi` và `nguoidung`) thì chỉ được đổi tên chứ không được xóa.
+- **Xem thiết bị bộ môn**  
+  `App/Views/totruong/thietbi_bomon`  
+  Chức năng này của tổ trưởng chuyên môn, chỉ lấy những thiết bị có `boMon` = bộ môn của tổ trưởng đang đăng nhập.
 
 ## ĐIỀN THỊNH (4 chức năng)
 - **Quản lý thiết bị** (tìm kiếm + xem + thêm + xóa + sửa)  
@@ -50,20 +50,20 @@
 - **Ghi nhận báo hỏng thiết bị** (cập nhật)  
   `App/Views/thietbi/baohong`  
   Đổi `tinhTrang` trong bảng `chitietthietbi` thành "Báo hỏng", sau đó sẽ tự động được thêm vào chức năng "Ghi nhận SC/BT/BH" của Văn Quân (ông có thể đọc mô tả ở dưới). Chỉ những thiết bị có `tinhTrang = "Khả dụng"` mới được báo hỏng.
-- **Quản lý bộ môn** (tìm kiếm + xem + thêm + xóa + sửa)  
-  `App/Views/thietbi/qlbomon`  
-  Quản lý bình thường thôi, nếu bộ môn đang được sử dụng (làm khóa ngoại cho bảng `thietbi` và `nguoidung`) thì chỉ được đổi tên chứ không được xóa.
-- **Xem thiết bị bộ môn**  
-  `App/Views/totruong/thietbi_bomon`  
-  Chức năng này của tổ trưởng chuyên môn, chỉ lấy những thiết bị có `boMon` = bộ môn của tổ trưởng đang đăng nhập.
+- **Xem thông tin giáo viên bộ môn**  
+  `App/Views/totruong/thongtin_giaovienbomon`  
+  Chức năng của tổ trưởng chuyên môn, chỉ lấy `vaiTro = "Giáo viên bộ môn"` và `boMon` = bộ môn của tổ trưởng chuyên môn đang đăng nhập.
+- **Xem thông tin giáo viên/nhân viên**  
+  `App/Views/hieutruong/thongtin_giaovien_nhanvien`  
+  Chức năng của hiệu trưởng, không được lấy `vaiTro = "Hiệu trưởng"` (vì ổng tự xem ổng làm gì?).
 
 ## QUỲNH NHƯ (5 chức năng)
-- Đăng ký mượn thiết bị (thêm)
-- Quản lý phiếu mượn (tìm kiếm + xem + thêm + xóa + sửa)  
+- **Đăng ký mượn thiết bị** (thêm)
+- **Quản lý phiếu mượn** (tìm kiếm + xem + thêm + xóa + sửa)  
   Thiết bị nào đã được lập trong phiếu mượn thì `tinhTrang = "Đang mượn"`, khi phiếu mượn được set `tinhTrang = "Đã trả"` thì tự động `tinhTrang = "Khả dụng"` trong bảng `chitietthietbi`.
-- Quản lý nhà cung cấp (tìm kiếm + xem + thêm + xóa + sửa)
-- Xem phiếu mượn
-- Xem phiếu mượn bộ môn
+- **Quản lý nhà cung cấp** (tìm kiếm + xem + thêm + xóa + sửa)
+- **Xem phiếu mượn**
+- **Xem phiếu mượn bộ môn**
 
 ## VĂN QUÂN (4 chức năng)
 - **Ghi nhận SC/BT/BH** (cập nhật)  
