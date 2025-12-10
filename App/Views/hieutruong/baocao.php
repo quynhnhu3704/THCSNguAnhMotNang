@@ -13,6 +13,24 @@ $chartMuaSamSo = [];
 $chartMuaSamChiPhi = []; 
 $tongChiPhiMuaSam = 0;
 
+// Tính tổng chi phí mua sắm
+$sumChiPhi = 0;
+foreach ($kq['keHoachMuaSam'] as $row) {
+    $sumChiPhi += (float)$row['tongChiPhi'];
+}
+
+// Tính tổng thu nhập từ thanh lý
+$sumGiaTri = 0;
+foreach ($kq['keHoachThanhLy'] as $row) {
+    $sumGiaTri += (float)$row['tongGiaTri'];
+}
+
+// Tổng giá trị = chi phí - thu nhập
+$kq['tongChiPhi'] = $sumChiPhi;
+$kq['tongThuNhap'] = $sumGiaTri;
+$kq['tongGiaTri'] = $sumChiPhi - $sumGiaTri;
+
+
 foreach ($trangThaiKeHoach as $tt) {
     $found = false;
     foreach ($kq['keHoachMuaSam'] as $r) {
@@ -50,7 +68,7 @@ foreach ($trangThaiKeHoach as $tt) {
                 <p class="text-muted mb-0">Tổng hợp dữ liệu quản lý thiết bị</p>
             </div>
             <div class="d-flex gap-2">
-                 <button class="btn btn-outline-secondary btn-sm" onclick="window.print()"><i class="bi bi-printer"></i> In báo cáo</button>
+                 <button class="btn btn-outline-secondary" onclick="window.print()"><i class="bi bi-printer"></i> In báo cáo</button>
             </div>
         </div>
 
@@ -136,8 +154,8 @@ foreach ($trangThaiKeHoach as $tt) {
                                 <i class="bi bi-currency-dollar"></i>
                             </div>
                         </div>
-                        <h5 class="fw-bold mb-1 text-truncate" title="<?= number_format($kq['tongGiaTriTaiSan'] ?? 0) ?>">
-                            <?= number_format(($kq['tongGiaTriTaiSan'] ?? 0)/1000000, 0) ?> Tr
+                        <h5 class="fw-bold mb-1 text-truncate" title="<?= number_format($kq['tongGiaTri']) ?>">
+                            <?= number_format($kq['tongGiaTri']) ?> Tr
                         </h5>
                         <p class="text-white-50 small mb-0">Tổng giá trị</p>
                     </div>
@@ -146,7 +164,7 @@ foreach ($trangThaiKeHoach as $tt) {
         </div>
 
         <ul class="nav nav-pills nav-fill bg-white shadow-sm p-2 rounded-pill mb-5" id="reportNav">
-            <li class="nav-item"><a class="nav-link rounded-pill" href="#thietbi-bomon">Bộ môn</a></li>
+            <li class="nav-item"><a class="nav-link rounded-pill" href="#bomon">Bộ môn</a></li>
             <li class="nav-item"><a class="nav-link rounded-pill" href="#suachua">Sửa chữa</a></li>
             <li class="nav-item"><a class="nav-link rounded-pill" href="#nhacungcap">Nhà cung cấp</a></li>
             <li class="nav-item"><a class="nav-link rounded-pill" href="#kehoachmuasam">Mua sắm</a></li>
@@ -154,7 +172,7 @@ foreach ($trangThaiKeHoach as $tt) {
         </ul>
 
         <div class="row g-4 mb-5">
-            <div class="col-lg-6" id="thietbi-bomon">
+            <div class="col-lg-6" id="bomon">
                 <div class="card border-0 shadow-sm h-100 section-card">
                     <div class="card-header bg-transparent border-0 pt-4 px-4 d-flex justify-content-between">
                         <h5 class="fw-bold text-dark">Thiết bị theo Bộ môn</h5>
@@ -197,7 +215,7 @@ foreach ($trangThaiKeHoach as $tt) {
             <div class="col-lg-6" id="suachua">
                 <div class="card border-0 shadow-sm h-100 section-card">
                     <div class="card-header bg-transparent border-0 pt-4 px-4 d-flex justify-content-between">
-                        <h5 class="fw-bold text-dark">Tình trạng Bảo trì / Sửa chữa</h5>
+                        <h5 class="fw-bold text-dark">Tình trạng sửa chữa/bảo trì/bảo hành</h5>
                         <i class="bi bi-wrench text-muted"></i>
                     </div>
                     <div class="card-body px-4">
@@ -295,18 +313,12 @@ foreach ($trangThaiKeHoach as $tt) {
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
 <style>
-    /* 1. Global Setup */
     body {
         background-color: #f3f4f6; /* Nền xám nhạt hiện đại */
         color: #344767;
     }
     
-    /* 2. Stat Cards (Modern) */
     .stat-card {
         border-radius: 16px;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -326,24 +338,21 @@ foreach ($trangThaiKeHoach as $tt) {
         font-size: 1.5rem;
     }
 
-    /* 3. Section Cards */
     .section-card {
         border-radius: 16px;
         background: #fff;
     }
 
-    /* 4. Nav Pills */
     .nav-pills .nav-link {
-        color: #6c757d;
+        color: #6c7a89;
         font-weight: 500;
-        margin: 0 5px;
     }
+    
     .nav-pills .nav-link.active, .nav-pills .nav-link:hover {
-        background-color: #4361ee;
-        color: white;
+        color: white !important;
+        background-color: var(--na-primary) !important;
     }
 
-    /* 5. Custom Scrollbar for small tables */
     .table-responsive::-webkit-scrollbar {
         width: 6px;
     }
@@ -385,6 +394,10 @@ foreach ($trangThaiKeHoach as $tt) {
         }
     };
 
+    // Set font toàn cục cho Chart.js
+    Chart.defaults.font.family = "'Quicksand', Arial, sans-serif";
+    Chart.defaults.color = themeColors.text;
+
     // 1. Chart Bộ Môn (Doughnut - Clean)
     new Chart(document.getElementById('chartBoMon'), {
         type: 'doughnut',
@@ -394,15 +407,14 @@ foreach ($trangThaiKeHoach as $tt) {
                 data: <?= json_encode(array_column($kq['byBoMon'], 'count')) ?>,
                 backgroundColor: themeColors.palette,
                 borderWidth: 0,
-                hoverOffset: 10
             }]
         },
         options: {
             ...commonOptions,
-            cutout: '75%', // Vòng tròn mỏng hơn
-            plugins: {
-                datalabels: { display: false }
-            }
+            cutout: '60%', // Vòng tròn mỏng hơn
+            // plugins: {
+            //     datalabels: { display: false }
+            // }
         }
     });
 
@@ -438,7 +450,7 @@ foreach ($trangThaiKeHoach as $tt) {
             datasets: [{
                 label: 'Số lượng',
                 data: <?= json_encode(array_column($kq['byNhaCungCap'], 'count')) ?>,
-                backgroundColor: themeColors.primary,
+                backgroundColor: themeColors.success,
                 borderRadius: 4,
                 barPercentage: 0.6
             }]
@@ -447,9 +459,8 @@ foreach ($trangThaiKeHoach as $tt) {
             indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
+            plugins: { legend: { display: false }, datalabels: { display: false } },
             scales: {
-                x: { grid: { display: false } },
                 y: { grid: { display: false } }
             }
         }
@@ -488,8 +499,9 @@ foreach ($trangThaiKeHoach as $tt) {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: { 
-                    legend: { display: true, position: 'top' },
-                    tooltip: { mode: 'index', intersect: false }
+                    legend: { display: true, position: 'top'},
+                    tooltip: { mode: 'index', intersect: false },
+                    datalabels: { display: false } // Tắt data labels
                 },
                 scales: {
                     y: { beginAtZero: true, display: false }, // Ẩn trục Y số lượng cho đẹp
@@ -519,7 +531,7 @@ foreach ($trangThaiKeHoach as $tt) {
             responsive: true,
             maintainAspectRatio: false,
             indexAxis: 'y',
-            plugins: { legend: { display: false } },
+            plugins: { legend: { display: false }, datalabels: { display: false } },
             scales: {
                 x: { ticks: { color: '#ccc' }, grid: { color: 'rgba(255,255,255,0.1)' } },
                 y: { ticks: { color: '#fff', font: {size: 11} }, grid: { display: false } }

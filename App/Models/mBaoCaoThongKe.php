@@ -77,13 +77,13 @@ class modelBaoCaoThongKe {
         return $data;
     }
 
-    // 5. Thiết bị đang sửa chữa / bảo trì / bảo hành (chỉ lấy những cái đang xử lý)
+    // 5. Thiết bị đang sửa chữa / bảo trì / bảo hành
     public function getThietBiDangSuaChua() {
         $con = $this->db->moketnoi();
         $truyvan = "SELECT y.loaiYeuCau, COUNT(*) AS count
                     FROM yeucauscbtbh y
                     WHERE y.loaiYeuCau IN ('Sửa chữa', 'Bảo trì', 'Bảo hành')
-                      AND y.tienDo NOT IN ('Đã sửa', 'Không thể sửa', 'Hoàn thành')
+                    AND y.tienDo IN ('Chờ xác nhận', 'Đã sửa', 'Không thể sửa', 'Đang xử lý')
                     GROUP BY y.loaiYeuCau";
         $kq = mysqli_query($con, $truyvan);
         $data = [
@@ -123,12 +123,12 @@ class modelBaoCaoThongKe {
     // 7. Bonus: Top 10 thiết bị được mượn nhiều nhất (tất cả thời gian)
     public function getTop10ThietBiMuon() {
         $con = $this->db->moketnoi();
-        $truyvan = "SELECT tb.tenThietBi, COUNT(ctpm.maChiTietPhieuMuon) AS soLanMuon
-                    FROM ct_phieumuon ctpm
+        $truyvan = "SELECT tb.tenThietBi, COUNT(ctpm.maChiTietPM) AS soLanMuon
+                    FROM chitietphieumuon ctpm
                     JOIN chitietthietbi ct ON ctpm.maChiTietTB = ct.maChiTietTB
                     JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
                     JOIN phieumuon pm ON ctpm.maPhieuMuon = pm.maPhieuMuon
-                    WHERE pm.trangThai IN ('Đang mượn', 'Đã xác nhận', 'Đã trả')
+                    WHERE pm.trangThai IN ('Chờ xử lý', 'Đang mượn', 'Đã xác nhận', 'Đã trả')
                     GROUP BY tb.maThietBi
                     ORDER BY soLanMuon DESC
                     LIMIT 10";

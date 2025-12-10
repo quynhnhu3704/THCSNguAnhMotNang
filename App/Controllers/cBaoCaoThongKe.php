@@ -66,12 +66,12 @@ class controlBaoCaoThongKe {
         // 5. Kế hoạch mua sắm – bảng + biểu đồ
         $keHoachMS = $this->model->getKeHoachMuaSamStats();
         $data['keHoachMuaSam'] = [];
-        $states = ['Chờ duyệt', 'Đã duyệt', 'Hủy'];
+        $states = ['Chờ duyệt', 'Chấp thuận', 'Từ chối'];
         foreach ($states as $st) {
             $data['keHoachMuaSam'][] = [
                 'trangThai'   => $st,
-                'soKeHoach'   => $keHoachMS[$st]['count'] ?? 0,
-                'tongChiPhi'  => $keHoachMS[$st]['totalCost'] ?? 0
+                'soKeHoach'   => $keHoachMS[$st]['soKeHoach'] ?? 0,
+                'tongChiPhi'  => $keHoachMS[$st]['tongChiPhi'] ?? 0
             ];
         }
 
@@ -79,8 +79,7 @@ class controlBaoCaoThongKe {
         $data['chartMuaSamSo'] = array_column($data['keHoachMuaSam'], 'soKeHoach');
         $data['chartMuaSamChiPhi'] = array_map(function($v) { return round($v / 1000000, 1); }, array_column($data['keHoachMuaSam'], 'tongChiPhi')); // đơn vị triệu
 
-        // 6. Kế hoạch thanh lý (giả sử bạn có bảng kehoachthanhly tương tự)
-        // Nếu chưa có thì comment lại hoặc tạo bảng giống kehoachmuasam
+        // 6. Kế hoạch thanh lý
         $data['keHoachThanhLy'] = $this->getKeHoachThanhLyStats(); // hàm phụ bên dưới
 
         // 7. Bonus: Top 10 thiết bị được mượn nhiều nhất
@@ -89,7 +88,7 @@ class controlBaoCaoThongKe {
         return $data;
     }
 
-    // Hàm phụ: Kế hoạch thanh lý (nếu bạn đã có bảng kehoachthanhly)
+    // Kế hoạch thanh lý (nếu bạn đã có bảng kehoachthanhly)
     private function getKeHoachThanhLyStats() {
         $p = new clsKetNoi();
         $con = $p->moketnoi();
@@ -103,7 +102,7 @@ class controlBaoCaoThongKe {
         }
         $p->dongketnoi($con);
 
-        $states = ['Chờ duyệt', 'Đã duyệt', 'Hủy'];
+        $states = ['Chờ duyệt', 'Chấp thuận', 'Từ chối'];
         $result = [];
         foreach ($states as $st) {
             $result[] = [
@@ -125,7 +124,7 @@ class controlBaoCaoThongKe {
                     JOIN chitietthietbi ct ON ctpm.maChiTietTB = ct.maChiTietTB
                     JOIN thietbi tb ON ct.maThietBi = tb.maThietBi
                     JOIN phieumuon pm ON ctpm.maPhieuMuon = pm.maPhieuMuon
-                    WHERE pm.trangThai IN ('Đang mượn', 'Đã xác nhận', 'Đã trả')
+                    WHERE pm.trangThai IN ('Chờ xử lý', 'Đang mượn', 'Đã xác nhận', 'Đã trả')
                     GROUP BY tb.maThietBi
                     ORDER BY soLanMuon DESC
                     LIMIT 10";
