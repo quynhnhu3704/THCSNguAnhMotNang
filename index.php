@@ -266,7 +266,7 @@ session_start();
             ?>
         </main>
 
-        <?php         
+        <?php
         include_once('App/Views/layouts/footer.php');
         ?>
     </div>
