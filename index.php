@@ -101,8 +101,7 @@ session_start();
                 echo '<li><a href="index.php?page=dskehoachthanhly" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch thanh lý</a></li>';
                 echo '<li><a href="index.php?page=dsmuasam" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch mua sắm</a></li>';
                 echo '<li><a href="index.php?page=dsthanhly" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch thanh lý</a></li>';
-                echo '<li><a href="index.php?page=baocaothongke" class="text-decoration-none d-block text-dark py-2">Báo cáo thống kê (qltb)</a></li>';
-                echo '<li><a href="index.php?page=baocao" class="text-decoration-none d-block text-dark py-2">Báo cáo thống kê (ht)</a></li>';
+                echo '<li><a href="index.php?page=baocaothongke" class="text-decoration-none d-block text-dark py-2">Báo cáo thống kê</a></li>';
                 echo '<li><a href="index.php?page=ds_giaovien_nhanvien" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên/nhân viên</a></li>';
                 echo '<li><a href="index.php?page=dsgiaovienbomon" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên bộ môn</a></li>';
                 echo '<li><a href="index.php?page=dsphieumuon_canhan" class="text-decoration-none d-block text-dark py-2">Phiếu mượn của tôi</a></li>';
@@ -161,7 +160,7 @@ session_start();
                 case 'xem_giaovien_nhanvien': include_once('App/Views/hieutruong/thongtin_giaovien_nhanvien/xem_giaovien_nhanvien.php'); break;
 
                 // Xem báo cáo thống kê
-                case 'baocao': include_once('App/Views/hieutruong/baocao.php'); break;
+                case 'baocaothongke': include_once('App/Views/hieutruong/baocaothongke.php'); break;
 
 
 
@@ -194,6 +193,7 @@ session_start();
                 case 'dsphieumuon_canhan': include_once('App/Views/giaovien/phieumuon_canhan/dsphieumuon_canhan.php'); break;
                 case 'xemphieumuon_canhan': include_once('App/Views/giaovien/phieumuon_canhan/xemphieumuon_canhan.php'); break;
                 case 'xoaphieumuon_canhan': include_once('App/Views/giaovien/phieumuon_canhan/xoaphieumuon_canhan.php'); break;
+
 
 
                 // Chức năng cho Nhân viên quản lý thiết bị
@@ -235,10 +235,7 @@ session_start();
                 case 'xemkehoachthanhly': include_once('App/Views/thietbi/kehoachthanhly/xemkehoachthanhly.php'); break;
                 case 'xoakehoachthanhly': include_once('App/Views/thietbi/kehoachthanhly/xoakehoachthanhly.php'); break;
 
-                // Lập báo cáo thống kê
-                case 'baocaothongke': include_once('App/Views/thietbi/baocaothongke.php'); break;
                 
-
 
                 // Chức năng cho Nhân viên kỹ thuật
                 // Cập nhật tiến độ sửa chữa/bảo trì/bảo hành
