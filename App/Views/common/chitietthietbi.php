@@ -127,6 +127,6 @@ if(isset($_POST['btnmuon'])) {
         exit();
     }
 
-    echo "<script>alert('Đã thêm thiết bị vào phiếu mượn'); window.history.back();</script>";
+    echo "<script>alert('Đã thêm thiết bị vào phiếu mượn.'); window.history.back();</script>";
 }
 ?>
