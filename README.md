@@ -19,26 +19,24 @@
   => Tích hợp nút "Thêm vào phiếu mượn" và chức năng lưu tạm session
 
 ## MINH TRUNG (4 chức năng)
+- **Lập kế hoạch mua sắm thiết bị** (tìm kiếm + thêm + xem + xóa)  
+  `App/Views/totruong/kehoachmuasam`  
+  Nhân viên thiết bị thì muốn mua cái gì cũng được, tổ trưởng chuyên môn thì chỉ được mua những thiết bị thuộc bộ môn của họ thôi. Những kế hoạch đã được hiệu trưởng duyệt (`trangThai = Chấp thuận/Từ chối`) sẽ không thể xóa.
 - **Lập kế hoạch thanh lý thiết bị** (tìm kiếm + thêm + xem + xóa)  
   `App/Views/thietbi/kehoachthanhly`  
   Chỉ được thanh lý những thiết bị có `tinhTrang = "Thanh lý"` (đi theo luồng từ chức năng của ông Thịnh và ông Quân: nhân viên thiết bị báo hỏng rồi nhân viên kỹ thuật sửa không được nữa => trong bảng `yeucauscbtbh` đổi `tienDo = "Không thể sửa"` => trong bảng `chitietthietbi` tự động đổi `tinhTrang = "Thanh lý"`). Những kế hoạch đã được hiệu trưởng duyệt (`trangThai = Chấp thuận/Từ chối`) sẽ không thể xóa.
-- **Duyệt kế hoạch thanh lý thiết bị** (cập nhật)  
-  `App/Views/hieutruong/kehoachthanhly`  
-  Duyệt bình thường, nếu `trangThai = Chấp thuận/Từ chối` thì khi ấn "Xem" sẽ xuất hiện thêm chữ ký hiệu trưởng, còn nếu "Chờ duyệt" thì chỉ có chữ ký người lập.
 - **Báo cáo thống kê**  
   `App/Views/thietbi/baocaothongke.php` và `App/Views/hieutruong/baocao.php`  
   Chức năng này ban đầu có lập nhưng cô Trang bảo chỉ cần source biểu đồ từ cơ sở dữ liệu sẵn có thôi, không có lập thủ công. Tui nhờ AI làm giùm rồi sửa lại xíu, tui vẫn chưa hiểu lắm, nhưng cái này không phải chức năng quan trọng nên không ai hỏi đâu, chứ tự làm chắc 1 tuần chưa xong =)))
 
 ## TRỌNG THUẦN (4 chức năng)
-- **Lập kế hoạch mua sắm thiết bị** (tìm kiếm + thêm + xem + xóa)  
-  `App/Views/totruong/kehoachmuasam`  
-  Nhân viên thiết bị thì muốn mua cái gì cũng được, tổ trưởng chuyên môn thì chỉ được mua những thiết bị thuộc bộ môn của họ thôi. Những kế hoạch đã được hiệu trưởng duyệt (`trangThai = Chấp thuận/Từ chối`) sẽ không thể xóa.
 - **Duyệt kế hoạch mua sắm thiết bị** (cập nhật)  
   `App/Views/hieutruong/kehoachmuasam`  
   Duyệt bình thường, nếu `trangThai = Chấp thuận/Từ chối` thì khi ấn "Xem" sẽ xuất hiện thêm chữ ký hiệu trưởng, còn nếu "Chờ duyệt" thì chỉ có chữ ký người lập.
-- **Quản lý bộ môn** (tìm kiếm + xem + thêm + xóa + sửa)  
-  `App/Views/thietbi/qlbomon`  
-  Quản lý bình thường thôi, nếu bộ môn đang được sử dụng (làm khóa ngoại cho bảng `thietbi` và `nguoidung`) thì chỉ được đổi tên chứ không được xóa.
+- **Duyệt kế hoạch thanh lý thiết bị** (cập nhật)  
+  `App/Views/hieutruong/kehoachthanhly`  
+  Duyệt bình thường, nếu `trangThai = Chấp thuận/Từ chối` thì khi ấn "Xem" sẽ xuất hiện thêm chữ ký hiệu trưởng, còn nếu "Chờ duyệt" thì chỉ có chữ ký người lập.
+- **Quản lý nhà cung cấp** (tìm kiếm + xem + thêm + xóa + sửa)
 - **Xem thiết bị bộ môn**  
   `App/Views/totruong/thietbi_bomon`  
   Chức năng này của tổ trưởng chuyên môn, chỉ lấy những thiết bị có `boMon` = bộ môn của tổ trưởng đang đăng nhập.
@@ -61,7 +59,9 @@
 - **Đăng ký mượn thiết bị** (thêm)
 - **Quản lý phiếu mượn** (tìm kiếm + xem + thêm + xóa + sửa)  
   Thiết bị nào đã được lập trong phiếu mượn thì `tinhTrang = "Đang mượn"`, khi phiếu mượn được set `tinhTrang = "Đã trả"` thì tự động `tinhTrang = "Khả dụng"` trong bảng `chitietthietbi`.
-- **Quản lý nhà cung cấp** (tìm kiếm + xem + thêm + xóa + sửa)
+- **Quản lý bộ môn** (tìm kiếm + xem + thêm + xóa + sửa)  
+  `App/Views/thietbi/qlbomon`  
+  Quản lý bình thường thôi, nếu bộ môn đang được sử dụng (làm khóa ngoại cho bảng `thietbi` và `nguoidung`) thì chỉ được đổi tên chứ không được xóa.
 - **Xem phiếu mượn**
 - **Xem phiếu mượn bộ môn**
 
