@@ -43,7 +43,7 @@ $gioHang = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                     <div class="col-6">
                         <div class="mb-3">
                             <label class="form-label fw-medium">Ngày mượn</label>
-                            <input type="date" name="ngayMuon" id="ngayMuon" class="form-control" value="<?= date('Y-m-d') ?>" disabled>
+                            <input type="date" id="ngayMuon" class="form-control" value="<?= date('Y-m-d') ?>" disabled>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-medium">Ngày trả <span class="text-danger">*</span></label>
@@ -123,7 +123,6 @@ if(isset($_POST['btnXacNhan'])) {
     $p = new controlPhieuMuon();
 
     $maNguoiDung = $_SESSION['maNguoiDung'];
-    $ngayMuon = $_POST['ngayMuon'];
     $ngayTra = $_POST['ngayTra'];
     $ghiChu = trim($_POST['ghiChu']);
 

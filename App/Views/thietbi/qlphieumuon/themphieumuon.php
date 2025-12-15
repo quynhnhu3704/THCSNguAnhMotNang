@@ -54,7 +54,7 @@ if(!isset($_SESSION['login'])) {
                 <!-- Ngày mượn -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Ngày mượn <span class="text-danger">*</span></label>
-                    <input type="date" name="ngayMuon" id="ngayMuon" class="form-control" min="<?= date('Y-m-d') ?>" required>
+                    <input type="date" name="ngayMuon" id="ngayMuon" class="form-control" value="<?= date('Y-m-d') ?>" disabled>
                 </div>
 
                 <!-- Ngày trả -->
