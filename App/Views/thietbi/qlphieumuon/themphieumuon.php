@@ -6,7 +6,7 @@ if(!isset($_SESSION['login'])) {
 }
 
 // if($_SESSION['login'] == 3) {
-//     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
+//     echo "<script>alert('Bạn không có quyền truy cập chức năng này!'); window.location.href='index.php'</script>";
 //     exit();
 // }
 ?>

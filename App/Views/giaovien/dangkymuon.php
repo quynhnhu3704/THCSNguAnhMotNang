@@ -5,6 +5,11 @@ if(!isset($_SESSION['login'])) {
     exit();
 }
 
+// if($_SESSION['login'] == 3) {
+//     echo "<script>alert('Bạn không có quyền truy cập chức năng này!'); window.location.href='index.php'</script>";
+//     exit();
+// }
+
 include_once('App/Controllers/cNguoiDung.php');
 $p = new controlNguoiDung();
 
@@ -27,7 +32,7 @@ $gioHang = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                 <div class="row">
                     <div class="col-6">
                         <div class="mb-3">
-                            <label class="form-label fw-medium">Tên người mượn</label>
+                            <label class="form-label fw-medium">Họ tên</label>
                             <input type="text" class="form-control" value="<?= $r['hoTen'] ?>" disabled>
                         </div>
                         <div class="mb-3">
