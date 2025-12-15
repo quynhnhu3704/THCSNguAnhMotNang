@@ -54,7 +54,7 @@ if(!isset($_SESSION['login'])) {
                 <!-- Ngày mượn -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Ngày mượn <span class="text-danger">*</span></label>
-                    <input type="date" name="ngayMuon" id="ngayMuon" class="form-control" value="<?= date('Y-m-d') ?>" disabled>
+                    <input type="date" id="ngayMuon" class="form-control" value="<?= date('Y-m-d') ?>" disabled>
                 </div>
 
                 <!-- Ngày trả -->
@@ -146,7 +146,6 @@ $p = new controlPhieuMuon();
 
 if(isset($_POST['btnluu'])) {
     $maNguoiDung = $_POST['maNguoiDung'];
-    $ngayMuon = $_POST['ngayMuon'];
     $ngayTra = $_POST['ngayTra'];
     $ghiChu = trim($_POST['ghiChu']);
 
@@ -172,7 +171,7 @@ if(isset($_POST['btnluu'])) {
         exit();
     }
 
-    $maPhieuMuon = $p->insertPhieuMuon($maNguoiDung, $ngayMuon, $ngayTra, "Đã xác nhận", $ghiChu);
+    $maPhieuMuon = $p->insertPhieuMuon($maNguoiDung, date('Y-m-d'), $ngayTra, "Đã xác nhận", $ghiChu);
 
     if($maPhieuMuon) {
         $kq = $p->insertChiTietPM($maPhieuMuon, $chiTiet);
