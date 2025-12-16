@@ -52,23 +52,19 @@ session_start();
 
                     <?php
                     if(isset($_SESSION['login'])) {
-                    // if(isset($_SESSION['role_id'])) {
-                        // if($_SESSION['role_id'] != 3) {
-                            echo '
-                            <li class="nav-item dropdown ms-lg-2">
-                                <a class="btn btn-primary dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-                                    <i class="bi bi-person-circle me-2"></i>' . $_SESSION['tenDangNhap'] . '
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end shadow">
-                                    <li><a class="dropdown-item" href="index.php?page=thongtincanhan">Thông tin cá nhân</a></li>
-                                    <li><a class="dropdown-item" href="index.php?page=thaydoimatkhau">Thay đổi mật khẩu</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item text-danger" href="index.php?page=dangxuat" onclick="return confirm(\'Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?\');"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
-                                </ul>
-                            </li>
-                            ';
-
-                        // }
+                        echo '
+                        <li class="nav-item dropdown ms-lg-2">
+                            <a class="btn btn-primary dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                                <i class="bi bi-person-circle me-2"></i>' . $_SESSION['tenDangNhap'] . '
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow">
+                                <li><a class="dropdown-item" href="index.php?page=thongtincanhan">Thông tin cá nhân</a></li>
+                                <li><a class="dropdown-item" href="index.php?page=thaydoimatkhau">Thay đổi mật khẩu</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="index.php?page=dangxuat" onclick="return confirm(\'Bạn có chắc chắn muốn đăng xuất khỏi hệ thống không?\');"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                        ';
                     } else {
                         echo '<li class="nav-item ms-lg-2">';
                             echo '<a class="btn btn-primary" href="index.php?page=dangnhap"><i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập</a>';
@@ -88,25 +84,56 @@ session_start();
             if(!isset($_SESSION['login'])) {
                 echo '<li class="fst-italic text-center text-muted">Vui lòng đăng nhập</li>';
             } else {
-                echo '<li><a href="index.php?page=dsthietbi" class="text-decoration-none d-block text-dark py-2">Quản lý thiết bị</a></li>';
-                echo '<li><a href="index.php?page=dsbomon" class="text-decoration-none d-block text-dark py-2">Quản lý bộ môn</a></li>';
-                echo '<li><a href="index.php?page=dsphieumuon" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>';
-                echo '<li><a href="index.php?page=dsnhacungcap" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>';
-                echo '<li><a href="index.php?page=dsnguoidung" class="text-decoration-none d-block text-dark py-2">Quản lý người dùng</a></li>';
-                echo '<li><a href="index.php?page=dsquyen" class="text-decoration-none d-block text-dark py-2">Phân quyền</a></li>';
-                echo '<li><a href="index.php?page=dsbaohong" class="text-decoration-none d-block text-dark py-2">Báo hỏng thiết bị</a></li>';
-                echo '<li><a href="index.php?page=dsghinhan" class="text-decoration-none d-block text-dark py-2">Ghi nhận SC/BT/BH</a></li>';
-                echo '<li><a href="index.php?page=dsyeucau" class="text-decoration-none d-block text-dark py-2">Cập nhật tiến độ SC/BT/BH</a></li>';
-                echo '<li><a href="index.php?page=dskehoachmuasam" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch mua sắm</a></li>';
-                echo '<li><a href="index.php?page=dskehoachthanhly" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch thanh lý</a></li>';
-                echo '<li><a href="index.php?page=dsmuasam" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch mua sắm</a></li>';
-                echo '<li><a href="index.php?page=dsthanhly" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch thanh lý</a></li>';
-                echo '<li><a href="index.php?page=baocaothongke" class="text-decoration-none d-block text-dark py-2">Báo cáo thống kê</a></li>';
-                echo '<li><a href="index.php?page=ds_giaovien_nhanvien" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên/nhân viên</a></li>';
-                echo '<li><a href="index.php?page=dsgiaovienbomon" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên bộ môn</a></li>';
-                echo '<li><a href="index.php?page=dsphieumuon_canhan" class="text-decoration-none d-block text-dark py-2">Phiếu mượn của tôi</a></li>';
-                echo '<li><a href="index.php?page=dsphieumuon_bomon" class="text-decoration-none d-block text-dark py-2">Phiếu mượn bộ môn</a></li>';
-                echo '<li><a href="index.php?page=dsthietbi_bomon" class="text-decoration-none d-block text-dark py-2">Thiết bị bộ môn</a></li>';
+                // Nhân viên quản lý thiết bị (4)
+                if($_SESSION['maVaiTro'] == 4) {
+                    echo '<li><a href="index.php?page=dsthietbi" class="text-decoration-none d-block text-dark py-2">Quản lý thiết bị</a></li>';
+                    echo '<li><a href="index.php?page=dsbomon" class="text-decoration-none d-block text-dark py-2">Quản lý bộ môn</a></li>';
+                    echo '<li><a href="index.php?page=dsphieumuon" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>';
+                    echo '<li><a href="index.php?page=dsnhacungcap" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>';
+                    echo '<li><a href="index.php?page=dsbaohong" class="text-decoration-none d-block text-dark py-2">Báo hỏng thiết bị</a></li>';
+                    echo '<li><a href="index.php?page=dsghinhan" class="text-decoration-none d-block text-dark py-2">Ghi nhận SC/BT/BH</a></li>';
+                    echo '<li><a href="index.php?page=dskehoachthanhly" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch thanh lý</a></li>';
+                }
+                
+                // Nhân viên quản lý thiết bị (4) và Tổ trưởng chuyên môn (2)
+                if($_SESSION['maVaiTro'] == 4 || $_SESSION['maVaiTro'] == 2) {
+                    echo '<li><a href="index.php?page=dskehoachmuasam" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch mua sắm</a></li>';
+                }
+                
+                // Tổ trưởng chuyên môn (2)
+                if($_SESSION['maVaiTro'] == 2) {
+                    echo '<li><a href="index.php?page=dsgiaovienbomon" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên bộ môn</a></li>';
+                    echo '<li><a href="index.php?page=dsphieumuon_bomon" class="text-decoration-none d-block text-dark py-2">Phiếu mượn bộ môn</a></li>';
+                    echo '<li><a href="index.php?page=dsthietbi_bomon" class="text-decoration-none d-block text-dark py-2">Thiết bị bộ môn</a></li>';
+                }
+                
+                // Tổ trưởng chuyên môn (2) và Giáo viên bộ môn (3)
+                if($_SESSION['maVaiTro'] == 2 || $_SESSION['maVaiTro'] == 3) {
+                    echo '<li><a href="index.php?page=dsphieumuon_canhan" class="text-decoration-none d-block text-dark py-2">Phiếu mượn của tôi</a></li>';
+                }
+
+                // Hiệu trưởng (1)
+                if($_SESSION['maVaiTro'] == 1) {
+                    echo '<li><a href="index.php?page=dsmuasam" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch mua sắm</a></li>';
+                    echo '<li><a href="index.php?page=dsthanhly" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch thanh lý</a></li>';
+                    echo '<li><a href="index.php?page=ds_giaovien_nhanvien" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên/nhân viên</a></li>';
+                }
+                
+                // Nhân viên quản lý thiết bị (4) và Hiệu trưởng (1)
+                if($_SESSION['maVaiTro'] == 4 || $_SESSION['maVaiTro'] == 1) {
+                    echo '<li><a href="index.php?page=baocaothongke" class="text-decoration-none d-block text-dark py-2">Báo cáo thống kê</a></li>';
+                }
+                
+                // Quản trị hệ thống (6)
+                if($_SESSION['maVaiTro'] == 6) {
+                    echo '<li><a href="index.php?page=dsnguoidung" class="text-decoration-none d-block text-dark py-2">Quản lý người dùng</a></li>';
+                    echo '<li><a href="index.php?page=dsquyen" class="text-decoration-none d-block text-dark py-2">Phân quyền</a></li>';
+                }    
+                
+                // Nhân viên kỹ thuật (5)
+                if($_SESSION['maVaiTro'] == 5) {
+                    echo '<li><a href="index.php?page=dsyeucau" class="text-decoration-none d-block text-dark py-2">Cập nhật tiến độ SC/BT/BH</a></li>';
+                }
             }
             ?>
         </ul>
