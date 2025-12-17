@@ -103,8 +103,8 @@ session_start();
                 // Tổ trưởng chuyên môn (2)
                 if($_SESSION['maVaiTro'] == 2) {
                     echo '<li><a href="index.php?page=dsgiaovienbomon" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên bộ môn</a></li>';
-                    echo '<li><a href="index.php?page=dsphieumuon_bomon" class="text-decoration-none d-block text-dark py-2">Phiếu mượn bộ môn</a></li>';
                     echo '<li><a href="index.php?page=dsthietbi_bomon" class="text-decoration-none d-block text-dark py-2">Thiết bị bộ môn</a></li>';
+                    echo '<li><a href="index.php?page=dsphieumuon_bomon" class="text-decoration-none d-block text-dark py-2">Phiếu mượn bộ môn</a></li>';
                 }
                 
                 // Tổ trưởng chuyên môn (2) và Giáo viên bộ môn (3)

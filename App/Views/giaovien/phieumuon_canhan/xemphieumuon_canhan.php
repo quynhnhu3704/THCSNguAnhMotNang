@@ -5,7 +5,7 @@ if(!isset($_SESSION['login'])) {
     exit();
 }
 
-if($_SESSION['maVaiTro'] != 3) {
+if($_SESSION['maVaiTro'] != 2 && $_SESSION['maVaiTro'] != 3) {
     echo "<script>alert('Bạn không có quyền truy cập chức năng này.'); window.history.back();</script>";
     exit();
 }

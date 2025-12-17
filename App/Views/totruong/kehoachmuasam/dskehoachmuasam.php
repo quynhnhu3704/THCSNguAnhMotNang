@@ -59,6 +59,9 @@ if($_SESSION['maVaiTro'] != 2 && $_SESSION['maVaiTro'] != 4) {
             if ($kq && $kq->num_rows > 0) {
                 $dem = 0;
                 while ($r = $kq->fetch_assoc()) {
+                    // Chỉ lấy kế hoạch thuộc bộ môn của người dùng đang đăng nhập
+                    if ($r['maBoMon'] != $_SESSION['maBoMon']) continue;
+                    
                     $dem++;
 
                     echo '<tr>';
@@ -88,6 +91,8 @@ if($_SESSION['maVaiTro'] != 2 && $_SESSION['maVaiTro'] != 4) {
                             }
                         echo '</td>';
                     echo '</tr>';
+                } if ($dem == 0) {
+                    echo '<tr><td colspan="10"><h5 class="text-center text-muted">Hiện chưa có kế hoạch nào. Vui lòng quay lại sau.</h5></td></tr>';
                 }
             } else {
                 echo '<tr><td colspan="10"><h5 class="text-center text-muted">Hiện chưa có kế hoạch nào. Vui lòng quay lại sau.</h5></td></tr>';   

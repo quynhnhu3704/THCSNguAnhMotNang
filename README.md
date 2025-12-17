@@ -58,7 +58,7 @@
 ## MINH TRUNG (4 chức năng)
 - **Lập kế hoạch mua sắm thiết bị** (tìm kiếm + thêm + xem + xóa)  
   `App/Views/totruong/kehoachmuasam`  
-  Nhân viên thiết bị thì muốn mua cái gì cũng được, tổ trưởng chuyên môn thì chỉ được mua những thiết bị thuộc bộ môn của họ thôi. Những kế hoạch đã được hiệu trưởng duyệt (`trangThai = Chấp thuận/Từ chối`) sẽ không thể xóa.
+  Nhân viên thiết bị thì muốn mua cái gì cũng được, tổ trưởng chuyên môn thì chỉ được mua những thiết bị thuộc bộ môn của họ thôi (cũng chỉ được xem các kế hoạch thuộc bộ môn của mình thôi). Những kế hoạch đã được hiệu trưởng duyệt (`trangThai = Chấp thuận/Từ chối`) sẽ không thể xóa.
 - **Lập kế hoạch thanh lý thiết bị** (tìm kiếm + thêm + xem + xóa)  
   `App/Views/thietbi/kehoachthanhly`  
   Chỉ được thanh lý những thiết bị có `tinhTrang = "Thanh lý"` (đi theo luồng từ chức năng của ông Thịnh và ông Quân: nhân viên thiết bị báo hỏng rồi nhân viên kỹ thuật sửa không được nữa => trong bảng `yeucauscbtbh` đổi `tienDo = "Không thể sửa"` => trong bảng `chitietthietbi` tự động đổi `tinhTrang = "Thanh lý"`). Những kế hoạch đã được hiệu trưởng duyệt (`trangThai = Chấp thuận/Từ chối`) sẽ không thể xóa.

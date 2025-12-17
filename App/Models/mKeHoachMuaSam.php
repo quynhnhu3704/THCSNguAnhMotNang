@@ -5,7 +5,7 @@ include_once('mketnoi.php');
 class modelKeHoachMuaSam {
     public function selectAllKeHoachMuaSam() {
         $p = new clsKetNoi();
-        $truyvan = "SELECT ms.*, nd.hoTen, vt.tenVaiTro, bm.tenBoMon, SUM(ct.soLuong) AS soLuongMuaSam
+        $truyvan = "SELECT ms.*, nd.hoTen, vt.tenVaiTro, bm.maBoMon, bm.tenBoMon, SUM(ct.soLuong) AS soLuongMuaSam
                     FROM kehoachmuasam ms
                     LEFT JOIN nguoidung nd ON ms.maNguoiDung = nd.maNguoiDung
                     LEFT JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
@@ -33,7 +33,7 @@ class modelKeHoachMuaSam {
 
     public function searchKeHoachMuaSam($keyword) {
         $p = new clsKetNoi();
-        $truyvan = "SELECT ms.*, nd.hoTen, vt.tenVaiTro, bm.tenBoMon, SUM(ct.soLuong) AS soLuongMuaSam
+        $truyvan = "SELECT ms.*, nd.hoTen, vt.tenVaiTro, bm.maBoMon, bm.tenBoMon, SUM(ct.soLuong) AS soLuongMuaSam
                     FROM kehoachmuasam ms
                     LEFT JOIN nguoidung nd ON ms.maNguoiDung = nd.maNguoiDung
                     LEFT JOIN vaitro vt ON nd.maVaiTro = vt.maVaiTro
