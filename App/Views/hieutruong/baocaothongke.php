@@ -5,6 +5,11 @@ if (!isset($_SESSION['login'])) {
     exit();
 }
 
+if($_SESSION['maVaiTro'] != 1 && $_SESSION['maVaiTro'] != 4) {
+    echo "<script>alert('Bạn không có quyền truy cập chức năng này.'); window.history.back();</script>";
+    exit();
+}
+
 include_once('App/Controllers/cBaoCaoThongKe.php');
 $p = new controlBaoCaoThongKe();
 $kq = $p->getAllThongKe();

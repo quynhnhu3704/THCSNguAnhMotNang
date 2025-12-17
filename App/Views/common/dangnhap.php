@@ -1,4 +1,11 @@
 <!-- App/Views/common/dangnhap.php -->
+<?php
+if (isset($_SESSION['login'])) {
+    echo "<script>alert('Bạn đã đăng nhập rồi.'); window.location.href='index.php';</script>";
+    exit();
+}
+?>
+
 <div class="container d-flex justify-content-center align-items-center my-5">
     <div class="card-na border-0" style="max-width: 26.25em; width: 100%;">
         <div class="card-body p-4">

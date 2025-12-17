@@ -160,3 +160,8 @@
         margin-top: 0.25em;
         font-style: italic;
     }
+
+    .about-item i,
+    .about-title i {
+        color: pink;
+    }

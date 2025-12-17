@@ -98,6 +98,13 @@ if(isset($_POST['btnmuon'])) {
         $_SESSION['cart'] = [];
     }
 
+    // Check quyền mượn
+    $maVaiTro = $_SESSION['maVaiTro'] ?? null;
+    if($maVaiTro != 2 && $maVaiTro != 3) {
+        echo "<script>alert('Bạn không có quyền đăng ký mượn thiết bị.'); window.history.back();</script>";
+        exit();
+    }
+
     // Kiểm tra bộ môn thiết bị
     $maBoMon = $_SESSION['maBoMon'] ?? null;
     if ($r['maBoMon'] != $maBoMon) {
