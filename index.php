@@ -88,10 +88,10 @@ session_start();
                 if($_SESSION['maVaiTro'] == 4) {
                     echo '<li><a href="index.php?page=dsthietbi" class="text-decoration-none d-block text-dark py-2">Quản lý thiết bị</a></li>';
                     echo '<li><a href="index.php?page=dsbomon" class="text-decoration-none d-block text-dark py-2">Quản lý bộ môn</a></li>';
-                    echo '<li><a href="index.php?page=dsphieumuon" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>';
                     echo '<li><a href="index.php?page=dsnhacungcap" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>';
+                    echo '<li><a href="index.php?page=dsphieumuon" class="text-decoration-none d-block text-dark py-2">Quản lý phiếu mượn</a></li>';
                     echo '<li><a href="index.php?page=dsbaohong" class="text-decoration-none d-block text-dark py-2">Báo hỏng thiết bị</a></li>';
-                    echo '<li><a href="index.php?page=dsghinhan" class="text-decoration-none d-block text-dark py-2">Ghi nhận SC/BT/BH</a></li>';
+                    echo '<li><a href="index.php?page=dsghinhan" class="text-decoration-none d-block text-dark py-2">Sửa chữa – Bảo trì – Bảo hành</a></li>';
                     echo '<li><a href="index.php?page=dskehoachthanhly" class="text-decoration-none d-block text-dark py-2">Kế hoạch thanh lý</a></li>';
                 }
                 
@@ -132,7 +132,7 @@ session_start();
                 
                 // Nhân viên kỹ thuật (5)
                 if($_SESSION['maVaiTro'] == 5) {
-                    echo '<li><a href="index.php?page=dsyeucau" class="text-decoration-none d-block text-dark py-2">Cập nhật tiến độ SC/BT/BH</a></li>';
+                    echo '<li><a href="index.php?page=dsyeucau" class="text-decoration-none d-block text-dark py-2">Sửa chữa – Bảo trì – Bảo hành</a></li>';
                 }
             }
             ?>

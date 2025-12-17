@@ -11,7 +11,7 @@ if($_SESSION['maVaiTro'] != 4) {
 }
 ?>
 
-<h2 class="text-center fw-semibold my-3">Danh sách yêu cầu sửa chữa/bảo trì/bảo hành</h2>
+<h2 class="text-center fw-semibold my-3">Danh sách yêu cầu sửa chữa - bảo trì - bảo hành</h2>
 
 <div class="d-flex mx-auto justify-content-between align-items-center" style="width: 95%">
     <!-- Thanh tìm kiếm -->
