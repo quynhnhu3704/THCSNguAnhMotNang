@@ -92,12 +92,12 @@ session_start();
                     echo '<li><a href="index.php?page=dsnhacungcap" class="text-decoration-none d-block text-dark py-2">Quản lý nhà cung cấp</a></li>';
                     echo '<li><a href="index.php?page=dsbaohong" class="text-decoration-none d-block text-dark py-2">Báo hỏng thiết bị</a></li>';
                     echo '<li><a href="index.php?page=dsghinhan" class="text-decoration-none d-block text-dark py-2">Ghi nhận SC/BT/BH</a></li>';
-                    echo '<li><a href="index.php?page=dskehoachthanhly" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch thanh lý</a></li>';
+                    echo '<li><a href="index.php?page=dskehoachthanhly" class="text-decoration-none d-block text-dark py-2">Kế hoạch thanh lý</a></li>';
                 }
                 
                 // Nhân viên quản lý thiết bị (4) và Tổ trưởng chuyên môn (2)
                 if($_SESSION['maVaiTro'] == 4 || $_SESSION['maVaiTro'] == 2) {
-                    echo '<li><a href="index.php?page=dskehoachmuasam" class="text-decoration-none d-block text-dark py-2">Lập kế hoạch mua sắm</a></li>';
+                    echo '<li><a href="index.php?page=dskehoachmuasam" class="text-decoration-none d-block text-dark py-2">Kế hoạch mua sắm</a></li>';
                 }
                 
                 // Tổ trưởng chuyên môn (2)
@@ -114,8 +114,8 @@ session_start();
 
                 // Hiệu trưởng (1)
                 if($_SESSION['maVaiTro'] == 1) {
-                    echo '<li><a href="index.php?page=dsmuasam" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch mua sắm</a></li>';
-                    echo '<li><a href="index.php?page=dsthanhly" class="text-decoration-none d-block text-dark py-2">Duyệt kế hoạch thanh lý</a></li>';
+                    echo '<li><a href="index.php?page=dsmuasam" class="text-decoration-none d-block text-dark py-2">Kế hoạch mua sắm</a></li>';
+                    echo '<li><a href="index.php?page=dsthanhly" class="text-decoration-none d-block text-dark py-2">Kế hoạch thanh lý</a></li>';
                     echo '<li><a href="index.php?page=ds_giaovien_nhanvien" class="text-decoration-none d-block text-dark py-2">Thông tin giáo viên/nhân viên</a></li>';
                 }
                 
