@@ -27,7 +27,7 @@ if($kq && $kq->num_rows > 0) {
 
 <button type="button" class="btn btn-outline-primary ms-4 my-4" onclick="window.history.back();"><i class="bi bi-arrow-left"></i> Quay lại</button>
 
-<div class="container d-flex justify-content-center align-items-center mb-5">
+<div class="container d-flex justify-content-center align-items-center mb-5" style="min-height:60vh;">
     <div class="card-na border-0" style="max-width: 36rem; width: 100%;">
         <div class="card-body p-4">
             <h3 class="text-center mb-4 fw-bold text-primary">Thay đổi mật khẩu</h3>
