@@ -18,7 +18,7 @@ if($_SESSION['maVaiTro'] != 6) {
     <a href="index.php?page=themnguoidung" class="btn btn-primary fw-semibold"><i class="bi bi-database-add me-1"></i> Thêm người dùng</a>
 
     <!-- Thanh tìm kiếm -->
-    <form class="d-flex" action="index.php" method="get">
+    <form class="d-flex" action="index.php" method="get" spellcheck="false">
         <input type="hidden" name="page" value="dsnguoidung"> <!-- Submit sẽ tạo URL: index.php?page=dsnguoidung&keyword=xxxxx -->
 
         <input class="form-control me-2" type="text" name="keyword" placeholder="Tìm kiếm người dùng..." style="width: 220px;">

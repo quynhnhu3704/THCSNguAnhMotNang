@@ -38,7 +38,7 @@ if($kq && $kq->num_rows > 0) {
         <div class="card-body p-4">
             <h3 class="text-center mb-4 fw-bold text-primary">Lập kế hoạch thanh lý</h3>
 
-            <form action="#" method="post" id="frmThemKeHoach">
+            <form action="#" method="post" id="frmThemKeHoach" spellcheck="false">
                 <!-- Họ tên -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Họ tên <span class="text-danger">*</span></label>

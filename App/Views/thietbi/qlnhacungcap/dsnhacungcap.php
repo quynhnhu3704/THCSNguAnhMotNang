@@ -18,7 +18,7 @@ if($_SESSION['maVaiTro'] != 4) {
     <a href="index.php?page=themnhacungcap" class="btn btn-primary fw-semibold"><i class="bi bi-database-add me-1"></i> Thêm nhà cung cấp</a>
 
     <!-- Thanh tìm kiếm -->
-    <form class="d-flex" action="index.php" method="get">
+    <form class="d-flex" action="index.php" method="get" spellcheck="false">
         <input type="hidden" name="page" value="dsnhacungcap"> <!-- Submit sẽ tạo URL: index.php?page=dsnhacungcap&keyword=xxxxx -->
 
         <input class="form-control me-2" type="text" name="keyword" placeholder="Tìm kiếm nhà cung cấp..." style="width: 220px;">

@@ -120,7 +120,7 @@ if($kq && $kq->num_rows > 0) {
             </p>
 
             <!-- Phê duyệt -->
-            <form action="#" method="post">
+            <form action="#" method="post" spellcheck="false">
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Trạng thái <span class="text-danger">*</span></label>
                     <select name="trangThai" class="form-select" required>

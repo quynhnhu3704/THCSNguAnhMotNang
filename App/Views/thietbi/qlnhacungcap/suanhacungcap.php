@@ -37,7 +37,7 @@ if($kq && $kq->num_rows > 0) {
         <div class="card-body p-4">
             <h3 class="text-center mb-4 fw-bold text-primary">Cập nhật nhà cung cấp</h3>
 
-            <form action="#" method="post" enctype="multipart/form-data">
+            <form action="#" method="post" enctype="multipart/form-data" spellcheck="false">
                 <!-- Tên nhà cung cấp -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Tên nhà cung cấp <span class="text-danger">*</span></label>

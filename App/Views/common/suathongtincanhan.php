@@ -32,7 +32,7 @@ if($kq && $kq->num_rows > 0) {
         <div class="card-body p-4">
             <h3 class="text-center mb-4 fw-bold text-primary">Chỉnh sửa thông tin cá nhân</h3>
 
-            <form action="#" method="post" enctype="multipart/form-data">
+            <form action="#" method="post" enctype="multipart/form-data" spellcheck="false">
                 <!-- Tên đăng nhập -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Tên đăng nhập <span class="text-danger">*</span></label>

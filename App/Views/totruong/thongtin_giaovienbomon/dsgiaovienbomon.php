@@ -15,7 +15,7 @@ if($_SESSION['maVaiTro'] != 2) {
 
 <div class="d-flex mx-auto justify-content-between align-items-center" style="width: 95%">
     <!-- Thanh tìm kiếm -->
-    <form class="d-flex ms-auto" action="index.php" method="get">
+    <form class="d-flex ms-auto" action="index.php" method="get" spellcheck="false">
         <input type="hidden" name="page" value="dsgiaovienbomon"> <!-- Submit sẽ tạo URL: index.php?page=dsgiaovienbomon&keyword=xxxxx -->
 
         <input class="form-control me-2" type="text" name="keyword" placeholder="Tìm kiếm giáo viên..." style="width: 220px;">

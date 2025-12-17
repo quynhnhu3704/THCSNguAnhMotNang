@@ -18,7 +18,7 @@ if($_SESSION['maVaiTro'] != 4) {
     <a href="index.php?page=themphieumuon" class="btn btn-primary fw-semibold"><i class="bi bi-database-add me-1"></i> Thêm phiếu mượn</a>
 
     <!-- Thanh tìm kiếm -->
-    <form class="d-flex" action="index.php" method="get">
+    <form class="d-flex" action="index.php" method="get" spellcheck="false">
         <input type="hidden" name="page" value="dsphieumuon"> <!-- Submit sẽ tạo URL: index.php?page=dsphieumuon&keyword=xxxxx -->
 
         <input class="form-control me-2" type="text" name="keyword" placeholder="Tìm kiếm phiếu mượn..." style="width: 220px;">

@@ -11,7 +11,7 @@ if (isset($_SESSION['login'])) {
         <div class="card-body p-4">
             <h3 class="text-center mb-4 fw-bold text-primary">Đăng nhập</h3>
             
-            <form action="#" method="post">
+            <form action="#" method="post" spellcheck="false">
                 <div class="mb-3">
                     <label class="form-label fw-medium">Tên đăng nhập <span class="text-danger">*</span></label>
                     <input type="text" name="tenDangNhap" value="qltb1" class="form-control" required>

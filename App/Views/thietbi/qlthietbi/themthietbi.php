@@ -18,7 +18,7 @@ if($_SESSION['maVaiTro'] != 4) {
         <div class="card-body p-4">
             <h3 class="text-center mb-4 fw-bold text-primary">Thêm thiết bị</h3>
 
-            <form action="#" method="post" enctype="multipart/form-data">
+            <form action="#" method="post" enctype="multipart/form-data" spellcheck="false">
                 <!-- Tên thiết bị -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Tên thiết bị <span class="text-danger">*</span></label>

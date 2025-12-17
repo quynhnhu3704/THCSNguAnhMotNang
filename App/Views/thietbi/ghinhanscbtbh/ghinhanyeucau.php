@@ -37,7 +37,7 @@ if($kq && $kq->num_rows > 0) {
         <div class="card-body p-4">
             <h3 class="text-center mb-4 fw-bold text-primary">Ghi nhận yêu cầu</h3>
 
-            <form action="#" method="post" enctype="multipart/form-data">
+            <form action="#" method="post" enctype="multipart/form-data" spellcheck="false">
                 <!-- Tên thiết bị -->
                 <div class="mb-3">
                     <label class="form-label fw-medium">Tên thiết bị</label>

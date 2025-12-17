@@ -67,7 +67,7 @@ if ($kq && $kq->num_rows > 0) {
                     </div>
                 </div>
                 
-                <form action="#" method="post">
+                <form action="#" method="post" spellcheck="false">
                     <button type="submit" name="btnmuon" class="btn btn-primary btn-lg mt-auto align-self-start fw-semibold">
                         <i class="bi bi-clipboard-check me-2 fw-semibold"></i>Thêm vào phiếu mượn
                     </button>

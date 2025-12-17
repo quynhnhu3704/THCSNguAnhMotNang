@@ -28,7 +28,7 @@ $gioHang = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
         <div class="card-body p-4">
             <h3 class="text-center mb-4 fw-bold text-primary">Thông tin phiếu mượn</h3>
 
-            <form action="#" method="post">
+            <form action="#" method="post" spellcheck="false">
                 <div class="row">
                     <div class="col-6">
                         <div class="mb-3">

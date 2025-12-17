@@ -41,7 +41,7 @@ session_start();
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-2">
                     <!-- Thanh tìm kiếm -->
                     <li class="nav-item me-5">
-                        <form class="d-flex" action="#" method="get">
+                        <form class="d-flex" action="#" method="get" spellcheck="false">
                             <input class="form-control me-2" type="text" name="keyword" placeholder="Tìm kiếm thiết bị..." style="width: 220px;">
                             <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
                         </form>
