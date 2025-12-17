@@ -5,10 +5,10 @@ if(!isset($_SESSION['login'])) {
     exit();
 }
 
-// if($_SESSION['login'] == 3) {
-//     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
-//     exit();
-// }
+if($_SESSION['maVaiTro'] != 2) {
+    echo "<script>alert('Bạn không có quyền truy cập chức năng này.'); window.history.back();</script>";
+    exit();
+}
 
 include_once('App/Controllers/cPhieuMuon.php');
 $p = new controlPhieuMuon();

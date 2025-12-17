@@ -5,10 +5,10 @@ if(!isset($_SESSION['login'])) {
     exit();
 }
 
-// if($_SESSION['login'] == 3) {
-//     echo "<script>alert('Bạn không được quyền truy cập trang này!'); window.location.href='index.php'</script>";
-//     exit();
-// }
+if($_SESSION['maVaiTro'] != 4) {
+    echo "<script>alert('Bạn không có quyền truy cập chức năng này.'); window.history.back();</script>";
+    exit();
+}
 ?>
 
 <button type="button" class="btn btn-outline-primary ms-4 my-4" onclick="window.location.href='index.php?page=dsnhacungcap'"><i class="bi bi-arrow-left"></i> Quay lại</button>
