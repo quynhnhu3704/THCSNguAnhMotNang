@@ -59,8 +59,10 @@ if($_SESSION['maVaiTro'] != 2 && $_SESSION['maVaiTro'] != 4) {
             if ($kq && $kq->num_rows > 0) {
                 $dem = 0;
                 while ($r = $kq->fetch_assoc()) {
-                    // Chỉ lấy kế hoạch thuộc bộ môn của người dùng đang đăng nhập
-                    if ($r['maBoMon'] != $_SESSION['maBoMon']) continue;
+                    // Nếu là Tổ trưởng (maVaiTro = 2) thì chỉ xem kế hoạch của bộ môn mình
+                    if ($_SESSION['maVaiTro'] == 2 && $r['maBoMon'] != $_SESSION['maBoMon']) {
+                        continue;
+                    }
                     
                     $dem++;
 
